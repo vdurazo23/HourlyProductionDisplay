@@ -1,0 +1,155 @@
+USE [MARS]
+GO
+/****** Object:  UserDefinedFunction [hmo].[GetHourlyProdTable]    Script Date: 01/31/2017 01:42:29 p.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER FUNCTION [hmo].[GetHourlyProdTable] 
+(	
+	-- Add the parameters for the function here
+	@ASSETID AS INT,
+	@SHIFTNAME AS VARCHAR(50),
+	@FECHA AS DATE
+)
+RETURNS @RT TABLE 
+(
+	ASSETID INT,
+	HORA INT,
+	STARTTIME DATETIME,
+	ENDTIME DATETIME,
+	OPENEDDATE DATETIME,
+	CLOSEDDATE DATETIME,
+	TOTAL INT,
+	CURRENTTARGET FLOAT,
+	RUNRATE FLOAT,
+	PARTNUMBER VARCHAR(100),
+	SEGUNDOSBREAK INT
+)
+AS
+BEGIN
+	-- Fill the table variable with the rows for your result set
+
+-- Declare the return variable here
+DECLARE @TotProd int
+DECLARE @Hora int
+DECLARE @EndTime datetime
+declare @Target float
+DECLARE @RunRate float
+DECLARE @OpenedDate datetime
+declare @ClosedDate datetime
+declare @StartTime datetime
+declare @PartNumber Varchar(100)
+
+DECLARE @SUMPZAS INTEGER
+SET @SUMPZAS=0
+DECLARE @SUMTARG FLOAT
+SET @SUMTARG=0.00
+
+DECLARE @HORAACTUAL INT
+
+declare @eff float = 0.0
+
+declare @FechaServer datetime
+set @FechaServer = Getdate()
+
+
+--PRINT @FechaServer
+declare db_cursor cursor For 
+select Pdet.Quantity + PADJ.Adjustment AS TotProd,DATEPART(HOUR,PDet.StartTime) as Hora,0.0 as TargetReal,EndTime,RunRate,OpenedDate,ClosedDate,StartTime,pt.PartNumber  
+from pro.ProductionDetail PDet inner join pro.production Pd on pdet.Production_ID=pd.ID inner join ref.WorkOrder Wo on pd.WorkOrder_ID=wo.ID inner join ref.workorderpart wop on wo.id=wop.WorkOrder_ID  inner join ref.Part pt on wop.Part_ID = pt.ID 
+left outer join ref.Capability cap on pt.ID=cap.Part_ID  and Cap.Asset_ID = @ASSETID
+INNER JOIN PRO.ProductionDetailAdjustment PADJ ON PDET.ID=PADJ.ProductionDetail_ID 
+where pd.Asset_ID=@ASSETID and pd.ProductionShiftName=@SHIFTNAME and pd.ProductionDate=@FECHA 
+open db_cursor
+
+fetch next from db_cursor into @TotProd,@Hora,@Target,@EndTime,@RunRate,@OpenedDate,@ClosedDate,@StartTime,@PartNumber
+
+while @@FETCH_STATUS=0
+BEGIN
+	DECLARE @TD FLOAT	
+	DECLARE @TS FLOAT
+
+	DECLARE @RESOURCECODE VARCHAR(50)
+	DECLARE @SEGUNDOSBREAK INT
+
+	SET @RESOURCECODE=(SELECT ResourceCode from dbo.asset where id=@ASSETID)
+
+	if @RunRate is null begin set @RunRate=1 end  --SI MARS NO TIENE RUNRATE SET RUNRATE=1 PARA EVITAR OVERFLOW
+	-----------------------------------------------------
+
+	if @EndTime IS NULL   --SI NO TIENE HORA DE FIN ES LA ULTIMA HORA U HORA ACTUAL
+		BEGIN
+			IF DATEPART(HOUR,@OpenedDate)=@Hora 
+				BEGIN
+					SET @TS = DATEDIFF(SECOND,@OpenedDate,getdate())
+					SET @SEGUNDOSBREAK = ([hmo].[GetBreakSeconds](@RESOURCECODE,@OpenedDate,getdate()))
+				END
+			ELSE
+				BEGIN
+					set @TS = DATEDIFF(SECOND,@StartTime,getdate())
+					SET @SEGUNDOSBREAK = ([hmo].[GetBreakSeconds](@RESOURCECODE,@StartTime,getdate()))
+				END
+		END
+	else
+		begin 
+			if datepart(HOUR,@ClosedDate)=@Hora 
+				begin
+					IF datepart(HOUR,@OpenedDate)=@Hora 
+						BEGIN
+							set @TS = datediff(SECOND,@OpenedDate,@ClosedDate)
+							SET @SEGUNDOSBREAK = ([hmo].[GetBreakSeconds](@RESOURCECODE,@OpenedDate,@ClosedDate))
+						END
+					else
+						begin
+							set @TS = datediff(SECOND,@StartTime,@ClosedDate)
+							SET @SEGUNDOSBREAK = ([hmo].[GetBreakSeconds](@RESOURCECODE,@StartTime,@ClosedDate))
+						end
+				end					
+			else
+				begin
+					if datepart(HOUR,@OpenedDate)=@Hora 
+						begin
+							set @TS = datediff(second,@OpenedDate,@EndTime)
+							SET @SEGUNDOSBREAK = ([hmo].[GetBreakSeconds](@RESOURCECODE,@OpenedDate,@EndTime))
+						end
+					else
+						begin
+							set @ts = DATEDIFF(second,@StartTime,@EndTime)
+							SET @SEGUNDOSBREAK = ([hmo].[GetBreakSeconds](@RESOURCECODE,@StartTime,@EndTime))
+						end
+				end
+		END
+	
+	SET @TS = @TS - @SEGUNDOSBREAK
+
+	set @TD = CAST((@TS * @RunRate) / 3600 AS FLOAT)
+
+	set @Target = @TD 
+
+	------------------------------------------------------
+		
+	--PRINT STR(@TotProd) + ' - ' + str(@Hora) + ' - ' + '[' + str(@RunRate) + ' -> '  + STR(@Target) + ']'
+	SET @SUMPZAS = @SUMPZAS + @TotProd 
+	SET @SUMTARG = @SUMTARG + @Target 
+
+	INSERT INTO @RT(ASSETID,HORA,STARTTIME,ENDTIME,OPENEDDATE,CLOSEDDATE,TOTAL,CURRENTTARGET,RUNRATE,PARTNUMBER,SEGUNDOSBREAK) 
+	VALUES (@ASSETID,@Hora,@StartTime,@EndTime,@OpenedDate,@ClosedDate,@Totprod,@Target,@RunRate,@PartNumber,@SEGUNDOSBREAK)
+	
+	fetch next from db_cursor into @TotProd,@Hora,@Target,@EndTime,@RunRate,@OpenedDate,@ClosedDate,@StartTime,@PartNumber
+	
+	SET @TD = 0
+	SET @TS = 0
+
+END
+close db_cursor
+deallocate db_cursor
+	RETURN 
+END
