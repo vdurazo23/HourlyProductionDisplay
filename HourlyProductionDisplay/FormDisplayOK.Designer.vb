@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class FormDisplay
+Partial Class FormDisplayOK
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -33,7 +33,7 @@ Partial Class FormDisplay
         Dim Series6 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Dim Series7 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Dim Series8 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormDisplay))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormDisplayOK))
         Me.LblShifTarget = New System.Windows.Forms.Label()
         Me.LblCurrentActual = New System.Windows.Forms.Label()
         Me.LblCurrentTarget = New System.Windows.Forms.Label()
@@ -66,11 +66,11 @@ Partial Class FormDisplay
         Me.LblShiftDelta = New System.Windows.Forms.Label()
         Me.LblShiftDeltaValue = New System.Windows.Forms.Label()
         Me.PanelPrensas = New System.Windows.Forms.Panel()
-        Me.LblSPMActual = New System.Windows.Forms.Label()
         Me.Lblsetupactual = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.LblSetupTarget = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.LblSPMActual = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.LblSPMTarget = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -117,6 +117,7 @@ Partial Class FormDisplay
         Me.LblCurrentTarget.TabIndex = 234
         Me.LblCurrentTarget.Text = "Current Hourly Target: "
         Me.LblCurrentTarget.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblCurrentTarget.Visible = False
         '
         'LblAverage
         '
@@ -371,7 +372,7 @@ Partial Class FormDisplay
         Me.RadialGaugeArc4.Margin = New System.Windows.Forms.Padding(0)
         Me.RadialGaugeArc4.Name = "RadialGaugeArc4"
         Me.RadialGaugeArc4.Padding = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeArc4.RangeEnd = 97.0R
+        Me.RadialGaugeArc4.RangeEnd = 80.0R
         Me.RadialGaugeArc4.RightToLeft = False
         Me.RadialGaugeArc4.Text = Nothing
         Me.RadialGaugeArc4.TextOrientation = System.Windows.Forms.Orientation.Horizontal
@@ -390,8 +391,8 @@ Partial Class FormDisplay
         Me.RadialGaugeArc5.Margin = New System.Windows.Forms.Padding(0)
         Me.RadialGaugeArc5.Name = "RadialGaugeArc5"
         Me.RadialGaugeArc5.Padding = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeArc5.RangeEnd = 115.0R
-        Me.RadialGaugeArc5.RangeStart = 100.0R
+        Me.RadialGaugeArc5.RangeEnd = 120.0R
+        Me.RadialGaugeArc5.RangeStart = 85.0R
         Me.RadialGaugeArc5.RightToLeft = False
         Me.RadialGaugeArc5.Text = Nothing
         Me.RadialGaugeArc5.TextOrientation = System.Windows.Forms.Orientation.Horizontal
@@ -410,8 +411,8 @@ Partial Class FormDisplay
         Me.RadialGaugeArc6.Margin = New System.Windows.Forms.Padding(0)
         Me.RadialGaugeArc6.Name = "RadialGaugeArc6"
         Me.RadialGaugeArc6.Padding = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeArc6.RangeEnd = 97.0R
-        Me.RadialGaugeArc6.RangeStart = 100.0R
+        Me.RadialGaugeArc6.RangeEnd = 85.0R
+        Me.RadialGaugeArc6.RangeStart = 80.0R
         Me.RadialGaugeArc6.RightToLeft = False
         Me.RadialGaugeArc6.Text = Nothing
         Me.RadialGaugeArc6.TextOrientation = System.Windows.Forms.Orientation.Horizontal
@@ -451,7 +452,7 @@ Partial Class FormDisplay
         Me.RadialGaugeTicks2.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
         Me.RadialGaugeTicks2.TextWrap = False
         Me.RadialGaugeTicks2.TickColor = System.Drawing.Color.Black
-        Me.RadialGaugeTicks2.TicksCount = 24
+        Me.RadialGaugeTicks2.TicksCount = 20
         Me.RadialGaugeTicks2.TicksLenghtPercentage = 5.0!
         Me.RadialGaugeTicks2.TickThickness = 1.0!
         '
@@ -466,7 +467,6 @@ Partial Class FormDisplay
         Me.RadialGaugeLabels2.ForeColor = System.Drawing.Color.Black
         Me.RadialGaugeLabels2.LabelFontSize = 5.0!
         Me.RadialGaugeLabels2.LabelRadiusPercentage = 68.0!
-        Me.RadialGaugeLabels2.LabelsCount = 12
         Me.RadialGaugeLabels2.Margin = New System.Windows.Forms.Padding(0)
         Me.RadialGaugeLabels2.Name = "RadialGaugeLabels2"
         Me.RadialGaugeLabels2.Padding = New System.Windows.Forms.Padding(0)
@@ -502,7 +502,7 @@ Partial Class FormDisplay
         Me.RadialGaugeNeedle2.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
         Me.RadialGaugeNeedle2.TextWrap = False
         Me.RadialGaugeNeedle2.Thickness = 2.0R
-        Me.RadialGaugeNeedle2.Value = 99.11!
+        Me.RadialGaugeNeedle2.Value = 0.0!
         '
         'RadialGaugeTicks3
         '
@@ -519,8 +519,6 @@ Partial Class FormDisplay
         Me.RadialGaugeTicks3.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
         Me.RadialGaugeTicks3.TextWrap = False
         Me.RadialGaugeTicks3.TickColor = System.Drawing.Color.Black
-        Me.RadialGaugeTicks3.TickEndIndexVisibleRange = 16.0!
-        Me.RadialGaugeTicks3.TicksCount = 12
         Me.RadialGaugeTicks3.TickStartIndexVisibleRange = 0.0!
         '
         'RadialGaugeSingleLabel1
@@ -562,7 +560,6 @@ Partial Class FormDisplay
         Me.RadRadialGauge2.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadialGaugeArc4, Me.RadialGaugeArc5, Me.RadialGaugeArc6, Me.RadialGaugeTicks2, Me.RadialGaugeLabels2, Me.RadialGaugeNeedle2, Me.RadialGaugeTicks3, Me.RadialGaugeSingleLabel1})
         Me.RadRadialGauge2.Location = New System.Drawing.Point(1198, -12)
         Me.RadRadialGauge2.Name = "RadRadialGauge2"
-        Me.RadRadialGauge2.RangeEnd = 120.0R
         Me.RadRadialGauge2.Size = New System.Drawing.Size(320, 254)
         Me.RadRadialGauge2.StartAngle = 130.0R
         Me.RadRadialGauge2.SweepAngle = 280.0R
@@ -650,11 +647,11 @@ Partial Class FormDisplay
         '
         'PanelPrensas
         '
-        Me.PanelPrensas.Controls.Add(Me.LblSPMActual)
         Me.PanelPrensas.Controls.Add(Me.Lblsetupactual)
         Me.PanelPrensas.Controls.Add(Me.Label5)
         Me.PanelPrensas.Controls.Add(Me.LblSetupTarget)
         Me.PanelPrensas.Controls.Add(Me.Label4)
+        Me.PanelPrensas.Controls.Add(Me.LblSPMActual)
         Me.PanelPrensas.Controls.Add(Me.Label2)
         Me.PanelPrensas.Controls.Add(Me.LblSPMTarget)
         Me.PanelPrensas.Controls.Add(Me.Label1)
@@ -663,19 +660,6 @@ Partial Class FormDisplay
         Me.PanelPrensas.Name = "PanelPrensas"
         Me.PanelPrensas.Size = New System.Drawing.Size(1503, 63)
         Me.PanelPrensas.TabIndex = 245
-        '
-        'LblSPMActual
-        '
-        Me.LblSPMActual.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.LblSPMActual.AutoSize = True
-        Me.LblSPMActual.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblSPMActual.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.LblSPMActual.Location = New System.Drawing.Point(587, 0)
-        Me.LblSPMActual.Name = "LblSPMActual"
-        Me.LblSPMActual.Size = New System.Drawing.Size(64, 44)
-        Me.LblSPMActual.TabIndex = 245
-        Me.LblSPMActual.Text = "00"
-        Me.LblSPMActual.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Lblsetupactual
         '
@@ -695,7 +679,7 @@ Partial Class FormDisplay
         Me.Label5.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(1063, 0)
+        Me.Label5.Location = New System.Drawing.Point(1062, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(253, 44)
         Me.Label5.TabIndex = 248
@@ -721,12 +705,25 @@ Partial Class FormDisplay
         Me.Label4.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(675, 0)
+        Me.Label4.Location = New System.Drawing.Point(673, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(257, 44)
         Me.Label4.TabIndex = 246
         Me.Label4.Text = "Target setup:"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LblSPMActual
+        '
+        Me.LblSPMActual.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.LblSPMActual.AutoSize = True
+        Me.LblSPMActual.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblSPMActual.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LblSPMActual.Location = New System.Drawing.Point(603, 0)
+        Me.LblSPMActual.Name = "LblSPMActual"
+        Me.LblSPMActual.Size = New System.Drawing.Size(64, 44)
+        Me.LblSPMActual.TabIndex = 245
+        Me.LblSPMActual.Text = "00"
+        Me.LblSPMActual.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label2
         '
@@ -747,7 +744,7 @@ Partial Class FormDisplay
         Me.LblSPMTarget.BackColor = System.Drawing.Color.Lime
         Me.LblSPMTarget.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblSPMTarget.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.LblSPMTarget.Location = New System.Drawing.Point(265, 0)
+        Me.LblSPMTarget.Location = New System.Drawing.Point(287, 0)
         Me.LblSPMTarget.Name = "LblSPMTarget"
         Me.LblSPMTarget.Size = New System.Drawing.Size(64, 44)
         Me.LblSPMTarget.TabIndex = 243
@@ -759,7 +756,7 @@ Partial Class FormDisplay
         Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(38, 0)
+        Me.Label1.Location = New System.Drawing.Point(49, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(232, 44)
         Me.Label1.TabIndex = 229

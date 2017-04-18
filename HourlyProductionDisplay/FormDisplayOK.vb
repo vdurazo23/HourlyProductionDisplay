@@ -6,7 +6,7 @@ Imports System.Security.Cryptography
 Imports System.IO
 Imports Transitions
 
-Public Class FormDisplay
+Public Class FormDisplayOK
 
     Dim fechaserver As Date
 
@@ -36,8 +36,8 @@ Public Class FormDisplay
 
     Public changeovertarget As Integer = 1200    ''20 minutos 20*60=1200 (segundos)
 
-    Dim actualyellowtarget As Integer = 97
-    Dim actualgreentarget As Integer = 100
+    Dim actualyellowtarget As Integer = 82
+    Dim actualgreentarget As Integer = 85
 
 
 
@@ -141,13 +141,13 @@ Public Class FormDisplay
 
 
         LblShiftDelta.Font = New Font(LblShiftDelta.Font.Name, LblShiftDelta.Tag + My.Settings.FontIncrement, LblShiftDelta.Font.Style)
-        LblShiftDelta.Top = LblCurrentActual.Top + LblCurrentActual.Height  'LblCurrentTarget.Top
+        LblShiftDelta.Top = LblCurrentTarget.Top
         LblShiftDelta.Width = LblCurrentActual.Width
         LblShiftDelta.Left = LblCurrentActual.Left
         LblShiftDelta.Height = LblCurrentTarget.Height
 
         LblShiftDeltaValue.Font = New Font(LblShiftDeltaValue.Font.Name, LblShiftDeltaValue.Tag + My.Settings.FontIncrement, LblShiftDeltaValue.Font.Style)
-        LblShiftDeltaValue.Top = LblCurrentActual.Top + LblCurrentActual.Height 'LblCurrentTarget.Top
+        LblShiftDeltaValue.Top = LblCurrentTarget.Top
         LblShiftDeltaValue.Left = LblCurrentActual.Left + LblCurrentActual.Width
         LblShiftDeltaValue.Height = LblCurrentTarget.Height
 
@@ -184,8 +184,8 @@ Public Class FormDisplay
         If Debugger.IsAttached Then
             'Dim seg As Integer
             'seg = InputBox("Segundos: ", "Segundos", "0")
-            TimerChange.Interval = 7000
-            TimerSlides.Interval = 7000
+            TimerChange.Interval = 5000
+            TimerSlides.Interval = 5000
         End If
 
         Chart2.Size = Chart1.Size
@@ -214,7 +214,7 @@ Public Class FormDisplay
         Me.Visible = False
         Me.Refresh()
         Me.ResizeRedraw = True
-        Showing=Chart1 
+        Showing = Chart1
         cargardatos(Chart1)
 
 
@@ -354,22 +354,13 @@ Public Class FormDisplay
     Dim ActualShift As String = ""
     Dim ActualFechaServer As Date = "01/01/1900"
     Dim segundossetup As Integer = 0
-    Private code As String = ""
     Dim SPM As Integer = 0
 
     Sub cargardatos(ByRef Elchart As Chart)
-        Dim val As Integer = 0
         Try
-            'LblEfficiency.Text = cn.State.ToString()
-
             CurrAssetID = My.Settings.RESOURCES.DefaultView.Item(CurrResIndex).Item(0).ToString
             ResourceName = My.Settings.RESOURCES.DefaultView.Item(CurrResIndex).Item(1).ToString
-            code = My.Settings.RESOURCES.DefaultView.Item(CurrResIndex).Item(3).ToString
             ResourceCode = My.Settings.RESOURCES.DefaultView.Item(CurrResIndex).Item(6).ToString
-
-            If My.Settings.MARSServer = "10.251.10.16\sqlmars" Then
-                code = ResourceCode
-            End If
 
             Try
                 CurrSubResID = My.Settings.RESOURCES.DefaultView.Item(CurrResIndex).Item(7).ToString
@@ -384,38 +375,21 @@ Public Class FormDisplay
             cmd.CommandText = "select getdate()"
             fechaserver = cmd.ExecuteScalar
 
-            ''VER SI EXISTE LA TABLA DE TIEMPO MUERTO (PARA EL ÚLTIMO SETUP TIME)
-            cmd.CommandText = "select count(*) from INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA='hmo' and TABLE_NAME='TiempoMuerto'"
+            cmd.CommandText = "select top 1 datediff(second,fecha,fecha_end) as segundos from hmo.TiempoMuerto where diechange=1 and iscurrent=0 and assetcode='" & ResourceCode.Trim.Replace(" ", "") & "' order by id desc"
 
-
-            val = 1
-            If cmd.ExecuteScalar <= 0 Then
-                PanelPrensas.Visible = False
-                GoTo saltarbottombar
-            End If
-
-            ''VER SI TIENE EL CAMPO SPM EN LA TABLA RUNNING PARA VER A CUANTO ESTÁ CORRIENDO EL RECURSO
-            cmd.CommandText = "select count(*) from  sysobjects, syscolumns where sysobjects.id = syscolumns.id and   sysobjects.xtype = 'u' and   sysobjects.name = 'Running' and	syscolumns.name='SPM'"
-
-            If cmd.ExecuteScalar <= 0 Then
-                PanelPrensas.Visible = False
-                GoTo saltarbottombar
-            End If
-
-            PanelPrensas.Visible = True
-
-
-            cmd.CommandText = "select top 1 datediff(second,fecha,fecha_end) as segundos from hmo.TiempoMuerto where diechange=1 and iscurrent=0 and assetcode='" & code.Trim.Replace(" ", "") & "' order by id desc"
-            val = 3
             segundossetup = cmd.ExecuteScalar
 
-            cmd.CommandText = "select SPM from hmo.running where prensa='" & code.Trim.Replace(" ", "") & "'"
+            cmd.CommandText = "select SPM from hmo.running where prensa='" & ResourceCode.Trim.Replace(" ", "") & "'"
 
             SPM = cmd.ExecuteScalar
 
             If segundossetup > 0 Then
                 PanelPrensas.Visible = True
+
+                segundossetup = 1158
+
                 Lblsetupactual.Text = secondstohourminutesecondA(segundossetup)
+
                 LblSetupTarget.Text = secondstohourminutesecondA(changeovertarget)
 
                 If segundossetup > changeovertarget Then
@@ -424,16 +398,13 @@ Public Class FormDisplay
                     Lblsetupactual.BackColor = Color.Lime
                 End If
 
-                LblSPMActual.Text = Format(SPM, "F0")
+                LblSPMActual.Text = SPM.ToString
 
             Else
                 PanelPrensas.Visible = False
 
             End If
 
-saltarbottombar:
-
-            val = 4
 
             'RANGOS DE ROJO VERDE AMARILLO
 
@@ -443,7 +414,7 @@ saltarbottombar:
             RadialGaugeArc6.RangeEnd = actualgreentarget
 
             RadialGaugeArc5.RangeStart = actualgreentarget
-            RadialGaugeArc5.RangeEnd = 120
+            RadialGaugeArc5.RangeEnd = 100
 
 
             ''LblFechaHora.Text = fechaserver.ToLongDateString & " " & fechaserver.ToShortTimeString
@@ -454,7 +425,6 @@ saltarbottombar:
             cmd.CommandText = "Select ProductionShiftName from pro.ResourceStatus where Asset_ID=" & CurrAssetID
             CurrShiftName = cmd.ExecuteScalar
 
-
             If fechaserver.ToShortDateString <> ActualFechaServer.ToShortDateString Then
                 cargarbreaks()
                 ActualFechaServer = fechaserver
@@ -462,25 +432,22 @@ saltarbottombar:
 
             cmd.CommandText = "Select ProductionDate from pro.ResourceStatus where Asset_ID=" & CurrAssetID
             CurrFecha = cmd.ExecuteScalar
-            LblResource.Text = CurrFecha.ToShortDateString
 
-            'CurrFecha = "03/14/2017"
-            'CurrShiftName = "2"
+            ''ds.Tables.Clear()
 
-            ds.Tables.Clear()
+            CurrFecha = "02/07/2017"
+            CurrShiftName = "1"
 
-            da.SelectCommand.CommandText = "SELECT * FROM [hmo].[GetHourlyProdTable] (" & CurrAssetID & ",'" & CurrShiftName & "','" & CurrFecha.ToString("MM/dd/yyyy") & "'," & CurrSubResID & ") where CURRENTTARGET>0"
+            da.SelectCommand.CommandText = "SELECT * FROM [hmo].[GetHourlyProdTable] (" & CurrAssetID & ",'" & CurrShiftName & "','" & CurrFecha.ToString("MM/dd/yyyy") & "'," & CurrSubResID & ") where CURRENTTARGET>=1"
 
             'da.SelectCommand.CommandText = "SELECT * FROM [hmo].[GetHourlyProdTable] (" & CurrAssetID & ",'" & CurrShiftName & "','" & CurrFecha.ToString("MM/dd/yyyy") & "')"
 
-
-            ''MsgBox(da.SelectCommand.CommandText)
-            da.Fill(ds, "Production")
-
-
+            If ds.Tables.Count = 0 Then
+                da.Fill(ds, "Production")
+            End If
 
             Dim cmsrunrate As Double
-            val = 5
+
             Try
                 For I = 0 To ds.Tables("Production").DefaultView.Count - 1
                     TBLMETHDR.DefaultView.RowFilter = "AOPART='" & ds.Tables("Production").DefaultView.Item(I).Item("PARTNUMBER") & "' AND AODEPT = '" & My.Settings.RESOURCES.DefaultView.Item(CurrResIndex).Item("DepartmentCode") & "' AND AORESC='" & My.Settings.RESOURCES.DefaultView.Item(CurrResIndex).Item("ResourceCode") & "'"
@@ -512,12 +479,20 @@ saltarbottombar:
                         '' poner el runrate de cms
                         ds.Tables("Production").DefaultView.Item(I).Item("RUNRATE") = cmsrunrate
                     End If
+
+                    ''aqui manualmente pongo el rate
+                    '****************************************
+                    '************ rate **********************
+                    '****************************************
+                    '****************************************
+                    ds.Tables("Production").DefaultView.Item(I).Item("RUNRATE") = 660
+
                 Next
             Catch ex As Exception
 
             End Try
 
-            val = 6
+
             Elchart.Series(0).Points.Clear()
             Elchart.Series(1).Points.Clear()
             Elchart.Series(2).Points.Clear()
@@ -540,9 +515,6 @@ saltarbottombar:
                 totalprod = totalprod + ds.Tables("Production").DefaultView.Item(i).Item("TOTAL")
                 ShiftTarget = ShiftTarget + ds.Tables("Production").DefaultView.Item(i).Item("CURRENTTARGET")
             Next
-
-
-            val = 7
 
             totalhoras = (DateDiff(DateInterval.Second, CType(ds.Tables("Production").DefaultView.Item(0).Item("STARTTIME"), Date), fechaserver) - SegundosBreaks) / 3600
 
@@ -568,7 +540,6 @@ saltarbottombar:
             LblCurrentActualValue.BackColor = Color.Gainsboro
             LblShiftDeltaValue.BackColor = Color.Gainsboro
 
-            val = 8
 
             If eff < actualyellowtarget Then
                 LblCurrentActualValue.BackColor = Color.Red
@@ -601,16 +572,12 @@ saltarbottombar:
             RadialGaugeSingleLabel1.LabelText = eff.ToString("f2") & "%"
 
             LblCurrentTarget.Text = "Current Hourly Target: " & ds.Tables("Production").DefaultView.Item(ds.Tables("Production").DefaultView.Count - 1).Item("RUNRATE")
+            LblSPMTarget.Text = (ds.Tables("Production").DefaultView.Item(ds.Tables("Production").DefaultView.Count - 1).Item("RUNRATE") / 60).ToString
 
-            If PanelPrensas.Visible Then
-                LblSPMTarget.Text = Format((ds.Tables("Production").DefaultView.Item(ds.Tables("Production").DefaultView.Count - 1).Item("RUNRATE") / 60), "F1")
-
-                If SPM >= Math.Ceiling(ds.Tables("Production").DefaultView.Item(ds.Tables("Production").DefaultView.Count - 1).Item("RUNRATE") / 60) Then
-                    LblSPMActual.BackColor = Color.Lime
-                Else
-                    LblSPMActual.BackColor = Color.Red
-                End If
-
+            If SPM >= Math.Ceiling(ds.Tables("Production").DefaultView.Item(ds.Tables("Production").DefaultView.Count - 1).Item("RUNRATE") / 60) Then
+                LblSPMActual.BackColor = Color.Lime
+            Else
+                LblSPMActual.BackColor = Color.Red
             End If
 
             ''NO MOSTRAR LA SERIE DEL TARGET
@@ -708,7 +675,7 @@ saltarbottombar:
             Elchart.ChartAreas(0).AxisX2.CustomLabels.Clear()
 
             Dim cuentahoras As Double = 0
-            val = 9
+
             For i = 0 To Elchart.Series(0).Points.Count - 1
                 Elchart.ChartAreas(0).AxisX.CustomLabels.Add(New CustomLabel(i + 0.5, i + 1.5, Elchart.Series(0).Points(i).AxisLabel, 0, LabelMarkStyle.None))
                 If Elchart.Series(0).Points(i).AxisLabel <> parteactual Then
@@ -775,8 +742,6 @@ saltarbottombar:
 
             Next
 
-            val = 10
-
             If Elchart.Series(0).Points.Count > 8 Then
                 Dim textohoras As String()
                 For i = 0 To Elchart.Series(0).Points.Count - 1
@@ -798,7 +763,7 @@ saltarbottombar:
 
         Catch ex As Exception
             'MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
-            LblFechaHora.Text = "CD: " & val.ToString & " " & ex.Message
+            LblFechaHora.Text = ex.Message
             LblFechaHora.ForeColor = Color.Red
 
         End Try
@@ -889,18 +854,13 @@ saltarbottombar:
     Private Sub TimerChange_Tick(sender As Object, e As EventArgs) Handles TimerChange.Tick
         If paused Then Exit Sub
         If My.Settings.RESOURCES Is Nothing Then Exit Sub
-        If My.Settings.RESOURCES.Rows.Count < 1 Then Exit Sub
+        If My.Settings.RESOURCES.Rows.Count <= 1 Then Exit Sub
         TimerDatos.Enabled = False
         CurrResIndex = CurrResIndex + 1
         If CurrResIndex > My.Settings.RESOURCES.DefaultView.Count - 1 Then
             If My.Settings.SLIDES.Rows.Count = 0 Then
                 ''se resetean los recursos
                 CurrResIndex = 0
-                If My.Settings.RESOURCES.DefaultView.Count = 1 Then
-                    TimerDatos.Enabled = True
-                    Exit Sub
-                End If
-
             Else
                 '' se empieza con los slides.
                 CurrResIndex = -1
@@ -978,10 +938,7 @@ saltarbottombar:
 
     Private Sub TimerSlides_Tick(sender As Object, e As EventArgs) Handles TimerSlides.Tick
         If paused Then Exit Sub
-
         Try
-            PicSlide1.Top = 0
-            PicSlide2.Top = 0
 
             If CurrSlideInex > My.Settings.SLIDES.Rows.Count - 1 Then
                 TimerSlides.Enabled = False
@@ -1097,15 +1054,4 @@ saltarbottombar:
         Return ""
     End Function
 
-    Private Sub PicSlide1_Click(sender As Object, e As EventArgs) Handles PicSlide1.Click
-
-    End Sub
-
-    Private Sub PicSlide1_DoubleClick(sender As Object, e As EventArgs) Handles PicSlide1.DoubleClick
-        MsgBox(PicSlide1.Location.ToString())
-    End Sub
-
-    Private Sub PicSlide2_DoubleClick(sender As Object, e As EventArgs) Handles PicSlide2.DoubleClick
-        MsgBox(PicSlide2.Location.ToString())
-    End Sub
 End Class

@@ -101,6 +101,12 @@
     <Compile Include="Config.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormDisplayOK.Designer.vb">
+      <DependentUpon>FormDisplayOK.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormDisplayOK.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormDisplay.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -140,6 +146,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Config.resx">
       <DependentUpon>Config.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDisplayOK.resx">
+      <DependentUpon>FormDisplayOK.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormDisplay.resx">
       <DependentUpon>FormDisplay.vb</DependentUpon>

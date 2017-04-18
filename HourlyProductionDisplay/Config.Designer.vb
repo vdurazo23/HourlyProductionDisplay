@@ -256,9 +256,9 @@ Partial Class Config
         Me.Button1.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.Button1.Location = New System.Drawing.Point(6, 6)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(122, 27)
+        Me.Button1.Size = New System.Drawing.Size(161, 27)
         Me.Button1.TabIndex = 10
-        Me.Button1.Text = "Add Sub Resource +"
+        Me.Button1.Text = "Add Sub Resource (MARS) +"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'TabControl1
