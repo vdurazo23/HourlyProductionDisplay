@@ -25,16 +25,19 @@ Partial Class SelectResource
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.BtnCancel = New System.Windows.Forms.Button()
         Me.BtnSave = New System.Windows.Forms.Button()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DataGridView1
         '
+        Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 12)
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 41)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(984, 480)
-        Me.DataGridView1.TabIndex = 0
+        Me.DataGridView1.ReadOnly = True
+        Me.DataGridView1.Size = New System.Drawing.Size(984, 451)
+        Me.DataGridView1.TabIndex = 1
         '
         'BtnCancel
         '
@@ -43,7 +46,7 @@ Partial Class SelectResource
         Me.BtnCancel.Location = New System.Drawing.Point(868, 498)
         Me.BtnCancel.Name = "BtnCancel"
         Me.BtnCancel.Size = New System.Drawing.Size(128, 52)
-        Me.BtnCancel.TabIndex = 10
+        Me.BtnCancel.TabIndex = 3
         Me.BtnCancel.Text = "Cancel"
         Me.BtnCancel.UseVisualStyleBackColor = True
         '
@@ -53,15 +56,23 @@ Partial Class SelectResource
         Me.BtnSave.Location = New System.Drawing.Point(734, 498)
         Me.BtnSave.Name = "BtnSave"
         Me.BtnSave.Size = New System.Drawing.Size(128, 52)
-        Me.BtnSave.TabIndex = 9
+        Me.BtnSave.TabIndex = 2
         Me.BtnSave.Text = "Ok"
         Me.BtnSave.UseVisualStyleBackColor = True
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(13, 15)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(606, 20)
+        Me.TextBox1.TabIndex = 0
         '
         'SelectResource
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1008, 562)
+        Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.BtnCancel)
         Me.Controls.Add(Me.BtnSave)
         Me.Controls.Add(Me.DataGridView1)
@@ -71,9 +82,11 @@ Partial Class SelectResource
         Me.Text = "SelectResource"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
     Friend WithEvents BtnCancel As System.Windows.Forms.Button
     Friend WithEvents BtnSave As System.Windows.Forms.Button
+    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
 End Class

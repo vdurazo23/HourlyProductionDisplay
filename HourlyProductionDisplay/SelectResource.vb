@@ -21,4 +21,17 @@
         Me.DialogResult = Windows.Forms.DialogResult.OK
 
     End Sub
+
+    Private Sub TextBox1_KeyUp(sender As Object, e As KeyEventArgs) Handles TextBox1.KeyUp
+        If e.KeyCode = Keys.Enter And DataGridView1.RowCount > 0 Then
+            Me.DialogResult = Windows.Forms.DialogResult.OK
+        End If
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+        Try
+            dt.DefaultView.RowFilter = "Name like '%" & TextBox1.Text & "%'"
+        Catch ex As Exception
+        End Try
+    End Sub
 End Class

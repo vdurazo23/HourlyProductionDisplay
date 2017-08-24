@@ -6,7 +6,7 @@ Imports System.Security.Cryptography
 Imports System.IO
 Imports Transitions
 
-Public Class FormDisplay
+Public Class FormDisplayOK
 
     Dim fechaserver As Date
 
@@ -15,7 +15,6 @@ Public Class FormDisplay
     Dim ds As New DataSet
     Dim da As New SqlClient.SqlDataAdapter("SELECT * FROM [hmo].[GetHourlyProdTable] (9,'2 - 3','2016-10-15')", cn)
 
-    Dim Con As New Odbc.OdbcConnection("DSN=" & My.Settings.DSN & ";UID=" & My.Settings.CMSUser & ";PWD=" & My.Settings.CMSPwd)
 
     Dim CurrAssetID As String = ""
     Dim CurrSubResID As String = ""
@@ -37,88 +36,14 @@ Public Class FormDisplay
 
     Public changeovertarget As Integer = 1200    ''20 minutos 20*60=1200 (segundos)
 
-    Dim actualyellowtarget As Integer = 97
-    Dim actualgreentarget As Integer = 100
-
-
-    Dim WithEvents hsp As HSPR01_1
-
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LblAverage.Visible = My.Settings.SHOWAVG
-
-        If My.Settings.HSPR01 Then
-            hsp = New HSPR01_1
-            hsp.Timer1.Enabled = False
-        End If
-        ''GUARDAR VALOR ORIGINAL DEL TAMAÑO DE LETRA EN LOS TAGS
-        LblResource.Tag = LblResource.Font.Size
-        LblPart.Tag = LblPart.Font.Size
-        LblShifTarget.Tag = LblShifTarget.Font.Size
-        LblAverage.Tag = LblAverage.Font.Size
-        LblCurrentActual.Tag = LblCurrentActual.Font.Size
-        LblCurrentActualValue.Tag = LblCurrentActualValue.Font.Size
-
-        LblShiftDelta.Tag = LblShiftDelta.Font.Size
-        LblShiftDeltaValue.Tag = LblShiftDelta.Font.Size
-
-
-        LblCurrentTarget.Tag = LblCurrentTarget.Font.Size
-        LblFechaHora.Tag = LblFechaHora.Font.Size
-
-        seriesfontsizeoriginal = Chart1.Series(1).Font.Size
-
-        formatlabels()
-        formatlabelsseries()
-
-        TimerChange.Interval = My.Settings.Timer * 1000
-        TimerSlides.Interval = My.Settings.Timer * 1000
-
-        If Debugger.IsAttached Then
-            'Dim seg As Integer
-            'seg = InputBox("Segundos: ", "Segundos", "0")
-
-            'TimerChange.Interval = 7000
-            'TimerSlides.Interval = 7000
-
-        End If
-
-        Chart2.Size = Chart1.Size
-        Chart2.Location = Chart1.Location
-        Chart2.Left = Me.Width
-        Chart2.Visible = False
-
-        PicSlide1.Size = Me.Size
-        PicSlide1.Location = Me.Bounds.Location
-        PicSlide1.Left = Me.Width
-        PicSlide1.Visible = False
-
-        PicSlide2.Size = Me.Size
-        PicSlide2.Location = Me.Bounds.Location
-        PicSlide2.Left = Me.Width
-        PicSlide2.Visible = False
-
-        CargarRunRates()
-        'prepararsubrecursos()
-
-        If My.Settings.RESOURCES.Rows.Count <= 0 Then
-            MsgBox("No resources configured", MsgBoxStyle.Exclamation, "Resource required!")
-            Application.Exit()
-        End If
-
-        Me.Visible = False
-        Me.Refresh()
-        Me.ResizeRedraw = True
-        Showing = Chart1
-        cargardatos(Chart1)
+    Dim actualyellowtarget As Integer = 82
+    Dim actualgreentarget As Integer = 85
 
 
 
-
-        Me.Visible = True
-    End Sub
 
     Private Sub FormDisplay_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
-        If e.KeyCode = Keys.Right Or e.KeyCode = Keys.NumPad6 Then
+        If e.KeyCode = Keys.Right Then
             If paused Then Exit Sub
             If TimerChange.Enabled = True Then
                 TimerChange.Stop()
@@ -134,7 +59,7 @@ Public Class FormDisplay
             End If
         End If
 
-        If e.KeyCode = Keys.P Or e.KeyCode = Keys.Pause Or e.KeyCode = Keys.Enter Then
+        If e.KeyCode = Keys.P Or e.KeyCode = Keys.Pause Then
             paused = Not paused
             If paused Then
                 Picpause.Visible = True
@@ -144,13 +69,12 @@ Public Class FormDisplay
             End If
         End If
 
-        If e.KeyCode = Keys.Up Or e.KeyCode = Keys.NumPad8 Then
+        If e.KeyCode = Keys.Up Then
             My.Settings.FontIncrement = My.Settings.FontIncrement + 1
             My.Settings.Save()
             formatlabels()
         End If
-
-        If e.KeyCode = Keys.Down Or e.KeyCode = Keys.NumPad2 Then
+        If e.KeyCode = Keys.Down Then
             My.Settings.FontIncrement = My.Settings.FontIncrement - 1
             My.Settings.Save()
             formatlabels()
@@ -171,11 +95,6 @@ Public Class FormDisplay
 
         If e.KeyCode = Keys.T Then
             targetfront = Not targetfront
-        End If
-
-
-        If e.KeyCode = Keys.Escape Then
-            Application.Exit()
         End If
 
     End Sub
@@ -222,13 +141,13 @@ Public Class FormDisplay
 
 
         LblShiftDelta.Font = New Font(LblShiftDelta.Font.Name, LblShiftDelta.Tag + My.Settings.FontIncrement, LblShiftDelta.Font.Style)
-        LblShiftDelta.Top = LblCurrentActual.Top + LblCurrentActual.Height  'LblCurrentTarget.Top
+        LblShiftDelta.Top = LblCurrentTarget.Top
         LblShiftDelta.Width = LblCurrentActual.Width
         LblShiftDelta.Left = LblCurrentActual.Left
         LblShiftDelta.Height = LblCurrentTarget.Height
 
         LblShiftDeltaValue.Font = New Font(LblShiftDeltaValue.Font.Name, LblShiftDeltaValue.Tag + My.Settings.FontIncrement, LblShiftDeltaValue.Font.Style)
-        LblShiftDeltaValue.Top = LblCurrentActual.Top + LblCurrentActual.Height 'LblCurrentTarget.Top
+        LblShiftDeltaValue.Top = LblCurrentTarget.Top
         LblShiftDeltaValue.Left = LblCurrentActual.Left + LblCurrentActual.Width
         LblShiftDeltaValue.Height = LblCurrentTarget.Height
 
@@ -236,15 +155,78 @@ Public Class FormDisplay
         LblFechaHora.Font = New Font(LblFechaHora.Font.Name, LblFechaHora.Tag + My.Settings.FontIncrement, LblFechaHora.Font.Style)
     End Sub
 
-    Sub KeyUP_HSPR01(sender As Object, e As KeyEventArgs) Handles hsp.KeyUp
-        FormDisplay_KeyUp(sender, e)
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        ''GUARDAR VALOR ORIGINAL DEL TAMAÑO DE LETRA EN LOS TAGS
+        LblResource.Tag = LblResource.Font.Size
+        LblPart.Tag = LblPart.Font.Size
+        LblShifTarget.Tag = LblShifTarget.Font.Size
+        LblAverage.Tag = LblAverage.Font.Size
+        LblCurrentActual.Tag = LblCurrentActual.Font.Size
+        LblCurrentActualValue.Tag = LblCurrentActualValue.Font.Size
+
+        LblShiftDelta.Tag = LblShiftDelta.Font.Size
+        LblShiftDeltaValue.Tag = LblShiftDelta.Font.Size
+
+
+        LblCurrentTarget.Tag = LblCurrentTarget.Font.Size
+        LblFechaHora.Tag = LblFechaHora.Font.Size
+
+        seriesfontsizeoriginal = Chart1.Series(1).Font.Size
+
+        formatlabels()
+        formatlabelsseries()
+
+        TimerChange.Interval = My.Settings.Timer * 1000
+        TimerSlides.Interval = My.Settings.Timer * 1000
+
+        If Debugger.IsAttached Then
+            'Dim seg As Integer
+            'seg = InputBox("Segundos: ", "Segundos", "0")
+            TimerChange.Interval = 5000
+            TimerSlides.Interval = 5000
+        End If
+
+        Chart2.Size = Chart1.Size
+        Chart2.Location = Chart1.Location
+        Chart2.Left = Me.Width
+        Chart2.Visible = False
+
+        PicSlide1.Size = Me.Size
+        PicSlide1.Location = Me.Bounds.Location
+        PicSlide1.Left = Me.Width
+        PicSlide1.Visible = False
+
+        PicSlide2.Size = Me.Size
+        PicSlide2.Location = Me.Bounds.Location
+        PicSlide2.Left = Me.Width
+        PicSlide2.Visible = False
+
+        CargarRunRates()
+        'prepararsubrecursos()
+
+        If My.Settings.RESOURCES.Rows.Count <= 0 Then
+            MsgBox("No resources configured", MsgBoxStyle.Exclamation, "Resource required!")
+            Application.Exit()
+        End If
+
+        Me.Visible = False
+        Me.Refresh()
+        Me.ResizeRedraw = True
+        Showing = Chart1
+        cargardatos(Chart1)
+
+
+
+
+        Me.Visible = True
     End Sub
-
     Sub CargarRunRates()
-
+        Dim Con As New Odbc.OdbcConnection("DSN=" & My.Settings.DSN & ";UID=" & My.Settings.CMSUser & ";PWD=" & My.Settings.CMSPwd)
         Try
 
-            If Con.State = ConnectionState.Closed Then Con.Open()
+            Con.Open()
 
             Dim Ds1 As New DataSet
             Dim da As New Odbc.OdbcDataAdapter("SELECT * FROM " & My.Settings.DSN & ".METHDR", Con)
@@ -274,10 +256,10 @@ Public Class FormDisplay
 
     Sub cargarbreaks()
         ' MsgBox("BREAKS")
-
+        Dim Con As New Odbc.OdbcConnection("DSN=" & My.Settings.DSN & ";UID=" & My.Settings.CMSUser & ";PWD=" & My.Settings.CMSPwd)
         Try
 
-            If Con.State = ConnectionState.Closed Then Con.Open()
+            Con.Open()
 
             Dim DAYSTART As String = "00:00:00"
             Dim ENDSTR As String = "01"
@@ -372,290 +354,13 @@ Public Class FormDisplay
     Dim ActualShift As String = ""
     Dim ActualFechaServer As Date = "01/01/1900"
     Dim segundossetup As Integer = 0
-    Private code As String = ""
     Dim SPM As Integer = 0
-    Function GETFROMCMS() As Boolean
-        Try
-            If cn.State = ConnectionState.Closed Then cn.Open()
-            da.SelectCommand.CommandText = "SELECT * FROM HMO.HXH WHERE ASSET='" & ResourceCode & "' ORDER BY HORA"
-            da.Fill(ds, "Production")
-        Catch ex As Exception
-            LblFechaHora.Text = ex.Message
-            LblFechaHora.ForeColor = Color.Red
-        End Try
-    End Function
-    'Function GETFROMCMS() As Boolean
-    '    Dim iniciodatetime As DateTime
-    '    Dim duracion1, duracion2 As Long
-    '    Dim spam As TimeSpan
-    '    Try
-    '        iniciodatetime = Now
-    '        Con.ConnectionTimeout = 0
-
-    '        If Con.State = ConnectionState.Closed Then Con.Open()
-
-    '        Dim da As New Odbc.OdbcDataAdapter("", Con)
-
-    '        da.SelectCommand.CommandText = "SELECT OARESC,OASHFT,OARDAT FROM  " & My.Settings.DSN & ".rprrx1  WHERE oaresc='" & ResourceCode & "' and  OAEDAT= '0001-01-01'"
-    '        da.Fill(ds, "SHIFTCMS")
-
-    '        CurrFecha = ds.Tables("SHIFTCMS").DefaultView.Item(0).Item("OARDAT")
-    '        CurrShiftName = ds.Tables("SHIFTCMS").DefaultView.Item(0).Item("OASHFT").ToString
-
-    '        ''CurrShiftName = "1"
-    '        da.SelectCommand.CommandTimeout = 0
-
-    '        da.SelectCommand.CommandText = "SELECT -1 ASSET,SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2) AS HORA," & _
-    '        "cast(TIRDAT as varchar(10)) || ' ' || SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2) || ':00:00' STARTTIME, " & _
-    '        "CASE WHEN        OAEDAT= '0001-01-01' AND SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2)=SUBSTR(CAST(CURRENT TIME AS VARCHAR(10)),1,2) THEN '' ELSE  cast(TIRDAT as varchar(10)) || ' ' || SUBSTR(CAST(TICTIM + 1 HOUR AS VARCHAR(10)),1,2) || ':00:00' END AS ENDTIME,  " & _
-    '        "CAST(OASDAT AS VARCHAR(10)) || ' ' || CAST(OASTIM AS VARCHAR(10)) OPENEDDATE,  " & _
-    '        "CASE WHEN OAEDAT='0001-01-01' THEN '' ELSE CAST(OAEDAT AS VARCHAR(10)) || ' ' || CAST(OAETIM AS VARCHAR(10)) END CLOSEDDATE, " & _
-    '        "Sum(TIQTYP) AS TOTAL, " & _
-    '        "0 AS CURRENTTARGET, " & _
-    '        "0 AS RUNRATE, " & _
-    '        "TIPART PARTNUMBER, " & _
-    '        "0 AS SEGUNDOSBREAK " & _
-    '        "FROM  " & My.Settings.DSN & ".RPRQX1 AS A,  " & My.Settings.DSN & ".RPRRX1 as B " & _
-    '        "WHERE " & _
-    '        "TIBTID = OABTID And TISHFT = OASHFT And OAPART = TIPART " & _
-    '        "AND tiresc='" & ResourceCode & "' AND tirdat= '" & CurrFecha.ToString("yyyy-MM-dd") & "' AND TISHFT= " & CurrShiftName.ToString & _
-    '        " GROUP BY  TIRESC,TIRDAT,TISHFT,TIPART ,SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2) ,cast(TIRDAT as varchar(10)) || ' ' || SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2) || ':00:00'   " & _
-    '        ", CAST(OASDAT AS VARCHAR(10)) || ' ' || CAST(OASTIM AS VARCHAR(10)), OAEDAT " & _
-    '        ",CASE WHEN OAEDAT= '0001-01-01' THEN '' ELSE CAST(OAEDAT AS VARCHAR(10)) || ' ' || CAST(OAETIM AS VARCHAR(10)) END " & _
-    '        ",CASE WHEN       OAEDAT= '0001-01-01' AND SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2)=SUBSTR(CAST(CURRENT TIME AS VARCHAR(10)),1,2) THEN '' ELSE  cast(TIRDAT as varchar(10)) || ' ' || SUBSTR(CAST(TICTIM + 1 HOUR AS VARCHAR(10)),1,2) || ':00:00' END " & _
-    '        "ORDER BY  SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2) "
-
-
-    '        da.SelectCommand.CommandText = "SELECT * FROM (" & _
-    '        " SELECT TIRESC ASSET,SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2) AS HORA," & _
-    '        "cast(TIRDAT as varchar(10)) || ' ' || SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2) || ':00:00' STARTTIME, " & _
-    '        "CASE WHEN        OAEDAT= '0001-01-01' AND SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2)=SUBSTR(CAST(CURRENT TIME AS VARCHAR(10)),1,2) THEN '' ELSE  cast(TIRDAT as varchar(10)) || ' ' || SUBSTR(CAST(TICTIM + 1 HOUR AS VARCHAR(10)),1,2) || ':00:00' END AS ENDTIME,  " & _
-    '        "CAST(OASDAT AS VARCHAR(10)) || ' ' || CAST(OASTIM AS VARCHAR(10)) OPENEDDATE,  " & _
-    '        "CASE WHEN OAEDAT='0001-01-01' THEN '' ELSE CAST(OAEDAT AS VARCHAR(10)) || ' ' || CAST(OAETIM AS VARCHAR(10)) END CLOSEDDATE, " & _
-    '        "Sum(TIQTYP) AS TOTAL, " & _
-    '        "0 AS CURRENTTARGET, " & _
-    '        "0 AS RUNRATE, " & _
-    '        "TIPART PARTNUMBER, " & _
-    '        " 0 AS SEGUNDOSBREAK " & _
-    '        "FROM RPRQX1 AS A, RPRRX1 as B " & _
-    '        "WHERE TIBTID = OABTID And TISHFT = OASHFT " & _
-    '        "AND OAPART=TIPART AND tiresc='" & ResourceCode & "' AND tirdat= '" & CurrFecha.ToString("yyyy-MM-dd") & "' AND TISHFT= " & CurrShiftName.ToString & _
-    '        " GROUP BY  TIRESC,TIRDAT,TISHFT,TIPART ,SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2) ,cast(TIRDAT as varchar(10)) || ' ' || SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2) || ':00:00'  " & _
-    '        ", CAST(OASDAT AS VARCHAR(10)) || ' ' || CAST(OASTIM AS VARCHAR(10)), OAEDAT " & _
-    '        ",CASE WHEN OAEDAT= '0001-01-01' THEN '' ELSE CAST(OAEDAT AS VARCHAR(10)) || ' ' || CAST(OAETIM AS VARCHAR(10)) END " & _
-    '        ",CASE WHEN       OAEDAT= '0001-01-01' AND SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2)=SUBSTR(CAST(CURRENT TIME AS VARCHAR(10)),1,2) THEN '' ELSE  cast(TIRDAT as varchar(10)) || ' ' || SUBSTR(CAST(TICTIM + 1 HOUR AS VARCHAR(10)),1,2) || ':00:00' END " & _
-    '        ") AS A  " & _
-    '        " WHERE ENDTIME BETWEEN OPENEDDATE AND CLOSEDDATE  OR CLOSEDDATE ='' " & _
-    '        " ORDER BY HORA "
-
-    '        da.SelectCommand.CommandText = "SELECT ASSET,    HORA,SHIFT,       STARTTIME,Max(ENDTIME) ENDTIME, OPENEDDATE,CLOSEDDATE,        Sum(TOTAL) TOTAL,       CURRENTTARGET,           RUNRATE,               PARTNUMBER,  SEGUNDOSBREAK FROM ( " & _
-    '        "SELECT TIRESC ASSET, TISHFT AS SHIFT, HOUR(TICTIM) AS HORA, " & _
-    '        "CHAR(TIRDAT ) || ' ' || SUBSTR(CHAR(TICTIM ),1,2) || ':00:00' STARTTIME, " & _
-    '        "CASE WHEN OAEDAT='0001-01-01' AND  (SUBSTR(CHAR(TICTIM),1,2)) =SUBSTR(CHAR(CURRENT TIME),1,2) THEN CURRENT TIMESTAMP - MICROSECOND (current timestamp) " & _
-    '        "MICROSECONDS " & _
-    '        "WHEN (OAEDAT<>'0001-01-01' AND HOUR(TICTIM +1 HOURS)<HOUR(OAETIM)) OR OAEDAT='0001-01-01' AND HOUR(TICTIM)<>HOUR(CURRENT TIME) THEN CHAR(TIRDAT ) || ' ' || SUBSTR(CHAR(TICTIM +1 HOURS ),1,2) || ':00:00'   " & _
-    '        "ELSE  TIMESTAMP (CHAR(TIRDAT) || ' ' || CHAR(MAX(TICTIM))) END AS ENDTIME, " & _
-    '        "CHAR(OASDAT ) || ' ' || CHAR(OASTIM ) OPENEDDATE, " & _
-    '        "CASE WHEN OAEDAT='0001-01-01' THEN CURRENT TIMESTAMP - MICROSECOND (current timestamp) MICROSECONDS ELSE CHAR(OAEDAT ) || ' ' || CHAR(OAETIM ) END CLOSEDDATE, " & _
-    '        "Sum(TIQTYP) AS TOTAL, 0 AS CURRENTTARGET,0 AS RUNRATE,TIPART PARTNUMBER,0 AS SEGUNDOSBREAK " & _
-    '        "FROM RPRQX1 AS A, RPRRX1 as B   WHERE  TIBTID = OABTID And TISHFT = OASHFT AND OAPART=TIPART AND tiresc='" & ResourceCode & "' AND TISHFT= " & CurrShiftName.ToString & _
-    '        " AND tirdat= '" & CurrFecha.ToString("yyyy-MM-dd") & "' GROUP BY  TIRESC,TIRDAT,TISHFT,TIPART ,SUBSTR(CHAR(TICTIM ),1,2) , " & _
-    '        "CHAR(TIRDAT ) || ' ' || SUBSTR(CHAR(TICTIM ),1,2) || ':00:00', CHAR(OASDAT ) || ' ' || CHAR(OASTIM ), OAEDAT ,CASE WHEN OAEDAT= '0001-01-01' THEN CURRENT TIMESTAMP ELSE TIMESTAMP(CHAR(OAEDAT ) || ' ' || CHAR(OAETIM)) END " & _
-    '        ",OAETIM, TICTIM ORDER BY TIPART) " & _
-    '        "AS A WHERE ENDTIME BETWEEN OPENEDDATE AND CLOSEDDATE AND  (HOUR(ENDTIME)<= HOUR(STARTTIME)+1 OR HOUR(CURRENT TIME) =HOUR(STARTTIME) ) " & _
-    '        "GROUP BY  ASSET,           SHIFT,HORA,       STARTTIME, OPENEDDATE,CLOSEDDATE,               CURRENTTARGET,           RUNRATE,           PARTNUMBER,  SEGUNDOSBREAK " & _
-    '        "ORDER BY STARTTIME,Max(ENDTIME)"
-
-
-    '        '"WHEN HOUR(TICTIM +1 HOURS)<HOUR(OAETIM) THEN CHAR(TIRDAT ) || ' ' || SUBSTR(CHAR(TICTIM +1 HOURS ),1,2) || ':00:00'  " & _
-
-    '        da.SelectCommand.CommandTimeout = 0
-
-    '        da.Fill(ds, "Production")
-
-    '        spam = Now - iniciodatetime
-
-    '        duracion1 = spam.TotalMilliseconds
-
-    '    Catch ex As Exception
-    '        LblFechaHora.Text = ex.Message
-    '        LblFechaHora.ForeColor = Color.Red
-
-    '        'Return False
-
-    '    Finally
-    '        If Con.State = ConnectionState.Open Then Con.Close()
-    '    End Try
-
-
-    '    'Dim cnOLE As New OleDb.OleDbConnection("Provider=IBMDA400;" & _
-    '    '                       "Data Source=10.208.10.10;" & _
-    '    '                       "Force Translate=0;" & _
-    '    '                       "Default Collection=SALDAT2;Catalog Library List=*USRLIBL;" & _
-    '    '                       "User ID=IGEAR;" & _
-    '    '                       "Password=IGEAR123")
-
-    '    'Try
-    '    '    iniciodatetime = Now
-    '    '    cnOLE.Open()
-    '    '    Dim da As New OleDb.OleDbDataAdapter("", cnOLE)
-    '    '    da.SelectCommand.CommandText = "SELECT OARESC,OASHFT,OARDAT FROM  " & My.Settings.DSN & ".rprrx1  WHERE oaresc='" & ResourceCode & "' and  OAEDAT= '0001-01-01'"
-    '    '    da.Fill(ds, "SHIFTCMS2")
-    '    '    CurrFecha = ds.Tables("SHIFTCMS2").DefaultView.Item(0).Item("OARDAT")
-    '    '    CurrShiftName = ds.Tables("SHIFTCMS2").DefaultView.Item(0).Item("OASHFT").ToString
-    '    '    ''CurrShiftName = "1"
-    '    '    da.SelectCommand.CommandText = "SELECT -1 ASSET,SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2) AS HORA," & _
-    '    '    "cast(TIRDAT as varchar(10)) || ' ' || SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2) || ':00:00' STARTTIME, " & _
-    '    '    "CASE WHEN        OAEDAT= '0001-01-01' AND SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2)=SUBSTR(CAST(CURRENT TIME AS VARCHAR(10)),1,2) THEN '' ELSE  cast(TIRDAT as varchar(10)) || ' ' || SUBSTR(CAST(TICTIM + 1 HOUR AS VARCHAR(10)),1,2) || ':00:00' END AS ENDTIME,  " & _
-    '    '    "CAST(OASDAT AS VARCHAR(10)) || ' ' || CAST(OASTIM AS VARCHAR(10)) OPENEDDATE,  " & _
-    '    '    "CASE WHEN OAEDAT='0001-01-01' THEN '' ELSE CAST(OAEDAT AS VARCHAR(10)) || ' ' || CAST(OAETIM AS VARCHAR(10)) END CLOSEDDATE, " & _
-    '    '    "Sum(TIQTYP) AS TOTAL, " & _
-    '    '    "0 AS CURRENTTARGET, " & _
-    '    '    "0 AS RUNRATE, " & _
-    '    '    "TIPART PARTNUMBER, " & _
-    '    '    "0 AS SEGUNDOSBREAK " & _
-    '    '    "FROM  " & My.Settings.DSN & ".RPRQX1 AS A,  " & My.Settings.DSN & ".RPRRX1 as B " & _
-    '    '    "WHERE " & _
-    '    '    "TIBTID = OABTID And TISHFT = OASHFT And OAPART = TIPART " & _
-    '    '    "AND tiresc='" & ResourceCode & "' AND tirdat= '" & CurrFecha.ToString("yyyy-MM-dd") & "' AND TISHFT= " & CurrShiftName.ToString & _
-    '    '    " GROUP BY  TIRESC,TIRDAT,TISHFT,TIPART ,SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2) ,cast(TIRDAT as varchar(10)) || ' ' || SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2) || ':00:00'   " & _
-    '    '    ", CAST(OASDAT AS VARCHAR(10)) || ' ' || CAST(OASTIM AS VARCHAR(10)), OAEDAT " & _
-    '    '    ",CASE WHEN OAEDAT= '0001-01-01' THEN '' ELSE CAST(OAEDAT AS VARCHAR(10)) || ' ' || CAST(OAETIM AS VARCHAR(10)) END " & _
-    '    '    ",CASE WHEN       OAEDAT= '0001-01-01' AND SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2)=SUBSTR(CAST(CURRENT TIME AS VARCHAR(10)),1,2) THEN '' ELSE  cast(TIRDAT as varchar(10)) || ' ' || SUBSTR(CAST(TICTIM + 1 HOUR AS VARCHAR(10)),1,2) || ':00:00' END " & _
-    '    '    "ORDER BY  SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2) "
-
-
-    '    '    da.SelectCommand.CommandText = "SELECT * FROM (" & _
-    '    '    " SELECT TIRESC ASSET,SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2) AS HORA," & _
-    '    '    "cast(TIRDAT as varchar(10)) || ' ' || SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2) || ':00:00' STARTTIME, " & _
-    '    '    "CASE WHEN        OAEDAT= '0001-01-01' AND SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2)=SUBSTR(CAST(CURRENT TIME AS VARCHAR(10)),1,2) THEN '' ELSE  cast(TIRDAT as varchar(10)) || ' ' || SUBSTR(CAST(TICTIM + 1 HOUR AS VARCHAR(10)),1,2) || ':00:00' END AS ENDTIME,  " & _
-    '    '    "CAST(OASDAT AS VARCHAR(10)) || ' ' || CAST(OASTIM AS VARCHAR(10)) OPENEDDATE,  " & _
-    '    '    "CASE WHEN OAEDAT='0001-01-01' THEN '' ELSE CAST(OAEDAT AS VARCHAR(10)) || ' ' || CAST(OAETIM AS VARCHAR(10)) END CLOSEDDATE, " & _
-    '    '    "Sum(TIQTYP) AS TOTAL, " & _
-    '    '    "0 AS CURRENTTARGET, " & _
-    '    '    "0 AS RUNRATE, " & _
-    '    '    "TIPART PARTNUMBER, " & _
-    '    '    " 0 AS SEGUNDOSBREAK " & _
-    '    '    "FROM RPRQX1 AS A, RPRRX1 as B " & _
-    '    '    "WHERE TIBTID = OABTID And TISHFT = OASHFT " & _
-    '    '    "AND OAPART=TIPART AND tiresc='" & ResourceCode & "' AND tirdat= '" & CurrFecha.ToString("yyyy-MM-dd") & "' AND TISHFT= " & CurrShiftName.ToString & _
-    '    '    " GROUP BY  TIRESC,TIRDAT,TISHFT,TIPART ,SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2) ,cast(TIRDAT as varchar(10)) || ' ' || SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2) || ':00:00'  " & _
-    '    '    ", CAST(OASDAT AS VARCHAR(10)) || ' ' || CAST(OASTIM AS VARCHAR(10)), OAEDAT " & _
-    '    '    ",CASE WHEN OAEDAT= '0001-01-01' THEN '' ELSE CAST(OAEDAT AS VARCHAR(10)) || ' ' || CAST(OAETIM AS VARCHAR(10)) END " & _
-    '    '    ",CASE WHEN       OAEDAT= '0001-01-01' AND SUBSTR(CAST(TICTIM AS VARCHAR(10)),1,2)=SUBSTR(CAST(CURRENT TIME AS VARCHAR(10)),1,2) THEN '' ELSE  cast(TIRDAT as varchar(10)) || ' ' || SUBSTR(CAST(TICTIM + 1 HOUR AS VARCHAR(10)),1,2) || ':00:00' END " & _
-    '    '    ") AS A  " & _
-    '    '    " WHERE ENDTIME BETWEEN OPENEDDATE AND CLOSEDDATE  OR CLOSEDDATE ='' " & _
-    '    '    " ORDER BY HORA "
-
-    '    '    da.Fill(ds, "Production2")
-
-
-    '    '    spam = Now - iniciodatetime
-    '    '    duracion2 = spam.TotalMilliseconds
-
-    '    '    Console.Write(duracion1.ToString)
-    '    '    Console.Write(duracion2.ToString)
-
-    '    'Catch ex As Exception
-    '    '    LblFechaHora.Text = ex.Message
-    '    '    LblFechaHora.ForeColor = Color.Red
-    '    'End Try
-
-    'End Function
-
-    Sub targetyratecms(ByVal cmsrunrate As Integer)
-
-
-        ''ds.Tables("Production").DefaultView.Item(I).Item("CURRENTTARGET") = (cmsrunrate * ds.Tables("Production").DefaultView.Item(I).Item("CURRENTTARGET")) / ds.Tables("Production").DefaultView.Item(I).Item("RUNRATE")
-
-        For i = 0 To ds.Tables("Production").DefaultView.Count - 1
-
-            ''ponerle el rate de cms
-            ds.Tables("Production").DefaultView.Item(i).Item("RUNRATE") = cmsrunrate
-
-            ''If ds.Tables("Production").DefaultView.Item(i).Item("ENDTIME") Is DBNull.Value Then
-            If String.IsNullOrEmpty(ds.Tables("Production").DefaultView.Item(i).Item("ENDTIME").ToString) Then
-                ''SI ES NULO ES LA HORA ACTUAL
-                If DatePart(DateInterval.Hour, CType(ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), Date)).ToString = CType(ds.Tables("Production").DefaultView.Item(i).Item("HORA"), Integer).ToString Then
-                    ''Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(i + 0.5, i + 1.5, CType(ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), Date).ToString("HH:mm") & " - " & fechaserver.ToString("HH:mm"), 0, LabelMarkStyle.None))
-                    ds.Tables("Production").DefaultView.Item(i).Item("CURRENTTARGET") = ((DateDiff(DateInterval.Second, ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), fechaserver)) * cmsrunrate) / 3600
-                Else
-                    ''Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(i + 0.5, i + 1.5, CType(ds.Tables("Production").DefaultView.Item(i).Item("STARTTIME"), Date).ToString("HH:mm") & " - " & fechaserver.ToString("HH:mm"), 0, LabelMarkStyle.None))
-                    ds.Tables("Production").DefaultView.Item(i).Item("CURRENTTARGET") = ((DateDiff(DateInterval.Second, ds.Tables("Production").DefaultView.Item(i).Item("STARTTIME"), fechaserver)) * cmsrunrate) / 3600
-                End If
-            Else
-
-                ''If Not ds.Tables("Production").DefaultView.Item(i).Item("CLOSEDDATE") Is DBNull.Value Then
-                If Not String.IsNullOrEmpty(ds.Tables("Production").DefaultView.Item(i).Item("CLOSEDDATE").ToString) Then
-
-                    If DatePart(DateInterval.Hour, CType(ds.Tables("Production").DefaultView.Item(i).Item("CLOSEDDATE"), Date)).ToString = CType(ds.Tables("Production").DefaultView.Item(i).Item("HORA"), Integer).ToString Then
-                        If DatePart(DateInterval.Hour, CType(ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), Date)).ToString = CType(ds.Tables("Production").DefaultView.Item(i).Item("HORA"), Integer).ToString Then
-                            'Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(i + 0.5, i + 1.5, CType(ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), Date).ToString("HH:mm") & " - " & CType(ds.Tables("Production").DefaultView.Item(i).Item("CLOSEDDATE"), Date).ToString("HH:mm"), 0, LabelMarkStyle.None))
-                            ds.Tables("Production").DefaultView.Item(i).Item("CURRENTTARGET") = ((DateDiff(DateInterval.Second, ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), ds.Tables("Production").DefaultView.Item(i).Item("CLOSEDDATE"))) * cmsrunrate) / 3600
-                        Else
-                            'Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(i + 0.5, i + 1.5, CType(ds.Tables("Production").DefaultView.Item(i).Item("STARTTIME"), Date).ToString("HH:mm") & " - " & CType(ds.Tables("Production").DefaultView.Item(i).Item("CLOSEDDATE"), Date).ToString("HH:mm"), 0, LabelMarkStyle.None))
-                            ds.Tables("Production").DefaultView.Item(i).Item("CURRENTTARGET") = ((DateDiff(DateInterval.Second, ds.Tables("Production").DefaultView.Item(i).Item("STARTTIME"), ds.Tables("Production").DefaultView.Item(i).Item("CLOSEDDATE"))) * cmsrunrate) / 3600
-                        End If
-                    Else
-                        If DatePart(DateInterval.Hour, CType(ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), Date)).ToString = CType(ds.Tables("Production").DefaultView.Item(i).Item("HORA"), Integer).ToString Then
-                            'Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(i + 0.5, i + 1.5, CType(ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), Date).ToString("HH:mm") & " - " & CType(ds.Tables("Production").DefaultView.Item(i).Item("ENDTIME"), Date).ToString("HH:mm"), 0, LabelMarkStyle.None))
-                            ds.Tables("Production").DefaultView.Item(i).Item("CURRENTTARGET") = ((DateDiff(DateInterval.Second, ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), ds.Tables("Production").DefaultView.Item(i).Item("ENDTIME"))) * cmsrunrate) / 3600
-                        Else
-                            'Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(i + 0.5, i + 1.5, CType(ds.Tables("Production").DefaultView.Item(i).Item("STARTTIME"), Date).ToString("HH:mm") & " - " & CType(ds.Tables("Production").DefaultView.Item(i).Item("ENDTIME"), Date).ToString("HH:mm"), 0, LabelMarkStyle.None))
-                            ds.Tables("Production").DefaultView.Item(i).Item("CURRENTTARGET") = ((DateDiff(DateInterval.Second, ds.Tables("Production").DefaultView.Item(i).Item("STARTTIME"), ds.Tables("Production").DefaultView.Item(i).Item("ENDTIME"))) * cmsrunrate) / 3600
-                        End If
-                    End If
-
-                Else
-                    'If Not ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE") Is DBNull.Value Then
-                    If Not String.IsNullOrEmpty(ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE").ToString) Then
-                        If DatePart(DateInterval.Hour, CType(ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), Date)).ToString = CType(ds.Tables("Production").DefaultView.Item(i).Item("HORA"), Integer).ToString Then
-                            ''Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(i + 0.5, i + 1.5, CType(ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), Date).ToString("HH:mm") & " - " & CType(ds.Tables("Production").DefaultView.Item(i).Item("ENDTIME"), Date).ToString("HH:mm"), 0, LabelMarkStyle.None))
-                            ds.Tables("Production").DefaultView.Item(i).Item("CURRENTTARGET") = ((DateDiff(DateInterval.Second, ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), ds.Tables("Production").DefaultView.Item(i).Item("ENDTIME"))) * cmsrunrate) / 3600
-                        Else
-                            ''Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(i + 0.5, i + 1.5, CType(ds.Tables("Production").DefaultView.Item(i).Item("STARTTIME"), Date).ToString("HH:mm") & " - " & CType(ds.Tables("Production").DefaultView.Item(i).Item("ENDTIME"), Date).ToString("HH:mm"), 0, LabelMarkStyle.None))
-                            ds.Tables("Production").DefaultView.Item(i).Item("CURRENTTARGET") = ((DateDiff(DateInterval.Second, ds.Tables("Production").DefaultView.Item(i).Item("STARTTIME"), ds.Tables("Production").DefaultView.Item(i).Item("ENDTIME"))) * cmsrunrate) / 3600
-                        End If
-                    Else
-                        ''Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(i + 0.5, i + 1.5, CType(ds.Tables("Production").DefaultView.Item(i).Item("STARTTIME"), Date).ToString("HH:mm") & " - " & CType(ds.Tables("Production").DefaultView.Item(i).Item("ENDTIME"), Date).ToString("HH:mm"), 0, LabelMarkStyle.None))
-                        ds.Tables("Production").DefaultView.Item(i).Item("CURRENTTARGET") = ((DateDiff(DateInterval.Second, ds.Tables("Production").DefaultView.Item(i).Item("STARTTIME"), ds.Tables("Production").DefaultView.Item(i).Item("ENDTIME"))) * cmsrunrate) / 3600
-                    End If
-                End If
-
-                'If ds.Tables("Production").DefaultView.Item(i).Item("STARTTIME") <> ds.Tables("Production").DefaultView.Item(i).Item("ENDTIME") Then
-                '    If i > 0 Then
-                '        If (ds.Tables("Production").DefaultView.Item(i).Item("Hora") = ds.Tables("Production").DefaultView.Item(i - 1).Item("Hora")) Then
-                '            Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(i + 0.5, i + 1.5, CType(ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), Date).ToString("HH:mm") & " - " & CType(ds.Tables("Production").DefaultView.Item(i).Item("ENDTIME"), Date).ToString("HH:mm"), 0, LabelMarkStyle.None))
-                '        Else
-                '            Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(i + 0.5, i + 1.5, CType(ds.Tables("Production").DefaultView.Item(i).Item("STARTTIME"), Date).ToString("HH:mm") & " - " & CType(ds.Tables("Production").DefaultView.Item(i).Item("ENDTIME"), Date).ToString("HH:mm"), 0, LabelMarkStyle.None))
-                '        End If
-                '    Else
-                '        Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(i + 0.5, i + 1.5, CType(ds.Tables("Production").DefaultView.Item(i).Item("STARTTIME"), Date).ToString("HH:mm") & " - " & CType(ds.Tables("Production").DefaultView.Item(i).Item("ENDTIME"), Date).ToString("HH:mm"), 0, LabelMarkStyle.None))
-                '    End If
-                'Else
-                '    Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(i + 0.5, i + 1.5, CType(ds.Tables("Production").DefaultView.Item(i).Item("STARTTIME"), Date).ToString("HH:mm") & " - " & CType(ds.Tables("Production").DefaultView.Item(i).Item("CLOSEDDATE"), Date).ToString("HH:mm"), 0, LabelMarkStyle.None))
-                'End If
-            End If
-        Next
-    End Sub
 
     Sub cargardatos(ByRef Elchart As Chart)
-        Dim val As Integer = 0
-        Dim quitarrapido As Boolean = False
         Try
-            TimerDatos.Stop()
-            LBLERROR.Visible = False
-
-            'LblEfficiency.Text = cn.State.ToString()
-
             CurrAssetID = My.Settings.RESOURCES.DefaultView.Item(CurrResIndex).Item(0).ToString
             ResourceName = My.Settings.RESOURCES.DefaultView.Item(CurrResIndex).Item(1).ToString
-            code = My.Settings.RESOURCES.DefaultView.Item(CurrResIndex).Item(3).ToString
             ResourceCode = My.Settings.RESOURCES.DefaultView.Item(CurrResIndex).Item(6).ToString
-
-            If My.Settings.MARSServer = "10.251.10.16\sqlmars" Then
-                code = ResourceCode
-            End If
 
             Try
                 CurrSubResID = My.Settings.RESOURCES.DefaultView.Item(CurrResIndex).Item(7).ToString
@@ -670,38 +375,21 @@ Public Class FormDisplay
             cmd.CommandText = "select getdate()"
             fechaserver = cmd.ExecuteScalar
 
-            ''VER SI EXISTE LA TABLA DE TIEMPO MUERTO (PARA EL ÚLTIMO SETUP TIME)
-            cmd.CommandText = "select count(*) from INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA='hmo' and TABLE_NAME='TiempoMuerto'"
+            cmd.CommandText = "select top 1 datediff(second,fecha,fecha_end) as segundos from hmo.TiempoMuerto where diechange=1 and iscurrent=0 and assetcode='" & ResourceCode.Trim.Replace(" ", "") & "' order by id desc"
 
-
-            val = 1
-            If cmd.ExecuteScalar <= 0 Then
-                PanelPrensas.Visible = False
-                GoTo saltarbottombar
-            End If
-
-            ''VER SI TIENE EL CAMPO SPM EN LA TABLA RUNNING PARA VER A CUANTO ESTÁ CORRIENDO EL RECURSO
-            cmd.CommandText = "select count(*) from  sysobjects, syscolumns where sysobjects.id = syscolumns.id and   sysobjects.xtype = 'u' and   sysobjects.name = 'Running' and	syscolumns.name='SPM'"
-
-            If cmd.ExecuteScalar <= 0 Then
-                PanelPrensas.Visible = False
-                GoTo saltarbottombar
-            End If
-
-            PanelPrensas.Visible = True
-
-
-            cmd.CommandText = "select top 1 datediff(second,fecha,fecha_end) as segundos from hmo.TiempoMuerto where diechange=1 and iscurrent=0 and assetcode='" & code.Trim.Replace(" ", "") & "' order by id desc"
-            val = 3
             segundossetup = cmd.ExecuteScalar
 
-            cmd.CommandText = "select SPM from hmo.running where prensa='" & code.Trim.Replace(" ", "") & "'"
+            cmd.CommandText = "select SPM from hmo.running where prensa='" & ResourceCode.Trim.Replace(" ", "") & "'"
 
             SPM = cmd.ExecuteScalar
 
             If segundossetup > 0 Then
                 PanelPrensas.Visible = True
+
+                segundossetup = 1158
+
                 Lblsetupactual.Text = secondstohourminutesecondA(segundossetup)
+
                 LblSetupTarget.Text = secondstohourminutesecondA(changeovertarget)
 
                 If segundossetup > changeovertarget Then
@@ -710,16 +398,13 @@ Public Class FormDisplay
                     Lblsetupactual.BackColor = Color.Lime
                 End If
 
-                LblSPMActual.Text = Format(SPM, "F0")
+                LblSPMActual.Text = SPM.ToString
 
             Else
                 PanelPrensas.Visible = False
 
             End If
 
-saltarbottombar:
-
-            val = 4
 
             'RANGOS DE ROJO VERDE AMARILLO
 
@@ -729,133 +414,85 @@ saltarbottombar:
             RadialGaugeArc6.RangeEnd = actualgreentarget
 
             RadialGaugeArc5.RangeStart = actualgreentarget
-            RadialGaugeArc5.RangeEnd = 120
+            RadialGaugeArc5.RangeEnd = 100
 
 
             ''LblFechaHora.Text = fechaserver.ToLongDateString & " " & fechaserver.ToShortTimeString
             LblFechaHora.Text = fechaserver.ToString("dd/MM/yyyy") & " " & fechaserver.ToShortTimeString
 
             LblFechaHora.ForeColor = Color.Black
-            If CurrAssetID = -1 Then
-                CurrShiftName = ""
-            Else
-                cmd.CommandText = "Select ProductionShiftName from pro.ResourceStatus where Asset_ID=" & CurrAssetID
-                CurrShiftName = cmd.ExecuteScalar
-            End If
+
+            cmd.CommandText = "Select ProductionShiftName from pro.ResourceStatus where Asset_ID=" & CurrAssetID
+            CurrShiftName = cmd.ExecuteScalar
 
             If fechaserver.ToShortDateString <> ActualFechaServer.ToShortDateString Then
                 cargarbreaks()
                 ActualFechaServer = fechaserver
             End If
 
-            If CurrAssetID = -1 Then
-                CurrFecha = fechaserver
-            Else
-                cmd.CommandText = "Select ProductionDate from pro.ResourceStatus where Asset_ID=" & CurrAssetID
-                CurrFecha = cmd.ExecuteScalar
-                LblResource.Text = CurrFecha.ToShortDateString
-            End If
+            cmd.CommandText = "Select ProductionDate from pro.ResourceStatus where Asset_ID=" & CurrAssetID
+            CurrFecha = cmd.ExecuteScalar
 
+            ''ds.Tables.Clear()
 
-            'CurrFecha = "03/14/2017"
-            'CurrShiftName = "2"
+            CurrFecha = "02/07/2017"
+            CurrShiftName = "1"
 
-            ds.Tables.Clear()
-
-            da.SelectCommand.CommandText = "SELECT * FROM [hmo].[GetHourlyProdTable] (" & CurrAssetID & ",'" & CurrShiftName & "','" & CurrFecha.ToString("MM/dd/yyyy") & "'," & CurrSubResID & ") "  ''where CURRENTTARGET>0"
+            da.SelectCommand.CommandText = "SELECT * FROM [hmo].[GetHourlyProdTable] (" & CurrAssetID & ",'" & CurrShiftName & "','" & CurrFecha.ToString("MM/dd/yyyy") & "'," & CurrSubResID & ") where CURRENTTARGET>=1"
 
             'da.SelectCommand.CommandText = "SELECT * FROM [hmo].[GetHourlyProdTable] (" & CurrAssetID & ",'" & CurrShiftName & "','" & CurrFecha.ToString("MM/dd/yyyy") & "')"
 
-            ''MsgBox(da.SelectCommand.CommandText)
-
-            If CurrAssetID = -1 Then
-                ''ES DESDE CMS
-                TimerDatos.Interval = 60000
-                If Debugger.IsAttached Then TimerDatos.Interval = 6000
-                GETFROMCMS()
-                Try
-                    Dim tot As Double
-                    If IsDBNull(ds.Tables("Production").Compute("Sum(TOTAL)", "")) Then
-                        tot = 0
-                    Else
-                        tot = ds.Tables("Production").Compute("Sum(TOTAL)", "")
-                    End If
-
-                    If (ds.Tables("Production").DefaultView.Count > 1 And tot <= 0) Or ds.Tables("Production").DefaultView.Count = 0 Then
-                        System.Threading.Thread.Sleep(1000)
-
-                        quitarrapido = True
-
-                    End If
-        Catch ex As Exception
-
-        End Try
-            Else
+            If ds.Tables.Count = 0 Then
                 da.Fill(ds, "Production")
-                TimerDatos.Interval = 3000
             End If
 
             Dim cmsrunrate As Double
-            val = 5
+
             Try
                 For I = 0 To ds.Tables("Production").DefaultView.Count - 1
                     TBLMETHDR.DefaultView.RowFilter = "AOPART='" & ds.Tables("Production").DefaultView.Item(I).Item("PARTNUMBER") & "' AND AODEPT = '" & My.Settings.RESOURCES.DefaultView.Item(CurrResIndex).Item("DepartmentCode") & "' AND AORESC='" & My.Settings.RESOURCES.DefaultView.Item(CurrResIndex).Item("ResourceCode") & "'"
                     TBLMETHDA.DefaultView.RowFilter = "ARPART='" & ds.Tables("Production").DefaultView.Item(I).Item("PARTNUMBER") & "' AND ARDEPT = '" & My.Settings.RESOURCES.DefaultView.Item(CurrResIndex).Item("DepartmentCode") & "' AND ARRESC='" & My.Settings.RESOURCES.DefaultView.Item(CurrResIndex).Item("ResourceCode") & "'"
                     If TBLMETHDR.DefaultView.Count = 0 Then
                         '' NO TIENE RUNRATE DEBE SER ALTERNO
-                        If TBLMETHDA.DefaultView.Count > 0 Then
-                            '' SI HAY ALTERNO
-                            If TBLMETHDA.DefaultView.Item(0).Item("ARFUTD") > 0 Then
-                                '' TIENE RUN RATE TEORICO
-                                cmsrunrate = TBLMETHDA.DefaultView.Item(0).Item("ARFUTD") ''/ TBLMETHDA.DefaultView.Item(0).Item("AR#MCH")
-                            Else
-                                ''NO TIENE TEORICO TONS LO QUE ES
-                                cmsrunrate = TBLMETHDA.DefaultView.Item(0).Item("ARRUNS") ''/ TBLMETHDA.DefaultView.Item(0).Item("AR#MCH")
-                            End If
+                        If TBLMETHDA.DefaultView.Item(0).Item("ARFUTD") > 0 Then
+                            '' TIENE RUN RATE TEORICO
+                            cmsrunrate = TBLMETHDA.DefaultView.Item(0).Item("ARFUTD") ''/ TBLMETHDA.DefaultView.Item(0).Item("AR#MCH")
                         Else
-                            '' NO HAY RUNRATE PARA ESTO
+                            ''NO TIENE TEORICO TONS LO QUE ES
+                            cmsrunrate = TBLMETHDA.DefaultView.Item(0).Item("ARRUNS") ''/ TBLMETHDA.DefaultView.Item(0).Item("AR#MCH")
                         End If
                     Else
                         ''SI TIENE NO ES ALTERNO
-                        If TBLMETHDR.DefaultView.Count > 0 Then
-                            If TBLMETHDR.DefaultView.Item(0).Item("AOFUTD") > 0 Then
-                                '' TIENE RUN RATE TEORICO
-                                cmsrunrate = TBLMETHDR.DefaultView.Item(0).Item("AOFUTD") ''/ TBLMETHDR.DefaultView.Item(0).Item("AO#MCH")
-                            Else
-                                ''NO TIENE TEORICO TONS LO QUE ES
-                                cmsrunrate = TBLMETHDR.DefaultView.Item(0).Item("AORUNS") ''/ TBLMETHDR.DefaultView.Item(0).Item("AO#MCH")
-                            End If
+                        If TBLMETHDR.DefaultView.Item(0).Item("AOFUTD") > 0 Then
+                            '' TIENE RUN RATE TEORICO
+                            cmsrunrate = TBLMETHDR.DefaultView.Item(0).Item("AOFUTD") ''/ TBLMETHDR.DefaultView.Item(0).Item("AO#MCH")
                         Else
-                            ''NO HAY RUNRATE PARA ESTA
-
+                            ''NO TIENE TEORICO TONS LO QUE ES
+                            cmsrunrate = TBLMETHDR.DefaultView.Item(0).Item("AORUNS") ''/ TBLMETHDR.DefaultView.Item(0).Item("AO#MCH")
                         End If
-
                     End If
 
                     If ds.Tables("Production").DefaultView.Item(I).Item("RUNRATE") <> cmsrunrate Then
                         '' MARS NO TIENE BIEN EL RUNRATE
-                        If CurrAssetID = -1 Then
-                            ''si viene desde cms no tiene rate ni target hay que calcularlo
-
-                            targetyratecms(cmsrunrate)
-
-
-                        Else
-                            ''aqui cuando es de MARS (Normalito)
-                            ds.Tables("Production").DefaultView.Item(I).Item("CURRENTTARGET") = (cmsrunrate * ds.Tables("Production").DefaultView.Item(I).Item("CURRENTTARGET")) / ds.Tables("Production").DefaultView.Item(I).Item("RUNRATE")
-                            ''calcular nuevo rate
-                            '' poner el runrate de cms
-                            ds.Tables("Production").DefaultView.Item(I).Item("RUNRATE") = cmsrunrate
-                        End If
-
-
+                        ''calcular nuevo rate
+                        ds.Tables("Production").DefaultView.Item(I).Item("CURRENTTARGET") = (cmsrunrate * ds.Tables("Production").DefaultView.Item(I).Item("CURRENTTARGET")) / ds.Tables("Production").DefaultView.Item(I).Item("RUNRATE")
+                        '' poner el runrate de cms
+                        ds.Tables("Production").DefaultView.Item(I).Item("RUNRATE") = cmsrunrate
                     End If
+
+                    ''aqui manualmente pongo el rate
+                    '****************************************
+                    '************ rate **********************
+                    '****************************************
+                    '****************************************
+                    ds.Tables("Production").DefaultView.Item(I).Item("RUNRATE") = 660
+
                 Next
             Catch ex As Exception
 
             End Try
 
-            val = 6
+
             Elchart.Series(0).Points.Clear()
             Elchart.Series(1).Points.Clear()
             Elchart.Series(2).Points.Clear()
@@ -879,44 +516,30 @@ saltarbottombar:
                 ShiftTarget = ShiftTarget + ds.Tables("Production").DefaultView.Item(i).Item("CURRENTTARGET")
             Next
 
+            totalhoras = (DateDiff(DateInterval.Second, CType(ds.Tables("Production").DefaultView.Item(0).Item("STARTTIME"), Date), fechaserver) - SegundosBreaks) / 3600
 
-            val = 7
+            LblPart.Text = "PART: " & ds.Tables("Production").DefaultView.Item(ds.Tables("Production").DefaultView.Count - 1).Item("PARTNUMBER").ToString
+            LblResource.Text = "Resource: " & ResourceName & IIf(CurrSubResID > 1, " " + CurrSubResID.ToString, "")
+            LblShifTarget.Text = "Shift current target: " & Math.Round(ShiftTarget).ToString("F0")
+            LblCurrentActualValue.Text = totalprod.ToString
 
-            ''SOLO SI HUBO DATOS
-            If ds.Tables("Production").DefaultView.Count > 0 Then
-                totalhoras = (DateDiff(DateInterval.Second, CType(ds.Tables("Production").DefaultView.Item(0).Item("STARTTIME"), Date), fechaserver) - SegundosBreaks) / 3600
-                LblPart.Text = "PART: " & ds.Tables("Production").DefaultView.Item(ds.Tables("Production").DefaultView.Count - 1).Item("PARTNUMBER").ToString
-                LblResource.Text = "Resource: " & ResourceName & IIf(CurrSubResID > 1, " " + CurrSubResID.ToString, "")
-                LblShifTarget.Text = "Shift current target: " & Math.Round(ShiftTarget).ToString("F0")
-                LblCurrentActualValue.Text = totalprod.ToString
-
-                LblShiftDeltaValue.Text = (totalprod - Math.Round(ShiftTarget)).ToString("F0")
-
-            Else
-                'SI NO HUBO DATOS
-                LblPart.Text = ""
-                LblResource.Text = "Resource: " & ResourceName & IIf(CurrSubResID > 1, " " + CurrSubResID.ToString, "")
-                LblShifTarget.Text = "Shift current target: " & Math.Round(ShiftTarget).ToString("F0")
-                LblCurrentActualValue.Text = totalprod.ToString
-
-                LblShiftDeltaValue.Text = 0
-                totalhoras = 0
-
-            End If
+            LblShiftDeltaValue.Text = (totalprod - Math.Round(ShiftTarget)).ToString("F0")
 
             If LblShiftDeltaValue.Text > 0 Then LblShiftDeltaValue.Text = "+" & LblShiftDeltaValue.Text
+
             If totalhoras < 0.01 Then
                 totalhoras = 0
             End If
 
             LblAverage.Text = "Average: " & ((totalprod) / totalhoras).ToString("F2")
+
             If totalprod = 0 Then LblAverage.Text = "Average: 0"
+
             Dim eff As Double
             eff = (totalprod * 100) / ShiftTarget
             LblCurrentActualValue.BackColor = Color.Gainsboro
             LblShiftDeltaValue.BackColor = Color.Gainsboro
 
-            val = 8
 
             If eff < actualyellowtarget Then
                 LblCurrentActualValue.BackColor = Color.Red
@@ -948,22 +571,13 @@ saltarbottombar:
 
             RadialGaugeSingleLabel1.LabelText = eff.ToString("f2") & "%"
 
-            If ds.Tables("Production").DefaultView.Count > 0 Then
-                LblCurrentTarget.Text = "Current Hourly Target: " & ds.Tables("Production").DefaultView.Item(ds.Tables("Production").DefaultView.Count - 1).Item("RUNRATE")
+            LblCurrentTarget.Text = "Current Hourly Target: " & ds.Tables("Production").DefaultView.Item(ds.Tables("Production").DefaultView.Count - 1).Item("RUNRATE")
+            LblSPMTarget.Text = (ds.Tables("Production").DefaultView.Item(ds.Tables("Production").DefaultView.Count - 1).Item("RUNRATE") / 60).ToString
+
+            If SPM >= Math.Ceiling(ds.Tables("Production").DefaultView.Item(ds.Tables("Production").DefaultView.Count - 1).Item("RUNRATE") / 60) Then
+                LblSPMActual.BackColor = Color.Lime
             Else
-                LblCurrentTarget.Text = "Current Hourly Target: -"
-            End If
-
-
-            If PanelPrensas.Visible And ds.Tables("Production").DefaultView.Count > 0 Then
-                LblSPMTarget.Text = Format((ds.Tables("Production").DefaultView.Item(ds.Tables("Production").DefaultView.Count - 1).Item("RUNRATE") / 60), "F1")
-
-                If SPM >= Math.Ceiling(ds.Tables("Production").DefaultView.Item(ds.Tables("Production").DefaultView.Count - 1).Item("RUNRATE") / 60) Then
-                    LblSPMActual.BackColor = Color.Lime
-                Else
-                    LblSPMActual.BackColor = Color.Red
-                End If
-
+                LblSPMActual.BackColor = Color.Red
             End If
 
             ''NO MOSTRAR LA SERIE DEL TARGET
@@ -1054,18 +668,14 @@ saltarbottombar:
             Elchart.Series(1)("BarLabelStyle") = "Center"
             Elchart.Series(1).LabelAngle = 90
 
-            Dim parteactual As String
-            If Elchart.Series(0).Points.Count > 0 Then
-                parteactual = Elchart.Series(0).Points(0).AxisLabel
-            End If
-
+            Dim parteactual As String = Elchart.Series(0).Points(0).AxisLabel
             LblChangeOverBlue.Visible = False
 
             Elchart.ChartAreas(0).AxisX.CustomLabels.Clear()
             Elchart.ChartAreas(0).AxisX2.CustomLabels.Clear()
 
             Dim cuentahoras As Double = 0
-            val = 9
+
             For i = 0 To Elchart.Series(0).Points.Count - 1
                 Elchart.ChartAreas(0).AxisX.CustomLabels.Add(New CustomLabel(i + 0.5, i + 1.5, Elchart.Series(0).Points(i).AxisLabel, 0, LabelMarkStyle.None))
                 If Elchart.Series(0).Points(i).AxisLabel <> parteactual Then
@@ -1073,27 +683,25 @@ saltarbottombar:
                     LblChangeOverBlue.Visible = True
                 End If
 
-                ''If ds.Tables("Production").DefaultView.Item(i).Item("ENDTIME") Is DBNull.Value Then
-                If String.IsNullOrEmpty(ds.Tables("Production").DefaultView.Item(i).Item("ENDTIME").ToString) Then
+                If ds.Tables("Production").DefaultView.Item(i).Item("ENDTIME") Is DBNull.Value Then
                     ''SI ES NULO ES LA HORA ACTUAL
-                    If DatePart(DateInterval.Hour, CType(ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), Date)).ToString = CType(ds.Tables("Production").DefaultView.Item(i).Item("HORA"), Integer).ToString Then
+                    If DatePart(DateInterval.Hour, CType(ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), Date)).ToString = ds.Tables("Production").DefaultView.Item(i).Item("HORA") Then
                         Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(i + 0.5, i + 1.5, CType(ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), Date).ToString("HH:mm") & " - " & fechaserver.ToString("HH:mm"), 0, LabelMarkStyle.None))
                     Else
                         Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(i + 0.5, i + 1.5, CType(ds.Tables("Production").DefaultView.Item(i).Item("STARTTIME"), Date).ToString("HH:mm") & " - " & fechaserver.ToString("HH:mm"), 0, LabelMarkStyle.None))
                     End If
                 Else
 
-                    ''If Not ds.Tables("Production").DefaultView.Item(i).Item("CLOSEDDATE") Is DBNull.Value Then
-                    If Not String.IsNullOrEmpty(ds.Tables("Production").DefaultView.Item(i).Item("CLOSEDDATE").ToString) Then
+                    If Not ds.Tables("Production").DefaultView.Item(i).Item("CLOSEDDATE") Is DBNull.Value Then
 
-                        If DatePart(DateInterval.Hour, CType(ds.Tables("Production").DefaultView.Item(i).Item("CLOSEDDATE"), Date)).ToString = CType(ds.Tables("Production").DefaultView.Item(i).Item("HORA"), Integer).ToString Then
-                            If DatePart(DateInterval.Hour, CType(ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), Date)).ToString = CType(ds.Tables("Production").DefaultView.Item(i).Item("HORA"), Integer).ToString Then
+                        If DatePart(DateInterval.Hour, CType(ds.Tables("Production").DefaultView.Item(i).Item("CLOSEDDATE"), Date)).ToString = ds.Tables("Production").DefaultView.Item(i).Item("HORA") Then
+                            If DatePart(DateInterval.Hour, CType(ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), Date)).ToString = ds.Tables("Production").DefaultView.Item(i).Item("HORA") Then
                                 Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(i + 0.5, i + 1.5, CType(ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), Date).ToString("HH:mm") & " - " & CType(ds.Tables("Production").DefaultView.Item(i).Item("CLOSEDDATE"), Date).ToString("HH:mm"), 0, LabelMarkStyle.None))
                             Else
                                 Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(i + 0.5, i + 1.5, CType(ds.Tables("Production").DefaultView.Item(i).Item("STARTTIME"), Date).ToString("HH:mm") & " - " & CType(ds.Tables("Production").DefaultView.Item(i).Item("CLOSEDDATE"), Date).ToString("HH:mm"), 0, LabelMarkStyle.None))
                             End If
                         Else
-                            If DatePart(DateInterval.Hour, CType(ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), Date)).ToString = CType(ds.Tables("Production").DefaultView.Item(i).Item("HORA"), Integer).ToString Then
+                            If DatePart(DateInterval.Hour, CType(ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), Date)).ToString = ds.Tables("Production").DefaultView.Item(i).Item("HORA") Then
                                 Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(i + 0.5, i + 1.5, CType(ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), Date).ToString("HH:mm") & " - " & CType(ds.Tables("Production").DefaultView.Item(i).Item("ENDTIME"), Date).ToString("HH:mm"), 0, LabelMarkStyle.None))
                             Else
                                 Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(i + 0.5, i + 1.5, CType(ds.Tables("Production").DefaultView.Item(i).Item("STARTTIME"), Date).ToString("HH:mm") & " - " & CType(ds.Tables("Production").DefaultView.Item(i).Item("ENDTIME"), Date).ToString("HH:mm"), 0, LabelMarkStyle.None))
@@ -1101,9 +709,8 @@ saltarbottombar:
                         End If
 
                     Else
-                        'If Not ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE") Is DBNull.Value Then
-                        If Not String.IsNullOrEmpty(ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE").ToString) Then
-                            If DatePart(DateInterval.Hour, CType(ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), Date)).ToString = CType(ds.Tables("Production").DefaultView.Item(i).Item("HORA"), Integer).ToString Then
+                        If Not ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE") Is DBNull.Value Then
+                            If DatePart(DateInterval.Hour, CType(ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), Date)).ToString = ds.Tables("Production").DefaultView.Item(i).Item("HORA") Then
                                 Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(i + 0.5, i + 1.5, CType(ds.Tables("Production").DefaultView.Item(i).Item("OPENEDDATE"), Date).ToString("HH:mm") & " - " & CType(ds.Tables("Production").DefaultView.Item(i).Item("ENDTIME"), Date).ToString("HH:mm"), 0, LabelMarkStyle.None))
                             Else
                                 Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(i + 0.5, i + 1.5, CType(ds.Tables("Production").DefaultView.Item(i).Item("STARTTIME"), Date).ToString("HH:mm") & " - " & CType(ds.Tables("Production").DefaultView.Item(i).Item("ENDTIME"), Date).ToString("HH:mm"), 0, LabelMarkStyle.None))
@@ -1135,8 +742,6 @@ saltarbottombar:
 
             Next
 
-            val = 10
-
             If Elchart.Series(0).Points.Count > 8 Then
                 Dim textohoras As String()
                 For i = 0 To Elchart.Series(0).Points.Count - 1
@@ -1156,41 +761,11 @@ saltarbottombar:
             'Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(8.5, 9.5, "13:00 - 14:00", 0, LabelMarkStyle.Box))
             'Elchart.ChartAreas(0).AxisX2.IsReversed = True
 
-            If ds.Tables("Production").DefaultView.Count = 0 Or Elchart.Series(0).Points.Count = 0 Then
-                displayerrorlabel("No Data to Display.", Elchart)
-            End If
-
-
-
         Catch ex As Exception
             'MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
-            'LblFechaHora.Text = "CD: " & val.ToString & " " & ex.Message
-            'LblFechaHora.ForeColor = Color.Red
-            displayerrorlabel(ex.Message, Elchart)
-        Finally
-            TimerDatos.Start()
-            If quitarrapido Then
-                TimerChange.Interval = 4000
-            Else
-                TimerChange.Interval = My.Settings.Timer * 1000
-            End If
-        End Try
-    End Sub
-    Sub displayerrorlabel(ByVal mensaje As String, ByRef Elchart As Chart)
-        Try
-            LBLERROR.Location = New Point(Elchart.Location.X + 150, Elchart.Location.Y + 150)
+            LblFechaHora.Text = ex.Message
+            LblFechaHora.ForeColor = Color.Red
 
-            LBLERROR.Size = New Size(Elchart.Size.Width - 300, Elchart.Height - 300)
-
-            LBLERROR.Font = LblFechaHora.Font
-            LBLERROR.TextAlign = ContentAlignment.MiddleCenter
-            LBLERROR.Visible = True
-            LBLERROR.ForeColor = Color.Red
-
-            LBLERROR.Text = mensaje
-
-            LBLERROR.BringToFront()
-        Catch ex As Exception
         End Try
     End Sub
 
@@ -1276,41 +851,16 @@ saltarbottombar:
 
     Dim currentchart As Integer = 1
     Dim currentslide As Integer = 1
-
-
-
     Private Sub TimerChange_Tick(sender As Object, e As EventArgs) Handles TimerChange.Tick
         If paused Then Exit Sub
         If My.Settings.RESOURCES Is Nothing Then Exit Sub
-        If My.Settings.RESOURCES.Rows.Count < 1 Then Exit Sub
+        If My.Settings.RESOURCES.Rows.Count <= 1 Then Exit Sub
         TimerDatos.Enabled = False
         CurrResIndex = CurrResIndex + 1
         If CurrResIndex > My.Settings.RESOURCES.DefaultView.Count - 1 Then
-            ''Solo HSPR01
-            If My.Settings.HSPR01 Then
-                If My.Settings.MARSServer = "192.168.114.99\mars" And Not hsp.Visible Then
-                    hsp.Timer1.Enabled = True
-                    hsp.Location = Me.Location
-                    hsp.WindowState = FormWindowState.Maximized
-                    hsp.StartPosition = FormStartPosition.Manual
-                    hsp.Show()
-                    TimerChange.Enabled = True
-                    Exit Sub
-                Else
-                    TimerChange.Enabled = True
-                    hsp.Timer1.Enabled = False
-                    hsp.Hide()
-                End If
-            End If
-
             If My.Settings.SLIDES.Rows.Count = 0 Then
                 ''se resetean los recursos
                 CurrResIndex = 0
-                If My.Settings.RESOURCES.DefaultView.Count = 1 Then
-                    TimerDatos.Enabled = True
-                    Exit Sub
-                End If
-
             Else
                 '' se empieza con los slides.
                 CurrResIndex = -1
@@ -1388,10 +938,7 @@ saltarbottombar:
 
     Private Sub TimerSlides_Tick(sender As Object, e As EventArgs) Handles TimerSlides.Tick
         If paused Then Exit Sub
-
         Try
-            PicSlide1.Top = 0
-            PicSlide2.Top = 0
 
             If CurrSlideInex > My.Settings.SLIDES.Rows.Count - 1 Then
                 TimerSlides.Enabled = False
@@ -1506,19 +1053,5 @@ saltarbottombar:
         End Try
         Return ""
     End Function
-
-    Private Sub PicSlide1_Click(sender As Object, e As EventArgs) Handles PicSlide1.Click
-
-    End Sub
-
-    Private Sub PicSlide1_DoubleClick(sender As Object, e As EventArgs) Handles PicSlide1.DoubleClick
-        MsgBox(PicSlide1.Location.ToString())
-    End Sub
-
-    Private Sub PicSlide2_DoubleClick(sender As Object, e As EventArgs) Handles PicSlide2.DoubleClick
-        MsgBox(PicSlide2.Location.ToString())
-    End Sub
-
-
 
 End Class

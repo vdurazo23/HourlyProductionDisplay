@@ -18,6 +18,16 @@ Public Class Config
 
             NumericUpDown1.Value = My.Settings.Timer
 
+            If My.Settings.MARSServer = "192.168.114.99\mars" Then
+                CheckBox1.Visible = True
+                CheckBox1.Checked = My.Settings.HSPR01
+            Else
+                CheckBox1.Visible = False
+                CheckBox1.Checked = False
+            End If
+
+            ChkShowAvg.Checked = My.Settings.SHOWAVG
+
             If Not My.Settings.RESOURCES Is Nothing Then
                 For i = 0 To My.Settings.RESOURCES.Rows.Count - 1
                     ListResources.Items.Add(My.Settings.RESOURCES.Rows(i).Item("ID").ToString)
@@ -162,6 +172,9 @@ Public Class Config
         Try
             cn.Open()
             MsgBox("Successfully connected" & vbCrLf & cn.DataSource.ToString & vbCrLf & cn.Database.ToString, MsgBoxStyle.Information, "Conexión")
+            If My.Settings.MARSServer = "192.168.114.99\mars" Then
+                CheckBox1.Visible = True
+            End If
         Catch ex As Exception
             MsgBox(ex.Message)
         Finally
@@ -238,6 +251,14 @@ Public Class Config
 
             My.Settings.Timer = NumericUpDown1.Value
 
+            If My.Settings.MARSServer = "192.168.114.99\mars" Then
+                My.Settings.HSPR01 = CheckBox1.Checked
+            Else
+                My.Settings.HSPR01 = False
+            End If
+
+            My.Settings.SHOWAVG = ChkShowAvg.Checked
+
             My.Settings.Save()
             Me.DialogResult = Windows.Forms.DialogResult.OK
             Me.Close()
@@ -260,6 +281,37 @@ Public Class Config
             frmsel.dt = ds.Tables("Resources")
             If frmsel.ShowDialog() = Windows.Forms.DialogResult.OK Then
                 If frmsel.DataGridView1.CurrentRow.Index >= 0 Then
+
+                    Dim textnew, textlist As String
+                    textnew = frmsel.DataGridView1.CurrentRow.Cells(0).Value.ToString.Trim & "," & _
+                            frmsel.DataGridView1.CurrentRow.Cells(1).Value.ToString.Trim & "," & _
+                            frmsel.DataGridView1.CurrentRow.Cells(3).Value.ToString.Trim & "," & _
+                            frmsel.DataGridView1.CurrentRow.Cells(4).Value.ToString.Trim & "," & _
+                            frmsel.DataGridView1.CurrentRow.Cells(5).Value.ToString.Trim & "," & _
+                            frmsel.DataGridView1.CurrentRow.Cells(6).Value.ToString.Trim & "," & _
+                            frmsel.DataGridView1.CurrentRow.Cells(7).Value.ToString.Trim
+
+                    For i = 0 To ListResources.Items.Count - 1
+
+                        textlist = ListResources.Items(i).Text.Trim & "," & _
+                        ListResources.Items(i).SubItems(1).Text.Trim & "," & _
+                        ListResources.Items(i).SubItems(3).Text.Trim & "," & _
+                        ListResources.Items(i).SubItems(4).Text.Trim & "," & _
+                        ListResources.Items(i).SubItems(5).Text.Trim & "," & _
+                        ListResources.Items(i).SubItems(6).Text.Trim & "," & _
+                        ListResources.Items(i).SubItems(7).Text.Trim & ""
+
+                        If textnew.ToUpper = textlist.ToUpper Then
+                            If MsgBox("Duplicated value " & vbCrLf & "Are you sure?", MsgBoxStyle.Question + MsgBoxStyle.YesNoCancel, "Duplicated") <> MsgBoxResult.Yes Then
+                                Exit Sub
+                            Else
+                                Exit For
+                            End If
+                        End If
+
+                    Next
+
+
                     ListResources.Items.Add(frmsel.DataGridView1.CurrentRow.Cells(0).Value.ToString)
                     ListResources.Items(ListResources.Items.Count - 1).SubItems.Add(frmsel.DataGridView1.CurrentRow.Cells(1).Value.ToString)
                     ListResources.Items(ListResources.Items.Count - 1).SubItems.Add(frmsel.DataGridView1.CurrentRow.Cells(2).Value.ToString)
@@ -283,11 +335,92 @@ Public Class Config
         End Try
     End Sub
 
+    Private Sub ListResources_DoubleClick(sender As Object, e As EventArgs) Handles ListResources.DoubleClick
+        Try
+            If ListResources.SelectedIndices.Count = 0 Then Exit Sub
+            If ListResources.Items(ListResources.SelectedItems(0).Index).Text = "-1" Then
+                Dim ad As New SubResourceCMS
+                ad.TxtName.Text = ListResources.Items(ListResources.SelectedItems(0).Index).SubItems(1).Text
+                ad.TxtDesc.Text = ListResources.Items(ListResources.SelectedItems(0).Index).SubItems(2).Text
+                ad.TxtDevice.Text = ListResources.Items(ListResources.SelectedItems(0).Index).SubItems(4).Text
+                ad.TxtDepartment.Text = ListResources.Items(ListResources.SelectedItems(0).Index).SubItems(5).Text
+                ad.TxtResource.Text = ListResources.Items(ListResources.SelectedItems(0).Index).SubItems(6).Text
+                If ad.ShowDialog = Windows.Forms.DialogResult.OK Then
+
+                    ListResources.Items(ListResources.SelectedItems(0).Index).SubItems(1).Text = ad.TxtName.Text
+                    ListResources.Items(ListResources.SelectedItems(0).Index).SubItems(2).Text = ad.TxtDesc.Text
+
+                    ListResources.Items(ListResources.SelectedItems(0).Index).SubItems(3).Text = ad.TxtName.Text
+
+                    ListResources.Items(ListResources.SelectedItems(0).Index).SubItems(4).Text = ad.TxtDevice.Text
+                    ListResources.Items(ListResources.SelectedItems(0).Index).SubItems(5).Text = ad.TxtDepartment.Text
+                    ListResources.Items(ListResources.SelectedItems(0).Index).SubItems(6).Text = ad.TxtResource.Text
+
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub ListResources_DragDrop(sender As Object, e As DragEventArgs) Handles ListResources.DragDrop
+        'Return if the items are not selected in the ListView control.
+        If ListResources.SelectedItems.Count = 0 Then Return
+        'Returns the location of the mouse pointer in the ListView control.
+        Dim p As Point = ListResources.PointToClient(New Point(e.X, e.Y))
+        'Obtain the item that is located at the specified location of the mouse pointer.
+        Dim dragToItem As ListViewItem = ListResources.GetItemAt(p.X, p.Y)
+        If dragToItem Is Nothing Then Return
+        'Obtain the index of the item at the mouse pointer.
+        Dim dragIndex As Integer = dragToItem.Index
+        Dim i As Integer
+        Dim sel(ListResources.SelectedItems.Count) As ListViewItem
+        For i = 0 To ListResources.SelectedItems.Count - 1
+            sel(i) = ListResources.SelectedItems.Item(i)
+        Next
+        For i = 0 To ListResources.SelectedItems.Count - 1
+            'Obtain the ListViewItem to be dragged to the target location.
+            Dim dragItem As ListViewItem = sel(i)
+            Dim itemIndex As Integer = dragIndex
+            If itemIndex = dragItem.Index Then Return
+            If dragItem.Index < itemIndex Then
+                itemIndex = itemIndex + 1
+            Else
+                itemIndex = dragIndex + i
+            End If
+            'Insert the item in the specified location.
+            Dim insertitem As ListViewItem = dragItem.Clone
+            ListResources.Items.Insert(itemIndex, insertitem)
+            'Removes the item from the initial location while 
+            'the item is moved to the new location.
+            ListResources.Items.Remove(dragItem)
+        Next
+    End Sub
+
+    Private Sub ListResources_DragEnter(sender As Object, e As DragEventArgs) Handles ListResources.DragEnter
+        Dim i As Integer
+        For i = 0 To e.Data.GetFormats().Length - 1
+            If e.Data.GetFormats()(i).Equals("System.Windows.Forms.ListView+SelectedListViewItemCollection") Then
+                'The data from the drag source is moved to the target.
+                e.Effect = DragDropEffects.Move
+            End If
+        Next
+    End Sub
+
+    Private Sub ListResources_ItemDrag(sender As Object, e As ItemDragEventArgs) Handles ListResources.ItemDrag
+        ListResources.DoDragDrop(ListResources.SelectedItems, DragDropEffects.Move)
+    End Sub
+
     Private Sub ListResources_KeyUp(sender As Object, e As KeyEventArgs) Handles ListResources.KeyUp
         If ListResources.SelectedIndices.Count = 0 Then Exit Sub
         If e.KeyCode = Keys.Delete Then
             If MsgBox("Are you sure ?", MsgBoxStyle.Question + MsgBoxStyle.YesNoCancel, "Remove") = MsgBoxResult.Yes Then
-                ListResources.Items.RemoveAt(ListResources.SelectedIndices(0))
+                'For i = 0 To ListResources.SelectedIndices.Count - 1
+                '    ListResources.Items.RemoveAt(ListResources.SelectedIndices(i))
+                'Next
+                For Each i As ListViewItem In ListResources.SelectedItems
+                    ListResources.Items.Remove(i)
+                Next
             End If
         End If
     End Sub
@@ -329,5 +462,52 @@ Public Class Config
 
     Private Sub ListFiles_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListFiles.SelectedIndexChanged
 
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Dim frmsel As New SubResourceCMS
+
+        If frmsel.ShowDialog() = Windows.Forms.DialogResult.OK Then
+
+            Dim textnew, textlist As String
+            textnew = "-1," & _
+                    frmsel.TxtName.Text.Trim & "," & _
+                    frmsel.TxtName.Text.Trim & "," & _
+                    frmsel.TxtDevice.Text.Trim & "," & _
+                    frmsel.TxtDepartment.Text.Trim & "," & _
+                    frmsel.TxtResource.Text.Trim & ",1"
+
+            For i = 0 To ListResources.Items.Count - 1
+
+                textlist = ListResources.Items(i).Text.Trim & "," & _
+                ListResources.Items(i).SubItems(1).Text.Trim & "," & _
+                ListResources.Items(i).SubItems(3).Text.Trim & "," & _
+                ListResources.Items(i).SubItems(4).Text.Trim & "," & _
+                ListResources.Items(i).SubItems(5).Text.Trim & "," & _
+                ListResources.Items(i).SubItems(6).Text.Trim & "," & _
+                ListResources.Items(i).SubItems(7).Text.Trim & ""
+
+                If textnew.ToUpper = textlist.ToUpper Then
+                    If MsgBox("Duplicated value " & vbCrLf & "Are you sure?", MsgBoxStyle.Question + MsgBoxStyle.YesNoCancel, "Duplicated") <> MsgBoxResult.Yes Then
+                        Exit Sub
+                    Else
+                        Exit For
+                    End If
+                End If
+
+            Next
+
+            ListResources.Items.Add(-1)
+            ListResources.Items(ListResources.Items.Count - 1).SubItems.Add(frmsel.TxtName.Text)
+            ListResources.Items(ListResources.Items.Count - 1).SubItems.Add(frmsel.TxtDesc.Text)
+            ListResources.Items(ListResources.Items.Count - 1).SubItems.Add(frmsel.TxtName.Text)
+            ListResources.Items(ListResources.Items.Count - 1).SubItems.Add(frmsel.TxtDevice.Text)
+            ListResources.Items(ListResources.Items.Count - 1).SubItems.Add(frmsel.TxtDepartment.Text)
+            ListResources.Items(ListResources.Items.Count - 1).SubItems.Add(frmsel.TxtResource.Text)
+            ListResources.Items(ListResources.Items.Count - 1).SubItems.Add(1)
+        End If
+
+        frmsel.Dispose()
+        frmsel = Nothing
     End Sub
 End Class

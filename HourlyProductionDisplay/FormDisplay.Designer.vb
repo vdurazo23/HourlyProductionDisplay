@@ -74,6 +74,7 @@ Partial Class FormDisplay
         Me.Label2 = New System.Windows.Forms.Label()
         Me.LblSPMTarget = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.LBLERROR = New System.Windows.Forms.Label()
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Chart2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadRadialGauge2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -766,12 +767,23 @@ Partial Class FormDisplay
         Me.Label1.Text = "SPM target:"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'LBLERROR
+        '
+        Me.LBLERROR.Location = New System.Drawing.Point(4, 302)
+        Me.LBLERROR.Name = "LBLERROR"
+        Me.LBLERROR.Size = New System.Drawing.Size(136, 29)
+        Me.LBLERROR.TabIndex = 246
+        Me.LBLERROR.Text = "Label3"
+        Me.LBLERROR.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LBLERROR.Visible = False
+        '
         'FormDisplay
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Gainsboro
         Me.ClientSize = New System.Drawing.Size(1503, 785)
+        Me.Controls.Add(Me.LBLERROR)
         Me.Controls.Add(Me.PanelPrensas)
         Me.Controls.Add(Me.LblFechaHora)
         Me.Controls.Add(Me.LblShiftDeltaValue)
@@ -851,5 +863,6 @@ Partial Class FormDisplay
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents LblSPMTarget As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents LBLERROR As System.Windows.Forms.Label
 
 End Class

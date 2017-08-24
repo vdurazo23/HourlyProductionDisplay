@@ -46,6 +46,7 @@ Partial Class Config
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.ListFiles = New System.Windows.Forms.ListView()
@@ -70,6 +71,8 @@ Partial Class Config
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.ChkShowAvg = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -201,10 +204,12 @@ Partial Class Config
         '
         'ListResources
         '
+        Me.ListResources.AllowDrop = True
         Me.ListResources.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ListResources.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ID, Me.NameCol, Me.Description, Me.Code, Me.DeviceCode, Me.DepartmentCode, Me.ResourceCode, Me.SubResourceID})
+        Me.ListResources.FullRowSelect = True
         Me.ListResources.Location = New System.Drawing.Point(6, 36)
         Me.ListResources.Name = "ListResources"
         Me.ListResources.Size = New System.Drawing.Size(757, 221)
@@ -277,6 +282,7 @@ Partial Class Config
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.Button5)
         Me.TabPage1.Controls.Add(Me.Button1)
         Me.TabPage1.Controls.Add(Me.ListResources)
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
@@ -286,6 +292,16 @@ Partial Class Config
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Sub resources"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'Button5
+        '
+        Me.Button5.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Button5.Location = New System.Drawing.Point(173, 6)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(161, 27)
+        Me.Button5.TabIndex = 11
+        Me.Button5.Text = "Add Sub Resource (CMS) +"
+        Me.Button5.UseVisualStyleBackColor = True
         '
         'TabPage2
         '
@@ -492,11 +508,34 @@ Partial Class Config
         Me.Label9.TabIndex = 0
         Me.Label9.Text = "D S N"
         '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(602, 194)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(68, 17)
+        Me.CheckBox1.TabIndex = 226
+        Me.CheckBox1.Text = "HSPR01"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.CheckBox1.Visible = False
+        '
+        'ChkShowAvg
+        '
+        Me.ChkShowAvg.AutoSize = True
+        Me.ChkShowAvg.Location = New System.Drawing.Point(121, 190)
+        Me.ChkShowAvg.Name = "ChkShowAvg"
+        Me.ChkShowAvg.Size = New System.Drawing.Size(96, 17)
+        Me.ChkShowAvg.TabIndex = 227
+        Me.ChkShowAvg.Text = "Show Average"
+        Me.ChkShowAvg.UseVisualStyleBackColor = True
+        '
         'Config
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(784, 562)
+        Me.Controls.Add(Me.ChkShowAvg)
+        Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label5)
@@ -569,4 +608,7 @@ Partial Class Config
     Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
     Friend WithEvents SubResourceID As System.Windows.Forms.ColumnHeader
+    Friend WithEvents Button5 As System.Windows.Forms.Button
+    Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
+    Friend WithEvents ChkShowAvg As System.Windows.Forms.CheckBox
 End Class
