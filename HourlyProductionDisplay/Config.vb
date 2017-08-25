@@ -6,6 +6,11 @@ Public Class Config
 
     Private Sub Config_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
+            Me.Text = System.String.Format(Me.Text, My.Application.Info.Version.Major, My.Application.Info.Version.Minor, My.Application.Info.Version.Build, My.Application.Info.Version.Revision)
+        Catch ex As Exception
+
+        End Try
+        Try
             TxtMarsServer.Text = My.Settings.MARSServer
             TxtMARSUser.Text = My.Settings.MARSUser
 

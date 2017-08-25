@@ -546,7 +546,7 @@ Partial Class Config
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "Config"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Configuration 2.0"
+        Me.Text = "Configuration Version {0}.{1} Build {2} Rev. {3}"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
