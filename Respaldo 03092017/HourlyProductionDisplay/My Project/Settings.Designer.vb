@@ -195,30 +195,6 @@ Namespace My
                 Me("FontIncrement2") = value
             End Set
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property HSPR01() As Boolean
-            Get
-                Return CType(Me("HSPR01"),Boolean)
-            End Get
-            Set
-                Me("HSPR01") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property SHOWAVG() As Boolean
-            Get
-                Return CType(Me("SHOWAVG"),Boolean)
-            End Get
-            Set
-                Me("SHOWAVG") = value
-            End Set
-        End Property
     End Class
 End Namespace
 

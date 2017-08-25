@@ -3,6 +3,13 @@
 Module MainModule
     Public Sub main()
         Try
+
+            ' If My.Settings.UPGRADEREQUIRED Then
+            My.MySettings.Default.Upgrade()
+            My.MySettings.Default.UPGRADEREQUIRED = False
+            My.MySettings.Default.Save()
+            'End If
+
             Dim SPECIFICPANT As Integer = -1
 
             Dim str() As String
@@ -36,6 +43,7 @@ Module MainModule
                     panttoshow = sp.Seleccion
 
 startshowingfromparameter:
+                    showspl(panttoshow)
 
                     Dim Fr As New FormDisplay
                     Fr.Location = Screen.AllScreens(panttoshow).Bounds.Location
@@ -46,6 +54,7 @@ startshowingfromparameter:
                     Application.Exit()
                 End If
             Else
+                showspl()
                 Dim Fr As New FormDisplay
                 Fr.WindowState = FormWindowState.Maximized
                 Application.Run(Fr)
@@ -54,7 +63,18 @@ startshowingfromparameter:
             MsgBox("Initializing Error: " & ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
     End Sub
+    Sub showspl(Optional ByVal panttoshow As Integer = 0)
+        Dim spl As New SplashScreen1
 
+        Dim centerscr As New Point(0, 0)
+        centerscr.X = Screen.AllScreens(panttoshow).Bounds.Location.X + (Screen.AllScreens(panttoshow).Bounds.Size.Width / 2 - (spl.Size.Width / 2))
+        centerscr.Y = Screen.AllScreens(panttoshow).Bounds.Location.Y + (Screen.AllScreens(panttoshow).Bounds.Size.Height / 2 - (spl.Size.Height / 2))
+
+
+        spl.Location = centerscr
+        spl.StartPosition = FormStartPosition.Manual
+        spl.ShowDialog()
+    End Sub
     Function GetCommandLineArgs() As String()
         ' Declare variables.
         Dim separators As String = " "

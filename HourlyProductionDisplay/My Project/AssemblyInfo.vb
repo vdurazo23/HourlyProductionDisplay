@@ -8,12 +8,12 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("HourlyProductionDisplay")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("")> 
+<Assembly: AssemblyTitle("Hourly Production Display")> 
+<Assembly: AssemblyDescription("Hourly Production Display")> 
+<Assembly: AssemblyCompany("Martinrea")> 
 <Assembly: AssemblyProduct("HourlyProductionDisplay")> 
-<Assembly: AssemblyCopyright("Copyright ©  2016")> 
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyCopyright("MREA ©  2017")> 
+<Assembly: AssemblyTrademark("MREA")> 
 
 <Assembly: ComVisible(False)>
 
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.0.0")> 
-<Assembly: AssemblyFileVersion("1.0.0.0")> 
+<Assembly: AssemblyVersion("2.0.1.1")> 
+<Assembly: AssemblyFileVersion("2.0.1.1")> 
