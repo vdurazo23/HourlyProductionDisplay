@@ -4,11 +4,11 @@ Module MainModule
     Public Sub main()
         Try
 
-            ' If My.Settings.UPGRADEREQUIRED Then
-            My.MySettings.Default.Upgrade()
-            My.MySettings.Default.UPGRADEREQUIRED = False
-            My.MySettings.Default.Save()
-            'End If
+            If My.Settings.UPGRADEREQUIRED Then
+                My.MySettings.Default.Upgrade()
+                My.MySettings.Default.UPGRADEREQUIRED = False
+                My.MySettings.Default.Save()
+            End If
 
             Dim SPECIFICPANT As Integer = -1
 
@@ -20,6 +20,7 @@ Module MainModule
                     conf.ShowDialog()
                     conf.Dispose()
                     conf = Nothing
+                    Console.Write("Sale config")
                 End If
 
                 If IsNumeric(str(0)) Then

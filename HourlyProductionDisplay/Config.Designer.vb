@@ -73,6 +73,10 @@ Partial Class Config
         Me.Label9 = New System.Windows.Forms.Label()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.ChkShowAvg = New System.Windows.Forms.CheckBox()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.PanelHSPR = New System.Windows.Forms.Panel()
+        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -80,6 +84,7 @@ Partial Class Config
         Me.TabPage3.SuspendLayout()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
+        Me.PanelHSPR.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -419,7 +424,7 @@ Partial Class Config
         'NumericUpDown1
         '
         Me.NumericUpDown1.Location = New System.Drawing.Point(368, 193)
-        Me.NumericUpDown1.Minimum = New Decimal(New Integer() {5, 0, 0, 0})
+        Me.NumericUpDown1.Minimum = New Decimal(New Integer() {6, 0, 0, 0})
         Me.NumericUpDown1.Name = "NumericUpDown1"
         Me.NumericUpDown1.Size = New System.Drawing.Size(65, 20)
         Me.NumericUpDown1.TabIndex = 212
@@ -511,13 +516,12 @@ Partial Class Config
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(602, 194)
+        Me.CheckBox1.Location = New System.Drawing.Point(3, 3)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(68, 17)
         Me.CheckBox1.TabIndex = 226
         Me.CheckBox1.Text = "HSPR01"
         Me.CheckBox1.UseVisualStyleBackColor = True
-        Me.CheckBox1.Visible = False
         '
         'ChkShowAvg
         '
@@ -529,13 +533,55 @@ Partial Class Config
         Me.ChkShowAvg.Text = "Show Average"
         Me.ChkShowAvg.UseVisualStyleBackColor = True
         '
+        'Button6
+        '
+        Me.Button6.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Button6.Location = New System.Drawing.Point(15, 504)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(161, 27)
+        Me.Button6.TabIndex = 228
+        Me.Button6.Text = "Translations"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
+        'PanelHSPR
+        '
+        Me.PanelHSPR.Controls.Add(Me.CheckBox3)
+        Me.PanelHSPR.Controls.Add(Me.CheckBox2)
+        Me.PanelHSPR.Controls.Add(Me.CheckBox1)
+        Me.PanelHSPR.Location = New System.Drawing.Point(589, 190)
+        Me.PanelHSPR.Name = "PanelHSPR"
+        Me.PanelHSPR.Size = New System.Drawing.Size(183, 48)
+        Me.PanelHSPR.TabIndex = 229
+        Me.PanelHSPR.Visible = False
+        '
+        'CheckBox3
+        '
+        Me.CheckBox3.AutoSize = True
+        Me.CheckBox3.Location = New System.Drawing.Point(88, 3)
+        Me.CheckBox3.Name = "CheckBox3"
+        Me.CheckBox3.Size = New System.Drawing.Size(68, 17)
+        Me.CheckBox3.TabIndex = 228
+        Me.CheckBox3.Text = "HSPR03"
+        Me.CheckBox3.UseVisualStyleBackColor = True
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Location = New System.Drawing.Point(3, 26)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(68, 17)
+        Me.CheckBox2.TabIndex = 227
+        Me.CheckBox2.Text = "HSPR02"
+        Me.CheckBox2.UseVisualStyleBackColor = True
+        '
         'Config
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(784, 562)
+        Me.Controls.Add(Me.PanelHSPR)
+        Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.ChkShowAvg)
-        Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label5)
@@ -556,6 +602,8 @@ Partial Class Config
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.PanelHSPR.ResumeLayout(False)
+        Me.PanelHSPR.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -611,4 +659,8 @@ Partial Class Config
     Friend WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
     Friend WithEvents ChkShowAvg As System.Windows.Forms.CheckBox
+    Friend WithEvents Button6 As System.Windows.Forms.Button
+    Friend WithEvents PanelHSPR As System.Windows.Forms.Panel
+    Friend WithEvents CheckBox2 As System.Windows.Forms.CheckBox
+    Friend WithEvents CheckBox3 As System.Windows.Forms.CheckBox
 End Class

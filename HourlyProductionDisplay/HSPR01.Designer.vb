@@ -37,6 +37,42 @@ Partial Class HSPR01
         Me.ChamferedRectShape1 = New Telerik.WinControls.ChamferedRectShape()
         Me.DiamondShape1 = New Telerik.WinControls.UI.DiamondShape()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.RadRadialGauge5 = New Telerik.WinControls.UI.Gauges.RadRadialGauge()
+        Me.BackOven1Zone2 = New Telerik.WinControls.UI.Gauges.RadialGaugeBackground()
+        Me.RadialGaugeArc20 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
+        Me.RadialGaugeArc21 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
+        Me.RadialGaugeArc22 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
+        Me.RadialGaugeArc23 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
+        Me.RadialGaugeTicks10 = New Telerik.WinControls.UI.Gauges.RadialGaugeTicks()
+        Me.RadialGaugeLabels6 = New Telerik.WinControls.UI.Gauges.RadialGaugeLabels()
+        Me.NeedleOven1Zone2 = New Telerik.WinControls.UI.Gauges.RadialGaugeNeedle()
+        Me.RadialGaugeTicks11 = New Telerik.WinControls.UI.Gauges.RadialGaugeTicks()
+        Me.LblOven1Zone2 = New Telerik.WinControls.UI.Gauges.RadialGaugeSingleLabel()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.RadRadialGauge6 = New Telerik.WinControls.UI.Gauges.RadRadialGauge()
+        Me.BackOven1Zone3 = New Telerik.WinControls.UI.Gauges.RadialGaugeBackground()
+        Me.RadialGaugeArc24 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
+        Me.RadialGaugeArc25 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
+        Me.RadialGaugeArc26 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
+        Me.RadialGaugeArc27 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
+        Me.RadialGaugeTicks12 = New Telerik.WinControls.UI.Gauges.RadialGaugeTicks()
+        Me.RadialGaugeLabels7 = New Telerik.WinControls.UI.Gauges.RadialGaugeLabels()
+        Me.NeedleOven1Zone3 = New Telerik.WinControls.UI.Gauges.RadialGaugeNeedle()
+        Me.RadialGaugeTicks13 = New Telerik.WinControls.UI.Gauges.RadialGaugeTicks()
+        Me.LblOven1Zone3 = New Telerik.WinControls.UI.Gauges.RadialGaugeSingleLabel()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.RadRadialGauge8 = New Telerik.WinControls.UI.Gauges.RadRadialGauge()
+        Me.BackOven1Zone1 = New Telerik.WinControls.UI.Gauges.RadialGaugeBackground()
+        Me.RadialGaugeArc32 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
+        Me.RadialGaugeArc33 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
+        Me.RadialGaugeArc34 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
+        Me.RadialGaugeArc35 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
+        Me.RadialGaugeTicks16 = New Telerik.WinControls.UI.Gauges.RadialGaugeTicks()
+        Me.RadialGaugeLabels9 = New Telerik.WinControls.UI.Gauges.RadialGaugeLabels()
+        Me.NeedleOven1Zone1 = New Telerik.WinControls.UI.Gauges.RadialGaugeNeedle()
+        Me.RadialGaugeTicks17 = New Telerik.WinControls.UI.Gauges.RadialGaugeTicks()
+        Me.LblOven1Zone1 = New Telerik.WinControls.UI.Gauges.RadialGaugeSingleLabel()
         Me.RadRadialGauge4 = New Telerik.WinControls.UI.Gauges.RadRadialGauge()
         Me.BackWaterlowerDieOutTemp = New Telerik.WinControls.UI.Gauges.RadialGaugeBackground()
         Me.RadialGaugeArc16 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
@@ -70,28 +106,6 @@ Partial Class HSPR01
         Me.NeedleWaterUperDieOutTemp = New Telerik.WinControls.UI.Gauges.RadialGaugeNeedle()
         Me.RadialGaugeTicks5 = New Telerik.WinControls.UI.Gauges.RadialGaugeTicks()
         Me.LblWaterUperDieOutTemp = New Telerik.WinControls.UI.Gauges.RadialGaugeSingleLabel()
-        Me.RadRadialGauge5 = New Telerik.WinControls.UI.Gauges.RadRadialGauge()
-        Me.BackOven1Zone2 = New Telerik.WinControls.UI.Gauges.RadialGaugeBackground()
-        Me.RadialGaugeArc20 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
-        Me.RadialGaugeArc21 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
-        Me.RadialGaugeArc22 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
-        Me.RadialGaugeArc23 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
-        Me.RadialGaugeTicks10 = New Telerik.WinControls.UI.Gauges.RadialGaugeTicks()
-        Me.RadialGaugeLabels6 = New Telerik.WinControls.UI.Gauges.RadialGaugeLabels()
-        Me.NeedleOven1Zone2 = New Telerik.WinControls.UI.Gauges.RadialGaugeNeedle()
-        Me.RadialGaugeTicks11 = New Telerik.WinControls.UI.Gauges.RadialGaugeTicks()
-        Me.LblOven1Zone2 = New Telerik.WinControls.UI.Gauges.RadialGaugeSingleLabel()
-        Me.RadRadialGauge8 = New Telerik.WinControls.UI.Gauges.RadRadialGauge()
-        Me.BackOven1Zone1 = New Telerik.WinControls.UI.Gauges.RadialGaugeBackground()
-        Me.RadialGaugeArc32 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
-        Me.RadialGaugeArc33 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
-        Me.RadialGaugeArc34 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
-        Me.RadialGaugeArc35 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
-        Me.RadialGaugeTicks16 = New Telerik.WinControls.UI.Gauges.RadialGaugeTicks()
-        Me.RadialGaugeLabels9 = New Telerik.WinControls.UI.Gauges.RadialGaugeLabels()
-        Me.NeedleOven1Zone1 = New Telerik.WinControls.UI.Gauges.RadialGaugeNeedle()
-        Me.RadialGaugeTicks17 = New Telerik.WinControls.UI.Gauges.RadialGaugeTicks()
-        Me.LblOven1Zone1 = New Telerik.WinControls.UI.Gauges.RadialGaugeSingleLabel()
         Me.RadRadialGauge7 = New Telerik.WinControls.UI.Gauges.RadRadialGauge()
         Me.BackOven2Zone3 = New Telerik.WinControls.UI.Gauges.RadialGaugeBackground()
         Me.RadialGaugeArc28 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
@@ -214,9 +228,17 @@ Partial Class HSPR01
         Me.RadialGaugeTicks37 = New Telerik.WinControls.UI.Gauges.RadialGaugeTicks()
         Me.LblTempBlankAfterFL = New Telerik.WinControls.UI.Gauges.RadialGaugeSingleLabel()
         Me.TableLayoutPanel6 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.TableLayoutPanel8 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel7 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.RadRadialGauge2 = New Telerik.WinControls.UI.Gauges.RadRadialGauge()
         Me.BackWaterUperDieInTemp = New Telerik.WinControls.UI.Gauges.RadialGaugeBackground()
         Me.RadialGaugeArc4 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
         Me.RadialGaugeArc5 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
@@ -227,44 +249,23 @@ Partial Class HSPR01
         Me.NeedleWaterUperDieInTemp = New Telerik.WinControls.UI.Gauges.RadialGaugeNeedle()
         Me.RadialGaugeTicks3 = New Telerik.WinControls.UI.Gauges.RadialGaugeTicks()
         Me.LblWaterUperDieInTemp = New Telerik.WinControls.UI.Gauges.RadialGaugeSingleLabel()
-        Me.RadRadialGauge2 = New Telerik.WinControls.UI.Gauges.RadRadialGauge()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.BackOven1Zone3 = New Telerik.WinControls.UI.Gauges.RadialGaugeBackground()
-        Me.RadialGaugeArc24 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
-        Me.RadialGaugeArc25 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
-        Me.RadialGaugeArc26 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
-        Me.RadialGaugeArc27 = New Telerik.WinControls.UI.Gauges.RadialGaugeArc()
-        Me.RadialGaugeTicks12 = New Telerik.WinControls.UI.Gauges.RadialGaugeTicks()
-        Me.RadialGaugeLabels7 = New Telerik.WinControls.UI.Gauges.RadialGaugeLabels()
-        Me.NeedleOven1Zone3 = New Telerik.WinControls.UI.Gauges.RadialGaugeNeedle()
-        Me.RadialGaugeTicks13 = New Telerik.WinControls.UI.Gauges.RadialGaugeTicks()
-        Me.LblOven1Zone3 = New Telerik.WinControls.UI.Gauges.RadialGaugeSingleLabel()
-        Me.RadRadialGauge6 = New Telerik.WinControls.UI.Gauges.RadRadialGauge()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanel8 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.TableLayoutPanel1.SuspendLayout()
+        CType(Me.RadRadialGauge5, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RadRadialGauge6, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RadRadialGauge8, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadRadialGauge4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadRadialGauge3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadRadialGauge1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RadRadialGauge5, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RadRadialGauge8, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadRadialGauge7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadRadialGauge9, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadRadialGauge10, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -277,12 +278,11 @@ Partial Class HSPR01
         CType(Me.RadRadialGauge15, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadRadialGauge18, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel6.SuspendLayout()
+        Me.TableLayoutPanel8.SuspendLayout()
         Me.TableLayoutPanel7.SuspendLayout()
         CType(Me.RadRadialGauge2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RadRadialGauge6, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TableLayoutPanel2.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
-        Me.TableLayoutPanel8.SuspendLayout()
+        Me.TableLayoutPanel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'BulletGraphFeaturedMeasureBar1
@@ -394,6 +394,738 @@ Partial Class HSPR01
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(257, 751)
         Me.TableLayoutPanel1.TabIndex = 237
+        '
+        'RadRadialGauge5
+        '
+        Me.RadRadialGauge5.BackColor = System.Drawing.Color.Transparent
+        Me.RadRadialGauge5.BackgroundImage = Global.HourlyProductionDisplay.My.Resources.Resources._258_REVOLUTION_SILVER
+        Me.RadRadialGauge5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.RadRadialGauge5.CausesValidation = False
+        Me.RadRadialGauge5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RadRadialGauge5.Items.AddRange(New Telerik.WinControls.RadItem() {Me.BackOven1Zone2, Me.RadialGaugeArc20, Me.RadialGaugeArc21, Me.RadialGaugeArc22, Me.RadialGaugeArc23, Me.RadialGaugeTicks10, Me.RadialGaugeLabels6, Me.NeedleOven1Zone2, Me.RadialGaugeTicks11, Me.LblOven1Zone2})
+        Me.RadRadialGauge5.Location = New System.Drawing.Point(4, 530)
+        Me.RadRadialGauge5.Name = "RadRadialGauge5"
+        Me.RadRadialGauge5.RangeEnd = 1000.0R
+        Me.RadRadialGauge5.RangeStart = 900.0R
+        Me.RadRadialGauge5.Size = New System.Drawing.Size(249, 217)
+        Me.RadRadialGauge5.StartAngle = 130.0R
+        Me.RadRadialGauge5.SweepAngle = 280.0R
+        Me.RadRadialGauge5.TabIndex = 244
+        Me.RadRadialGauge5.Text = "radRadialGauge1"
+        Me.RadRadialGauge5.Value = 0.0!
+        '
+        'BackOven1Zone2
+        '
+        Me.BackOven1Zone2.AngleTransform = 0.0!
+        Me.BackOven1Zone2.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.[Auto]
+        Me.BackOven1Zone2.BackColor = System.Drawing.Color.White
+        Me.BackOven1Zone2.BackColor2 = System.Drawing.Color.Lime
+        Me.BackOven1Zone2.BackColor3 = System.Drawing.SystemColors.ControlDark
+        Me.BackOven1Zone2.BorderBoxStyle = Telerik.WinControls.BorderBoxStyle.SingleBorder
+        Me.BackOven1Zone2.BorderDrawMode = Telerik.WinControls.BorderDrawModes.RightOverTop
+        Me.BackOven1Zone2.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.BackOven1Zone2.DrawFill = True
+        Me.BackOven1Zone2.ExtrusionPercentage = 40.0R
+        Me.BackOven1Zone2.Name = "BackOven1Zone2"
+        Me.BackOven1Zone2.RadiusOffsetPercentage = 100.0R
+        Me.BackOven1Zone2.Text = "RadialGaugeBackground1"
+        Me.BackOven1Zone2.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        '
+        'RadialGaugeArc20
+        '
+        Me.RadialGaugeArc20.Alignment = System.Drawing.ContentAlignment.TopLeft
+        Me.RadialGaugeArc20.AngleTransform = 0.0!
+        Me.RadialGaugeArc20.BackColor = System.Drawing.Color.Red
+        Me.RadialGaugeArc20.BackColor2 = System.Drawing.Color.Brown
+        Me.RadialGaugeArc20.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeArc20.FlipText = False
+        Me.RadialGaugeArc20.Margin = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeArc20.Name = "RadialGaugeArc20"
+        Me.RadialGaugeArc20.Padding = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeArc20.RangeEnd = 930.0R
+        Me.RadialGaugeArc20.RangeStart = 900.0R
+        Me.RadialGaugeArc20.RightToLeft = False
+        Me.RadialGaugeArc20.Text = Nothing
+        Me.RadialGaugeArc20.TextOrientation = System.Windows.Forms.Orientation.Horizontal
+        Me.RadialGaugeArc20.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeArc20.TextWrap = False
+        Me.RadialGaugeArc20.Width = 10.0R
+        '
+        'RadialGaugeArc21
+        '
+        Me.RadialGaugeArc21.Alignment = System.Drawing.ContentAlignment.TopLeft
+        Me.RadialGaugeArc21.AngleTransform = 0.0!
+        Me.RadialGaugeArc21.BackColor = System.Drawing.Color.Lime
+        Me.RadialGaugeArc21.BackColor2 = System.Drawing.Color.Lime
+        Me.RadialGaugeArc21.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeArc21.FlipText = False
+        Me.RadialGaugeArc21.Margin = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeArc21.Name = "RadialGaugeArc21"
+        Me.RadialGaugeArc21.Padding = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeArc21.RangeEnd = 960.0R
+        Me.RadialGaugeArc21.RangeStart = 930.0R
+        Me.RadialGaugeArc21.RightToLeft = False
+        Me.RadialGaugeArc21.Text = Nothing
+        Me.RadialGaugeArc21.TextOrientation = System.Windows.Forms.Orientation.Horizontal
+        Me.RadialGaugeArc21.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeArc21.TextWrap = False
+        Me.RadialGaugeArc21.Width = 10.0R
+        '
+        'RadialGaugeArc22
+        '
+        Me.RadialGaugeArc22.Alignment = System.Drawing.ContentAlignment.TopLeft
+        Me.RadialGaugeArc22.AngleTransform = 0.0!
+        Me.RadialGaugeArc22.BackColor = System.Drawing.Color.Red
+        Me.RadialGaugeArc22.BackColor2 = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(88, Byte), Integer))
+        Me.RadialGaugeArc22.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeArc22.FlipText = False
+        Me.RadialGaugeArc22.Margin = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeArc22.Name = "RadialGaugeArc22"
+        Me.RadialGaugeArc22.Padding = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeArc22.RangeEnd = 1000.0R
+        Me.RadialGaugeArc22.RangeStart = 960.0R
+        Me.RadialGaugeArc22.RightToLeft = False
+        Me.RadialGaugeArc22.Text = Nothing
+        Me.RadialGaugeArc22.TextOrientation = System.Windows.Forms.Orientation.Horizontal
+        Me.RadialGaugeArc22.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeArc22.TextWrap = False
+        Me.RadialGaugeArc22.Width = 10.0R
+        '
+        'RadialGaugeArc23
+        '
+        Me.RadialGaugeArc23.BackColor = System.Drawing.Color.Red
+        Me.RadialGaugeArc23.BackColor2 = System.Drawing.Color.Brown
+        Me.RadialGaugeArc23.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeArc23.Name = "RadialGaugeArc23"
+        Me.RadialGaugeArc23.RangeEnd = 100.0R
+        Me.RadialGaugeArc23.RangeStart = 75.0R
+        Me.RadialGaugeArc23.Text = "RadialGaugeArc7"
+        Me.RadialGaugeArc23.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeArc23.Width = 10.0R
+        '
+        'RadialGaugeTicks10
+        '
+        Me.RadialGaugeTicks10.Alignment = System.Drawing.ContentAlignment.TopLeft
+        Me.RadialGaugeTicks10.AngleTransform = 0.0!
+        Me.RadialGaugeTicks10.BackColor = System.Drawing.Color.White
+        Me.RadialGaugeTicks10.BackColor2 = System.Drawing.Color.White
+        Me.RadialGaugeTicks10.BackColor3 = System.Drawing.Color.White
+        Me.RadialGaugeTicks10.BorderBottomColor = System.Drawing.Color.White
+        Me.RadialGaugeTicks10.BorderColor = System.Drawing.Color.White
+        Me.RadialGaugeTicks10.BorderColor2 = System.Drawing.Color.White
+        Me.RadialGaugeTicks10.BorderColor3 = System.Drawing.Color.White
+        Me.RadialGaugeTicks10.BorderColor4 = System.Drawing.Color.White
+        Me.RadialGaugeTicks10.BorderInnerColor2 = System.Drawing.Color.White
+        Me.RadialGaugeTicks10.BorderInnerColor3 = System.Drawing.Color.White
+        Me.RadialGaugeTicks10.BorderInnerColor4 = System.Drawing.Color.White
+        Me.RadialGaugeTicks10.BorderLeftColor = System.Drawing.Color.White
+        Me.RadialGaugeTicks10.BorderRightColor = System.Drawing.Color.White
+        Me.RadialGaugeTicks10.BorderTopColor = System.Drawing.Color.White
+        Me.RadialGaugeTicks10.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeTicks10.DrawText = False
+        Me.RadialGaugeTicks10.FlipText = False
+        Me.RadialGaugeTicks10.ForeColor = System.Drawing.Color.White
+        Me.RadialGaugeTicks10.HorizontalLineColor = System.Drawing.Color.White
+        Me.RadialGaugeTicks10.Margin = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeTicks10.Name = "RadialGaugeTicks10"
+        Me.RadialGaugeTicks10.Padding = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeTicks10.RightToLeft = False
+        Me.RadialGaugeTicks10.Text = Nothing
+        Me.RadialGaugeTicks10.TextOrientation = System.Windows.Forms.Orientation.Horizontal
+        Me.RadialGaugeTicks10.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeTicks10.TextWrap = False
+        Me.RadialGaugeTicks10.TickColor = System.Drawing.Color.Black
+        Me.RadialGaugeTicks10.TicksCount = 20
+        Me.RadialGaugeTicks10.TicksLenghtPercentage = 5.0!
+        Me.RadialGaugeTicks10.TickThickness = 1.0!
+        '
+        'RadialGaugeLabels6
+        '
+        Me.RadialGaugeLabels6.Alignment = System.Drawing.ContentAlignment.TopLeft
+        Me.RadialGaugeLabels6.AngleTransform = 0.0!
+        Me.RadialGaugeLabels6.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeLabels6.DrawText = False
+        Me.RadialGaugeLabels6.FlipText = False
+        Me.RadialGaugeLabels6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RadialGaugeLabels6.ForeColor = System.Drawing.Color.Black
+        Me.RadialGaugeLabels6.LabelFontSize = 5.0!
+        Me.RadialGaugeLabels6.LabelRadiusPercentage = 75.0!
+        Me.RadialGaugeLabels6.Margin = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeLabels6.Name = "RadialGaugeLabels6"
+        Me.RadialGaugeLabels6.Padding = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeLabels6.RightToLeft = False
+        Me.RadialGaugeLabels6.Text = Nothing
+        Me.RadialGaugeLabels6.TextOrientation = System.Windows.Forms.Orientation.Horizontal
+        Me.RadialGaugeLabels6.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeLabels6.TextWrap = False
+        '
+        'NeedleOven1Zone2
+        '
+        Me.NeedleOven1Zone2.Alignment = System.Drawing.ContentAlignment.TopLeft
+        Me.NeedleOven1Zone2.AngleTransform = 0.0!
+        Me.NeedleOven1Zone2.BackColor = System.Drawing.Color.Black
+        Me.NeedleOven1Zone2.BackColor2 = System.Drawing.Color.Black
+        Me.NeedleOven1Zone2.BackColor3 = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(3, Byte), Integer), CType(CType(3, Byte), Integer))
+        Me.NeedleOven1Zone2.BackLenghtPercentage = 0.0R
+        Me.NeedleOven1Zone2.BorderBottomWidth = 1.0!
+        Me.NeedleOven1Zone2.BorderBoxStyle = Telerik.WinControls.BorderBoxStyle.OuterInnerBorders
+        Me.NeedleOven1Zone2.BorderColor = System.Drawing.Color.Black
+        Me.NeedleOven1Zone2.BorderDashStyle = System.Drawing.Drawing2D.DashStyle.Solid
+        Me.NeedleOven1Zone2.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.NeedleOven1Zone2.FlipText = False
+        Me.NeedleOven1Zone2.InnerPointRadiusPercentage = 0.0R
+        Me.NeedleOven1Zone2.LenghtPercentage = 60.0R
+        Me.NeedleOven1Zone2.Margin = New System.Windows.Forms.Padding(0)
+        Me.NeedleOven1Zone2.Name = "NeedleOven1Zone2"
+        Me.NeedleOven1Zone2.Padding = New System.Windows.Forms.Padding(0)
+        Me.NeedleOven1Zone2.RightToLeft = False
+        Me.NeedleOven1Zone2.Text = Nothing
+        Me.NeedleOven1Zone2.TextOrientation = System.Windows.Forms.Orientation.Horizontal
+        Me.NeedleOven1Zone2.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.NeedleOven1Zone2.TextWrap = False
+        Me.NeedleOven1Zone2.Thickness = 2.0R
+        Me.NeedleOven1Zone2.Value = 945.0!
+        '
+        'RadialGaugeTicks11
+        '
+        Me.RadialGaugeTicks11.Alignment = System.Drawing.ContentAlignment.TopLeft
+        Me.RadialGaugeTicks11.AngleTransform = 0.0!
+        Me.RadialGaugeTicks11.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeTicks11.FlipText = False
+        Me.RadialGaugeTicks11.Margin = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeTicks11.Name = "RadialGaugeTicks11"
+        Me.RadialGaugeTicks11.Padding = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeTicks11.PositionOffset = New System.Drawing.SizeF(0.0!, 0.0!)
+        Me.RadialGaugeTicks11.RightToLeft = False
+        Me.RadialGaugeTicks11.Text = "RadialGaugeTicks2"
+        Me.RadialGaugeTicks11.TextOrientation = System.Windows.Forms.Orientation.Horizontal
+        Me.RadialGaugeTicks11.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeTicks11.TextWrap = False
+        Me.RadialGaugeTicks11.TickColor = System.Drawing.Color.Black
+        Me.RadialGaugeTicks11.TickEndIndexVisibleRange = 16.0!
+        Me.RadialGaugeTicks11.TickStartIndexVisibleRange = 0.0!
+        Me.RadialGaugeTicks11.TickThickness = 1.0!
+        '
+        'LblOven1Zone2
+        '
+        Me.LblOven1Zone2.Alignment = System.Drawing.ContentAlignment.TopLeft
+        Me.LblOven1Zone2.AngleTransform = 0.0!
+        Me.LblOven1Zone2.BackColor = System.Drawing.SystemColors.Control
+        Me.LblOven1Zone2.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.LblOven1Zone2.FlipText = False
+        Me.LblOven1Zone2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblOven1Zone2.ForeColor = System.Drawing.Color.Black
+        Me.LblOven1Zone2.LabelText = "945"
+        Me.LblOven1Zone2.LocationPercentage = New System.Drawing.SizeF(0.0!, 0.7!)
+        Me.LblOven1Zone2.Margin = New System.Windows.Forms.Padding(0)
+        Me.LblOven1Zone2.Name = "LblOven1Zone2"
+        Me.LblOven1Zone2.Padding = New System.Windows.Forms.Padding(0)
+        Me.LblOven1Zone2.RightToLeft = False
+        Me.LblOven1Zone2.Text = "RadialGaugeSingleLabel1"
+        Me.LblOven1Zone2.TextOrientation = System.Windows.Forms.Orientation.Horizontal
+        Me.LblOven1Zone2.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.LblOven1Zone2.TextWrap = False
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.BackColor = System.Drawing.Color.Gainsboro
+        Me.Label6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(4, 501)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(249, 25)
+        Me.Label6.TabIndex = 246
+        Me.Label6.Text = "Oven1 Zone3 Temp"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'RadRadialGauge6
+        '
+        Me.RadRadialGauge6.BackColor = System.Drawing.Color.Transparent
+        Me.RadRadialGauge6.BackgroundImage = Global.HourlyProductionDisplay.My.Resources.Resources._258_REVOLUTION_SILVER
+        Me.RadRadialGauge6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.RadRadialGauge6.CausesValidation = False
+        Me.RadRadialGauge6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RadRadialGauge6.Items.AddRange(New Telerik.WinControls.RadItem() {Me.BackOven1Zone3, Me.RadialGaugeArc24, Me.RadialGaugeArc25, Me.RadialGaugeArc26, Me.RadialGaugeArc27, Me.RadialGaugeTicks12, Me.RadialGaugeLabels7, Me.NeedleOven1Zone3, Me.RadialGaugeTicks13, Me.LblOven1Zone3})
+        Me.RadRadialGauge6.Location = New System.Drawing.Point(4, 280)
+        Me.RadRadialGauge6.Name = "RadRadialGauge6"
+        Me.RadRadialGauge6.RangeEnd = 1000.0R
+        Me.RadRadialGauge6.RangeStart = 900.0R
+        Me.RadRadialGauge6.Size = New System.Drawing.Size(249, 217)
+        Me.RadRadialGauge6.StartAngle = 130.0R
+        Me.RadRadialGauge6.SweepAngle = 280.0R
+        Me.RadRadialGauge6.TabIndex = 245
+        Me.RadRadialGauge6.Text = "radRadialGauge1"
+        Me.RadRadialGauge6.Value = 0.0!
+        '
+        'BackOven1Zone3
+        '
+        Me.BackOven1Zone3.AngleTransform = 0.0!
+        Me.BackOven1Zone3.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.[Auto]
+        Me.BackOven1Zone3.BackColor = System.Drawing.Color.White
+        Me.BackOven1Zone3.BackColor2 = System.Drawing.Color.Lime
+        Me.BackOven1Zone3.BackColor3 = System.Drawing.SystemColors.ControlDark
+        Me.BackOven1Zone3.BorderBoxStyle = Telerik.WinControls.BorderBoxStyle.SingleBorder
+        Me.BackOven1Zone3.BorderDrawMode = Telerik.WinControls.BorderDrawModes.RightOverTop
+        Me.BackOven1Zone3.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.BackOven1Zone3.DrawFill = True
+        Me.BackOven1Zone3.ExtrusionPercentage = 40.0R
+        Me.BackOven1Zone3.Name = "BackOven1Zone3"
+        Me.BackOven1Zone3.RadiusOffsetPercentage = 100.0R
+        Me.BackOven1Zone3.Text = "RadialGaugeBackground1"
+        Me.BackOven1Zone3.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        '
+        'RadialGaugeArc24
+        '
+        Me.RadialGaugeArc24.Alignment = System.Drawing.ContentAlignment.TopLeft
+        Me.RadialGaugeArc24.AngleTransform = 0.0!
+        Me.RadialGaugeArc24.BackColor = System.Drawing.Color.Red
+        Me.RadialGaugeArc24.BackColor2 = System.Drawing.Color.Brown
+        Me.RadialGaugeArc24.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeArc24.FlipText = False
+        Me.RadialGaugeArc24.Margin = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeArc24.Name = "RadialGaugeArc24"
+        Me.RadialGaugeArc24.Padding = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeArc24.RangeEnd = 930.0R
+        Me.RadialGaugeArc24.RangeStart = 900.0R
+        Me.RadialGaugeArc24.RightToLeft = False
+        Me.RadialGaugeArc24.Text = Nothing
+        Me.RadialGaugeArc24.TextOrientation = System.Windows.Forms.Orientation.Horizontal
+        Me.RadialGaugeArc24.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeArc24.TextWrap = False
+        Me.RadialGaugeArc24.Width = 10.0R
+        '
+        'RadialGaugeArc25
+        '
+        Me.RadialGaugeArc25.Alignment = System.Drawing.ContentAlignment.TopLeft
+        Me.RadialGaugeArc25.AngleTransform = 0.0!
+        Me.RadialGaugeArc25.BackColor = System.Drawing.Color.Lime
+        Me.RadialGaugeArc25.BackColor2 = System.Drawing.Color.Lime
+        Me.RadialGaugeArc25.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeArc25.FlipText = False
+        Me.RadialGaugeArc25.Margin = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeArc25.Name = "RadialGaugeArc25"
+        Me.RadialGaugeArc25.Padding = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeArc25.RangeEnd = 960.0R
+        Me.RadialGaugeArc25.RangeStart = 930.0R
+        Me.RadialGaugeArc25.RightToLeft = False
+        Me.RadialGaugeArc25.Text = Nothing
+        Me.RadialGaugeArc25.TextOrientation = System.Windows.Forms.Orientation.Horizontal
+        Me.RadialGaugeArc25.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeArc25.TextWrap = False
+        Me.RadialGaugeArc25.Width = 10.0R
+        '
+        'RadialGaugeArc26
+        '
+        Me.RadialGaugeArc26.Alignment = System.Drawing.ContentAlignment.TopLeft
+        Me.RadialGaugeArc26.AngleTransform = 0.0!
+        Me.RadialGaugeArc26.BackColor = System.Drawing.Color.Red
+        Me.RadialGaugeArc26.BackColor2 = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(88, Byte), Integer))
+        Me.RadialGaugeArc26.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeArc26.FlipText = False
+        Me.RadialGaugeArc26.Margin = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeArc26.Name = "RadialGaugeArc26"
+        Me.RadialGaugeArc26.Padding = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeArc26.RangeEnd = 1000.0R
+        Me.RadialGaugeArc26.RangeStart = 960.0R
+        Me.RadialGaugeArc26.RightToLeft = False
+        Me.RadialGaugeArc26.Text = Nothing
+        Me.RadialGaugeArc26.TextOrientation = System.Windows.Forms.Orientation.Horizontal
+        Me.RadialGaugeArc26.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeArc26.TextWrap = False
+        Me.RadialGaugeArc26.Width = 10.0R
+        '
+        'RadialGaugeArc27
+        '
+        Me.RadialGaugeArc27.BackColor = System.Drawing.Color.Red
+        Me.RadialGaugeArc27.BackColor2 = System.Drawing.Color.Brown
+        Me.RadialGaugeArc27.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeArc27.Name = "RadialGaugeArc27"
+        Me.RadialGaugeArc27.RangeEnd = 100.0R
+        Me.RadialGaugeArc27.RangeStart = 75.0R
+        Me.RadialGaugeArc27.Text = "RadialGaugeArc7"
+        Me.RadialGaugeArc27.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeArc27.Width = 10.0R
+        '
+        'RadialGaugeTicks12
+        '
+        Me.RadialGaugeTicks12.Alignment = System.Drawing.ContentAlignment.TopLeft
+        Me.RadialGaugeTicks12.AngleTransform = 0.0!
+        Me.RadialGaugeTicks12.BackColor = System.Drawing.Color.White
+        Me.RadialGaugeTicks12.BackColor2 = System.Drawing.Color.White
+        Me.RadialGaugeTicks12.BackColor3 = System.Drawing.Color.White
+        Me.RadialGaugeTicks12.BorderBottomColor = System.Drawing.Color.White
+        Me.RadialGaugeTicks12.BorderColor = System.Drawing.Color.White
+        Me.RadialGaugeTicks12.BorderColor2 = System.Drawing.Color.White
+        Me.RadialGaugeTicks12.BorderColor3 = System.Drawing.Color.White
+        Me.RadialGaugeTicks12.BorderColor4 = System.Drawing.Color.White
+        Me.RadialGaugeTicks12.BorderInnerColor2 = System.Drawing.Color.White
+        Me.RadialGaugeTicks12.BorderInnerColor3 = System.Drawing.Color.White
+        Me.RadialGaugeTicks12.BorderInnerColor4 = System.Drawing.Color.White
+        Me.RadialGaugeTicks12.BorderLeftColor = System.Drawing.Color.White
+        Me.RadialGaugeTicks12.BorderRightColor = System.Drawing.Color.White
+        Me.RadialGaugeTicks12.BorderTopColor = System.Drawing.Color.White
+        Me.RadialGaugeTicks12.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeTicks12.DrawText = False
+        Me.RadialGaugeTicks12.FlipText = False
+        Me.RadialGaugeTicks12.ForeColor = System.Drawing.Color.White
+        Me.RadialGaugeTicks12.HorizontalLineColor = System.Drawing.Color.White
+        Me.RadialGaugeTicks12.Margin = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeTicks12.Name = "RadialGaugeTicks12"
+        Me.RadialGaugeTicks12.Padding = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeTicks12.RightToLeft = False
+        Me.RadialGaugeTicks12.Text = Nothing
+        Me.RadialGaugeTicks12.TextOrientation = System.Windows.Forms.Orientation.Horizontal
+        Me.RadialGaugeTicks12.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeTicks12.TextWrap = False
+        Me.RadialGaugeTicks12.TickColor = System.Drawing.Color.Black
+        Me.RadialGaugeTicks12.TicksCount = 20
+        Me.RadialGaugeTicks12.TicksLenghtPercentage = 5.0!
+        Me.RadialGaugeTicks12.TickThickness = 1.0!
+        '
+        'RadialGaugeLabels7
+        '
+        Me.RadialGaugeLabels7.Alignment = System.Drawing.ContentAlignment.TopLeft
+        Me.RadialGaugeLabels7.AngleTransform = 0.0!
+        Me.RadialGaugeLabels7.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeLabels7.DrawText = False
+        Me.RadialGaugeLabels7.FlipText = False
+        Me.RadialGaugeLabels7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RadialGaugeLabels7.ForeColor = System.Drawing.Color.Black
+        Me.RadialGaugeLabels7.LabelFontSize = 5.0!
+        Me.RadialGaugeLabels7.LabelRadiusPercentage = 75.0!
+        Me.RadialGaugeLabels7.Margin = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeLabels7.Name = "RadialGaugeLabels7"
+        Me.RadialGaugeLabels7.Padding = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeLabels7.RightToLeft = False
+        Me.RadialGaugeLabels7.Text = Nothing
+        Me.RadialGaugeLabels7.TextOrientation = System.Windows.Forms.Orientation.Horizontal
+        Me.RadialGaugeLabels7.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeLabels7.TextWrap = False
+        '
+        'NeedleOven1Zone3
+        '
+        Me.NeedleOven1Zone3.Alignment = System.Drawing.ContentAlignment.TopLeft
+        Me.NeedleOven1Zone3.AngleTransform = 0.0!
+        Me.NeedleOven1Zone3.BackColor = System.Drawing.Color.Black
+        Me.NeedleOven1Zone3.BackColor2 = System.Drawing.Color.Black
+        Me.NeedleOven1Zone3.BackColor3 = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(3, Byte), Integer), CType(CType(3, Byte), Integer))
+        Me.NeedleOven1Zone3.BackLenghtPercentage = 0.0R
+        Me.NeedleOven1Zone3.BorderBottomWidth = 1.0!
+        Me.NeedleOven1Zone3.BorderBoxStyle = Telerik.WinControls.BorderBoxStyle.OuterInnerBorders
+        Me.NeedleOven1Zone3.BorderColor = System.Drawing.Color.Black
+        Me.NeedleOven1Zone3.BorderDashStyle = System.Drawing.Drawing2D.DashStyle.Solid
+        Me.NeedleOven1Zone3.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.NeedleOven1Zone3.FlipText = False
+        Me.NeedleOven1Zone3.InnerPointRadiusPercentage = 0.0R
+        Me.NeedleOven1Zone3.LenghtPercentage = 60.0R
+        Me.NeedleOven1Zone3.Margin = New System.Windows.Forms.Padding(0)
+        Me.NeedleOven1Zone3.Name = "NeedleOven1Zone3"
+        Me.NeedleOven1Zone3.Padding = New System.Windows.Forms.Padding(0)
+        Me.NeedleOven1Zone3.RightToLeft = False
+        Me.NeedleOven1Zone3.Text = Nothing
+        Me.NeedleOven1Zone3.TextOrientation = System.Windows.Forms.Orientation.Horizontal
+        Me.NeedleOven1Zone3.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.NeedleOven1Zone3.TextWrap = False
+        Me.NeedleOven1Zone3.Thickness = 2.0R
+        Me.NeedleOven1Zone3.Value = 945.0!
+        '
+        'RadialGaugeTicks13
+        '
+        Me.RadialGaugeTicks13.Alignment = System.Drawing.ContentAlignment.TopLeft
+        Me.RadialGaugeTicks13.AngleTransform = 0.0!
+        Me.RadialGaugeTicks13.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeTicks13.FlipText = False
+        Me.RadialGaugeTicks13.Margin = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeTicks13.Name = "RadialGaugeTicks13"
+        Me.RadialGaugeTicks13.Padding = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeTicks13.PositionOffset = New System.Drawing.SizeF(0.0!, 0.0!)
+        Me.RadialGaugeTicks13.RightToLeft = False
+        Me.RadialGaugeTicks13.Text = "RadialGaugeTicks2"
+        Me.RadialGaugeTicks13.TextOrientation = System.Windows.Forms.Orientation.Horizontal
+        Me.RadialGaugeTicks13.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeTicks13.TextWrap = False
+        Me.RadialGaugeTicks13.TickColor = System.Drawing.Color.Black
+        Me.RadialGaugeTicks13.TickEndIndexVisibleRange = 16.0!
+        Me.RadialGaugeTicks13.TickStartIndexVisibleRange = 0.0!
+        Me.RadialGaugeTicks13.TickThickness = 1.0!
+        '
+        'LblOven1Zone3
+        '
+        Me.LblOven1Zone3.Alignment = System.Drawing.ContentAlignment.TopLeft
+        Me.LblOven1Zone3.AngleTransform = 0.0!
+        Me.LblOven1Zone3.BackColor = System.Drawing.SystemColors.Control
+        Me.LblOven1Zone3.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.LblOven1Zone3.FlipText = False
+        Me.LblOven1Zone3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblOven1Zone3.ForeColor = System.Drawing.Color.Black
+        Me.LblOven1Zone3.LabelText = "945"
+        Me.LblOven1Zone3.LocationPercentage = New System.Drawing.SizeF(0.0!, 0.7!)
+        Me.LblOven1Zone3.Margin = New System.Windows.Forms.Padding(0)
+        Me.LblOven1Zone3.Name = "LblOven1Zone3"
+        Me.LblOven1Zone3.Padding = New System.Windows.Forms.Padding(0)
+        Me.LblOven1Zone3.RightToLeft = False
+        Me.LblOven1Zone3.Text = "RadialGaugeSingleLabel1"
+        Me.LblOven1Zone3.TextOrientation = System.Windows.Forms.Orientation.Horizontal
+        Me.LblOven1Zone3.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.LblOven1Zone3.TextWrap = False
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.BackColor = System.Drawing.Color.Gainsboro
+        Me.Label7.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(4, 251)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(249, 25)
+        Me.Label7.TabIndex = 238
+        Me.Label7.Text = "Oven1 Zone2 Temp"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.BackColor = System.Drawing.Color.Gainsboro
+        Me.Label8.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(4, 1)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(249, 25)
+        Me.Label8.TabIndex = 1
+        Me.Label8.Text = "Oven1 Zone1 Temp"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'RadRadialGauge8
+        '
+        Me.RadRadialGauge8.BackColor = System.Drawing.Color.Transparent
+        Me.RadRadialGauge8.BackgroundImage = Global.HourlyProductionDisplay.My.Resources.Resources._258_REVOLUTION_SILVER
+        Me.RadRadialGauge8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.RadRadialGauge8.CausesValidation = False
+        Me.RadRadialGauge8.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RadRadialGauge8.Items.AddRange(New Telerik.WinControls.RadItem() {Me.BackOven1Zone1, Me.RadialGaugeArc32, Me.RadialGaugeArc33, Me.RadialGaugeArc34, Me.RadialGaugeArc35, Me.RadialGaugeTicks16, Me.RadialGaugeLabels9, Me.NeedleOven1Zone1, Me.RadialGaugeTicks17, Me.LblOven1Zone1})
+        Me.RadRadialGauge8.Location = New System.Drawing.Point(4, 30)
+        Me.RadRadialGauge8.Name = "RadRadialGauge8"
+        Me.RadRadialGauge8.RangeEnd = 1000.0R
+        Me.RadRadialGauge8.RangeStart = 900.0R
+        Me.RadRadialGauge8.Size = New System.Drawing.Size(249, 217)
+        Me.RadRadialGauge8.StartAngle = 130.0R
+        Me.RadRadialGauge8.SweepAngle = 280.0R
+        Me.RadRadialGauge8.TabIndex = 236
+        Me.RadRadialGauge8.Text = "radRadialGauge1"
+        Me.RadRadialGauge8.Value = 0.0!
+        '
+        'BackOven1Zone1
+        '
+        Me.BackOven1Zone1.AngleTransform = 0.0!
+        Me.BackOven1Zone1.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.[Auto]
+        Me.BackOven1Zone1.BackColor = System.Drawing.Color.White
+        Me.BackOven1Zone1.BackColor2 = System.Drawing.Color.Lime
+        Me.BackOven1Zone1.BackColor3 = System.Drawing.SystemColors.ControlDark
+        Me.BackOven1Zone1.BorderBoxStyle = Telerik.WinControls.BorderBoxStyle.SingleBorder
+        Me.BackOven1Zone1.BorderDrawMode = Telerik.WinControls.BorderDrawModes.RightOverTop
+        Me.BackOven1Zone1.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.BackOven1Zone1.DrawFill = True
+        Me.BackOven1Zone1.ExtrusionPercentage = 40.0R
+        Me.BackOven1Zone1.Name = "BackOven1Zone1"
+        Me.BackOven1Zone1.RadiusOffsetPercentage = 100.0R
+        Me.BackOven1Zone1.Text = "RadialGaugeBackground1"
+        Me.BackOven1Zone1.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        '
+        'RadialGaugeArc32
+        '
+        Me.RadialGaugeArc32.Alignment = System.Drawing.ContentAlignment.TopLeft
+        Me.RadialGaugeArc32.AngleTransform = 0.0!
+        Me.RadialGaugeArc32.BackColor = System.Drawing.Color.Red
+        Me.RadialGaugeArc32.BackColor2 = System.Drawing.Color.Brown
+        Me.RadialGaugeArc32.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeArc32.FlipText = False
+        Me.RadialGaugeArc32.Margin = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeArc32.Name = "RadialGaugeArc32"
+        Me.RadialGaugeArc32.Padding = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeArc32.RangeEnd = 930.0R
+        Me.RadialGaugeArc32.RangeStart = 900.0R
+        Me.RadialGaugeArc32.RightToLeft = False
+        Me.RadialGaugeArc32.Text = Nothing
+        Me.RadialGaugeArc32.TextOrientation = System.Windows.Forms.Orientation.Horizontal
+        Me.RadialGaugeArc32.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeArc32.TextWrap = False
+        Me.RadialGaugeArc32.Width = 10.0R
+        '
+        'RadialGaugeArc33
+        '
+        Me.RadialGaugeArc33.Alignment = System.Drawing.ContentAlignment.TopLeft
+        Me.RadialGaugeArc33.AngleTransform = 0.0!
+        Me.RadialGaugeArc33.BackColor = System.Drawing.Color.Lime
+        Me.RadialGaugeArc33.BackColor2 = System.Drawing.Color.Lime
+        Me.RadialGaugeArc33.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeArc33.FlipText = False
+        Me.RadialGaugeArc33.Margin = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeArc33.Name = "RadialGaugeArc33"
+        Me.RadialGaugeArc33.Padding = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeArc33.RangeEnd = 960.0R
+        Me.RadialGaugeArc33.RangeStart = 930.0R
+        Me.RadialGaugeArc33.RightToLeft = False
+        Me.RadialGaugeArc33.Text = Nothing
+        Me.RadialGaugeArc33.TextOrientation = System.Windows.Forms.Orientation.Horizontal
+        Me.RadialGaugeArc33.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeArc33.TextWrap = False
+        Me.RadialGaugeArc33.Width = 10.0R
+        '
+        'RadialGaugeArc34
+        '
+        Me.RadialGaugeArc34.Alignment = System.Drawing.ContentAlignment.TopLeft
+        Me.RadialGaugeArc34.AngleTransform = 0.0!
+        Me.RadialGaugeArc34.BackColor = System.Drawing.Color.Red
+        Me.RadialGaugeArc34.BackColor2 = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(88, Byte), Integer))
+        Me.RadialGaugeArc34.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeArc34.FlipText = False
+        Me.RadialGaugeArc34.Margin = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeArc34.Name = "RadialGaugeArc34"
+        Me.RadialGaugeArc34.Padding = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeArc34.RangeEnd = 1000.0R
+        Me.RadialGaugeArc34.RangeStart = 960.0R
+        Me.RadialGaugeArc34.RightToLeft = False
+        Me.RadialGaugeArc34.Text = Nothing
+        Me.RadialGaugeArc34.TextOrientation = System.Windows.Forms.Orientation.Horizontal
+        Me.RadialGaugeArc34.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeArc34.TextWrap = False
+        Me.RadialGaugeArc34.Width = 10.0R
+        '
+        'RadialGaugeArc35
+        '
+        Me.RadialGaugeArc35.BackColor = System.Drawing.Color.Red
+        Me.RadialGaugeArc35.BackColor2 = System.Drawing.Color.Brown
+        Me.RadialGaugeArc35.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeArc35.Name = "RadialGaugeArc35"
+        Me.RadialGaugeArc35.RangeEnd = 100.0R
+        Me.RadialGaugeArc35.RangeStart = 75.0R
+        Me.RadialGaugeArc35.Text = "RadialGaugeArc7"
+        Me.RadialGaugeArc35.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeArc35.Width = 10.0R
+        '
+        'RadialGaugeTicks16
+        '
+        Me.RadialGaugeTicks16.Alignment = System.Drawing.ContentAlignment.TopLeft
+        Me.RadialGaugeTicks16.AngleTransform = 0.0!
+        Me.RadialGaugeTicks16.BackColor = System.Drawing.Color.White
+        Me.RadialGaugeTicks16.BackColor2 = System.Drawing.Color.White
+        Me.RadialGaugeTicks16.BackColor3 = System.Drawing.Color.White
+        Me.RadialGaugeTicks16.BorderBottomColor = System.Drawing.Color.White
+        Me.RadialGaugeTicks16.BorderColor = System.Drawing.Color.White
+        Me.RadialGaugeTicks16.BorderColor2 = System.Drawing.Color.White
+        Me.RadialGaugeTicks16.BorderColor3 = System.Drawing.Color.White
+        Me.RadialGaugeTicks16.BorderColor4 = System.Drawing.Color.White
+        Me.RadialGaugeTicks16.BorderInnerColor2 = System.Drawing.Color.White
+        Me.RadialGaugeTicks16.BorderInnerColor3 = System.Drawing.Color.White
+        Me.RadialGaugeTicks16.BorderInnerColor4 = System.Drawing.Color.White
+        Me.RadialGaugeTicks16.BorderLeftColor = System.Drawing.Color.White
+        Me.RadialGaugeTicks16.BorderRightColor = System.Drawing.Color.White
+        Me.RadialGaugeTicks16.BorderTopColor = System.Drawing.Color.White
+        Me.RadialGaugeTicks16.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeTicks16.DrawText = False
+        Me.RadialGaugeTicks16.FlipText = False
+        Me.RadialGaugeTicks16.ForeColor = System.Drawing.Color.White
+        Me.RadialGaugeTicks16.HorizontalLineColor = System.Drawing.Color.White
+        Me.RadialGaugeTicks16.Margin = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeTicks16.Name = "RadialGaugeTicks16"
+        Me.RadialGaugeTicks16.Padding = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeTicks16.RightToLeft = False
+        Me.RadialGaugeTicks16.Text = Nothing
+        Me.RadialGaugeTicks16.TextOrientation = System.Windows.Forms.Orientation.Horizontal
+        Me.RadialGaugeTicks16.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeTicks16.TextWrap = False
+        Me.RadialGaugeTicks16.TickColor = System.Drawing.Color.Black
+        Me.RadialGaugeTicks16.TicksCount = 20
+        Me.RadialGaugeTicks16.TicksLenghtPercentage = 5.0!
+        Me.RadialGaugeTicks16.TickThickness = 1.0!
+        '
+        'RadialGaugeLabels9
+        '
+        Me.RadialGaugeLabels9.Alignment = System.Drawing.ContentAlignment.TopLeft
+        Me.RadialGaugeLabels9.AngleTransform = 0.0!
+        Me.RadialGaugeLabels9.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeLabels9.DrawText = False
+        Me.RadialGaugeLabels9.FlipText = False
+        Me.RadialGaugeLabels9.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RadialGaugeLabels9.ForeColor = System.Drawing.Color.Black
+        Me.RadialGaugeLabels9.LabelFontSize = 5.0!
+        Me.RadialGaugeLabels9.LabelRadiusPercentage = 75.0!
+        Me.RadialGaugeLabels9.Margin = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeLabels9.Name = "RadialGaugeLabels9"
+        Me.RadialGaugeLabels9.Padding = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeLabels9.RightToLeft = False
+        Me.RadialGaugeLabels9.Text = Nothing
+        Me.RadialGaugeLabels9.TextOrientation = System.Windows.Forms.Orientation.Horizontal
+        Me.RadialGaugeLabels9.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeLabels9.TextWrap = False
+        '
+        'NeedleOven1Zone1
+        '
+        Me.NeedleOven1Zone1.Alignment = System.Drawing.ContentAlignment.TopLeft
+        Me.NeedleOven1Zone1.AngleTransform = 0.0!
+        Me.NeedleOven1Zone1.BackColor = System.Drawing.Color.Black
+        Me.NeedleOven1Zone1.BackColor2 = System.Drawing.Color.Black
+        Me.NeedleOven1Zone1.BackColor3 = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(3, Byte), Integer), CType(CType(3, Byte), Integer))
+        Me.NeedleOven1Zone1.BackLenghtPercentage = 0.0R
+        Me.NeedleOven1Zone1.BorderBottomWidth = 1.0!
+        Me.NeedleOven1Zone1.BorderBoxStyle = Telerik.WinControls.BorderBoxStyle.OuterInnerBorders
+        Me.NeedleOven1Zone1.BorderColor = System.Drawing.Color.Black
+        Me.NeedleOven1Zone1.BorderDashStyle = System.Drawing.Drawing2D.DashStyle.Solid
+        Me.NeedleOven1Zone1.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.NeedleOven1Zone1.FlipText = False
+        Me.NeedleOven1Zone1.InnerPointRadiusPercentage = 0.0R
+        Me.NeedleOven1Zone1.LenghtPercentage = 60.0R
+        Me.NeedleOven1Zone1.Margin = New System.Windows.Forms.Padding(0)
+        Me.NeedleOven1Zone1.Name = "NeedleOven1Zone1"
+        Me.NeedleOven1Zone1.Padding = New System.Windows.Forms.Padding(0)
+        Me.NeedleOven1Zone1.RightToLeft = False
+        Me.NeedleOven1Zone1.Text = Nothing
+        Me.NeedleOven1Zone1.TextOrientation = System.Windows.Forms.Orientation.Horizontal
+        Me.NeedleOven1Zone1.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.NeedleOven1Zone1.TextWrap = False
+        Me.NeedleOven1Zone1.Thickness = 2.0R
+        Me.NeedleOven1Zone1.Value = 945.0!
+        '
+        'RadialGaugeTicks17
+        '
+        Me.RadialGaugeTicks17.Alignment = System.Drawing.ContentAlignment.TopLeft
+        Me.RadialGaugeTicks17.AngleTransform = 0.0!
+        Me.RadialGaugeTicks17.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeTicks17.FlipText = False
+        Me.RadialGaugeTicks17.Margin = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeTicks17.Name = "RadialGaugeTicks17"
+        Me.RadialGaugeTicks17.Padding = New System.Windows.Forms.Padding(0)
+        Me.RadialGaugeTicks17.PositionOffset = New System.Drawing.SizeF(0.0!, 0.0!)
+        Me.RadialGaugeTicks17.RightToLeft = False
+        Me.RadialGaugeTicks17.Text = "RadialGaugeTicks2"
+        Me.RadialGaugeTicks17.TextOrientation = System.Windows.Forms.Orientation.Horizontal
+        Me.RadialGaugeTicks17.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.RadialGaugeTicks17.TextWrap = False
+        Me.RadialGaugeTicks17.TickColor = System.Drawing.Color.Black
+        Me.RadialGaugeTicks17.TickEndIndexVisibleRange = 16.0!
+        Me.RadialGaugeTicks17.TickStartIndexVisibleRange = 0.0!
+        Me.RadialGaugeTicks17.TickThickness = 1.0!
+        '
+        'LblOven1Zone1
+        '
+        Me.LblOven1Zone1.Alignment = System.Drawing.ContentAlignment.TopLeft
+        Me.LblOven1Zone1.AngleTransform = 0.0!
+        Me.LblOven1Zone1.BackColor = System.Drawing.SystemColors.Control
+        Me.LblOven1Zone1.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.LblOven1Zone1.FlipText = False
+        Me.LblOven1Zone1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblOven1Zone1.ForeColor = System.Drawing.Color.Black
+        Me.LblOven1Zone1.LabelText = "945"
+        Me.LblOven1Zone1.LocationPercentage = New System.Drawing.SizeF(0.0!, 0.7!)
+        Me.LblOven1Zone1.Margin = New System.Windows.Forms.Padding(0)
+        Me.LblOven1Zone1.Name = "LblOven1Zone1"
+        Me.LblOven1Zone1.Padding = New System.Windows.Forms.Padding(0)
+        Me.LblOven1Zone1.RightToLeft = False
+        Me.LblOven1Zone1.Text = "RadialGaugeSingleLabel1"
+        Me.LblOven1Zone1.TextOrientation = System.Windows.Forms.Orientation.Horizontal
+        Me.LblOven1Zone1.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.LblOven1Zone1.TextWrap = False
         '
         'RadRadialGauge4
         '
@@ -1086,468 +1818,6 @@ Partial Class HSPR01
         Me.LblWaterUperDieOutTemp.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
         Me.LblWaterUperDieOutTemp.TextWrap = False
         '
-        'RadRadialGauge5
-        '
-        Me.RadRadialGauge5.BackColor = System.Drawing.Color.Transparent
-        Me.RadRadialGauge5.BackgroundImage = Global.HourlyProductionDisplay.My.Resources.Resources._258_REVOLUTION_SILVER
-        Me.RadRadialGauge5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.RadRadialGauge5.CausesValidation = False
-        Me.RadRadialGauge5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RadRadialGauge5.Items.AddRange(New Telerik.WinControls.RadItem() {Me.BackOven1Zone2, Me.RadialGaugeArc20, Me.RadialGaugeArc21, Me.RadialGaugeArc22, Me.RadialGaugeArc23, Me.RadialGaugeTicks10, Me.RadialGaugeLabels6, Me.NeedleOven1Zone2, Me.RadialGaugeTicks11, Me.LblOven1Zone2})
-        Me.RadRadialGauge5.Location = New System.Drawing.Point(4, 528)
-        Me.RadRadialGauge5.Name = "RadRadialGauge5"
-        Me.RadRadialGauge5.RangeEnd = 1000.0R
-        Me.RadRadialGauge5.RangeStart = 900.0R
-        Me.RadRadialGauge5.Size = New System.Drawing.Size(249, 219)
-        Me.RadRadialGauge5.StartAngle = 130.0R
-        Me.RadRadialGauge5.SweepAngle = 280.0R
-        Me.RadRadialGauge5.TabIndex = 244
-        Me.RadRadialGauge5.Text = "radRadialGauge1"
-        Me.RadRadialGauge5.Value = 0.0!
-        '
-        'BackOven1Zone2
-        '
-        Me.BackOven1Zone2.AngleTransform = 0.0!
-        Me.BackOven1Zone2.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.[Auto]
-        Me.BackOven1Zone2.BackColor = System.Drawing.Color.White
-        Me.BackOven1Zone2.BackColor2 = System.Drawing.Color.Lime
-        Me.BackOven1Zone2.BackColor3 = System.Drawing.SystemColors.ControlDark
-        Me.BackOven1Zone2.BorderBoxStyle = Telerik.WinControls.BorderBoxStyle.SingleBorder
-        Me.BackOven1Zone2.BorderDrawMode = Telerik.WinControls.BorderDrawModes.RightOverTop
-        Me.BackOven1Zone2.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.BackOven1Zone2.DrawFill = True
-        Me.BackOven1Zone2.ExtrusionPercentage = 40.0R
-        Me.BackOven1Zone2.Name = "BackOven1Zone2"
-        Me.BackOven1Zone2.RadiusOffsetPercentage = 100.0R
-        Me.BackOven1Zone2.Text = "RadialGaugeBackground1"
-        Me.BackOven1Zone2.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        '
-        'RadialGaugeArc20
-        '
-        Me.RadialGaugeArc20.Alignment = System.Drawing.ContentAlignment.TopLeft
-        Me.RadialGaugeArc20.AngleTransform = 0.0!
-        Me.RadialGaugeArc20.BackColor = System.Drawing.Color.Red
-        Me.RadialGaugeArc20.BackColor2 = System.Drawing.Color.Brown
-        Me.RadialGaugeArc20.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeArc20.FlipText = False
-        Me.RadialGaugeArc20.Margin = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeArc20.Name = "RadialGaugeArc20"
-        Me.RadialGaugeArc20.Padding = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeArc20.RangeEnd = 930.0R
-        Me.RadialGaugeArc20.RangeStart = 900.0R
-        Me.RadialGaugeArc20.RightToLeft = False
-        Me.RadialGaugeArc20.Text = Nothing
-        Me.RadialGaugeArc20.TextOrientation = System.Windows.Forms.Orientation.Horizontal
-        Me.RadialGaugeArc20.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeArc20.TextWrap = False
-        Me.RadialGaugeArc20.Width = 10.0R
-        '
-        'RadialGaugeArc21
-        '
-        Me.RadialGaugeArc21.Alignment = System.Drawing.ContentAlignment.TopLeft
-        Me.RadialGaugeArc21.AngleTransform = 0.0!
-        Me.RadialGaugeArc21.BackColor = System.Drawing.Color.Lime
-        Me.RadialGaugeArc21.BackColor2 = System.Drawing.Color.Lime
-        Me.RadialGaugeArc21.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeArc21.FlipText = False
-        Me.RadialGaugeArc21.Margin = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeArc21.Name = "RadialGaugeArc21"
-        Me.RadialGaugeArc21.Padding = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeArc21.RangeEnd = 960.0R
-        Me.RadialGaugeArc21.RangeStart = 930.0R
-        Me.RadialGaugeArc21.RightToLeft = False
-        Me.RadialGaugeArc21.Text = Nothing
-        Me.RadialGaugeArc21.TextOrientation = System.Windows.Forms.Orientation.Horizontal
-        Me.RadialGaugeArc21.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeArc21.TextWrap = False
-        Me.RadialGaugeArc21.Width = 10.0R
-        '
-        'RadialGaugeArc22
-        '
-        Me.RadialGaugeArc22.Alignment = System.Drawing.ContentAlignment.TopLeft
-        Me.RadialGaugeArc22.AngleTransform = 0.0!
-        Me.RadialGaugeArc22.BackColor = System.Drawing.Color.Red
-        Me.RadialGaugeArc22.BackColor2 = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(88, Byte), Integer))
-        Me.RadialGaugeArc22.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeArc22.FlipText = False
-        Me.RadialGaugeArc22.Margin = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeArc22.Name = "RadialGaugeArc22"
-        Me.RadialGaugeArc22.Padding = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeArc22.RangeEnd = 1000.0R
-        Me.RadialGaugeArc22.RangeStart = 960.0R
-        Me.RadialGaugeArc22.RightToLeft = False
-        Me.RadialGaugeArc22.Text = Nothing
-        Me.RadialGaugeArc22.TextOrientation = System.Windows.Forms.Orientation.Horizontal
-        Me.RadialGaugeArc22.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeArc22.TextWrap = False
-        Me.RadialGaugeArc22.Width = 10.0R
-        '
-        'RadialGaugeArc23
-        '
-        Me.RadialGaugeArc23.BackColor = System.Drawing.Color.Red
-        Me.RadialGaugeArc23.BackColor2 = System.Drawing.Color.Brown
-        Me.RadialGaugeArc23.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeArc23.Name = "RadialGaugeArc23"
-        Me.RadialGaugeArc23.RangeEnd = 100.0R
-        Me.RadialGaugeArc23.RangeStart = 75.0R
-        Me.RadialGaugeArc23.Text = "RadialGaugeArc7"
-        Me.RadialGaugeArc23.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeArc23.Width = 10.0R
-        '
-        'RadialGaugeTicks10
-        '
-        Me.RadialGaugeTicks10.Alignment = System.Drawing.ContentAlignment.TopLeft
-        Me.RadialGaugeTicks10.AngleTransform = 0.0!
-        Me.RadialGaugeTicks10.BackColor = System.Drawing.Color.White
-        Me.RadialGaugeTicks10.BackColor2 = System.Drawing.Color.White
-        Me.RadialGaugeTicks10.BackColor3 = System.Drawing.Color.White
-        Me.RadialGaugeTicks10.BorderBottomColor = System.Drawing.Color.White
-        Me.RadialGaugeTicks10.BorderColor = System.Drawing.Color.White
-        Me.RadialGaugeTicks10.BorderColor2 = System.Drawing.Color.White
-        Me.RadialGaugeTicks10.BorderColor3 = System.Drawing.Color.White
-        Me.RadialGaugeTicks10.BorderColor4 = System.Drawing.Color.White
-        Me.RadialGaugeTicks10.BorderInnerColor2 = System.Drawing.Color.White
-        Me.RadialGaugeTicks10.BorderInnerColor3 = System.Drawing.Color.White
-        Me.RadialGaugeTicks10.BorderInnerColor4 = System.Drawing.Color.White
-        Me.RadialGaugeTicks10.BorderLeftColor = System.Drawing.Color.White
-        Me.RadialGaugeTicks10.BorderRightColor = System.Drawing.Color.White
-        Me.RadialGaugeTicks10.BorderTopColor = System.Drawing.Color.White
-        Me.RadialGaugeTicks10.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeTicks10.DrawText = False
-        Me.RadialGaugeTicks10.FlipText = False
-        Me.RadialGaugeTicks10.ForeColor = System.Drawing.Color.White
-        Me.RadialGaugeTicks10.HorizontalLineColor = System.Drawing.Color.White
-        Me.RadialGaugeTicks10.Margin = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeTicks10.Name = "RadialGaugeTicks10"
-        Me.RadialGaugeTicks10.Padding = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeTicks10.RightToLeft = False
-        Me.RadialGaugeTicks10.Text = Nothing
-        Me.RadialGaugeTicks10.TextOrientation = System.Windows.Forms.Orientation.Horizontal
-        Me.RadialGaugeTicks10.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeTicks10.TextWrap = False
-        Me.RadialGaugeTicks10.TickColor = System.Drawing.Color.Black
-        Me.RadialGaugeTicks10.TicksCount = 20
-        Me.RadialGaugeTicks10.TicksLenghtPercentage = 5.0!
-        Me.RadialGaugeTicks10.TickThickness = 1.0!
-        '
-        'RadialGaugeLabels6
-        '
-        Me.RadialGaugeLabels6.Alignment = System.Drawing.ContentAlignment.TopLeft
-        Me.RadialGaugeLabels6.AngleTransform = 0.0!
-        Me.RadialGaugeLabels6.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeLabels6.DrawText = False
-        Me.RadialGaugeLabels6.FlipText = False
-        Me.RadialGaugeLabels6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RadialGaugeLabels6.ForeColor = System.Drawing.Color.Black
-        Me.RadialGaugeLabels6.LabelFontSize = 5.0!
-        Me.RadialGaugeLabels6.LabelRadiusPercentage = 75.0!
-        Me.RadialGaugeLabels6.Margin = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeLabels6.Name = "RadialGaugeLabels6"
-        Me.RadialGaugeLabels6.Padding = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeLabels6.RightToLeft = False
-        Me.RadialGaugeLabels6.Text = Nothing
-        Me.RadialGaugeLabels6.TextOrientation = System.Windows.Forms.Orientation.Horizontal
-        Me.RadialGaugeLabels6.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeLabels6.TextWrap = False
-        '
-        'NeedleOven1Zone2
-        '
-        Me.NeedleOven1Zone2.Alignment = System.Drawing.ContentAlignment.TopLeft
-        Me.NeedleOven1Zone2.AngleTransform = 0.0!
-        Me.NeedleOven1Zone2.BackColor = System.Drawing.Color.Black
-        Me.NeedleOven1Zone2.BackColor2 = System.Drawing.Color.Black
-        Me.NeedleOven1Zone2.BackColor3 = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(3, Byte), Integer), CType(CType(3, Byte), Integer))
-        Me.NeedleOven1Zone2.BackLenghtPercentage = 0.0R
-        Me.NeedleOven1Zone2.BorderBottomWidth = 1.0!
-        Me.NeedleOven1Zone2.BorderBoxStyle = Telerik.WinControls.BorderBoxStyle.OuterInnerBorders
-        Me.NeedleOven1Zone2.BorderColor = System.Drawing.Color.Black
-        Me.NeedleOven1Zone2.BorderDashStyle = System.Drawing.Drawing2D.DashStyle.Solid
-        Me.NeedleOven1Zone2.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.NeedleOven1Zone2.FlipText = False
-        Me.NeedleOven1Zone2.InnerPointRadiusPercentage = 0.0R
-        Me.NeedleOven1Zone2.LenghtPercentage = 60.0R
-        Me.NeedleOven1Zone2.Margin = New System.Windows.Forms.Padding(0)
-        Me.NeedleOven1Zone2.Name = "NeedleOven1Zone2"
-        Me.NeedleOven1Zone2.Padding = New System.Windows.Forms.Padding(0)
-        Me.NeedleOven1Zone2.RightToLeft = False
-        Me.NeedleOven1Zone2.Text = Nothing
-        Me.NeedleOven1Zone2.TextOrientation = System.Windows.Forms.Orientation.Horizontal
-        Me.NeedleOven1Zone2.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.NeedleOven1Zone2.TextWrap = False
-        Me.NeedleOven1Zone2.Thickness = 2.0R
-        Me.NeedleOven1Zone2.Value = 945.0!
-        '
-        'RadialGaugeTicks11
-        '
-        Me.RadialGaugeTicks11.Alignment = System.Drawing.ContentAlignment.TopLeft
-        Me.RadialGaugeTicks11.AngleTransform = 0.0!
-        Me.RadialGaugeTicks11.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeTicks11.FlipText = False
-        Me.RadialGaugeTicks11.Margin = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeTicks11.Name = "RadialGaugeTicks11"
-        Me.RadialGaugeTicks11.Padding = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeTicks11.PositionOffset = New System.Drawing.SizeF(0.0!, 0.0!)
-        Me.RadialGaugeTicks11.RightToLeft = False
-        Me.RadialGaugeTicks11.Text = "RadialGaugeTicks2"
-        Me.RadialGaugeTicks11.TextOrientation = System.Windows.Forms.Orientation.Horizontal
-        Me.RadialGaugeTicks11.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeTicks11.TextWrap = False
-        Me.RadialGaugeTicks11.TickColor = System.Drawing.Color.Black
-        Me.RadialGaugeTicks11.TickEndIndexVisibleRange = 16.0!
-        Me.RadialGaugeTicks11.TickStartIndexVisibleRange = 0.0!
-        Me.RadialGaugeTicks11.TickThickness = 1.0!
-        '
-        'LblOven1Zone2
-        '
-        Me.LblOven1Zone2.Alignment = System.Drawing.ContentAlignment.TopLeft
-        Me.LblOven1Zone2.AngleTransform = 0.0!
-        Me.LblOven1Zone2.BackColor = System.Drawing.SystemColors.Control
-        Me.LblOven1Zone2.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.LblOven1Zone2.FlipText = False
-        Me.LblOven1Zone2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblOven1Zone2.ForeColor = System.Drawing.Color.Black
-        Me.LblOven1Zone2.LabelText = "945"
-        Me.LblOven1Zone2.LocationPercentage = New System.Drawing.SizeF(0.0!, 0.7!)
-        Me.LblOven1Zone2.Margin = New System.Windows.Forms.Padding(0)
-        Me.LblOven1Zone2.Name = "LblOven1Zone2"
-        Me.LblOven1Zone2.Padding = New System.Windows.Forms.Padding(0)
-        Me.LblOven1Zone2.RightToLeft = False
-        Me.LblOven1Zone2.Text = "RadialGaugeSingleLabel1"
-        Me.LblOven1Zone2.TextOrientation = System.Windows.Forms.Orientation.Horizontal
-        Me.LblOven1Zone2.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.LblOven1Zone2.TextWrap = False
-        '
-        'RadRadialGauge8
-        '
-        Me.RadRadialGauge8.BackColor = System.Drawing.Color.Transparent
-        Me.RadRadialGauge8.BackgroundImage = Global.HourlyProductionDisplay.My.Resources.Resources._258_REVOLUTION_SILVER
-        Me.RadRadialGauge8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.RadRadialGauge8.CausesValidation = False
-        Me.RadRadialGauge8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RadRadialGauge8.Items.AddRange(New Telerik.WinControls.RadItem() {Me.BackOven1Zone1, Me.RadialGaugeArc32, Me.RadialGaugeArc33, Me.RadialGaugeArc34, Me.RadialGaugeArc35, Me.RadialGaugeTicks16, Me.RadialGaugeLabels9, Me.NeedleOven1Zone1, Me.RadialGaugeTicks17, Me.LblOven1Zone1})
-        Me.RadRadialGauge8.Location = New System.Drawing.Point(4, 30)
-        Me.RadRadialGauge8.Name = "RadRadialGauge8"
-        Me.RadRadialGauge8.RangeEnd = 1000.0R
-        Me.RadRadialGauge8.RangeStart = 900.0R
-        Me.RadRadialGauge8.Size = New System.Drawing.Size(249, 216)
-        Me.RadRadialGauge8.StartAngle = 130.0R
-        Me.RadRadialGauge8.SweepAngle = 280.0R
-        Me.RadRadialGauge8.TabIndex = 236
-        Me.RadRadialGauge8.Text = "radRadialGauge1"
-        Me.RadRadialGauge8.Value = 0.0!
-        '
-        'BackOven1Zone1
-        '
-        Me.BackOven1Zone1.AngleTransform = 0.0!
-        Me.BackOven1Zone1.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.[Auto]
-        Me.BackOven1Zone1.BackColor = System.Drawing.Color.White
-        Me.BackOven1Zone1.BackColor2 = System.Drawing.Color.Lime
-        Me.BackOven1Zone1.BackColor3 = System.Drawing.SystemColors.ControlDark
-        Me.BackOven1Zone1.BorderBoxStyle = Telerik.WinControls.BorderBoxStyle.SingleBorder
-        Me.BackOven1Zone1.BorderDrawMode = Telerik.WinControls.BorderDrawModes.RightOverTop
-        Me.BackOven1Zone1.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.BackOven1Zone1.DrawFill = True
-        Me.BackOven1Zone1.ExtrusionPercentage = 40.0R
-        Me.BackOven1Zone1.Name = "BackOven1Zone1"
-        Me.BackOven1Zone1.RadiusOffsetPercentage = 100.0R
-        Me.BackOven1Zone1.Text = "RadialGaugeBackground1"
-        Me.BackOven1Zone1.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        '
-        'RadialGaugeArc32
-        '
-        Me.RadialGaugeArc32.Alignment = System.Drawing.ContentAlignment.TopLeft
-        Me.RadialGaugeArc32.AngleTransform = 0.0!
-        Me.RadialGaugeArc32.BackColor = System.Drawing.Color.Red
-        Me.RadialGaugeArc32.BackColor2 = System.Drawing.Color.Brown
-        Me.RadialGaugeArc32.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeArc32.FlipText = False
-        Me.RadialGaugeArc32.Margin = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeArc32.Name = "RadialGaugeArc32"
-        Me.RadialGaugeArc32.Padding = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeArc32.RangeEnd = 930.0R
-        Me.RadialGaugeArc32.RangeStart = 900.0R
-        Me.RadialGaugeArc32.RightToLeft = False
-        Me.RadialGaugeArc32.Text = Nothing
-        Me.RadialGaugeArc32.TextOrientation = System.Windows.Forms.Orientation.Horizontal
-        Me.RadialGaugeArc32.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeArc32.TextWrap = False
-        Me.RadialGaugeArc32.Width = 10.0R
-        '
-        'RadialGaugeArc33
-        '
-        Me.RadialGaugeArc33.Alignment = System.Drawing.ContentAlignment.TopLeft
-        Me.RadialGaugeArc33.AngleTransform = 0.0!
-        Me.RadialGaugeArc33.BackColor = System.Drawing.Color.Lime
-        Me.RadialGaugeArc33.BackColor2 = System.Drawing.Color.Lime
-        Me.RadialGaugeArc33.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeArc33.FlipText = False
-        Me.RadialGaugeArc33.Margin = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeArc33.Name = "RadialGaugeArc33"
-        Me.RadialGaugeArc33.Padding = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeArc33.RangeEnd = 960.0R
-        Me.RadialGaugeArc33.RangeStart = 930.0R
-        Me.RadialGaugeArc33.RightToLeft = False
-        Me.RadialGaugeArc33.Text = Nothing
-        Me.RadialGaugeArc33.TextOrientation = System.Windows.Forms.Orientation.Horizontal
-        Me.RadialGaugeArc33.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeArc33.TextWrap = False
-        Me.RadialGaugeArc33.Width = 10.0R
-        '
-        'RadialGaugeArc34
-        '
-        Me.RadialGaugeArc34.Alignment = System.Drawing.ContentAlignment.TopLeft
-        Me.RadialGaugeArc34.AngleTransform = 0.0!
-        Me.RadialGaugeArc34.BackColor = System.Drawing.Color.Red
-        Me.RadialGaugeArc34.BackColor2 = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(88, Byte), Integer))
-        Me.RadialGaugeArc34.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeArc34.FlipText = False
-        Me.RadialGaugeArc34.Margin = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeArc34.Name = "RadialGaugeArc34"
-        Me.RadialGaugeArc34.Padding = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeArc34.RangeEnd = 1000.0R
-        Me.RadialGaugeArc34.RangeStart = 960.0R
-        Me.RadialGaugeArc34.RightToLeft = False
-        Me.RadialGaugeArc34.Text = Nothing
-        Me.RadialGaugeArc34.TextOrientation = System.Windows.Forms.Orientation.Horizontal
-        Me.RadialGaugeArc34.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeArc34.TextWrap = False
-        Me.RadialGaugeArc34.Width = 10.0R
-        '
-        'RadialGaugeArc35
-        '
-        Me.RadialGaugeArc35.BackColor = System.Drawing.Color.Red
-        Me.RadialGaugeArc35.BackColor2 = System.Drawing.Color.Brown
-        Me.RadialGaugeArc35.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeArc35.Name = "RadialGaugeArc35"
-        Me.RadialGaugeArc35.RangeEnd = 100.0R
-        Me.RadialGaugeArc35.RangeStart = 75.0R
-        Me.RadialGaugeArc35.Text = "RadialGaugeArc7"
-        Me.RadialGaugeArc35.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeArc35.Width = 10.0R
-        '
-        'RadialGaugeTicks16
-        '
-        Me.RadialGaugeTicks16.Alignment = System.Drawing.ContentAlignment.TopLeft
-        Me.RadialGaugeTicks16.AngleTransform = 0.0!
-        Me.RadialGaugeTicks16.BackColor = System.Drawing.Color.White
-        Me.RadialGaugeTicks16.BackColor2 = System.Drawing.Color.White
-        Me.RadialGaugeTicks16.BackColor3 = System.Drawing.Color.White
-        Me.RadialGaugeTicks16.BorderBottomColor = System.Drawing.Color.White
-        Me.RadialGaugeTicks16.BorderColor = System.Drawing.Color.White
-        Me.RadialGaugeTicks16.BorderColor2 = System.Drawing.Color.White
-        Me.RadialGaugeTicks16.BorderColor3 = System.Drawing.Color.White
-        Me.RadialGaugeTicks16.BorderColor4 = System.Drawing.Color.White
-        Me.RadialGaugeTicks16.BorderInnerColor2 = System.Drawing.Color.White
-        Me.RadialGaugeTicks16.BorderInnerColor3 = System.Drawing.Color.White
-        Me.RadialGaugeTicks16.BorderInnerColor4 = System.Drawing.Color.White
-        Me.RadialGaugeTicks16.BorderLeftColor = System.Drawing.Color.White
-        Me.RadialGaugeTicks16.BorderRightColor = System.Drawing.Color.White
-        Me.RadialGaugeTicks16.BorderTopColor = System.Drawing.Color.White
-        Me.RadialGaugeTicks16.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeTicks16.DrawText = False
-        Me.RadialGaugeTicks16.FlipText = False
-        Me.RadialGaugeTicks16.ForeColor = System.Drawing.Color.White
-        Me.RadialGaugeTicks16.HorizontalLineColor = System.Drawing.Color.White
-        Me.RadialGaugeTicks16.Margin = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeTicks16.Name = "RadialGaugeTicks16"
-        Me.RadialGaugeTicks16.Padding = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeTicks16.RightToLeft = False
-        Me.RadialGaugeTicks16.Text = Nothing
-        Me.RadialGaugeTicks16.TextOrientation = System.Windows.Forms.Orientation.Horizontal
-        Me.RadialGaugeTicks16.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeTicks16.TextWrap = False
-        Me.RadialGaugeTicks16.TickColor = System.Drawing.Color.Black
-        Me.RadialGaugeTicks16.TicksCount = 20
-        Me.RadialGaugeTicks16.TicksLenghtPercentage = 5.0!
-        Me.RadialGaugeTicks16.TickThickness = 1.0!
-        '
-        'RadialGaugeLabels9
-        '
-        Me.RadialGaugeLabels9.Alignment = System.Drawing.ContentAlignment.TopLeft
-        Me.RadialGaugeLabels9.AngleTransform = 0.0!
-        Me.RadialGaugeLabels9.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeLabels9.DrawText = False
-        Me.RadialGaugeLabels9.FlipText = False
-        Me.RadialGaugeLabels9.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RadialGaugeLabels9.ForeColor = System.Drawing.Color.Black
-        Me.RadialGaugeLabels9.LabelFontSize = 5.0!
-        Me.RadialGaugeLabels9.LabelRadiusPercentage = 75.0!
-        Me.RadialGaugeLabels9.Margin = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeLabels9.Name = "RadialGaugeLabels9"
-        Me.RadialGaugeLabels9.Padding = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeLabels9.RightToLeft = False
-        Me.RadialGaugeLabels9.Text = Nothing
-        Me.RadialGaugeLabels9.TextOrientation = System.Windows.Forms.Orientation.Horizontal
-        Me.RadialGaugeLabels9.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeLabels9.TextWrap = False
-        '
-        'NeedleOven1Zone1
-        '
-        Me.NeedleOven1Zone1.Alignment = System.Drawing.ContentAlignment.TopLeft
-        Me.NeedleOven1Zone1.AngleTransform = 0.0!
-        Me.NeedleOven1Zone1.BackColor = System.Drawing.Color.Black
-        Me.NeedleOven1Zone1.BackColor2 = System.Drawing.Color.Black
-        Me.NeedleOven1Zone1.BackColor3 = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(3, Byte), Integer), CType(CType(3, Byte), Integer))
-        Me.NeedleOven1Zone1.BackLenghtPercentage = 0.0R
-        Me.NeedleOven1Zone1.BorderBottomWidth = 1.0!
-        Me.NeedleOven1Zone1.BorderBoxStyle = Telerik.WinControls.BorderBoxStyle.OuterInnerBorders
-        Me.NeedleOven1Zone1.BorderColor = System.Drawing.Color.Black
-        Me.NeedleOven1Zone1.BorderDashStyle = System.Drawing.Drawing2D.DashStyle.Solid
-        Me.NeedleOven1Zone1.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.NeedleOven1Zone1.FlipText = False
-        Me.NeedleOven1Zone1.InnerPointRadiusPercentage = 0.0R
-        Me.NeedleOven1Zone1.LenghtPercentage = 60.0R
-        Me.NeedleOven1Zone1.Margin = New System.Windows.Forms.Padding(0)
-        Me.NeedleOven1Zone1.Name = "NeedleOven1Zone1"
-        Me.NeedleOven1Zone1.Padding = New System.Windows.Forms.Padding(0)
-        Me.NeedleOven1Zone1.RightToLeft = False
-        Me.NeedleOven1Zone1.Text = Nothing
-        Me.NeedleOven1Zone1.TextOrientation = System.Windows.Forms.Orientation.Horizontal
-        Me.NeedleOven1Zone1.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.NeedleOven1Zone1.TextWrap = False
-        Me.NeedleOven1Zone1.Thickness = 2.0R
-        Me.NeedleOven1Zone1.Value = 945.0!
-        '
-        'RadialGaugeTicks17
-        '
-        Me.RadialGaugeTicks17.Alignment = System.Drawing.ContentAlignment.TopLeft
-        Me.RadialGaugeTicks17.AngleTransform = 0.0!
-        Me.RadialGaugeTicks17.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeTicks17.FlipText = False
-        Me.RadialGaugeTicks17.Margin = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeTicks17.Name = "RadialGaugeTicks17"
-        Me.RadialGaugeTicks17.Padding = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeTicks17.PositionOffset = New System.Drawing.SizeF(0.0!, 0.0!)
-        Me.RadialGaugeTicks17.RightToLeft = False
-        Me.RadialGaugeTicks17.Text = "RadialGaugeTicks2"
-        Me.RadialGaugeTicks17.TextOrientation = System.Windows.Forms.Orientation.Horizontal
-        Me.RadialGaugeTicks17.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeTicks17.TextWrap = False
-        Me.RadialGaugeTicks17.TickColor = System.Drawing.Color.Black
-        Me.RadialGaugeTicks17.TickEndIndexVisibleRange = 16.0!
-        Me.RadialGaugeTicks17.TickStartIndexVisibleRange = 0.0!
-        Me.RadialGaugeTicks17.TickThickness = 1.0!
-        '
-        'LblOven1Zone1
-        '
-        Me.LblOven1Zone1.Alignment = System.Drawing.ContentAlignment.TopLeft
-        Me.LblOven1Zone1.AngleTransform = 0.0!
-        Me.LblOven1Zone1.BackColor = System.Drawing.SystemColors.Control
-        Me.LblOven1Zone1.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.LblOven1Zone1.FlipText = False
-        Me.LblOven1Zone1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblOven1Zone1.ForeColor = System.Drawing.Color.Black
-        Me.LblOven1Zone1.LabelText = "945"
-        Me.LblOven1Zone1.LocationPercentage = New System.Drawing.SizeF(0.0!, 0.7!)
-        Me.LblOven1Zone1.Margin = New System.Windows.Forms.Padding(0)
-        Me.LblOven1Zone1.Name = "LblOven1Zone1"
-        Me.LblOven1Zone1.Padding = New System.Windows.Forms.Padding(0)
-        Me.LblOven1Zone1.RightToLeft = False
-        Me.LblOven1Zone1.Text = "RadialGaugeSingleLabel1"
-        Me.LblOven1Zone1.TextOrientation = System.Windows.Forms.Orientation.Horizontal
-        Me.LblOven1Zone1.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.LblOven1Zone1.TextWrap = False
-        '
         'RadRadialGauge7
         '
         Me.RadRadialGauge7.BackColor = System.Drawing.Color.Transparent
@@ -1556,11 +1826,11 @@ Partial Class HSPR01
         Me.RadRadialGauge7.CausesValidation = False
         Me.RadRadialGauge7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.RadRadialGauge7.Items.AddRange(New Telerik.WinControls.RadItem() {Me.BackOven2Zone3, Me.RadialGaugeArc28, Me.RadialGaugeArc29, Me.RadialGaugeArc30, Me.RadialGaugeArc31, Me.RadialGaugeTicks14, Me.RadialGaugeLabels8, Me.NeedleOven2Zone3, Me.RadialGaugeTicks15, Me.LblOven2Zone3})
-        Me.RadRadialGauge7.Location = New System.Drawing.Point(4, 279)
+        Me.RadRadialGauge7.Location = New System.Drawing.Point(4, 280)
         Me.RadRadialGauge7.Name = "RadRadialGauge7"
         Me.RadRadialGauge7.RangeEnd = 1000.0R
         Me.RadRadialGauge7.RangeStart = 900.0R
-        Me.RadRadialGauge7.Size = New System.Drawing.Size(249, 216)
+        Me.RadRadialGauge7.Size = New System.Drawing.Size(249, 217)
         Me.RadRadialGauge7.StartAngle = 130.0R
         Me.RadRadialGauge7.SweepAngle = 280.0R
         Me.RadRadialGauge7.TabIndex = 245
@@ -1787,11 +2057,11 @@ Partial Class HSPR01
         Me.RadRadialGauge9.CausesValidation = False
         Me.RadRadialGauge9.Dock = System.Windows.Forms.DockStyle.Fill
         Me.RadRadialGauge9.Items.AddRange(New Telerik.WinControls.RadItem() {Me.BackOven2Zone2, Me.RadialGaugeArc36, Me.RadialGaugeArc37, Me.RadialGaugeArc38, Me.RadialGaugeArc39, Me.RadialGaugeTicks18, Me.RadialGaugeLabels10, Me.NeedleOven2Zone2, Me.RadialGaugeTicks19, Me.LblOven2Zone2})
-        Me.RadRadialGauge9.Location = New System.Drawing.Point(4, 528)
+        Me.RadRadialGauge9.Location = New System.Drawing.Point(4, 530)
         Me.RadRadialGauge9.Name = "RadRadialGauge9"
         Me.RadRadialGauge9.RangeEnd = 1000.0R
         Me.RadRadialGauge9.RangeStart = 900.0R
-        Me.RadRadialGauge9.Size = New System.Drawing.Size(249, 219)
+        Me.RadRadialGauge9.Size = New System.Drawing.Size(249, 217)
         Me.RadRadialGauge9.StartAngle = 130.0R
         Me.RadRadialGauge9.SweepAngle = 280.0R
         Me.RadRadialGauge9.TabIndex = 244
@@ -2022,7 +2292,7 @@ Partial Class HSPR01
         Me.RadRadialGauge10.Name = "RadRadialGauge10"
         Me.RadRadialGauge10.RangeEnd = 1000.0R
         Me.RadRadialGauge10.RangeStart = 900.0R
-        Me.RadRadialGauge10.Size = New System.Drawing.Size(249, 216)
+        Me.RadRadialGauge10.Size = New System.Drawing.Size(249, 217)
         Me.RadRadialGauge10.StartAngle = 130.0R
         Me.RadRadialGauge10.SweepAngle = 280.0R
         Me.RadRadialGauge10.TabIndex = 236
@@ -4110,10 +4380,86 @@ Partial Class HSPR01
         Me.TableLayoutPanel6.Size = New System.Drawing.Size(1315, 757)
         Me.TableLayoutPanel6.TabIndex = 242
         '
-        'Timer1
+        'TableLayoutPanel8
         '
-        Me.Timer1.Enabled = True
-        Me.Timer1.Interval = 1000
+        Me.TableLayoutPanel8.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.[Single]
+        Me.TableLayoutPanel8.ColumnCount = 1
+        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel8.Controls.Add(Me.RadRadialGauge15, 0, 7)
+        Me.TableLayoutPanel8.Controls.Add(Me.Label15, 0, 6)
+        Me.TableLayoutPanel8.Controls.Add(Me.RadRadialGauge16, 0, 5)
+        Me.TableLayoutPanel8.Controls.Add(Me.Label16, 0, 4)
+        Me.TableLayoutPanel8.Controls.Add(Me.RadRadialGauge17, 0, 3)
+        Me.TableLayoutPanel8.Controls.Add(Me.Label17, 0, 2)
+        Me.TableLayoutPanel8.Controls.Add(Me.Label18, 0, 0)
+        Me.TableLayoutPanel8.Controls.Add(Me.RadRadialGauge18, 0, 1)
+        Me.TableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel8.Location = New System.Drawing.Point(1055, 3)
+        Me.TableLayoutPanel8.Name = "TableLayoutPanel8"
+        Me.TableLayoutPanel8.RowCount = 8
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel8.Size = New System.Drawing.Size(257, 751)
+        Me.TableLayoutPanel8.TabIndex = 246
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.BackColor = System.Drawing.Color.Gainsboro
+        Me.Label15.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(4, 562)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(249, 25)
+        Me.Label15.TabIndex = 249
+        Me.Label15.Text = "Temp Blank After RR"
+        Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.BackColor = System.Drawing.Color.Gainsboro
+        Me.Label16.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(4, 375)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(249, 25)
+        Me.Label16.TabIndex = 248
+        Me.Label16.Text = "Temp Blank After RL"
+        Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.BackColor = System.Drawing.Color.Gainsboro
+        Me.Label17.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.Location = New System.Drawing.Point(4, 188)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(249, 25)
+        Me.Label17.TabIndex = 238
+        Me.Label17.Text = "Temp Blank After FR"
+        Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.BackColor = System.Drawing.Color.Gainsboro
+        Me.Label18.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.Location = New System.Drawing.Point(4, 1)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(249, 25)
+        Me.Label18.TabIndex = 1
+        Me.Label18.Text = "Temp Blank After FL"
+        Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TableLayoutPanel7
         '
@@ -4144,6 +4490,45 @@ Partial Class HSPR01
         Me.TableLayoutPanel7.Size = New System.Drawing.Size(257, 751)
         Me.TableLayoutPanel7.TabIndex = 243
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.BackColor = System.Drawing.Color.Gainsboro
+        Me.Label4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(4, 562)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(249, 25)
+        Me.Label4.TabIndex = 246
+        Me.Label4.Text = "Water Lower Die Out Temp"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.BackColor = System.Drawing.Color.Gainsboro
+        Me.Label3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(4, 375)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(249, 25)
+        Me.Label3.TabIndex = 244
+        Me.Label3.Text = "Water Lower Die In Temp"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.BackColor = System.Drawing.Color.Gainsboro
+        Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(4, 188)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(249, 25)
+        Me.Label2.TabIndex = 238
+        Me.Label2.Text = "Water Upper Die Out Temp"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -4156,6 +4541,24 @@ Partial Class HSPR01
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Water Upper Die In Temp"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'RadRadialGauge2
+        '
+        Me.RadRadialGauge2.BackColor = System.Drawing.Color.Transparent
+        Me.RadRadialGauge2.BackgroundImage = Global.HourlyProductionDisplay.My.Resources.Resources._258_REVOLUTION_SILVER
+        Me.RadRadialGauge2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.RadRadialGauge2.CausesValidation = False
+        Me.RadRadialGauge2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RadRadialGauge2.Items.AddRange(New Telerik.WinControls.RadItem() {Me.BackWaterUperDieInTemp, Me.RadialGaugeArc4, Me.RadialGaugeArc5, Me.RadialGaugeArc6, Me.RadialGaugeArc7, Me.RadialGaugeTicks2, Me.RadialGaugeLabels2, Me.NeedleWaterUperDieInTemp, Me.RadialGaugeTicks3, Me.LblWaterUperDieInTemp})
+        Me.RadRadialGauge2.Location = New System.Drawing.Point(4, 30)
+        Me.RadRadialGauge2.Name = "RadRadialGauge2"
+        Me.RadRadialGauge2.RangeEnd = 20.0R
+        Me.RadRadialGauge2.Size = New System.Drawing.Size(249, 154)
+        Me.RadRadialGauge2.StartAngle = 130.0R
+        Me.RadRadialGauge2.SweepAngle = 280.0R
+        Me.RadRadialGauge2.TabIndex = 236
+        Me.RadRadialGauge2.Text = "radRadialGauge1"
+        Me.RadRadialGauge2.Value = 0.0!
         '
         'BackWaterUperDieInTemp
         '
@@ -4368,400 +4771,6 @@ Partial Class HSPR01
         Me.LblWaterUperDieInTemp.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
         Me.LblWaterUperDieInTemp.TextWrap = False
         '
-        'RadRadialGauge2
-        '
-        Me.RadRadialGauge2.BackColor = System.Drawing.Color.Transparent
-        Me.RadRadialGauge2.BackgroundImage = Global.HourlyProductionDisplay.My.Resources.Resources._258_REVOLUTION_SILVER
-        Me.RadRadialGauge2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.RadRadialGauge2.CausesValidation = False
-        Me.RadRadialGauge2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RadRadialGauge2.Items.AddRange(New Telerik.WinControls.RadItem() {Me.BackWaterUperDieInTemp, Me.RadialGaugeArc4, Me.RadialGaugeArc5, Me.RadialGaugeArc6, Me.RadialGaugeArc7, Me.RadialGaugeTicks2, Me.RadialGaugeLabels2, Me.NeedleWaterUperDieInTemp, Me.RadialGaugeTicks3, Me.LblWaterUperDieInTemp})
-        Me.RadRadialGauge2.Location = New System.Drawing.Point(4, 30)
-        Me.RadRadialGauge2.Name = "RadRadialGauge2"
-        Me.RadRadialGauge2.RangeEnd = 20.0R
-        Me.RadRadialGauge2.Size = New System.Drawing.Size(249, 154)
-        Me.RadRadialGauge2.StartAngle = 130.0R
-        Me.RadRadialGauge2.SweepAngle = 280.0R
-        Me.RadRadialGauge2.TabIndex = 236
-        Me.RadRadialGauge2.Text = "radRadialGauge1"
-        Me.RadRadialGauge2.Value = 0.0!
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.BackColor = System.Drawing.Color.Gainsboro
-        Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(4, 188)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(249, 25)
-        Me.Label2.TabIndex = 238
-        Me.Label2.Text = "Water Upper Die Out Temp"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.BackColor = System.Drawing.Color.Gainsboro
-        Me.Label3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(4, 375)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(249, 25)
-        Me.Label3.TabIndex = 244
-        Me.Label3.Text = "Water Lower Die In Temp"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.BackColor = System.Drawing.Color.Gainsboro
-        Me.Label4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(4, 562)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(249, 25)
-        Me.Label4.TabIndex = 246
-        Me.Label4.Text = "Water Lower Die Out Temp"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'BackOven1Zone3
-        '
-        Me.BackOven1Zone3.AngleTransform = 0.0!
-        Me.BackOven1Zone3.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.[Auto]
-        Me.BackOven1Zone3.BackColor = System.Drawing.Color.White
-        Me.BackOven1Zone3.BackColor2 = System.Drawing.Color.Lime
-        Me.BackOven1Zone3.BackColor3 = System.Drawing.SystemColors.ControlDark
-        Me.BackOven1Zone3.BorderBoxStyle = Telerik.WinControls.BorderBoxStyle.SingleBorder
-        Me.BackOven1Zone3.BorderDrawMode = Telerik.WinControls.BorderDrawModes.RightOverTop
-        Me.BackOven1Zone3.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.BackOven1Zone3.DrawFill = True
-        Me.BackOven1Zone3.ExtrusionPercentage = 40.0R
-        Me.BackOven1Zone3.Name = "BackOven1Zone3"
-        Me.BackOven1Zone3.RadiusOffsetPercentage = 100.0R
-        Me.BackOven1Zone3.Text = "RadialGaugeBackground1"
-        Me.BackOven1Zone3.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        '
-        'RadialGaugeArc24
-        '
-        Me.RadialGaugeArc24.Alignment = System.Drawing.ContentAlignment.TopLeft
-        Me.RadialGaugeArc24.AngleTransform = 0.0!
-        Me.RadialGaugeArc24.BackColor = System.Drawing.Color.Red
-        Me.RadialGaugeArc24.BackColor2 = System.Drawing.Color.Brown
-        Me.RadialGaugeArc24.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeArc24.FlipText = False
-        Me.RadialGaugeArc24.Margin = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeArc24.Name = "RadialGaugeArc24"
-        Me.RadialGaugeArc24.Padding = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeArc24.RangeEnd = 930.0R
-        Me.RadialGaugeArc24.RangeStart = 900.0R
-        Me.RadialGaugeArc24.RightToLeft = False
-        Me.RadialGaugeArc24.Text = Nothing
-        Me.RadialGaugeArc24.TextOrientation = System.Windows.Forms.Orientation.Horizontal
-        Me.RadialGaugeArc24.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeArc24.TextWrap = False
-        Me.RadialGaugeArc24.Width = 10.0R
-        '
-        'RadialGaugeArc25
-        '
-        Me.RadialGaugeArc25.Alignment = System.Drawing.ContentAlignment.TopLeft
-        Me.RadialGaugeArc25.AngleTransform = 0.0!
-        Me.RadialGaugeArc25.BackColor = System.Drawing.Color.Lime
-        Me.RadialGaugeArc25.BackColor2 = System.Drawing.Color.Lime
-        Me.RadialGaugeArc25.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeArc25.FlipText = False
-        Me.RadialGaugeArc25.Margin = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeArc25.Name = "RadialGaugeArc25"
-        Me.RadialGaugeArc25.Padding = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeArc25.RangeEnd = 960.0R
-        Me.RadialGaugeArc25.RangeStart = 930.0R
-        Me.RadialGaugeArc25.RightToLeft = False
-        Me.RadialGaugeArc25.Text = Nothing
-        Me.RadialGaugeArc25.TextOrientation = System.Windows.Forms.Orientation.Horizontal
-        Me.RadialGaugeArc25.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeArc25.TextWrap = False
-        Me.RadialGaugeArc25.Width = 10.0R
-        '
-        'RadialGaugeArc26
-        '
-        Me.RadialGaugeArc26.Alignment = System.Drawing.ContentAlignment.TopLeft
-        Me.RadialGaugeArc26.AngleTransform = 0.0!
-        Me.RadialGaugeArc26.BackColor = System.Drawing.Color.Red
-        Me.RadialGaugeArc26.BackColor2 = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(88, Byte), Integer))
-        Me.RadialGaugeArc26.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeArc26.FlipText = False
-        Me.RadialGaugeArc26.Margin = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeArc26.Name = "RadialGaugeArc26"
-        Me.RadialGaugeArc26.Padding = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeArc26.RangeEnd = 1000.0R
-        Me.RadialGaugeArc26.RangeStart = 960.0R
-        Me.RadialGaugeArc26.RightToLeft = False
-        Me.RadialGaugeArc26.Text = Nothing
-        Me.RadialGaugeArc26.TextOrientation = System.Windows.Forms.Orientation.Horizontal
-        Me.RadialGaugeArc26.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeArc26.TextWrap = False
-        Me.RadialGaugeArc26.Width = 10.0R
-        '
-        'RadialGaugeArc27
-        '
-        Me.RadialGaugeArc27.BackColor = System.Drawing.Color.Red
-        Me.RadialGaugeArc27.BackColor2 = System.Drawing.Color.Brown
-        Me.RadialGaugeArc27.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeArc27.Name = "RadialGaugeArc27"
-        Me.RadialGaugeArc27.RangeEnd = 100.0R
-        Me.RadialGaugeArc27.RangeStart = 75.0R
-        Me.RadialGaugeArc27.Text = "RadialGaugeArc7"
-        Me.RadialGaugeArc27.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeArc27.Width = 10.0R
-        '
-        'RadialGaugeTicks12
-        '
-        Me.RadialGaugeTicks12.Alignment = System.Drawing.ContentAlignment.TopLeft
-        Me.RadialGaugeTicks12.AngleTransform = 0.0!
-        Me.RadialGaugeTicks12.BackColor = System.Drawing.Color.White
-        Me.RadialGaugeTicks12.BackColor2 = System.Drawing.Color.White
-        Me.RadialGaugeTicks12.BackColor3 = System.Drawing.Color.White
-        Me.RadialGaugeTicks12.BorderBottomColor = System.Drawing.Color.White
-        Me.RadialGaugeTicks12.BorderColor = System.Drawing.Color.White
-        Me.RadialGaugeTicks12.BorderColor2 = System.Drawing.Color.White
-        Me.RadialGaugeTicks12.BorderColor3 = System.Drawing.Color.White
-        Me.RadialGaugeTicks12.BorderColor4 = System.Drawing.Color.White
-        Me.RadialGaugeTicks12.BorderInnerColor2 = System.Drawing.Color.White
-        Me.RadialGaugeTicks12.BorderInnerColor3 = System.Drawing.Color.White
-        Me.RadialGaugeTicks12.BorderInnerColor4 = System.Drawing.Color.White
-        Me.RadialGaugeTicks12.BorderLeftColor = System.Drawing.Color.White
-        Me.RadialGaugeTicks12.BorderRightColor = System.Drawing.Color.White
-        Me.RadialGaugeTicks12.BorderTopColor = System.Drawing.Color.White
-        Me.RadialGaugeTicks12.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeTicks12.DrawText = False
-        Me.RadialGaugeTicks12.FlipText = False
-        Me.RadialGaugeTicks12.ForeColor = System.Drawing.Color.White
-        Me.RadialGaugeTicks12.HorizontalLineColor = System.Drawing.Color.White
-        Me.RadialGaugeTicks12.Margin = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeTicks12.Name = "RadialGaugeTicks12"
-        Me.RadialGaugeTicks12.Padding = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeTicks12.RightToLeft = False
-        Me.RadialGaugeTicks12.Text = Nothing
-        Me.RadialGaugeTicks12.TextOrientation = System.Windows.Forms.Orientation.Horizontal
-        Me.RadialGaugeTicks12.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeTicks12.TextWrap = False
-        Me.RadialGaugeTicks12.TickColor = System.Drawing.Color.Black
-        Me.RadialGaugeTicks12.TicksCount = 20
-        Me.RadialGaugeTicks12.TicksLenghtPercentage = 5.0!
-        Me.RadialGaugeTicks12.TickThickness = 1.0!
-        '
-        'RadialGaugeLabels7
-        '
-        Me.RadialGaugeLabels7.Alignment = System.Drawing.ContentAlignment.TopLeft
-        Me.RadialGaugeLabels7.AngleTransform = 0.0!
-        Me.RadialGaugeLabels7.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeLabels7.DrawText = False
-        Me.RadialGaugeLabels7.FlipText = False
-        Me.RadialGaugeLabels7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RadialGaugeLabels7.ForeColor = System.Drawing.Color.Black
-        Me.RadialGaugeLabels7.LabelFontSize = 5.0!
-        Me.RadialGaugeLabels7.LabelRadiusPercentage = 75.0!
-        Me.RadialGaugeLabels7.Margin = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeLabels7.Name = "RadialGaugeLabels7"
-        Me.RadialGaugeLabels7.Padding = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeLabels7.RightToLeft = False
-        Me.RadialGaugeLabels7.Text = Nothing
-        Me.RadialGaugeLabels7.TextOrientation = System.Windows.Forms.Orientation.Horizontal
-        Me.RadialGaugeLabels7.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeLabels7.TextWrap = False
-        '
-        'NeedleOven1Zone3
-        '
-        Me.NeedleOven1Zone3.Alignment = System.Drawing.ContentAlignment.TopLeft
-        Me.NeedleOven1Zone3.AngleTransform = 0.0!
-        Me.NeedleOven1Zone3.BackColor = System.Drawing.Color.Black
-        Me.NeedleOven1Zone3.BackColor2 = System.Drawing.Color.Black
-        Me.NeedleOven1Zone3.BackColor3 = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(3, Byte), Integer), CType(CType(3, Byte), Integer))
-        Me.NeedleOven1Zone3.BackLenghtPercentage = 0.0R
-        Me.NeedleOven1Zone3.BorderBottomWidth = 1.0!
-        Me.NeedleOven1Zone3.BorderBoxStyle = Telerik.WinControls.BorderBoxStyle.OuterInnerBorders
-        Me.NeedleOven1Zone3.BorderColor = System.Drawing.Color.Black
-        Me.NeedleOven1Zone3.BorderDashStyle = System.Drawing.Drawing2D.DashStyle.Solid
-        Me.NeedleOven1Zone3.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.NeedleOven1Zone3.FlipText = False
-        Me.NeedleOven1Zone3.InnerPointRadiusPercentage = 0.0R
-        Me.NeedleOven1Zone3.LenghtPercentage = 60.0R
-        Me.NeedleOven1Zone3.Margin = New System.Windows.Forms.Padding(0)
-        Me.NeedleOven1Zone3.Name = "NeedleOven1Zone3"
-        Me.NeedleOven1Zone3.Padding = New System.Windows.Forms.Padding(0)
-        Me.NeedleOven1Zone3.RightToLeft = False
-        Me.NeedleOven1Zone3.Text = Nothing
-        Me.NeedleOven1Zone3.TextOrientation = System.Windows.Forms.Orientation.Horizontal
-        Me.NeedleOven1Zone3.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.NeedleOven1Zone3.TextWrap = False
-        Me.NeedleOven1Zone3.Thickness = 2.0R
-        Me.NeedleOven1Zone3.Value = 945.0!
-        '
-        'RadialGaugeTicks13
-        '
-        Me.RadialGaugeTicks13.Alignment = System.Drawing.ContentAlignment.TopLeft
-        Me.RadialGaugeTicks13.AngleTransform = 0.0!
-        Me.RadialGaugeTicks13.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeTicks13.FlipText = False
-        Me.RadialGaugeTicks13.Margin = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeTicks13.Name = "RadialGaugeTicks13"
-        Me.RadialGaugeTicks13.Padding = New System.Windows.Forms.Padding(0)
-        Me.RadialGaugeTicks13.PositionOffset = New System.Drawing.SizeF(0.0!, 0.0!)
-        Me.RadialGaugeTicks13.RightToLeft = False
-        Me.RadialGaugeTicks13.Text = "RadialGaugeTicks2"
-        Me.RadialGaugeTicks13.TextOrientation = System.Windows.Forms.Orientation.Horizontal
-        Me.RadialGaugeTicks13.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.RadialGaugeTicks13.TextWrap = False
-        Me.RadialGaugeTicks13.TickColor = System.Drawing.Color.Black
-        Me.RadialGaugeTicks13.TickEndIndexVisibleRange = 16.0!
-        Me.RadialGaugeTicks13.TickStartIndexVisibleRange = 0.0!
-        Me.RadialGaugeTicks13.TickThickness = 1.0!
-        '
-        'LblOven1Zone3
-        '
-        Me.LblOven1Zone3.Alignment = System.Drawing.ContentAlignment.TopLeft
-        Me.LblOven1Zone3.AngleTransform = 0.0!
-        Me.LblOven1Zone3.BackColor = System.Drawing.SystemColors.Control
-        Me.LblOven1Zone3.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.LblOven1Zone3.FlipText = False
-        Me.LblOven1Zone3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblOven1Zone3.ForeColor = System.Drawing.Color.Black
-        Me.LblOven1Zone3.LabelText = "945"
-        Me.LblOven1Zone3.LocationPercentage = New System.Drawing.SizeF(0.0!, 0.7!)
-        Me.LblOven1Zone3.Margin = New System.Windows.Forms.Padding(0)
-        Me.LblOven1Zone3.Name = "LblOven1Zone3"
-        Me.LblOven1Zone3.Padding = New System.Windows.Forms.Padding(0)
-        Me.LblOven1Zone3.RightToLeft = False
-        Me.LblOven1Zone3.Text = "RadialGaugeSingleLabel1"
-        Me.LblOven1Zone3.TextOrientation = System.Windows.Forms.Orientation.Horizontal
-        Me.LblOven1Zone3.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
-        Me.LblOven1Zone3.TextWrap = False
-        '
-        'RadRadialGauge6
-        '
-        Me.RadRadialGauge6.BackColor = System.Drawing.Color.Transparent
-        Me.RadRadialGauge6.BackgroundImage = Global.HourlyProductionDisplay.My.Resources.Resources._258_REVOLUTION_SILVER
-        Me.RadRadialGauge6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.RadRadialGauge6.CausesValidation = False
-        Me.RadRadialGauge6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RadRadialGauge6.Items.AddRange(New Telerik.WinControls.RadItem() {Me.BackOven1Zone3, Me.RadialGaugeArc24, Me.RadialGaugeArc25, Me.RadialGaugeArc26, Me.RadialGaugeArc27, Me.RadialGaugeTicks12, Me.RadialGaugeLabels7, Me.NeedleOven1Zone3, Me.RadialGaugeTicks13, Me.LblOven1Zone3})
-        Me.RadRadialGauge6.Location = New System.Drawing.Point(4, 279)
-        Me.RadRadialGauge6.Name = "RadRadialGauge6"
-        Me.RadRadialGauge6.RangeEnd = 1000.0R
-        Me.RadRadialGauge6.RangeStart = 900.0R
-        Me.RadRadialGauge6.Size = New System.Drawing.Size(249, 216)
-        Me.RadRadialGauge6.StartAngle = 130.0R
-        Me.RadRadialGauge6.SweepAngle = 280.0R
-        Me.RadRadialGauge6.TabIndex = 245
-        Me.RadRadialGauge6.Text = "radRadialGauge1"
-        Me.RadRadialGauge6.Value = 0.0!
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.BackColor = System.Drawing.Color.Gainsboro
-        Me.Label8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(4, 1)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(249, 25)
-        Me.Label8.TabIndex = 1
-        Me.Label8.Text = "Oven1 Zone1 Temp"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.BackColor = System.Drawing.Color.Gainsboro
-        Me.Label7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(4, 250)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(249, 25)
-        Me.Label7.TabIndex = 238
-        Me.Label7.Text = "Oven1 Zone2 Temp"
-        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.BackColor = System.Drawing.Color.Gainsboro
-        Me.Label6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(4, 499)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(249, 25)
-        Me.Label6.TabIndex = 246
-        Me.Label6.Text = "Oven1 Zone3 Temp"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TableLayoutPanel2
-        '
-        Me.TableLayoutPanel2.BackColor = System.Drawing.Color.White
-        Me.TableLayoutPanel2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.[Single]
-        Me.TableLayoutPanel2.ColumnCount = 1
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel2.Controls.Add(Me.RadRadialGauge9, 0, 5)
-        Me.TableLayoutPanel2.Controls.Add(Me.Label5, 0, 4)
-        Me.TableLayoutPanel2.Controls.Add(Me.RadRadialGauge7, 0, 3)
-        Me.TableLayoutPanel2.Controls.Add(Me.Label9, 0, 2)
-        Me.TableLayoutPanel2.Controls.Add(Me.Label10, 0, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.RadRadialGauge10, 0, 1)
-        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(529, 3)
-        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
-        Me.TableLayoutPanel2.RowCount = 6
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(257, 751)
-        Me.TableLayoutPanel2.TabIndex = 244
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.BackColor = System.Drawing.Color.Gainsboro
-        Me.Label10.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(4, 1)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(249, 25)
-        Me.Label10.TabIndex = 1
-        Me.Label10.Text = "Oven2 Zone1 Temp"
-        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.BackColor = System.Drawing.Color.Gainsboro
-        Me.Label9.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(4, 250)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(249, 25)
-        Me.Label9.TabIndex = 238
-        Me.Label9.Text = "Oven2 Zone2 Temp"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.BackColor = System.Drawing.Color.Gainsboro
-        Me.Label5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(4, 499)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(249, 25)
-        Me.Label5.TabIndex = 246
-        Me.Label5.Text = "Oven2 Zone3 Temp"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'TableLayoutPanel3
         '
         Me.TableLayoutPanel3.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.[Single]
@@ -4791,60 +4800,18 @@ Partial Class HSPR01
         Me.TableLayoutPanel3.Size = New System.Drawing.Size(257, 751)
         Me.TableLayoutPanel3.TabIndex = 245
         '
-        'TableLayoutPanel8
+        'Label11
         '
-        Me.TableLayoutPanel8.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.[Single]
-        Me.TableLayoutPanel8.ColumnCount = 1
-        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel8.Controls.Add(Me.RadRadialGauge15, 0, 7)
-        Me.TableLayoutPanel8.Controls.Add(Me.Label15, 0, 6)
-        Me.TableLayoutPanel8.Controls.Add(Me.RadRadialGauge16, 0, 5)
-        Me.TableLayoutPanel8.Controls.Add(Me.Label16, 0, 4)
-        Me.TableLayoutPanel8.Controls.Add(Me.RadRadialGauge17, 0, 3)
-        Me.TableLayoutPanel8.Controls.Add(Me.Label17, 0, 2)
-        Me.TableLayoutPanel8.Controls.Add(Me.Label18, 0, 0)
-        Me.TableLayoutPanel8.Controls.Add(Me.RadRadialGauge18, 0, 1)
-        Me.TableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel8.Location = New System.Drawing.Point(1055, 3)
-        Me.TableLayoutPanel8.Name = "TableLayoutPanel8"
-        Me.TableLayoutPanel8.RowCount = 8
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel8.Size = New System.Drawing.Size(257, 751)
-        Me.TableLayoutPanel8.TabIndex = 246
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.BackColor = System.Drawing.Color.Gainsboro
-        Me.Label14.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(4, 1)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(249, 25)
-        Me.Label14.TabIndex = 1
-        Me.Label14.Text = "Temp Blank Before FL"
-        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.BackColor = System.Drawing.Color.Gainsboro
-        Me.Label13.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(4, 188)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(249, 25)
-        Me.Label13.TabIndex = 238
-        Me.Label13.Text = "Temp Blank Before FR"
-        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label11.AutoSize = True
+        Me.Label11.BackColor = System.Drawing.Color.Gainsboro
+        Me.Label11.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(4, 562)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(249, 25)
+        Me.Label11.TabIndex = 249
+        Me.Label11.Text = "Temp Blank Before RR"
+        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label12
         '
@@ -4859,70 +4826,103 @@ Partial Class HSPR01
         Me.Label12.Text = "Temp Blank Before RL"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label11
+        'Label13
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.BackColor = System.Drawing.Color.Gainsboro
-        Me.Label11.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(4, 562)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(249, 25)
-        Me.Label11.TabIndex = 249
-        Me.Label11.Text = "Temp Blank Before RR"
-        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label13.AutoSize = True
+        Me.Label13.BackColor = System.Drawing.Color.Gainsboro
+        Me.Label13.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(4, 188)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(249, 25)
+        Me.Label13.TabIndex = 238
+        Me.Label13.Text = "Temp Blank Before FR"
+        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label18
+        'Label14
         '
-        Me.Label18.AutoSize = True
-        Me.Label18.BackColor = System.Drawing.Color.Gainsboro
-        Me.Label18.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(4, 1)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(249, 25)
-        Me.Label18.TabIndex = 1
-        Me.Label18.Text = "Temp Blank After FL"
-        Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label14.AutoSize = True
+        Me.Label14.BackColor = System.Drawing.Color.Gainsboro
+        Me.Label14.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(4, 1)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(249, 25)
+        Me.Label14.TabIndex = 1
+        Me.Label14.Text = "Temp Blank Before FL"
+        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label17
+        'TableLayoutPanel2
         '
-        Me.Label17.AutoSize = True
-        Me.Label17.BackColor = System.Drawing.Color.Gainsboro
-        Me.Label17.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(4, 188)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(249, 25)
-        Me.Label17.TabIndex = 238
-        Me.Label17.Text = "Temp Blank After FR"
-        Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.TableLayoutPanel2.BackColor = System.Drawing.Color.White
+        Me.TableLayoutPanel2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.[Single]
+        Me.TableLayoutPanel2.ColumnCount = 1
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel2.Controls.Add(Me.RadRadialGauge9, 0, 5)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label5, 0, 4)
+        Me.TableLayoutPanel2.Controls.Add(Me.RadRadialGauge7, 0, 3)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label9, 0, 2)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label10, 0, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.RadRadialGauge10, 0, 1)
+        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(529, 3)
+        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        Me.TableLayoutPanel2.RowCount = 6
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(257, 751)
+        Me.TableLayoutPanel2.TabIndex = 244
         '
-        'Label16
+        'Label5
         '
-        Me.Label16.AutoSize = True
-        Me.Label16.BackColor = System.Drawing.Color.Gainsboro
-        Me.Label16.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(4, 375)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(249, 25)
-        Me.Label16.TabIndex = 248
-        Me.Label16.Text = "Temp Blank After RL"
-        Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label5.AutoSize = True
+        Me.Label5.BackColor = System.Drawing.Color.Gainsboro
+        Me.Label5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(4, 501)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(249, 25)
+        Me.Label5.TabIndex = 246
+        Me.Label5.Text = "Oven2 Zone3 Temp"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label15
+        'Label9
         '
-        Me.Label15.AutoSize = True
-        Me.Label15.BackColor = System.Drawing.Color.Gainsboro
-        Me.Label15.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(4, 562)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(249, 25)
-        Me.Label15.TabIndex = 249
-        Me.Label15.Text = "Temp Blank After RR"
-        Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label9.AutoSize = True
+        Me.Label9.BackColor = System.Drawing.Color.Gainsboro
+        Me.Label9.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(4, 251)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(249, 25)
+        Me.Label9.TabIndex = 238
+        Me.Label9.Text = "Oven2 Zone2 Temp"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.BackColor = System.Drawing.Color.Gainsboro
+        Me.Label10.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(4, 1)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(249, 25)
+        Me.Label10.TabIndex = 1
+        Me.Label10.Text = "Oven2 Zone1 Temp"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Timer1
+        '
+        Me.Timer1.Enabled = True
+        Me.Timer1.Interval = 1000
         '
         'HSPR01
         '
@@ -4939,11 +4939,12 @@ Partial Class HSPR01
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
+        CType(Me.RadRadialGauge5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RadRadialGauge6, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RadRadialGauge8, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadRadialGauge4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadRadialGauge3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadRadialGauge1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RadRadialGauge5, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RadRadialGauge8, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadRadialGauge7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadRadialGauge9, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadRadialGauge10, System.ComponentModel.ISupportInitialize).EndInit()
@@ -4956,16 +4957,15 @@ Partial Class HSPR01
         CType(Me.RadRadialGauge15, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadRadialGauge18, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel6.ResumeLayout(False)
+        Me.TableLayoutPanel8.ResumeLayout(False)
+        Me.TableLayoutPanel8.PerformLayout()
         Me.TableLayoutPanel7.ResumeLayout(False)
         Me.TableLayoutPanel7.PerformLayout()
         CType(Me.RadRadialGauge2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RadRadialGauge6, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TableLayoutPanel2.ResumeLayout(False)
-        Me.TableLayoutPanel2.PerformLayout()
         Me.TableLayoutPanel3.ResumeLayout(False)
         Me.TableLayoutPanel3.PerformLayout()
-        Me.TableLayoutPanel8.ResumeLayout(False)
-        Me.TableLayoutPanel8.PerformLayout()
+        Me.TableLayoutPanel2.ResumeLayout(False)
+        Me.TableLayoutPanel2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub

@@ -80,8 +80,8 @@ Partial Class HSPR01_1
         Me.ChartBlankaFTER = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.ChartBlankBefore = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.LblWaterFlowUpperIn = New System.Windows.Forms.Label()
         Me.LblWaterFlowLowerIn = New System.Windows.Forms.Label()
+        Me.LblWaterFlowUpperIn = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.LblWaterFlowLowerOut = New System.Windows.Forms.Label()
         Me.LblWaterFlowUpperOut = New System.Windows.Forms.Label()
@@ -586,16 +586,6 @@ Partial Class HSPR01_1
         Me.Panel1.Size = New System.Drawing.Size(594, 235)
         Me.Panel1.TabIndex = 6
         '
-        'LblWaterFlowUpperIn
-        '
-        Me.LblWaterFlowUpperIn.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.LblWaterFlowUpperIn.AutoSize = True
-        Me.LblWaterFlowUpperIn.Location = New System.Drawing.Point(465, 116)
-        Me.LblWaterFlowUpperIn.Name = "LblWaterFlowUpperIn"
-        Me.LblWaterFlowUpperIn.Size = New System.Drawing.Size(93, 13)
-        Me.LblWaterFlowUpperIn.TabIndex = 1
-        Me.LblWaterFlowUpperIn.Text = "Water Flow Upper"
-        '
         'LblWaterFlowLowerIn
         '
         Me.LblWaterFlowLowerIn.Anchor = System.Windows.Forms.AnchorStyles.Right
@@ -605,6 +595,16 @@ Partial Class HSPR01_1
         Me.LblWaterFlowLowerIn.Size = New System.Drawing.Size(93, 13)
         Me.LblWaterFlowLowerIn.TabIndex = 2
         Me.LblWaterFlowLowerIn.Text = "Water Flow Lower"
+        '
+        'LblWaterFlowUpperIn
+        '
+        Me.LblWaterFlowUpperIn.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.LblWaterFlowUpperIn.AutoSize = True
+        Me.LblWaterFlowUpperIn.Location = New System.Drawing.Point(465, 116)
+        Me.LblWaterFlowUpperIn.Name = "LblWaterFlowUpperIn"
+        Me.LblWaterFlowUpperIn.Size = New System.Drawing.Size(93, 13)
+        Me.LblWaterFlowUpperIn.TabIndex = 1
+        Me.LblWaterFlowUpperIn.Text = "Water Flow Upper"
         '
         'Panel2
         '

@@ -24,11 +24,15 @@ Public Class Config
             NumericUpDown1.Value = My.Settings.Timer
 
             If My.Settings.MARSServer = "192.168.114.99\mars" Then
-                CheckBox1.Visible = True
+                PanelHSPR.Visible = True
                 CheckBox1.Checked = My.Settings.HSPR01
+                CheckBox2.Checked = My.Settings.HSPR02
+                CheckBox3.Checked = My.Settings.HSPR03
             Else
-                CheckBox1.Visible = False
+                PanelHSPR.Visible = False
                 CheckBox1.Checked = False
+                CheckBox2.Checked = False
+                CheckBox3.Checked = False
             End If
 
             ChkShowAvg.Checked = My.Settings.SHOWAVG
@@ -177,8 +181,10 @@ Public Class Config
         Try
             cn.Open()
             MsgBox("Successfully connected" & vbCrLf & cn.DataSource.ToString & vbCrLf & cn.Database.ToString, MsgBoxStyle.Information, "Conexión")
-            If My.Settings.MARSServer = "192.168.114.99\mars" Then
-                CheckBox1.Visible = True
+            If TxtMarsServer.Text.Trim = "192.168.114.99\mars" Then
+                PanelHSPR.Visible = True
+            Else
+                PanelHSPR.Visible = False
             End If
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -258,8 +264,12 @@ Public Class Config
 
             If My.Settings.MARSServer = "192.168.114.99\mars" Then
                 My.Settings.HSPR01 = CheckBox1.Checked
+                My.Settings.HSPR02 = CheckBox2.Checked
+                My.Settings.HSPR03 = CheckBox3.Checked
             Else
                 My.Settings.HSPR01 = False
+                My.Settings.HSPR02 = False
+                My.Settings.HSPR03 = False
             End If
 
             My.Settings.SHOWAVG = ChkShowAvg.Checked
@@ -514,5 +524,35 @@ Public Class Config
 
         frmsel.Dispose()
         frmsel = Nothing
+    End Sub
+
+ 
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Dim trn As New Translations
+        trn.ShowDialog()
+
+    End Sub
+
+    Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox2.CheckedChanged
+        If CheckBox2.Checked Then
+            CheckBox1.Checked = False
+            CheckBox3.Checked = False
+        End If
+
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+        If CheckBox1.Checked Then
+            CheckBox2.Checked = False
+            CheckBox3.Checked = False
+        End If
+    End Sub
+
+    Private Sub CheckBox3_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox3.CheckedChanged
+        If CheckBox3.Checked Then
+            CheckBox1.Checked = False
+            CheckBox2.Checked = False
+
+        End If
     End Sub
 End Class

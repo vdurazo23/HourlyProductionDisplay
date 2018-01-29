@@ -66,6 +66,8 @@ Partial Class FormDisplay
         Me.LblShiftDelta = New System.Windows.Forms.Label()
         Me.LblShiftDeltaValue = New System.Windows.Forms.Label()
         Me.PanelPrensas = New System.Windows.Forms.Panel()
+        Me.LblDownTimeAcum = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.LblSPMActual = New System.Windows.Forms.Label()
         Me.Lblsetupactual = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -75,6 +77,7 @@ Partial Class FormDisplay
         Me.LblSPMTarget = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LBLERROR = New System.Windows.Forms.Label()
+        Me.LblShifTargetValue = New System.Windows.Forms.Label()
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Chart2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadRadialGauge2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -91,9 +94,9 @@ Partial Class FormDisplay
         Me.LblShifTarget.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblShifTarget.Location = New System.Drawing.Point(0, 79)
         Me.LblShifTarget.Name = "LblShifTarget"
-        Me.LblShifTarget.Size = New System.Drawing.Size(366, 44)
+        Me.LblShifTarget.Size = New System.Drawing.Size(285, 44)
         Me.LblShifTarget.TabIndex = 228
-        Me.LblShifTarget.Text = "Shift current target:"
+        Me.LblShifTarget.Text = "Shift objective:"
         Me.LblShifTarget.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'LblCurrentActual
@@ -103,9 +106,9 @@ Partial Class FormDisplay
         Me.LblCurrentActual.ForeColor = System.Drawing.SystemColors.ControlText
         Me.LblCurrentActual.Location = New System.Drawing.Point(0, 130)
         Me.LblCurrentActual.Name = "LblCurrentActual"
-        Me.LblCurrentActual.Size = New System.Drawing.Size(370, 44)
+        Me.LblCurrentActual.Size = New System.Drawing.Size(343, 44)
         Me.LblCurrentActual.TabIndex = 229
-        Me.LblCurrentActual.Text = "Shift current actual:"
+        Me.LblCurrentActual.Text = "Production actual:"
         Me.LblCurrentActual.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'LblCurrentTarget
@@ -114,7 +117,7 @@ Partial Class FormDisplay
         Me.LblCurrentTarget.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblCurrentTarget.Location = New System.Drawing.Point(0, 178)
         Me.LblCurrentTarget.Name = "LblCurrentTarget"
-        Me.LblCurrentTarget.Size = New System.Drawing.Size(1503, 51)
+        Me.LblCurrentTarget.Size = New System.Drawing.Size(1803, 51)
         Me.LblCurrentTarget.TabIndex = 234
         Me.LblCurrentTarget.Text = "Current Hourly Target: "
         Me.LblCurrentTarget.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -125,7 +128,7 @@ Partial Class FormDisplay
         Me.LblAverage.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblAverage.Location = New System.Drawing.Point(0, 127)
         Me.LblAverage.Name = "LblAverage"
-        Me.LblAverage.Size = New System.Drawing.Size(1503, 51)
+        Me.LblAverage.Size = New System.Drawing.Size(1803, 51)
         Me.LblAverage.TabIndex = 233
         Me.LblAverage.Text = "Average:"
         Me.LblAverage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -145,14 +148,14 @@ Partial Class FormDisplay
         'LblChangeOverBlue
         '
         Me.LblChangeOverBlue.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LblChangeOverBlue.AutoSize = True
         Me.LblChangeOverBlue.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblChangeOverBlue.ForeColor = System.Drawing.Color.Blue
-        Me.LblChangeOverBlue.Location = New System.Drawing.Point(1216, 690)
+        Me.LblChangeOverBlue.Location = New System.Drawing.Point(1331, 690)
         Me.LblChangeOverBlue.Name = "LblChangeOverBlue"
-        Me.LblChangeOverBlue.Size = New System.Drawing.Size(283, 29)
+        Me.LblChangeOverBlue.Size = New System.Drawing.Size(468, 29)
         Me.LblChangeOverBlue.TabIndex = 227
         Me.LblChangeOverBlue.Text = "Blue Text = Change Over"
+        Me.LblChangeOverBlue.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Chart1
         '
@@ -233,7 +236,7 @@ Partial Class FormDisplay
         Me.Chart1.Series.Add(Series2)
         Me.Chart1.Series.Add(Series3)
         Me.Chart1.Series.Add(Series4)
-        Me.Chart1.Size = New System.Drawing.Size(1500, 554)
+        Me.Chart1.Size = New System.Drawing.Size(1800, 554)
         Me.Chart1.TabIndex = 226
         Me.Chart1.Text = "Chart1"
         '
@@ -330,7 +333,7 @@ Partial Class FormDisplay
         Me.Chart2.Series.Add(Series6)
         Me.Chart2.Series.Add(Series7)
         Me.Chart2.Series.Add(Series8)
-        Me.Chart2.Size = New System.Drawing.Size(574, 337)
+        Me.Chart2.Size = New System.Drawing.Size(874, 337)
         Me.Chart2.TabIndex = 240
         Me.Chart2.Text = "Chart2"
         '
@@ -343,7 +346,7 @@ Partial Class FormDisplay
         Me.LblFontIncrement.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LblFontIncrement.AutoSize = True
         Me.LblFontIncrement.Font = New System.Drawing.Font("Microsoft Sans Serif", 120.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblFontIncrement.Location = New System.Drawing.Point(668, 302)
+        Me.LblFontIncrement.Location = New System.Drawing.Point(818, 302)
         Me.LblFontIncrement.Name = "LblFontIncrement"
         Me.LblFontIncrement.Size = New System.Drawing.Size(166, 181)
         Me.LblFontIncrement.TabIndex = 241
@@ -356,7 +359,7 @@ Partial Class FormDisplay
         Me.LblPart.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblPart.Location = New System.Drawing.Point(0, 76)
         Me.LblPart.Name = "LblPart"
-        Me.LblPart.Size = New System.Drawing.Size(1503, 51)
+        Me.LblPart.Size = New System.Drawing.Size(1803, 51)
         Me.LblPart.TabIndex = 232
         Me.LblPart.Text = "PART: "
         Me.LblPart.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -548,7 +551,7 @@ Partial Class FormDisplay
         Me.LblEfficiency.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblEfficiency.AutoSize = True
         Me.LblEfficiency.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblEfficiency.Location = New System.Drawing.Point(118, 224)
+        Me.LblEfficiency.Location = New System.Drawing.Point(108, 216)
         Me.LblEfficiency.Name = "LblEfficiency"
         Me.LblEfficiency.Size = New System.Drawing.Size(92, 24)
         Me.LblEfficiency.TabIndex = 0
@@ -561,10 +564,10 @@ Partial Class FormDisplay
         Me.RadRadialGauge2.CausesValidation = False
         Me.RadRadialGauge2.Controls.Add(Me.LblEfficiency)
         Me.RadRadialGauge2.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadialGaugeArc4, Me.RadialGaugeArc5, Me.RadialGaugeArc6, Me.RadialGaugeTicks2, Me.RadialGaugeLabels2, Me.RadialGaugeNeedle2, Me.RadialGaugeTicks3, Me.RadialGaugeSingleLabel1})
-        Me.RadRadialGauge2.Location = New System.Drawing.Point(1198, -12)
+        Me.RadRadialGauge2.Location = New System.Drawing.Point(1497, 0)
         Me.RadRadialGauge2.Name = "RadRadialGauge2"
         Me.RadRadialGauge2.RangeEnd = 120.0R
-        Me.RadRadialGauge2.Size = New System.Drawing.Size(320, 254)
+        Me.RadRadialGauge2.Size = New System.Drawing.Size(305, 242)
         Me.RadRadialGauge2.StartAngle = 130.0R
         Me.RadRadialGauge2.SweepAngle = 280.0R
         Me.RadRadialGauge2.TabIndex = 235
@@ -577,7 +580,7 @@ Partial Class FormDisplay
         Me.LblResource.Font = New System.Drawing.Font("Microsoft Sans Serif", 38.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblResource.Location = New System.Drawing.Point(0, 0)
         Me.LblResource.Name = "LblResource"
-        Me.LblResource.Size = New System.Drawing.Size(1503, 76)
+        Me.LblResource.Size = New System.Drawing.Size(1803, 76)
         Me.LblResource.TabIndex = 231
         Me.LblResource.Text = "RESOURCE:"
         Me.LblResource.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -598,7 +601,7 @@ Partial Class FormDisplay
         '
         Me.Picpause.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Picpause.Image = Global.HourlyProductionDisplay.My.Resources.Resources._1476829650_067_Pause
-        Me.Picpause.Location = New System.Drawing.Point(1092, 9)
+        Me.Picpause.Location = New System.Drawing.Point(1392, 9)
         Me.Picpause.Name = "Picpause"
         Me.Picpause.Size = New System.Drawing.Size(100, 50)
         Me.Picpause.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -632,7 +635,7 @@ Partial Class FormDisplay
         Me.LblShiftDelta.ForeColor = System.Drawing.SystemColors.ControlText
         Me.LblShiftDelta.Location = New System.Drawing.Point(2, 181)
         Me.LblShiftDelta.Name = "LblShiftDelta"
-        Me.LblShiftDelta.Size = New System.Drawing.Size(368, 44)
+        Me.LblShiftDelta.Size = New System.Drawing.Size(341, 44)
         Me.LblShiftDelta.TabIndex = 243
         Me.LblShiftDelta.Text = "Delta:"
         Me.LblShiftDelta.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -651,6 +654,8 @@ Partial Class FormDisplay
         '
         'PanelPrensas
         '
+        Me.PanelPrensas.Controls.Add(Me.LblDownTimeAcum)
+        Me.PanelPrensas.Controls.Add(Me.Label3)
         Me.PanelPrensas.Controls.Add(Me.LblSPMActual)
         Me.PanelPrensas.Controls.Add(Me.Lblsetupactual)
         Me.PanelPrensas.Controls.Add(Me.Label5)
@@ -662,16 +667,43 @@ Partial Class FormDisplay
         Me.PanelPrensas.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PanelPrensas.Location = New System.Drawing.Point(0, 722)
         Me.PanelPrensas.Name = "PanelPrensas"
-        Me.PanelPrensas.Size = New System.Drawing.Size(1503, 63)
+        Me.PanelPrensas.Size = New System.Drawing.Size(1803, 63)
         Me.PanelPrensas.TabIndex = 245
+        '
+        'LblDownTimeAcum
+        '
+        Me.LblDownTimeAcum.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.LblDownTimeAcum.AutoSize = True
+        Me.LblDownTimeAcum.BackColor = System.Drawing.Color.Red
+        Me.LblDownTimeAcum.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblDownTimeAcum.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LblDownTimeAcum.Location = New System.Drawing.Point(1615, 10)
+        Me.LblDownTimeAcum.Name = "LblDownTimeAcum"
+        Me.LblDownTimeAcum.Size = New System.Drawing.Size(176, 44)
+        Me.LblDownTimeAcum.TabIndex = 251
+        Me.LblDownTimeAcum.Text = "00:00:00"
+        Me.LblDownTimeAcum.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label3
+        '
+        Me.Label3.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(1414, 10)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(210, 44)
+        Me.Label3.TabIndex = 250
+        Me.Label3.Text = "Downtime:"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'LblSPMActual
         '
         Me.LblSPMActual.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.LblSPMActual.AutoSize = True
+        Me.LblSPMActual.BackColor = System.Drawing.Color.Lime
         Me.LblSPMActual.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblSPMActual.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.LblSPMActual.Location = New System.Drawing.Point(587, 0)
+        Me.LblSPMActual.Location = New System.Drawing.Point(556, 10)
         Me.LblSPMActual.Name = "LblSPMActual"
         Me.LblSPMActual.Size = New System.Drawing.Size(64, 44)
         Me.LblSPMActual.TabIndex = 245
@@ -682,9 +714,10 @@ Partial Class FormDisplay
         '
         Me.Lblsetupactual.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Lblsetupactual.AutoSize = True
+        Me.Lblsetupactual.BackColor = System.Drawing.Color.Lime
         Me.Lblsetupactual.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Lblsetupactual.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Lblsetupactual.Location = New System.Drawing.Point(1321, 0)
+        Me.Lblsetupactual.Location = New System.Drawing.Point(1275, 10)
         Me.Lblsetupactual.Name = "Lblsetupactual"
         Me.Lblsetupactual.Size = New System.Drawing.Size(120, 44)
         Me.Lblsetupactual.TabIndex = 249
@@ -696,7 +729,7 @@ Partial Class FormDisplay
         Me.Label5.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(1063, 0)
+        Me.Label5.Location = New System.Drawing.Point(1031, 10)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(253, 44)
         Me.Label5.TabIndex = 248
@@ -710,7 +743,7 @@ Partial Class FormDisplay
         Me.LblSetupTarget.BackColor = System.Drawing.Color.Lime
         Me.LblSetupTarget.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblSetupTarget.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.LblSetupTarget.Location = New System.Drawing.Point(936, 0)
+        Me.LblSetupTarget.Location = New System.Drawing.Point(892, 10)
         Me.LblSetupTarget.Name = "LblSetupTarget"
         Me.LblSetupTarget.Size = New System.Drawing.Size(120, 44)
         Me.LblSetupTarget.TabIndex = 247
@@ -722,7 +755,7 @@ Partial Class FormDisplay
         Me.Label4.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(675, 0)
+        Me.Label4.Location = New System.Drawing.Point(645, 10)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(257, 44)
         Me.Label4.TabIndex = 246
@@ -734,7 +767,7 @@ Partial Class FormDisplay
         Me.Label2.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(357, 0)
+        Me.Label2.Location = New System.Drawing.Point(326, 10)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(240, 44)
         Me.Label2.TabIndex = 244
@@ -748,7 +781,7 @@ Partial Class FormDisplay
         Me.LblSPMTarget.BackColor = System.Drawing.Color.Lime
         Me.LblSPMTarget.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblSPMTarget.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.LblSPMTarget.Location = New System.Drawing.Point(265, 0)
+        Me.LblSPMTarget.Location = New System.Drawing.Point(237, 10)
         Me.LblSPMTarget.Name = "LblSPMTarget"
         Me.LblSPMTarget.Size = New System.Drawing.Size(64, 44)
         Me.LblSPMTarget.TabIndex = 243
@@ -760,7 +793,7 @@ Partial Class FormDisplay
         Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(38, 0)
+        Me.Label1.Location = New System.Drawing.Point(12, 10)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(232, 44)
         Me.Label1.TabIndex = 229
@@ -777,18 +810,31 @@ Partial Class FormDisplay
         Me.LBLERROR.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.LBLERROR.Visible = False
         '
+        'LblShifTargetValue
+        '
+        Me.LblShifTargetValue.AutoSize = True
+        Me.LblShifTargetValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblShifTargetValue.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LblShifTargetValue.Location = New System.Drawing.Point(360, 79)
+        Me.LblShifTargetValue.Name = "LblShifTargetValue"
+        Me.LblShifTargetValue.Size = New System.Drawing.Size(42, 44)
+        Me.LblShifTargetValue.TabIndex = 247
+        Me.LblShifTargetValue.Text = "0"
+        Me.LblShifTargetValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'FormDisplay
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Gainsboro
-        Me.ClientSize = New System.Drawing.Size(1503, 785)
+        Me.ClientSize = New System.Drawing.Size(1803, 785)
+        Me.Controls.Add(Me.LblShiftDeltaValue)
+        Me.Controls.Add(Me.LblCurrentActualValue)
+        Me.Controls.Add(Me.LblShifTargetValue)
         Me.Controls.Add(Me.LBLERROR)
         Me.Controls.Add(Me.PanelPrensas)
         Me.Controls.Add(Me.LblFechaHora)
-        Me.Controls.Add(Me.LblShiftDeltaValue)
         Me.Controls.Add(Me.LblShiftDelta)
-        Me.Controls.Add(Me.LblCurrentActualValue)
         Me.Controls.Add(Me.LblCurrentActual)
         Me.Controls.Add(Me.LblFontIncrement)
         Me.Controls.Add(Me.LblChangeOverBlue)
@@ -864,5 +910,8 @@ Partial Class FormDisplay
     Friend WithEvents LblSPMTarget As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents LBLERROR As System.Windows.Forms.Label
+    Friend WithEvents LblDownTimeAcum As System.Windows.Forms.Label
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents LblShifTargetValue As System.Windows.Forms.Label
 
 End Class

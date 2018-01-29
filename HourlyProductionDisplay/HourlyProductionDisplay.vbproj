@@ -62,8 +62,6 @@
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -161,10 +159,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="My Project\Settings.Designer.vb">
+    <Compile Include="My Project\Settings1.Designer.vb">
       <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="PrintSample.Designer.vb">
       <DependentUpon>PrintSample.vb</DependentUpon>
@@ -194,6 +192,12 @@
       <DependentUpon>SubResourceCMS.vb</DependentUpon>
     </Compile>
     <Compile Include="SubResourceCMS.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Translations.Designer.vb">
+      <DependentUpon>Translations.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Translations.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UserControl1.Designer.vb">
@@ -246,6 +250,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SubResourceCMS.resx">
       <DependentUpon>SubResourceCMS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Translations.resx">
+      <DependentUpon>Translations.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl1.resx">
       <DependentUpon>UserControl1.vb</DependentUpon>

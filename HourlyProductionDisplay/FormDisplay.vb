@@ -5,6 +5,7 @@ Imports System.Text
 Imports System.Security.Cryptography
 Imports System.IO
 Imports Transitions
+Imports System.Xml
 
 Public Class FormDisplay
 
@@ -20,6 +21,8 @@ Public Class FormDisplay
     Dim CurrAssetID As String = ""
     Dim CurrSubResID As String = ""
     Dim CurrShiftName As String = ""
+    Dim CurrentShiftStartTime As DateTime
+
     Dim CurrFecha As Date
     Dim ResourceName As String = ""
     Dim ResourceCode As String = ""
@@ -45,8 +48,19 @@ Public Class FormDisplay
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LblAverage.Visible = My.Settings.SHOWAVG
+        loadtranslations()
 
-        If My.Settings.HSPR01 Then
+        LblEfficiency.Text = IIf(gettranslation("Totarget") <> "", gettranslation("Totarget"), "To Target")
+        LblChangeOverBlue.Text = IIf(gettranslation("Bluetext") <> "", gettranslation("Bluetext"), "Blue Text = Change Over")
+        LblCurrentActual.Text = IIf(gettranslation("Shiftcurrentactual") <> "", gettranslation("Shiftcurrentactual"), "Production actual: ")
+        LblShiftDelta.Text = IIf(gettranslation("Delta") <> "", gettranslation("Delta"), "Delta: ")
+
+        Chart1.ChartAreas(0).AxisX.Title = IIf(gettranslation("Part") <> "", gettranslation("Part"), "Part")
+        Chart1.ChartAreas(0).AxisY.Title = IIf(gettranslation("PCS_HR") <> "", gettranslation("PCS_HR"), "PCS / HR")
+        Chart2.ChartAreas(0).AxisX.Title = IIf(gettranslation("Part") <> "", gettranslation("Part"), "Part")
+        Chart2.ChartAreas(0).AxisY.Title = IIf(gettranslation("PCS_HR") <> "", gettranslation("PCS_HR"), "PCS / HR")
+
+        If My.Settings.HSPR01 Or My.Settings.HSPR02 Or My.Settings.HSPR03 Then
             hsp = New HSPR01_1
             hsp.Timer1.Enabled = False
         End If
@@ -54,9 +68,13 @@ Public Class FormDisplay
         LblResource.Tag = LblResource.Font.Size
         LblPart.Tag = LblPart.Font.Size
         LblShifTarget.Tag = LblShifTarget.Font.Size
+        LblShifTargetValue.Tag = LblShifTargetValue.Font.Size
+
         LblAverage.Tag = LblAverage.Font.Size
         LblCurrentActual.Tag = LblCurrentActual.Font.Size
         LblCurrentActualValue.Tag = LblCurrentActualValue.Font.Size
+
+
 
         LblShiftDelta.Tag = LblShiftDelta.Font.Size
         LblShiftDeltaValue.Tag = LblShiftDelta.Font.Size
@@ -116,6 +134,68 @@ Public Class FormDisplay
 
         Me.Visible = True
     End Sub
+
+    Private Structure traduccion
+        Dim Name As String
+        Dim value As String
+    End Structure
+
+    Dim listTraduccion As New List(Of traduccion)
+
+    Sub loadtranslations()
+        Dim xlread As XmlTextReader
+
+        Try
+            If IO.File.Exists(Application.StartupPath & "\Language.xml") Then
+                xlread = New XmlTextReader(Application.StartupPath & "\Language.xml")
+                While xlread.Read()
+                    xlread.MoveToElement()
+
+                    If xlread.Name <> "xml" And xlread.Name <> "Settings" Then
+                        Dim tr As New traduccion With {.Name = xlread.Name, .value = xlread.ReadString}
+                        listTraduccion.Add(tr)
+                    End If
+                    'If xlread.Name = "Part" Then TxtPart.Text = xlread.ReadString
+                    'If xlread.Name = "Average" Then TxtAverage.Text = xlread.ReadString
+                    'If xlread.Name = "CurrentHourlytarget" Then TxtHourlyTarget.Text = xlread.ReadString
+                    'If xlread.Name = "Shiftcurrenttarget" Then TxtShiftTarget.Text = xlread.ReadString
+                    'If xlread.Name = "Shiftcurrentactual" Then TxtShiftActual.Text = xlread.ReadString
+                    'If xlread.Name = "Delta" Then TxtDelta.Text = xlread.ReadString
+                    'If xlread.Name = "Totarget" Then TxtToTarget.Text = xlread.ReadString
+                    'If xlread.Name = "PCS_HR" Then TxtPcsHr.Text = xlread.ReadString
+                    'If xlread.Name = "Bluetext" Then TxtBluetext.Text = xlread.ReadString
+
+                    'writer.WriteElementString("Part", TxtPart.Text)
+                    'writer.WriteElementString("Average", TxtAverage.Text)
+                    'writer.WriteElementString("CurrentHourlytarget", TxtHourlyTarget.Text)
+                    'writer.WriteElementString("Shiftcurrenttarget", TxtShiftTarget.Text)
+                    'writer.WriteElementString("Shiftcurrentactual", TxtShiftActual.Text)
+                    'writer.WriteElementString("Delta", TxtDelta.Text)
+                    'writer.WriteElementString("Totarget", TxtToTarget.Text)
+                    'writer.WriteElementString("PCS_HR", TxtPcsHr.Text)
+                    'writer.WriteElementString("Bluetext", TxtBluetext.Text)
+
+                End While
+            End If
+        Catch ex As Exception
+            'MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+        Finally
+            Try
+                xlread.Close()
+            Catch ex As Exception
+            End Try
+        End Try
+    End Sub
+
+    Function gettranslation(ByVal Name As String) As String
+        Dim texttoreturn As String = ""
+        For i = 0 To listTraduccion.Count - 1
+            If listTraduccion(i).Name = Name Then
+                texttoreturn = listTraduccion(i).value
+            End If
+        Next
+        Return texttoreturn
+    End Function
 
     Private Sub FormDisplay_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
         If e.KeyCode = Keys.Right Or e.KeyCode = Keys.NumPad6 Then
@@ -215,11 +295,16 @@ Public Class FormDisplay
         LblCurrentActual.Top = LblAverage.Top
         LblCurrentActual.Height = LblAverage.Height
 
+        
+
         LblCurrentActualValue.Font = New Font(LblCurrentActualValue.Font.Name, LblCurrentActualValue.Tag + My.Settings.FontIncrement, LblCurrentActualValue.Font.Style)
         LblCurrentActualValue.Top = LblAverage.Top
         LblCurrentActualValue.Left = LblCurrentActual.Left + LblCurrentActual.Width
         LblCurrentActualValue.Height = LblAverage.Height
 
+        LblShifTargetValue.Font = New Font(LblShifTargetValue.Font.Name, LblShifTargetValue.Tag + My.Settings.FontIncrement, LblCurrentActualValue.Font.Style)
+        LblShifTarget.Top = LblPart.Top
+        LblShifTargetValue.Left = LblCurrentActualValue.Left
 
         LblShiftDelta.Font = New Font(LblShiftDelta.Font.Name, LblShiftDelta.Tag + My.Settings.FontIncrement, LblShiftDelta.Font.Style)
         LblShiftDelta.Top = LblCurrentActual.Top + LblCurrentActual.Height  'LblCurrentTarget.Top
@@ -272,11 +357,12 @@ Public Class FormDisplay
         Dim fin As String
     End Structure
 
+
     Sub cargarbreaks()
         ' MsgBox("BREAKS")
-
+        Dim Loadstep As Integer = 0
         Try
-
+            Loadstep = 1
             If Con.State = ConnectionState.Closed Then Con.Open()
 
             Dim DAYSTART As String = "00:00:00"
@@ -288,7 +374,7 @@ Public Class FormDisplay
             Dim da As New Odbc.OdbcDataAdapter("SELECT * FROM " & My.Settings.DSN & ".METHDR", Con)
 
             Dim breaksList As New List(Of Breaks)
-
+            Loadstep = 2
             For i = 0 To My.Settings.RESOURCES.DefaultView.Count - 1
                 '5 y 6  dpto y resc
                 da.SelectCommand.CommandText = "SELECT * FROM " & My.Settings.DSN & ".CPCTY WHERE DYDEPT='" & My.Settings.RESOURCES.DefaultView.Item(i).Item(5).ToString & "' AND DYRESR='" & My.Settings.RESOURCES.DefaultView.Item(i).Item(6).ToString & "' AND DYDATE='" & fechaserver.ToString("yyyy-MM-dd") & "'"
@@ -303,6 +389,7 @@ Public Class FormDisplay
                     End If
                 End If
 
+                Loadstep = 3
                 For y = 0 To ds.Tables("LABOR").DefaultView.Count - 1
                     ''Todos los posibles espacios de programacion "16"
                     Dim xpos As Integer = 0
@@ -332,9 +419,10 @@ Public Class FormDisplay
 
                 Next
 
-
+                Loadstep = 4
                 cmd.CommandText = "DELETE FROM hmo.breaks where Department='" & My.Settings.RESOURCES.DefaultView.Item(i).Item(5).ToString & "' AND ResourceCode='" & My.Settings.RESOURCES.DefaultView.Item(i).Item(6).ToString & "' AND Fecha='" & fechaserver.ToString("MM/dd/yyyy") & "'"
                 cmd.ExecuteScalar()
+                Loadstep = 5
                 For n = 0 To breaksList.Count - 1
                     cmd.CommandText = "INSERT INTO hmo.breaks(ResourceCode,Department,Start,[End],Fecha) values ('" & My.Settings.RESOURCES.DefaultView.Item(i).Item(6).ToString & "'," & _
                         "'" & My.Settings.RESOURCES.DefaultView.Item(i).Item(5).ToString & "'," & _
@@ -344,6 +432,7 @@ Public Class FormDisplay
                     cmd.ExecuteScalar()
                 Next
 
+                Loadstep = 6
                 breaksList.Clear()
                 ds.Tables.Clear()
 
@@ -364,7 +453,9 @@ Public Class FormDisplay
             'Ds1 = Nothing
 
         Catch ex As Exception
-            MsgBox("Error loading RunRates " & vbCrLf & ex.Message, MsgBoxStyle.Critical)
+            'MsgBox("Error loading Breaks - " & Loadstep.ToString & vbCrLf & ex.Message, MsgBoxStyle.Critical)
+            LblFechaHora.Text = "Error loading Breaks - " & Loadstep.ToString & vbCrLf & ex.Message
+            LblFechaHora.ForeColor = Color.Red
         Finally
             If Con.State = ConnectionState.Open Then Con.Close()
         End Try
@@ -372,13 +463,30 @@ Public Class FormDisplay
     Dim ActualShift As String = ""
     Dim ActualFechaServer As Date = "01/01/1900"
     Dim segundossetup As Integer = 0
+    Dim sumsegundosdowntime As Integer = 0
     Private code As String = ""
     Dim SPM As Integer = 0
     Function GETFROMCMS() As Boolean
         Try
             If cn.State = ConnectionState.Closed Then cn.Open()
-            da.SelectCommand.CommandText = "SELECT * FROM HMO.HXH WHERE ASSET='" & ResourceCode & "' ORDER BY HORA"
-            da.Fill(ds, "Production")
+            Dim cmd As New SqlClient.SqlCommand("SELECT count(*) FROM HMO.HXH WHERE ASSET='" & ResourceCode & "'", cn)
+            Dim cnt As Integer = cmd.ExecuteScalar
+
+            If ds.Tables.Count > 0 Then
+                ''ya existe la tabla producción
+                If cnt > 0 Then
+                    ds.Tables.Clear()
+                    da.SelectCommand.CommandText = "SELECT * FROM HMO.HXH WHERE ASSET='" & ResourceCode & "' ORDER BY HORA"
+                    da.Fill(ds, "Production")
+                Else
+                    Return True
+                End If
+            Else
+                da.SelectCommand.CommandText = "SELECT * FROM HMO.HXH WHERE ASSET='" & ResourceCode & "' ORDER BY HORA"
+                da.Fill(ds, "Production")
+            End If
+
+
         Catch ex As Exception
             LblFechaHora.Text = ex.Message
             LblFechaHora.ForeColor = Color.Red
@@ -639,12 +747,15 @@ Public Class FormDisplay
         Next
     End Sub
 
+    Dim showprensas As Boolean = False
+    Dim availability As Double = 0
     Sub cargardatos(ByRef Elchart As Chart)
         Dim val As Integer = 0
         Dim quitarrapido As Boolean = False
         Try
             TimerDatos.Stop()
             LBLERROR.Visible = False
+            showprensas = False
 
             'LblEfficiency.Text = cn.State.ToString()
 
@@ -686,35 +797,40 @@ Public Class FormDisplay
             If cmd.ExecuteScalar <= 0 Then
                 PanelPrensas.Visible = False
                 GoTo saltarbottombar
+            Else
+                cmd.CommandText = "Select count(*) from hmo.running where prensa='" & ResourceCode.Trim.Replace(" ", "") & "'"
+                If cmd.ExecuteScalar > 0 Then
+                    PanelPrensas.Visible = True
+                    showprensas = True
+                Else
+                    PanelPrensas.Visible = False
+                    showprensas = False
+                End If
+                
             End If
 
-            PanelPrensas.Visible = True
 
 
-            cmd.CommandText = "select top 1 datediff(second,fecha,fecha_end) as segundos from hmo.TiempoMuerto where diechange=1 and iscurrent=0 and assetcode='" & code.Trim.Replace(" ", "") & "' order by id desc"
+
+            cmd.CommandText = "select top 1 datediff(second,fecha,fecha_end) as segundos from hmo.TiempoMuerto where diechange=1 and iscurrent=0 and assetcode='" & ResourceCode.Trim.Replace(" ", "") & "' order by id desc"
             val = 3
             segundossetup = cmd.ExecuteScalar
 
-            cmd.CommandText = "select SPM from hmo.running where prensa='" & code.Trim.Replace(" ", "") & "'"
+            cmd.CommandText = "select SPM from hmo.running where prensa='" & ResourceCode.Trim.Replace(" ", "") & "'"
 
             SPM = cmd.ExecuteScalar
 
             If segundossetup > 0 Then
-                PanelPrensas.Visible = True
                 Lblsetupactual.Text = secondstohourminutesecondA(segundossetup)
                 LblSetupTarget.Text = secondstohourminutesecondA(changeovertarget)
-
                 If segundossetup > changeovertarget Then
                     Lblsetupactual.BackColor = Color.Red
                 Else
                     Lblsetupactual.BackColor = Color.Lime
                 End If
-
                 LblSPMActual.Text = Format(SPM, "F0")
-
             Else
-                PanelPrensas.Visible = False
-
+                'simplemente no ha habido ningún setup en eset turno
             End If
 
 saltarbottombar:
@@ -729,7 +845,7 @@ saltarbottombar:
             RadialGaugeArc6.RangeEnd = actualgreentarget
 
             RadialGaugeArc5.RangeStart = actualgreentarget
-            RadialGaugeArc5.RangeEnd = 120
+            RadialGaugeArc5.RangeEnd = 115
 
 
             ''LblFechaHora.Text = fechaserver.ToLongDateString & " " & fechaserver.ToShortTimeString
@@ -741,6 +857,11 @@ saltarbottombar:
             Else
                 cmd.CommandText = "Select ProductionShiftName from pro.ResourceStatus where Asset_ID=" & CurrAssetID
                 CurrShiftName = cmd.ExecuteScalar
+
+                cmd.CommandText = "select startTime from ref.ShiftDetail where Name='" & CurrShiftName & "'"
+                CurrentShiftStartTime = cmd.ExecuteScalar
+
+
             End If
 
             If fechaserver.ToShortDateString <> ActualFechaServer.ToShortDateString Then
@@ -756,11 +877,8 @@ saltarbottombar:
                 LblResource.Text = CurrFecha.ToShortDateString
             End If
 
-
             'CurrFecha = "03/14/2017"
             'CurrShiftName = "2"
-
-            ds.Tables.Clear()
 
             da.SelectCommand.CommandText = "SELECT * FROM [hmo].[GetHourlyProdTable] (" & CurrAssetID & ",'" & CurrShiftName & "','" & CurrFecha.ToString("MM/dd/yyyy") & "'," & CurrSubResID & ") "  ''where CURRENTTARGET>0"
 
@@ -770,7 +888,7 @@ saltarbottombar:
 
             If CurrAssetID = -1 Then
                 ''ES DESDE CMS
-                TimerDatos.Interval = 60000
+                TimerDatos.Interval = 6000
                 If Debugger.IsAttached Then TimerDatos.Interval = 6000
                 GETFROMCMS()
                 Try
@@ -787,10 +905,11 @@ saltarbottombar:
                         quitarrapido = True
 
                     End If
-        Catch ex As Exception
+                Catch ex As Exception
 
-        End Try
+                End Try
             Else
+                ds.Tables.Clear()
                 da.Fill(ds, "Production")
                 TimerDatos.Interval = 3000
             End If
@@ -879,24 +998,37 @@ saltarbottombar:
                 ShiftTarget = ShiftTarget + ds.Tables("Production").DefaultView.Item(i).Item("CURRENTTARGET")
             Next
 
-
             val = 7
 
             ''SOLO SI HUBO DATOS
             If ds.Tables("Production").DefaultView.Count > 0 Then
                 totalhoras = (DateDiff(DateInterval.Second, CType(ds.Tables("Production").DefaultView.Item(0).Item("STARTTIME"), Date), fechaserver) - SegundosBreaks) / 3600
-                LblPart.Text = "PART: " & ds.Tables("Production").DefaultView.Item(ds.Tables("Production").DefaultView.Count - 1).Item("PARTNUMBER").ToString
-                LblResource.Text = "Resource: " & ResourceName & IIf(CurrSubResID > 1, " " + CurrSubResID.ToString, "")
-                LblShifTarget.Text = "Shift current target: " & Math.Round(ShiftTarget).ToString("F0")
-                LblCurrentActualValue.Text = totalprod.ToString
 
+                LblPart.Text = IIf(gettranslation("Part") <> "", gettranslation("Part"), "PART: ") & ds.Tables("Production").DefaultView.Item(ds.Tables("Production").DefaultView.Count - 1).Item("PARTNUMBER").ToString
+
+                LblResource.Text = IIf(gettranslation("Resource") <> "", gettranslation("Resource"), "Resource: ") & ResourceName & IIf(CurrSubResID > 1, " " + CurrSubResID.ToString, "")
+
+                'LblShifTarget.Text = IIf(gettranslation("Shiftcurrenttarget") <> "", gettranslation("Shiftcurrenttarget"), "Shift objective: ") & Math.Round(ShiftTarget).ToString("F0")
+                LblShifTarget.Text = IIf(gettranslation("Shiftcurrenttarget") <> "", gettranslation("Shiftcurrenttarget"), "Shift objective: ")
+
+                LblShifTargetValue.Text = Math.Round(ShiftTarget).ToString("F0")
+
+
+                LblCurrentActualValue.Text = totalprod.ToString
+                
                 LblShiftDeltaValue.Text = (totalprod - Math.Round(ShiftTarget)).ToString("F0")
 
             Else
                 'SI NO HUBO DATOS
                 LblPart.Text = ""
-                LblResource.Text = "Resource: " & ResourceName & IIf(CurrSubResID > 1, " " + CurrSubResID.ToString, "")
-                LblShifTarget.Text = "Shift current target: " & Math.Round(ShiftTarget).ToString("F0")
+
+                LblResource.Text = IIf(gettranslation("Resource") <> "", gettranslation("Resource"), "Resource: ") & ResourceName & IIf(CurrSubResID > 1, " " + CurrSubResID.ToString, "")
+
+                'LblShifTarget.Text = IIf(gettranslation("Shiftcurrenttarget") <> "", gettranslation("Shiftcurrenttarget"), "Shift objective: ") & Math.Round(ShiftTarget).ToString("F0")
+                LblShifTarget.Text = IIf(gettranslation("Shiftcurrenttarget") <> "", gettranslation("Shiftcurrenttarget"), "Shift objective: ") & Math.Round(ShiftTarget).ToString("F0")
+
+                LblShifTargetValue.Text = Math.Round(ShiftTarget).ToString("F0")
+
                 LblCurrentActualValue.Text = totalprod.ToString
 
                 LblShiftDeltaValue.Text = 0
@@ -909,8 +1041,8 @@ saltarbottombar:
                 totalhoras = 0
             End If
 
-            LblAverage.Text = "Average: " & ((totalprod) / totalhoras).ToString("F2")
-            If totalprod = 0 Then LblAverage.Text = "Average: 0"
+            LblAverage.Text = IIf(gettranslation("Average") <> "", gettranslation("Average"), "Average: ") & ((totalprod) / totalhoras).ToString("F2")
+            If totalprod = 0 Then LblAverage.Text = IIf(gettranslation("Average") <> "", gettranslation("Average"), "Average: 0")
             Dim eff As Double
             eff = (totalprod * 100) / ShiftTarget
             LblCurrentActualValue.BackColor = Color.Gainsboro
@@ -949,9 +1081,10 @@ saltarbottombar:
             RadialGaugeSingleLabel1.LabelText = eff.ToString("f2") & "%"
 
             If ds.Tables("Production").DefaultView.Count > 0 Then
-                LblCurrentTarget.Text = "Current Hourly Target: " & ds.Tables("Production").DefaultView.Item(ds.Tables("Production").DefaultView.Count - 1).Item("RUNRATE")
+
+                LblCurrentTarget.Text = IIf(gettranslation("CurrentHourlytarget") <> "", gettranslation("CurrentHourlytarget"), "Current Hourly Target: ") & ds.Tables("Production").DefaultView.Item(ds.Tables("Production").DefaultView.Count - 1).Item("RUNRATE")
             Else
-                LblCurrentTarget.Text = "Current Hourly Target: -"
+                LblCurrentTarget.Text = IIf(gettranslation("CurrentHourlytarget") <> "", gettranslation("CurrentHourlytarget"), "Current Hourly Target: -")
             End If
 
 
@@ -1145,6 +1278,59 @@ saltarbottombar:
                 Next
             End If
 
+
+            If showprensas Then
+                ''traer tiempo muerto según nombre de recurso
+                sumsegundosdowntime = 0
+                availability = 0
+                da.SelectCommand.CommandText = "select DATEDIFF(SECOND,fecha,Fecha_End) as Tiempo ,* from [hmo].[TiempoMuerto] where (Fecha_End >= '" & CurrFecha.ToString("MM/dd/yyyy") & " " & CurrentShiftStartTime.ToString("HH:mm:ss") & "' or Fecha_End is null) and AssetCode='" & ResourceCode.Replace(" ", "") & "' and diechange=0 order by fecha"
+                da.Fill(ds, "DownTime")
+                For i = 0 To ds.Tables("Downtime").DefaultView.Count - 1
+                    If IsDBNull(ds.Tables("Downtime").DefaultView.Item(i).Item("Fecha_End")) Then
+                        ds.Tables("Downtime").DefaultView.Item(i).Item("Fecha_End") = fechaserver
+                        ds.Tables("Downtime").DefaultView.Item(i).Item("Tiempo") = DateDiff(DateInterval.Second, ds.Tables("Downtime").DefaultView.Item(i).Item("Fecha"), fechaserver)
+                    End If
+                    If ds.Tables("Downtime").DefaultView.Item(i).Item("fecha") < CType(CurrFecha.ToString("MM/dd/yyyy") & " " & CurrentShiftStartTime.ToString("HH:mm:ss"), DateTime) Then
+                        ds.Tables("Downtime").DefaultView.Item(i).Item("Tiempo") = DateDiff(DateInterval.Second, CType(CurrFecha.ToString("MM/dd/yyyy") & " " & CurrentShiftStartTime.ToString("HH:mm:ss"), DateTime), ds.Tables("Downtime").DefaultView.Item(i).Item("Fecha_End"))
+                    End If
+                    sumsegundosdowntime += ds.Tables("Downtime").DefaultView.Item(i).Item("Tiempo")
+                Next
+
+                ''availability= runtime / plannedproductiontime
+                ''runtime=plannedproduction time - stop time
+                ''plannedproductiontime  = shift length - breaks  =  totalhoras
+
+
+                totalhoras = (totalhoras * 3600) - SegundosBreaks
+
+                Dim runtime As Double = 0
+                runtime = totalhoras - sumsegundosdowntime
+
+
+                availability = runtime / totalhoras
+
+                Dim iSpan As TimeSpan = TimeSpan.FromSeconds(sumsegundosdowntime)
+                Dim sumsegstr As String = iSpan.Hours.ToString.PadLeft(2, "0"c) & ":" & iSpan.Minutes.ToString.PadLeft(2, "0"c) & ":" & iSpan.Seconds.ToString.PadLeft(2, "0"c)
+                Console.Write(sumsegstr)
+                LblDownTimeAcum.Text = sumsegstr
+
+
+                If availability < 0.85 Then
+                    LblDownTimeAcum.BackColor = Color.Red
+                End If
+
+                If availability >= 0.85 Then
+                    LblDownTimeAcum.BackColor = Color.Yellow
+                End If
+
+                If availability >= 0.9 Then
+                    LblDownTimeAcum.BackColor = Color.Lime
+                End If
+
+
+            End If
+
+
             'Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(0.5, 1.5, "06:00 - 07:00", 0, LabelMarkStyle.Box))
             'Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(1.5, 2.5, "07:00 - 08:00", 0, LabelMarkStyle.Box))
             'Elchart.ChartAreas(0).AxisX2.CustomLabels.Add(New CustomLabel(2.5, 3.5, "08:00 - 09:00", 0, LabelMarkStyle.Box))
@@ -1169,7 +1355,7 @@ saltarbottombar:
             displayerrorlabel(ex.Message, Elchart)
         Finally
             TimerDatos.Start()
-            If quitarrapido Then
+            If quitarrapido And My.Settings.RESOURCES.DefaultView.Count > 1 Then
                 TimerChange.Interval = 4000
             Else
                 TimerChange.Interval = My.Settings.Timer * 1000
@@ -1287,7 +1473,7 @@ saltarbottombar:
         CurrResIndex = CurrResIndex + 1
         If CurrResIndex > My.Settings.RESOURCES.DefaultView.Count - 1 Then
             ''Solo HSPR01
-            If My.Settings.HSPR01 Then
+            If My.Settings.HSPR01 Or My.Settings.HSPR02 Or My.Settings.HSPR03 Then
                 If My.Settings.MARSServer = "192.168.114.99\mars" And Not hsp.Visible Then
                     hsp.Timer1.Enabled = True
                     hsp.Location = Me.Location
@@ -1518,7 +1704,4 @@ saltarbottombar:
     Private Sub PicSlide2_DoubleClick(sender As Object, e As EventArgs) Handles PicSlide2.DoubleClick
         MsgBox(PicSlide2.Location.ToString())
     End Sub
-
-
-
 End Class
