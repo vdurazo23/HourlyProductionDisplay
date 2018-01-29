@@ -1,6 +1,7 @@
 ﻿Public Class SelPant
     Public Seleccion As Integer = 0
     Private Sub SelPant_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         cargarareas()
         If Screen.AllScreens.Count > 1 Then
             For i = 0 To Screen.AllScreens.Count - 1

@@ -207,28 +207,64 @@ Namespace My
                 Me("HSPR01") = value
             End Set
         End Property
-
-        <Global.System.Configuration.UserScopedSettingAttribute(), _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")> _
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
         Public Property SHOWAVG() As Boolean
             Get
-                Return CType(Me("SHOWAVG"), Boolean)
+                Return CType(Me("SHOWAVG"),Boolean)
             End Get
-            Set(value As Boolean)
+            Set
                 Me("SHOWAVG") = value
             End Set
         End Property
-
-        <Global.System.Configuration.UserScopedSettingAttribute(), _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")> _
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
         Public Property UPGRADEREQUIRED() As Boolean
             Get
-                Return CType(Me("UPGRADEREQUIRED"), Boolean)
+                Return CType(Me("UPGRADEREQUIRED"),Boolean)
             End Get
-            Set(value As Boolean)
+            Set
                 Me("UPGRADEREQUIRED") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property HSPR02() As Boolean
+            Get
+                Return CType(Me("HSPR02"),Boolean)
+            End Get
+            Set
+                Me("HSPR02") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property HSPR03() As Boolean
+            Get
+                Return CType(Me("HSPR03"),Boolean)
+            End Get
+            Set
+                Me("HSPR03") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("A")>  _
+        Public Property TST() As String
+            Get
+                Return CType(Me("TST"),String)
+            End Get
+            Set
+                Me("TST") = value
             End Set
         End Property
     End Class

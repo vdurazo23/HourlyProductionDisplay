@@ -29,6 +29,7 @@ Partial Class PrintSample
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.UserControl11 = New HourlyProductionDisplay.UserControl1()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -79,11 +80,25 @@ Partial Class PrintSample
         Me.Label1.TabIndex = 2
         Me.Label1.Text = "TITULO"
         '
+        'UserControl11
+        '
+        Me.UserControl11.BackColor = System.Drawing.Color.White
+        Me.UserControl11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.UserControl11.Location = New System.Drawing.Point(61, 378)
+        Me.UserControl11.Maximum = 100
+        Me.UserControl11.Minimum = 0
+        Me.UserControl11.Name = "UserControl11"
+        Me.UserControl11.ProgressBarColor = System.Drawing.Color.Lime
+        Me.UserControl11.Size = New System.Drawing.Size(378, 34)
+        Me.UserControl11.TabIndex = 3
+        Me.UserControl11.Value = 100
+        '
         'PrintSample
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(570, 476)
+        Me.ClientSize = New System.Drawing.Size(1223, 547)
+        Me.Controls.Add(Me.UserControl11)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.PictureBox1)
@@ -100,4 +115,5 @@ Partial Class PrintSample
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents UserControl11 As HourlyProductionDisplay.UserControl1
 End Class

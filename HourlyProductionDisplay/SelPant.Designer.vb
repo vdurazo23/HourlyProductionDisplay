@@ -42,13 +42,14 @@ Partial Class SelPant
         '
         'Panel1
         '
+        Me.Panel1.AutoScroll = True
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.Button1)
         Me.Panel1.Controls.Add(Me.ComboBox1)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(734, 462)
+        Me.Panel1.Size = New System.Drawing.Size(730, 458)
         Me.Panel1.TabIndex = 5
         '
         'Label1
@@ -67,7 +68,7 @@ Partial Class SelPant
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 28.0!, System.Drawing.FontStyle.Bold)
         Me.Button1.ForeColor = System.Drawing.Color.White
         Me.Button1.Image = Global.HourlyProductionDisplay.My.Resources.Resources.cinema_display_based_on_2
-        Me.Button1.Location = New System.Drawing.Point(492, 212)
+        Me.Button1.Location = New System.Drawing.Point(488, 212)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(230, 130)
         Me.Button1.TabIndex = 3
@@ -79,7 +80,8 @@ Partial Class SelPant
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(734, 462)
+        Me.AutoScroll = True
+        Me.ClientSize = New System.Drawing.Size(730, 458)
         Me.ControlBox = False
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle

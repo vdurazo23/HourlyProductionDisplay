@@ -28,7 +28,14 @@
         Try
             Me.BackColor = Color.White
             If cn.State = ConnectionState.Closed Then cn.Open()
-            da.SelectCommand.CommandText = "select top 20 * from hmo.HSPR01_HIST order by id desc"
+
+            Dim TABLE As String = "HSPR01"
+            If My.Settings.HSPR01 Then TABLE = "HSPR01"
+            If My.Settings.HSPR02 Then TABLE = "HSPR02"
+            If My.Settings.HSPR03 Then TABLE = "HSPR03"
+
+
+            da.SelectCommand.CommandText = "select top 20 * from hmo." & TABLE & "_HIST order by id desc"
             ds.Tables.Clear()
             da.Fill(ds, "HSPR01")
             'cmd.CommandText = "select datediff(second,fecha,getdate()) as segundos from [hmo].[HSPR01]"

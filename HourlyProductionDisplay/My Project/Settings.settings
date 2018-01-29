@@ -53,5 +53,8 @@
     <Setting Name="HSPR03" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="TST" Type="System.String" Scope="User">
+      <Value Profile="(Default)">A</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
