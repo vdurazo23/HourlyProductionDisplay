@@ -295,8 +295,6 @@ Public Class FormDisplay
         LblCurrentActual.Top = LblAverage.Top
         LblCurrentActual.Height = LblAverage.Height
 
-        
-
         LblCurrentActualValue.Font = New Font(LblCurrentActualValue.Font.Name, LblCurrentActualValue.Tag + My.Settings.FontIncrement, LblCurrentActualValue.Font.Style)
         LblCurrentActualValue.Top = LblAverage.Top
         LblCurrentActualValue.Left = LblCurrentActual.Left + LblCurrentActual.Width

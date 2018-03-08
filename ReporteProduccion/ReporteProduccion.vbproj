@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1C33C95A-96D5-45D9-9D4F-0D422DB10358}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>ReporteProduccion.My.MyApplication</StartupObject>
+    <RootNamespace>ReporteProduccion</RootNamespace>
+    <AssemblyName>ReporteProduccion</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>ReporteProduccion.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>ReporteProduccion.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>MaRsicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AquaGauge">
+      <HintPath>..\..\..\..\FreeGaugeExample\FreeGaugeExample\FreeGaugeExample\bin\Debug\AquaGauge.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Telerik.WinControls, Version=2016.1.112.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.WinControls.GridView, Version=2016.1.112.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.WinControls.UI, Version=2016.1.112.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TelerikCommon, Version=2016.1.112.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e">
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\Get_MARS_Assets.Designer.vb">
+      <DependentUpon>Get_MARS_Assets.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Get_MARS_Assets.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Assets\SelectAsset.Designer.vb">
+      <DependentUpon>SelectAsset.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\SelectAsset.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Catalogos\Assets.Designer.vb">
+      <DependentUpon>Assets.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Catalogos\Assets.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Catalogos\DepartmentsConcepts.Designer.vb">
+      <DependentUpon>DepartmentsConcepts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Catalogos\DepartmentsConcepts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Catalogos\StationsEquipment.Designer.vb">
+      <DependentUpon>StationsEquipment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Catalogos\StationsEquipment.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Config\Config.Designer.vb">
+      <DependentUpon>Config.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Config\Config.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Helper\Utils.vb" />
+    <Compile Include="Menu.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu.Designer.vb">
+      <DependentUpon>Menu.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Helper\SQLCon.vb" />
+    <Compile Include="OEEDashboard.Designer.vb">
+      <DependentUpon>OEEDashboard.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OEEDashboard.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ReporteDataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte\BuscarCodigo.Designer.vb">
+      <DependentUpon>BuscarCodigo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte\BuscarCodigo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporte\Formulas.Designer.vb">
+      <DependentUpon>Formulas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte\Formulas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Resources\LocalizableStrings.en-US.Designer.vb">
+      <DependentUpon>LocalizableStrings.en-US.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\LocalizableStrings.es-ES.Designer.vb">
+      <DependentUpon>LocalizableStrings.es-ES.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\LocalizableStrings.es.Designer.vb">
+      <DependentUpon>LocalizableStrings.es.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\LocalizableStrings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocalizableStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.Designer.vb">
+      <DependentUpon>Login.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Login.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Reporte\NewDowntime.Designer.vb">
+      <DependentUpon>NewDowntime.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte\NewDowntime.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporte\NewPlannedDowntime.Designer.vb">
+      <DependentUpon>NewPlannedDowntime.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte\NewPlannedDowntime.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporte\NewRework.Designer.vb">
+      <DependentUpon>NewRework.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte\NewRework.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporte\ReporteProduccion.Designer.vb">
+      <DependentUpon>ReporteProduccion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte\ReporteProduccion.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Get_MARS_Assets.resx">
+      <DependentUpon>Get_MARS_Assets.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\SelectAsset.resx">
+      <DependentUpon>SelectAsset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Catalogos\Assets.resx">
+      <DependentUpon>Assets.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Catalogos\DepartmentsConcepts.resx">
+      <DependentUpon>DepartmentsConcepts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Catalogos\StationsEquipment.resx">
+      <DependentUpon>StationsEquipment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Config\Config.resx">
+      <DependentUpon>Config.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu.en-US.resx">
+      <DependentUpon>Menu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu.es.resx">
+      <DependentUpon>Menu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu.resx">
+      <DependentUpon>Menu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OEEDashboard.resx">
+      <DependentUpon>OEEDashboard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte\BuscarCodigo.resx">
+      <DependentUpon>BuscarCodigo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte\Formulas.resx">
+      <DependentUpon>Formulas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte\Report1.rdlc" />
+    <EmbeddedResource Include="Resources\LocalizableStrings.en-US.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LocalizableStrings.en-US.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\LocalizableStrings.es-ES.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LocalizableStrings.es-ES.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\LocalizableStrings.es.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LocalizableStrings.es.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\LocalizableStrings.resx">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LocalizableStrings.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\licenses.licx" />
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte\NewDowntime.resx">
+      <DependentUpon>NewDowntime.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte\NewPlannedDowntime.resx">
+      <DependentUpon>NewPlannedDowntime.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte\NewRework.resx">
+      <DependentUpon>NewRework.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte\ReporteProduccion.resx">
+      <DependentUpon>ReporteProduccion.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReporteDataSet.xsc">
+      <DependentUpon>ReporteDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ReporteDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReporteDataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReporteDataSet.xss">
+      <DependentUpon>ReporteDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Resources\1386307661_new-file.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Symbol-Delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Security2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="favicon %282%29.ico" />
+    <Content Include="favicon.ico" />
+    <Content Include="MaRsicon.ico" />
+    <None Include="Resources\if_find_712.png" />
+    <None Include="Resources\search_magnifying_glass_find-128.png" />
+    <None Include="Resources\favicon %282%29.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
