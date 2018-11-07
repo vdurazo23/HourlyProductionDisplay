@@ -38,17 +38,20 @@ Partial Class Menu
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.RadPageViewPage2 = New Telerik.WinControls.UI.RadPageViewPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.CboTurno2 = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.RadPageAssets = New Telerik.WinControls.UI.RadPageViewPage()
         Me.RadPageStations = New Telerik.WinControls.UI.RadPageViewPage()
         Me.RadPageDepartments = New Telerik.WinControls.UI.RadPageViewPage()
-        Me.RadPageViewPage1 = New Telerik.WinControls.UI.RadPageViewPage()
+        Me.RadPageCharacteristics = New Telerik.WinControls.UI.RadPageViewPage()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.LblUsername = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.DonutShape1 = New Telerik.WinControls.Tests.DonutShape()
+        Me.MediaShape1 = New Telerik.WinControls.Tests.MediaShape()
         Me.GroupBox1.SuspendLayout()
         CType(Me.RadPageView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadPageView1.SuspendLayout()
@@ -56,6 +59,7 @@ Partial Class Menu
         CType(Me.RadButton1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadPageViewPage2.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'CboResource
@@ -112,14 +116,14 @@ Partial Class Menu
         '
         'RadPageView1
         '
+        resources.ApplyResources(Me.RadPageView1, "RadPageView1")
         Me.RadPageView1.BackColor = System.Drawing.Color.FromArgb(CType(CType(233, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(249, Byte), Integer))
         Me.RadPageView1.Controls.Add(Me.RadPageCaptura)
         Me.RadPageView1.Controls.Add(Me.RadPageViewPage2)
         Me.RadPageView1.Controls.Add(Me.RadPageAssets)
         Me.RadPageView1.Controls.Add(Me.RadPageStations)
         Me.RadPageView1.Controls.Add(Me.RadPageDepartments)
-        Me.RadPageView1.Controls.Add(Me.RadPageViewPage1)
-        resources.ApplyResources(Me.RadPageView1, "RadPageView1")
+        Me.RadPageView1.Controls.Add(Me.RadPageCharacteristics)
         Me.RadPageView1.ImageList = Me.ImageList1
         Me.RadPageView1.Name = "RadPageView1"
         Me.RadPageView1.PageBackColor = System.Drawing.Color.White
@@ -154,9 +158,7 @@ Partial Class Menu
         'RadPageViewPage2
         '
         Me.RadPageViewPage2.Controls.Add(Me.GroupBox2)
-        Me.RadPageViewPage2.Controls.Add(Me.Label4)
         Me.RadPageViewPage2.Controls.Add(Me.CheckBox2)
-        Me.RadPageViewPage2.Controls.Add(Me.ComboBox2)
         Me.RadPageViewPage2.ItemSize = New System.Drawing.SizeF(225.0!, 45.0!)
         resources.ApplyResources(Me.RadPageViewPage2, "RadPageViewPage2")
         Me.RadPageViewPage2.Name = "RadPageViewPage2"
@@ -164,19 +166,19 @@ Partial Class Menu
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.ComboBox1)
+        Me.GroupBox2.Controls.Add(Me.CboTurno2)
         Me.GroupBox2.Controls.Add(Me.Label5)
         Me.GroupBox2.Controls.Add(Me.DateTimePicker2)
         Me.GroupBox2.Controls.Add(Me.Label6)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         '
-        'ComboBox1
+        'CboTurno2
         '
-        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox1.FormattingEnabled = True
-        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
-        Me.ComboBox1.Name = "ComboBox1"
+        Me.CboTurno2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CboTurno2.FormattingEnabled = True
+        resources.ApplyResources(Me.CboTurno2, "CboTurno2")
+        Me.CboTurno2.Name = "CboTurno2"
         '
         'Label5
         '
@@ -193,11 +195,6 @@ Partial Class Menu
         resources.ApplyResources(Me.Label6, "Label6")
         Me.Label6.Name = "Label6"
         '
-        'Label4
-        '
-        resources.ApplyResources(Me.Label4, "Label4")
-        Me.Label4.Name = "Label4"
-        '
         'CheckBox2
         '
         resources.ApplyResources(Me.CheckBox2, "CheckBox2")
@@ -205,13 +202,6 @@ Partial Class Menu
         Me.CheckBox2.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckBox2.Name = "CheckBox2"
         Me.CheckBox2.UseVisualStyleBackColor = True
-        '
-        'ComboBox2
-        '
-        Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox2.FormattingEnabled = True
-        resources.ApplyResources(Me.ComboBox2, "ComboBox2")
-        Me.ComboBox2.Name = "ComboBox2"
         '
         'RadPageAssets
         '
@@ -227,21 +217,38 @@ Partial Class Menu
         '
         'RadPageDepartments
         '
-        resources.ApplyResources(Me.RadPageDepartments, "RadPageDepartments")
         Me.RadPageDepartments.ItemSize = New System.Drawing.SizeF(225.0!, 45.0!)
+        resources.ApplyResources(Me.RadPageDepartments, "RadPageDepartments")
         Me.RadPageDepartments.Name = "RadPageDepartments"
         '
-        'RadPageViewPage1
+        'RadPageCharacteristics
         '
-        resources.ApplyResources(Me.RadPageViewPage1, "RadPageViewPage1")
-        Me.RadPageViewPage1.ItemSize = New System.Drawing.SizeF(225.0!, 45.0!)
-        Me.RadPageViewPage1.Name = "RadPageViewPage1"
+        Me.RadPageCharacteristics.ItemSize = New System.Drawing.SizeF(225.0!, 45.0!)
+        resources.ApplyResources(Me.RadPageCharacteristics, "RadPageCharacteristics")
+        Me.RadPageCharacteristics.Name = "RadPageCharacteristics"
+        '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.LblUsername})
+        resources.ApplyResources(Me.StatusStrip1, "StatusStrip1")
+        Me.StatusStrip1.Name = "StatusStrip1"
+        '
+        'ToolStripStatusLabel1
+        '
+        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
+        resources.ApplyResources(Me.ToolStripStatusLabel1, "ToolStripStatusLabel1")
+        '
+        'LblUsername
+        '
+        Me.LblUsername.Name = "LblUsername"
+        resources.ApplyResources(Me.LblUsername, "LblUsername")
         '
         'Menu
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(233, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(249, Byte), Integer))
+        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.RadPageView1)
         Me.IsMdiContainer = True
         Me.Name = "Menu"
@@ -257,7 +264,10 @@ Partial Class Menu
         Me.RadPageViewPage2.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents CboResource As System.Windows.Forms.ComboBox
@@ -277,13 +287,16 @@ Partial Class Menu
     Friend WithEvents RadButton1 As Telerik.WinControls.UI.RadButton
     Friend WithEvents RadPageViewPage2 As Telerik.WinControls.UI.RadPageViewPage
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
+    Friend WithEvents CboTurno2 As System.Windows.Forms.ComboBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents DateTimePicker2 As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents CheckBox2 As System.Windows.Forms.CheckBox
-    Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
-    Friend WithEvents RadPageViewPage1 As Telerik.WinControls.UI.RadPageViewPage
+    Friend WithEvents RadPageCharacteristics As Telerik.WinControls.UI.RadPageViewPage
+    Friend WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
+    Friend WithEvents ToolStripStatusLabel1 As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents LblUsername As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents DonutShape1 As Telerik.WinControls.Tests.DonutShape
+    Friend WithEvents MediaShape1 As Telerik.WinControls.Tests.MediaShape
 
 End Class

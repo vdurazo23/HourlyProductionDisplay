@@ -37,6 +37,9 @@
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
+        If Not SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "Departamentos", "Editar") Then
+            TreeView1.LabelEdit = False
+        End If
     End Sub
 
     Private Sub TreeView1_AfterLabelEdit(sender As Object, e As NodeLabelEditEventArgs) Handles TreeView1.AfterLabelEdit
@@ -60,6 +63,7 @@
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
             e.CancelEdit = True
         End Try
+
     End Sub
 
     Private Sub TreeView1_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles TreeView1.AfterSelect
@@ -77,6 +81,10 @@
 
     Private Sub RadButton1_Click(sender As Object, e As EventArgs) Handles RadButton1.Click
         Try
+            If Not SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "Departamentos", "Nuevo") Then
+                MsgBox("No tiene permisos para esta opción" & vbCrLf & "Consulte al Administrador del Sistema", MsgBoxStyle.Exclamation, "Permisos")
+                Exit Sub
+            End If
             Dim depname As String
             depname = InputBox("Departamento:", "Nuevo Departamento", "")
             If depname.Trim = "" Then Exit Sub
@@ -87,16 +95,22 @@
         End Try
     End Sub
 
+    Public Esnuevoelnodo As Boolean = False
     Private Sub NuevaOpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NuevaOpToolStripMenuItem.Click
         Try
             'MsgBox(TreeView1.SelectedNode.Tag.ToString)
+            If Not SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "Departamentos", "Nuevo") Then
+                MsgBox("No tiene permisos para esta opción" & vbCrLf & "Consulte al Administrador del Sistema", MsgBoxStyle.Exclamation, "Permisos")
+                Exit Sub
+            End If
             Dim newid As Integer
             newid = SQLCon.NewConcept(TreeView1.SelectedNode.Tag, "Concepto" & (TreeView1.SelectedNode.Nodes.Count + 1).ToString)
             TreeView1.SelectedNode.Nodes.Add("Concepto" & (TreeView1.SelectedNode.Nodes.Count + 1).ToString)
             TreeView1.SelectedNode.Nodes(TreeView1.SelectedNode.Nodes.Count - 1).Tag = newid
             TreeView1.SelectedNode = TreeView1.SelectedNode.Nodes(TreeView1.SelectedNode.Nodes.Count - 1)
             TreeView1.SelectedNode.ContextMenuStrip = ContextConcepts
-            TreeView1.SelectedNode.BeginEdit()
+            Esnuevoelnodo = True
+            If TreeView1.LabelEdit Then TreeView1.SelectedNode.BeginEdit()
 
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
@@ -105,6 +119,10 @@
 
     Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
         Try
+            If Not SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "Departamentos", "Nuevo") Then
+                MsgBox("No tiene permisos para esta opción" & vbCrLf & "Consulte al Administrador del Sistema", MsgBoxStyle.Exclamation, "Permisos")
+                Exit Sub
+            End If
             'MsgBox(TreeView1.SelectedNode.Tag.ToString)
             Dim newid As Integer
             newid = SQLCon.NewDowntimeCode(TreeView1.SelectedNode.Tag, "Código" & (TreeView1.SelectedNode.Nodes.Count + 1).ToString)
@@ -112,8 +130,8 @@
             TreeView1.SelectedNode.Nodes(TreeView1.SelectedNode.Nodes.Count - 1).Tag = newid
             TreeView1.SelectedNode = TreeView1.SelectedNode.Nodes(TreeView1.SelectedNode.Nodes.Count - 1)
             TreeView1.SelectedNode.ContextMenuStrip = ContextCodes
-            TreeView1.SelectedNode.BeginEdit()
-
+            Esnuevoelnodo = True
+            If TreeView1.LabelEdit Then TreeView1.SelectedNode.BeginEdit()
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
         End Try

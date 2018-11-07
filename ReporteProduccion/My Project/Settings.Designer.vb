@@ -152,7 +152,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
         Public Property UserId() As String
             Get
                 Return CType(Me("UserId"),String)
@@ -231,6 +231,30 @@ Namespace My
             End Get
             Set
                 Me("PreferedSubresource") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property UPGRADEREQUIRED() As Boolean
+            Get
+                Return CType(Me("UPGRADEREQUIRED"),Boolean)
+            End Get
+            Set
+                Me("UPGRADEREQUIRED") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property PrefConcepto() As Integer
+            Get
+                Return CType(Me("PrefConcepto"),Integer)
+            End Get
+            Set
+                Me("PrefConcepto") = value
             End Set
         End Property
     End Class

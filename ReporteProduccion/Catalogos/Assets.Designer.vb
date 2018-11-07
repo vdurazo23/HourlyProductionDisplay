@@ -45,7 +45,7 @@ Partial Class Assets
         Me.RadButton1.Name = "RadButton1"
         Me.RadButton1.Size = New System.Drawing.Size(131, 50)
         Me.RadButton1.TabIndex = 6
-        Me.RadButton1.Text = "Agregar Recurso (MARS)"
+        Me.RadButton1.Text = "Nuevo Recurso (MARS)"
         Me.RadButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.RadButton1.TextWrap = True
         '

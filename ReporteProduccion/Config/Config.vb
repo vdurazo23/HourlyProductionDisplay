@@ -31,8 +31,6 @@
             TXTUsuarioMPS.Text = My.Settings.MPSUsuario
             TXTContrasaeñaMPS.Text = My.Settings.MPSContraseña
 
-
-
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
         End Try

@@ -14,12 +14,35 @@ Public Class Menu
         Return args
     End Function
 
+    Sub activaopciones()
+        If Not SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "Recursos") Then RadPageAssets.Enabled = False
+        If Not SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "Operaciones") Then RadPageStations.Enabled = False
+        If Not SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "Departamentos") Then RadPageDepartments.Enabled = False
+        If Not SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "Características") Then RadPageCharacteristics.Enabled = False
+    End Sub
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
+            Me.Text = Me.Text & " " & System.String.Format("Version {0}.{1} Build {2} Rev. {3}", My.Application.Info.Version.Major, My.Application.Info.Version.Minor, My.Application.Info.Version.Build, My.Application.Info.Version.Revision)
+
             FormatoFecha = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern
             Me.IsMdiContainer = True
+
+            If My.Settings.UPGRADEREQUIRED Then
+                My.MySettings.Default.Upgrade()
+                My.MySettings.Default.UPGRADEREQUIRED = False
+                My.MySettings.Default.Save()
+            End If
+
             'Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US")
             'MsgBox(My.Resources.LocalizableStrings.RECURSO)
+
+            'MsgBox(My.Settings.UserId)
+            If My.Settings.UserId.Trim = "" Then
+                My.Settings.UserId = "0"
+                My.Settings.Save()
+            End If
+
 
             Dim str() As String
             str = GetCommandLineArgs()
@@ -45,17 +68,21 @@ Public Class Menu
                 End If
             End If
 
-            'Dim lg As New Login
-            'Me.Hide()
-            'If lg.ShowDialog = Windows.Forms.DialogResult.OK Then
-            '    Me.Show()
+            Dim lg As New Login
+            Me.Hide()
+            If lg.ShowDialog = Windows.Forms.DialogResult.OK Then
+                Me.Show()
+                cargardatos()
+                LblUsername.Text = My.Settings.UserName
+            Else
+                Application.Exit()
+            End If
+
             cargardatos()
-            'Else
-            'Application.Exit()
-            'End If
+
+            activaopciones()
 
             'Dim param As New ReportParameter("ReportParameter1", "Test")
-
             'Dim myparams As New ReportParameterCollection
             'myparams.Add(param)
             'Me.ReportViewer1.LocalReport.SetParameters(myparams)
@@ -107,8 +134,12 @@ Public Class Menu
         CboTurno.DataSource = SQLCon.GetMARSShifts(CboResource.SelectedValue, Now)
         CboTurno.DisplayMember = "Name"
         CboTurno.ValueMember = "ShiftID"
-    End Sub
 
+
+        CboTurno2.DataSource = SQLCon.GetMARSShifts(CboResource.SelectedValue, Now)
+        CboTurno2.DisplayMember = "Name"
+        CboTurno2.ValueMember = "ShiftID"
+    End Sub
 
     Dim assts As New Assets
     Dim stateq As New StationsEquipment
@@ -153,6 +184,12 @@ Public Class Menu
     End Sub
 
     Private Sub RadButton1_Click(sender As Object, e As EventArgs) Handles RadButton1.Click
+        If CboResource.SelectedValue Is Nothing Then Exit Sub
+        'If Not SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "Captura") Then
+        '    MsgBox("No tiene permisos para esta opción" & vbCrLf & "Consulte al Administrador del Sistema", MsgBoxStyle.Exclamation, "Permisos")
+        '    Exit Sub
+        'End If
+
         returnRow = dt.Select("ID=" & CboResource.SelectedValue.ToString)
         My.Settings.PreferedSubresource = CboResource.SelectedValue
         My.Settings.Save()
@@ -182,7 +219,24 @@ Public Class Menu
 
     End Sub
 
-    Private Sub RadPageCaptura_Paint(sender As Object, e As PaintEventArgs) Handles RadPageCaptura.Paint
+
+    Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub RadMenuItem1_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox2.CheckedChanged
+        GroupBox2.Enabled = Not CheckBox2.Checked
+    End Sub
+
+    Private Sub CboTurno_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboTurno.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub CboTurno2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboTurno2.SelectedIndexChanged
 
     End Sub
 End Class

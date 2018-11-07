@@ -34,6 +34,7 @@ Partial Class Login
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.BtnAceptar = New System.Windows.Forms.Button()
+        Me.Version = New System.Windows.Forms.Label()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -135,15 +136,29 @@ Partial Class Login
         Me.BtnAceptar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.BtnAceptar.UseVisualStyleBackColor = True
         '
+        'Version
+        '
+        Me.Version.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Version.BackColor = System.Drawing.Color.Transparent
+        Me.Version.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Version.Location = New System.Drawing.Point(9, 199)
+        Me.Version.Name = "Version"
+        Me.Version.Size = New System.Drawing.Size(445, 20)
+        Me.Version.TabIndex = 5
+        Me.Version.Text = "Version {0}.{1} Build {2} Rev. {3}"
+        '
         'Login
         '
         Me.AcceptButton = Me.BtnAceptar
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.BtnCancelar
-        Me.ClientSize = New System.Drawing.Size(461, 203)
+        Me.ClientSize = New System.Drawing.Size(461, 223)
+        Me.Controls.Add(Me.Version)
         Me.Controls.Add(Me.GroupBox1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.KeyPreview = True
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "Login"
@@ -166,4 +181,5 @@ Partial Class Login
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
     Friend WithEvents ImageList1 As System.Windows.Forms.ImageList
+    Friend WithEvents Version As System.Windows.Forms.Label
 End Class

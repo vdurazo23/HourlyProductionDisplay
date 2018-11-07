@@ -3,6 +3,16 @@ Imports System.Security.Cryptography
 
 Public Class Login
     Dim cn As New SqlClient.SqlConnection("Data Source=" & My.Settings.MPSServer.Trim & ";workstation id=;Persist Security Info=True;User ID=" & My.Settings.MPSUsuario & ";password=" & My.Settings.MPSContraseña & ";initial catalog=" & My.Settings.MPSBD)
+
+    Private Sub Login_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
+        If e.Alt And e.Control Then
+            If e.KeyCode = Keys.C Then
+                Dim conf As New Config
+                conf.ShowDialog()
+            End If
+        End If
+
+    End Sub
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Dim cone As New OleDb.OleDbConnection("")
         'Dim coneodbc As New Odbc.OdbcConnection("DSN=HMOCMS;UID=IGEAR;PWD=IGEAR123")
@@ -41,6 +51,8 @@ Public Class Login
         'Finally
         '    cone.Close()
         'End Try
+        Version.Text = System.String.Format(Version.Text, My.Application.Info.Version.Major, My.Application.Info.Version.Minor, My.Application.Info.Version.Build, My.Application.Info.Version.Revision)
+        'Version {0}.{1} Build {2} Rev. {3}
         If Debugger.IsAttached Then
             txtpwd.Text = "Elchoco1"
             txtUsuario.Text = "Admin"
@@ -65,37 +77,48 @@ Public Class Login
         End If
 
         Try
-            If cn.State = ConnectionState.Closed Then cn.Open()
-            Dim ds As New DataSet
-            Dim da As New SqlClient.SqlDataAdapter("", cn)
-            da.SelectCommand.CommandText = "select Id,usuario,password,activo from dbo.usuarios where usuario=@usuario"
-            da.SelectCommand.Parameters.Add("@usuario", SqlDbType.VarChar)
-            da.SelectCommand.Parameters("@usuario").Value = txtUsuario.Text
 
-            da.Fill(ds, "Usuario")
-            If ds.Tables("Usuario").DefaultView.Count <= 0 Then
-                MsgBox("No se encuentra el usuario " & txtUsuario.Text, MsgBoxStyle.Exclamation, "Usuario no encontrado")
+            Dim loginstr As String
+            loginstr = SQLCon.Login(txtUsuario.Text, GenerateHash(txtpwd.Text))
+            If loginstr = "OK" Then
+                Me.DialogResult = Windows.Forms.DialogResult.OK
+                Me.Close()
                 Exit Sub
             Else
-
-                If String.IsNullOrEmpty(ds.Tables("Usuario").DefaultView.Item(0).Item("Activo")) Then
-                    MsgBox("El usuario está inactivo" & vbCrLf & "Consulte al Administrador del Sistema", MsgBoxStyle.Exclamation, "Usuario")
-                    Exit Sub
-                Else
-                    If ds.Tables("Usuario").DefaultView.Item(0).Item("Password") = GenerateHash(txtpwd.Text) Then
-                        My.Settings.UserId = ds.Tables("Usuario").DefaultView.Item(0).Item("Id").ToString
-                        My.Settings.UserName = ds.Tables("Usuario").DefaultView.Item(0).Item("usuario")
-                        My.Settings.Save()
-                        Me.DialogResult = Windows.Forms.DialogResult.OK
-                        Me.Close()
-                        Exit Sub
-                    Else
-                        MsgBox("Contraseña incorrecta", MsgBoxStyle.Exclamation, "Contraseña")
-                        Exit Sub
-                    End If
-                End If
-
+                MsgBox(loginstr, MsgBoxStyle.Exclamation, "Login")
             End If
+
+            'If cn.State = ConnectionState.Closed Then cn.Open()
+            'Dim ds As New DataSet
+            'Dim da As New SqlClient.SqlDataAdapter("", cn)
+            'da.SelectCommand.CommandText = "select Id,usuario,password,activo from dbo.usuarios where usuario=@usuario"
+            'da.SelectCommand.Parameters.Add("@usuario", SqlDbType.VarChar)
+            'da.SelectCommand.Parameters("@usuario").Value = txtUsuario.Text
+
+            'da.Fill(ds, "Usuario")
+            'If ds.Tables("Usuario").DefaultView.Count <= 0 Then
+            '    MsgBox("No se encuentra el usuario " & txtUsuario.Text, MsgBoxStyle.Exclamation, "Usuario no encontrado")
+            '    Exit Sub
+            'Else
+
+            '    If String.IsNullOrEmpty(ds.Tables("Usuario").DefaultView.Item(0).Item("Activo")) Then
+            '        MsgBox("El usuario está inactivo" & vbCrLf & "Consulte al Administrador del Sistema", MsgBoxStyle.Exclamation, "Usuario")
+            '        Exit Sub
+            '    Else
+            '        If ds.Tables("Usuario").DefaultView.Item(0).Item("Password") = GenerateHash(txtpwd.Text) Then
+            '            My.Settings.UserId = ds.Tables("Usuario").DefaultView.Item(0).Item("Id").ToString
+            '            My.Settings.UserName = ds.Tables("Usuario").DefaultView.Item(0).Item("usuario")
+            '            My.Settings.Save()
+            '            Me.DialogResult = Windows.Forms.DialogResult.OK
+            '            Me.Close()
+            '            Exit Sub
+            '        Else
+            '            MsgBox("Contraseña incorrecta", MsgBoxStyle.Exclamation, "Contraseña")
+            '            Exit Sub
+            '        End If
+            '    End If
+
+            'End If
 
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")

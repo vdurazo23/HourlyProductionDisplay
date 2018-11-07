@@ -23,6 +23,10 @@
             GridProduction.Columns("Department_ID").IsVisible = False
             GridProduction.Columns("Concept_ID").IsVisible = False
 
+            GridProduction.Columns("Description").HeaderText = "Descripción"
+            GridProduction.Columns("Concept").HeaderText = "Concepto"
+            GridProduction.Columns("Department").HeaderText = "Departamento"
+
             For i = 0 To GridProduction.Columns.Count - 1
                 GridProduction.Columns(i).BestFit()
             Next

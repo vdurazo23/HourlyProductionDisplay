@@ -1,6 +1,7 @@
 ﻿Imports System.Security.Cryptography
 Imports System.IO
 Imports System.Text
+Imports System.Configuration
 
 Public Class Config
 
@@ -203,6 +204,7 @@ Public Class Config
         Try
             cn.Open()
             My.Settings.MARSServer = TxtMarsServer.Text
+
             My.Settings.MARSUser = TxtMARSUser.Text
             My.Settings.MARSPwd = Encrypt(TxtMARSPwd.Text)
             My.Settings.MARSBD = TxtMARSBd.Text

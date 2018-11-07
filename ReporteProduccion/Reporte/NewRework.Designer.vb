@@ -42,9 +42,12 @@ Partial Class NewRework
         Me.RadButton1 = New Telerik.WinControls.UI.RadButton()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.CboParte = New System.Windows.Forms.ComboBox()
+        Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.CheckScrap = New System.Windows.Forms.CheckBox()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadButton2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadButton1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label3
@@ -180,7 +183,7 @@ Partial Class NewRework
         '
         Me.RadButton2.ImageIndex = 1
         Me.RadButton2.ImageList = Me.ImageList1
-        Me.RadButton2.Location = New System.Drawing.Point(279, 295)
+        Me.RadButton2.Location = New System.Drawing.Point(279, 332)
         Me.RadButton2.Name = "RadButton2"
         Me.RadButton2.Size = New System.Drawing.Size(128, 59)
         Me.RadButton2.TabIndex = 8
@@ -199,7 +202,7 @@ Partial Class NewRework
         '
         Me.RadButton1.ImageIndex = 0
         Me.RadButton1.ImageList = Me.ImageList1
-        Me.RadButton1.Location = New System.Drawing.Point(142, 295)
+        Me.RadButton1.Location = New System.Drawing.Point(142, 332)
         Me.RadButton1.Name = "RadButton1"
         Me.RadButton1.Size = New System.Drawing.Size(128, 59)
         Me.RadButton1.TabIndex = 7
@@ -227,12 +230,28 @@ Partial Class NewRework
         Me.CboParte.Size = New System.Drawing.Size(365, 28)
         Me.CboParte.TabIndex = 1
         '
+        'ErrorProvider1
+        '
+        Me.ErrorProvider1.ContainerControl = Me
+        '
+        'CheckScrap
+        '
+        Me.CheckScrap.AutoSize = True
+        Me.CheckScrap.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CheckScrap.Location = New System.Drawing.Point(131, 296)
+        Me.CheckScrap.Name = "CheckScrap"
+        Me.CheckScrap.Size = New System.Drawing.Size(75, 24)
+        Me.CheckScrap.TabIndex = 44
+        Me.CheckScrap.Text = "Scrap"
+        Me.CheckScrap.UseVisualStyleBackColor = True
+        '
         'NewRework
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(548, 365)
+        Me.ClientSize = New System.Drawing.Size(548, 403)
+        Me.Controls.Add(Me.CheckScrap)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.CboParte)
         Me.Controls.Add(Me.RadButton2)
@@ -257,6 +276,7 @@ Partial Class NewRework
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadButton2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadButton1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -279,4 +299,6 @@ Partial Class NewRework
     Friend WithEvents ImageList1 As System.Windows.Forms.ImageList
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents CboParte As System.Windows.Forms.ComboBox
+    Friend WithEvents ErrorProvider1 As System.Windows.Forms.ErrorProvider
+    Friend WithEvents CheckScrap As System.Windows.Forms.CheckBox
 End Class

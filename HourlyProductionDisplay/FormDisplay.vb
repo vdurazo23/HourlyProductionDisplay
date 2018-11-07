@@ -26,6 +26,7 @@ Public Class FormDisplay
     Dim CurrFecha As Date
     Dim ResourceName As String = ""
     Dim ResourceCode As String = ""
+    Dim Department As String = ""
 
     Dim CurrResIndex As Integer = 0
     Dim CurrSlideInex As Integer = 0
@@ -46,8 +47,14 @@ Public Class FormDisplay
 
     Dim WithEvents hsp As HSPR01_1
 
+    Dim lblerrorlocation As New Point
+    Dim lblerrorsize As New Size
+
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LblAverage.Visible = My.Settings.SHOWAVG
+        lblerrorlocation = New Point(Chart1.Location.X + 150, Chart1.Location.Y + 150)
+        lblerrorsize = New Size(Chart1.Size.Width - 300, Chart1.Height - 300)
         loadtranslations()
 
         LblEfficiency.Text = IIf(gettranslation("Totarget") <> "", gettranslation("Totarget"), "To Target")
@@ -458,38 +465,47 @@ Public Class FormDisplay
             If Con.State = ConnectionState.Open Then Con.Close()
         End Try
     End Sub
+
     Dim ActualShift As String = ""
     Dim ActualFechaServer As Date = "01/01/1900"
     Dim segundossetup As Integer = 0
     Dim sumsegundosdowntime As Integer = 0
     Private code As String = ""
     Dim SPM As Integer = 0
+
     Function GETFROMCMS() As Boolean
         Try
             If cn.State = ConnectionState.Closed Then cn.Open()
-            Dim cmd As New SqlClient.SqlCommand("SELECT count(*) FROM HMO.HXH WHERE ASSET='" & ResourceCode & "'", cn)
+            Dim cmd As New SqlClient.SqlCommand("SELECT count(*) FROM HMO.HXH WHERE ASSET='" & ResourceCode & "' AND DEPTO='" & Department & "'", cn)
             Dim cnt As Integer = cmd.ExecuteScalar
 
             If ds.Tables.Count > 0 Then
                 ''ya existe la tabla producción
                 If cnt > 0 Then
                     ds.Tables.Clear()
-                    da.SelectCommand.CommandText = "SELECT * FROM HMO.HXH WHERE ASSET='" & ResourceCode & "' ORDER BY HORA"
+                    da.SelectCommand.CommandText = "SELECT * FROM HMO.HXH WHERE ASSET='" & ResourceCode & "' AND DEPTO='" & Department & "' ORDER BY HORA"
                     da.Fill(ds, "Production")
                 Else
                     Return True
                 End If
             Else
-                da.SelectCommand.CommandText = "SELECT * FROM HMO.HXH WHERE ASSET='" & ResourceCode & "' ORDER BY HORA"
+                da.SelectCommand.CommandText = "SELECT * FROM HMO.HXH WHERE ASSET='" & ResourceCode & "' AND DEPTO='" & Department & "' ORDER BY HORA"
                 da.Fill(ds, "Production")
             End If
 
-
         Catch ex As Exception
-            LblFechaHora.Text = ex.Message
-            LblFechaHora.ForeColor = Color.Red
+            'LblFechaHora.Text = ex.Message
+            'LblFechaHora.ForeColor = Color.Red
+            displayerrorlabel(ex.Message)
+            Try
+                If ds.Tables("Production").DefaultView.Count > 0 Then
+                    ds.Tables("Production").Rows.Clear()
+                End If
+            Catch ex2 As Exception
+            End Try
         End Try
     End Function
+
     'Function GETFROMCMS() As Boolean
     '    Dim iniciodatetime As DateTime
     '    Dim duracion1, duracion2 As Long
@@ -750,8 +766,10 @@ Public Class FormDisplay
     Sub cargardatos(ByRef Elchart As Chart)
         Dim val As Integer = 0
         Dim quitarrapido As Boolean = False
+        If CurrResIndex < 0 Then Exit Sub
         Try
             TimerDatos.Stop()
+            displayerrorlabel("")
             LBLERROR.Visible = False
             showprensas = False
 
@@ -761,6 +779,7 @@ Public Class FormDisplay
             ResourceName = My.Settings.RESOURCES.DefaultView.Item(CurrResIndex).Item(1).ToString
             code = My.Settings.RESOURCES.DefaultView.Item(CurrResIndex).Item(3).ToString
             ResourceCode = My.Settings.RESOURCES.DefaultView.Item(CurrResIndex).Item(6).ToString
+            Department = My.Settings.RESOURCES.DefaultView.Item(CurrResIndex).Item(5).ToString
 
             If My.Settings.MARSServer = "10.251.10.16\sqlmars" Then
                 code = ResourceCode
@@ -796,7 +815,13 @@ Public Class FormDisplay
                 PanelPrensas.Visible = False
                 GoTo saltarbottombar
             Else
-                cmd.CommandText = "Select count(*) from hmo.running where prensa='" & ResourceCode.Trim.Replace(" ", "") & "'"
+                If My.Settings.MARSServer = "10.251.10.16\sqlmars" Then
+                    cmd.CommandText = "Select count(*) from hmo.running where prensa='" & ResourceCode.Trim.Replace(" ", "") & "'"
+                Else
+                    cmd.CommandText = "Select count(*) from hmo.running where prensa='" & code & "'"
+                End If
+
+
                 If cmd.ExecuteScalar > 0 Then
                     PanelPrensas.Visible = True
                     showprensas = True
@@ -811,10 +836,12 @@ Public Class FormDisplay
 
 
             cmd.CommandText = "select top 1 datediff(second,fecha,fecha_end) as segundos from hmo.TiempoMuerto where diechange=1 and iscurrent=0 and assetcode='" & ResourceCode.Trim.Replace(" ", "") & "' order by id desc"
+            If My.Settings.MARSServer <> "10.251.10.16\sqlmars" Then cmd.CommandText = "select top 1 datediff(second,fecha,fecha_end) as segundos from hmo.TiempoMuerto where diechange=1 and iscurrent=0 and assetcode='" & code & "' order by id desc"
             val = 3
             segundossetup = cmd.ExecuteScalar
 
             cmd.CommandText = "select SPM from hmo.running where prensa='" & ResourceCode.Trim.Replace(" ", "") & "'"
+            If My.Settings.MARSServer <> "10.251.10.16\sqlmars" Then cmd.CommandText = "select SPM from hmo.running where prensa='" & code & "'"
 
             SPM = cmd.ExecuteScalar
 
@@ -858,7 +885,6 @@ saltarbottombar:
 
                 cmd.CommandText = "select startTime from ref.ShiftDetail where Name='" & CurrShiftName & "'"
                 CurrentShiftStartTime = cmd.ExecuteScalar
-
 
             End If
 
@@ -1013,7 +1039,7 @@ saltarbottombar:
 
 
                 LblCurrentActualValue.Text = totalprod.ToString
-                
+
                 LblShiftDeltaValue.Text = (totalprod - Math.Round(ShiftTarget)).ToString("F0")
 
             Else
@@ -1282,14 +1308,15 @@ saltarbottombar:
                 sumsegundosdowntime = 0
                 availability = 0
                 da.SelectCommand.CommandText = "select DATEDIFF(SECOND,fecha,Fecha_End) as Tiempo ,* from [hmo].[TiempoMuerto] where (Fecha_End >= '" & CurrFecha.ToString("MM/dd/yyyy") & " " & CurrentShiftStartTime.ToString("HH:mm:ss") & "' or Fecha_End is null) and AssetCode='" & ResourceCode.Replace(" ", "") & "' and diechange=0 order by fecha"
+                If My.Settings.MARSServer <> "10.251.10.16\sqlmars" Then da.SelectCommand.CommandText = "select DATEDIFF(SECOND,fecha,Fecha_End) as Tiempo ,* from [hmo].[TiempoMuerto] where (Fecha_End >= '" & fechaserver.ToString("MM/dd/yyyy") & " " & CurrentShiftStartTime.ToString("HH:mm:ss") & "' or Fecha_End is null) and AssetCode='" & code & "' and diechange=0 order by fecha"
                 da.Fill(ds, "DownTime")
                 For i = 0 To ds.Tables("Downtime").DefaultView.Count - 1
                     If IsDBNull(ds.Tables("Downtime").DefaultView.Item(i).Item("Fecha_End")) Then
                         ds.Tables("Downtime").DefaultView.Item(i).Item("Fecha_End") = fechaserver
                         ds.Tables("Downtime").DefaultView.Item(i).Item("Tiempo") = DateDiff(DateInterval.Second, ds.Tables("Downtime").DefaultView.Item(i).Item("Fecha"), fechaserver)
                     End If
-                    If ds.Tables("Downtime").DefaultView.Item(i).Item("fecha") < CType(CurrFecha.ToString("MM/dd/yyyy") & " " & CurrentShiftStartTime.ToString("HH:mm:ss"), DateTime) Then
-                        ds.Tables("Downtime").DefaultView.Item(i).Item("Tiempo") = DateDiff(DateInterval.Second, CType(CurrFecha.ToString("MM/dd/yyyy") & " " & CurrentShiftStartTime.ToString("HH:mm:ss"), DateTime), ds.Tables("Downtime").DefaultView.Item(i).Item("Fecha_End"))
+                    If ds.Tables("Downtime").DefaultView.Item(i).Item("fecha") < CType(fechaserver.ToString("MM/dd/yyyy") & " " & CurrentShiftStartTime.ToString("HH:mm:ss"), DateTime) Then
+                        ds.Tables("Downtime").DefaultView.Item(i).Item("Tiempo") = DateDiff(DateInterval.Second, CType(fechaserver.ToString("MM/dd/yyyy") & " " & CurrentShiftStartTime.ToString("HH:mm:ss"), DateTime), ds.Tables("Downtime").DefaultView.Item(i).Item("Fecha_End"))
                     End If
                     sumsegundosdowntime += ds.Tables("Downtime").DefaultView.Item(i).Item("Tiempo")
                 Next
@@ -1341,16 +1368,14 @@ saltarbottombar:
             'Elchart.ChartAreas(0).AxisX2.IsReversed = True
 
             If ds.Tables("Production").DefaultView.Count = 0 Or Elchart.Series(0).Points.Count = 0 Then
-                displayerrorlabel("No Data to Display.", Elchart)
+                If LBLERROR.Text = "" Then displayerrorlabel("No Data to Display.")
             End If
-
-
 
         Catch ex As Exception
             'MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
             'LblFechaHora.Text = "CD: " & val.ToString & " " & ex.Message
             'LblFechaHora.ForeColor = Color.Red
-            displayerrorlabel(ex.Message, Elchart)
+            displayerrorlabel(ex.Message)
         Finally
             TimerDatos.Start()
             If quitarrapido And My.Settings.RESOURCES.DefaultView.Count > 1 Then
@@ -1360,19 +1385,16 @@ saltarbottombar:
             End If
         End Try
     End Sub
-    Sub displayerrorlabel(ByVal mensaje As String, ByRef Elchart As Chart)
+
+    Sub displayerrorlabel(ByVal mensaje As String)
         Try
-            LBLERROR.Location = New Point(Elchart.Location.X + 150, Elchart.Location.Y + 150)
-
-            LBLERROR.Size = New Size(Elchart.Size.Width - 300, Elchart.Height - 300)
-
+            LBLERROR.Location = lblerrorlocation ''New Point(Elchart.Location.X + 150, Elchart.Location.Y + 150)
+            LBLERROR.Size = lblerrorsize  ''New Size(Elchart.Size.Width - 300, Elchart.Height - 300)
             LBLERROR.Font = LblFechaHora.Font
             LBLERROR.TextAlign = ContentAlignment.MiddleCenter
             LBLERROR.Visible = True
             LBLERROR.ForeColor = Color.Red
-
             LBLERROR.Text = mensaje
-
             LBLERROR.BringToFront()
         Catch ex As Exception
         End Try
@@ -1568,6 +1590,7 @@ saltarbottombar:
     Private Sub Anim_TransitionCompletedEvent(sender As Object, e As Transition.Args)
         ''saliente.Visible = False
         TimerDatos.Enabled = True
+        If LBLERROR.Visible Then LBLERROR.BringToFront()
     End Sub
 
     Private Sub TimerSlides_Tick(sender As Object, e As EventArgs) Handles TimerSlides.Tick

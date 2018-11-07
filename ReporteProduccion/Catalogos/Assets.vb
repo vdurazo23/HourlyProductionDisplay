@@ -23,7 +23,12 @@
     End Sub
 
     Private Sub RadButton1_Click(sender As Object, e As EventArgs) Handles RadButton1.Click
+        If Not SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "Recursos", "Nuevo") Then
+            MsgBox("No tiene permisos para esta opción" & vbCrLf & "Consulte al Administrador del Sistema", MsgBoxStyle.Exclamation, "Permisos")
+            Exit Sub
+        End If
         Dim sr As New Get_MARS_Assets
+
         Try
             If sr.ShowDialog() = Windows.Forms.DialogResult.OK Then
                 If sr.RadGridView1.Rows.Count <= 0 Then Exit Sub
@@ -41,5 +46,12 @@
             sr = Nothing
         End Try
 
+    End Sub
+
+    Private Sub RadButton3_Click(sender As Object, e As EventArgs) Handles RadButton3.Click
+        If Not SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "Recursos", "Eliminar") Then
+            MsgBox("No tiene permisos para esta opción" & vbCrLf & "Consulte al Administrador del Sistema", MsgBoxStyle.Exclamation, "Permisos")
+            Exit Sub
+        End If
     End Sub
 End Class
