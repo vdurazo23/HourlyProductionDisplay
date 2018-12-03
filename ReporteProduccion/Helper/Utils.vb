@@ -1,5 +1,6 @@
 ﻿Public Class Utils
     Shared Function GetAvailabilityColor(ByVal Availability As Double) As Color
+        ''comments
         Dim colortoreturn As Color = Color.Transparent
         If Availability < 0.85 Then colortoreturn = Color.Red
         If Availability >= 0.85 And Availability < 0.9 Then colortoreturn = Color.Yellow

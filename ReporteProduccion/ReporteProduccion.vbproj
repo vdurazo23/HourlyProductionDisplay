@@ -30,8 +30,8 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>Reporte.html</WebPage>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>9</ApplicationRevision>
-    <ApplicationVersion>1.0.0.9</ApplicationVersion>
+    <ApplicationRevision>11</ApplicationRevision>
+    <ApplicationVersion>1.0.0.11</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <ExcludeDeploymentUrl>true</ExcludeDeploymentUrl>
@@ -199,6 +199,12 @@
     <Compile Include="Reporte\Formulas.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reporte\NewAdjustment.Designer.vb">
+      <DependentUpon>NewAdjustment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte\NewAdjustment.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Resources\LocalizableStrings.en-US.Designer.vb">
       <DependentUpon>LocalizableStrings.en-US.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -302,6 +308,9 @@
     <EmbeddedResource Include="Reporte\Formulas.resx">
       <DependentUpon>Formulas.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reporte\NewAdjustment.resx">
+      <DependentUpon>NewAdjustment.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reporte\Report1.rdlc" />
     <EmbeddedResource Include="Resources\LocalizableStrings.en-US.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -391,6 +400,7 @@
     <Content Include="favicon.ico" />
     <Content Include="MaRsicon.ico" />
     <Content Include="Reporte_icon.ico" />
+    <None Include="Resources\1387241235_Setting.png" />
     <None Include="Resources\if_find_712.png" />
     <None Include="Resources\search_magnifying_glass_find-128.png" />
     <None Include="Resources\favicon %282%29.ico" />

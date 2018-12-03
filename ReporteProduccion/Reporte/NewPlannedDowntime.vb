@@ -26,9 +26,34 @@
     Dim CurrentMinsValue As Integer
 
     Private Sub NewPlannedDowntime_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Try
+            ''CORREGIR EL DESASTRE DE MARS
+            Dim currpart As String = ""
+            Dim OpenedDate As DateTime
+
+            For I = 0 To TblProd.DefaultView.Count - 1
+                If TblProd.DefaultView.Item(I).Item("PARTNUMBER") <> currpart Then
+                    currpart = TblProd.DefaultView.Item(I).Item("PARTNUMBER")
+
+                    OpenedDate = CType(TblProd.DefaultView.Item(I).Item("OPENEDDATE"), DateTime).ToString(FormatoFecha & " HH:mm:ss.fff")
+                    If I = 0 Then OpenedDate = CType(TblProd.DefaultView.Item(I).Item("STARTTIME"), DateTime).ToString(FormatoFecha & " HH:mm:ss.fff")
+
+                    ''Corregir openeddate de mars si está mal
+                    If I > 0 Then
+                        If OpenedDate <> CType(TblProd.DefaultView.Item(I - 1).Item("CLOSEDDATE"), DateTime) Then
+                            TblProd.DefaultView.Item(I).Item("OPENEDDATE") = TblProd.DefaultView.Item(I - 1).Item("CLOSEDDATE")
+                        End If
+                    End If
+                End If
+            Next
+        Catch ex As Exception
+        End Try
+
+
         FormatoFecha = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern
         cargardatos()
-
+        
     End Sub
     Sub cargardatos()
         Try
@@ -73,6 +98,7 @@
                 Next
 
                 CboConcepto.SelectedValue = tbltmp.DefaultView.Item(0).Item("PlannedDTRC_ID")
+                CboParte.SelectedValue = tbltmp.DefaultView.Item(0).Item("PartNumber")
                 NumericUpDown1.Value = tbltmp.DefaultView.Item(0).Item("Minutes")
                 CurrentMinsValue = tbltmp.DefaultView.Item(0).Item("Minutes")
                 txtcomments.Text = tbltmp.DefaultView.Item(0).Item("Comments")

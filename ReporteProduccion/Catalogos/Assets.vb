@@ -5,6 +5,7 @@
     End Sub
     Sub cargardatos()
         Try
+            ''comment
             GridAssets.DataSource = Nothing
             tblassets = Nothing
             tblassets = SQLCon.GetLineas

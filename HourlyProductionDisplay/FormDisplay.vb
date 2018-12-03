@@ -1725,4 +1725,8 @@ saltarbottombar:
     Private Sub PicSlide2_DoubleClick(sender As Object, e As EventArgs) Handles PicSlide2.DoubleClick
         MsgBox(PicSlide2.Location.ToString())
     End Sub
+
+    Private Sub LblSPMTarget_Click(sender As Object, e As EventArgs) Handles LblSPMTarget.Click
+
+    End Sub
 End Class
