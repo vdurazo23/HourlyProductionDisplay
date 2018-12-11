@@ -144,7 +144,7 @@ Public Class Menu
     Dim assts As New Assets
     Dim stateq As New StationsEquipment
     Dim depconc As New DepartmentsConcepts
-
+    Dim feat As New PartFeatures
 
     Private Sub RadPageView1_SelectedPageChanged(sender As Object, e As EventArgs) Handles RadPageView1.SelectedPageChanged
         If RadPageView1.SelectedPage.Name = "" Then Exit Sub
@@ -178,8 +178,15 @@ Public Class Menu
                 depconc.FormBorderStyle = Windows.Forms.FormBorderStyle.None
                 RadPageDepartments.Controls.Add(depconc)
                 depconc.Show()
-
-
+            Case RadPageCharacteristics.Name
+                feat = Nothing
+                feat = New PartFeatures
+                feat.TopLevel = False
+                feat.Visible = True
+                feat.Dock = DockStyle.Fill
+                feat.FormBorderStyle = Windows.Forms.FormBorderStyle.None
+                RadPageCharacteristics.Controls.Add(feat)
+                feat.Show()
         End Select
     End Sub
 

@@ -155,10 +155,16 @@
     <Compile Include="Catalogos\DepartmentsConcepts.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Catalogos\StationsEquipment.Designer.vb">
-      <DependentUpon>StationsEquipment.vb</DependentUpon>
+    <Compile Include="Catalogos\StationsEquipment - Copy.Designer.vb">
+      <DependentUpon>StationsEquipment - Copy.vb</DependentUpon>
     </Compile>
-    <Compile Include="Catalogos\StationsEquipment.vb">
+    <Compile Include="Catalogos\StationsEquipment - Copy.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Catalogos\PartFeatures.Designer.vb">
+      <DependentUpon>PartFeatures.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Catalogos\PartFeatures.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Config\Config.Designer.vb">
@@ -167,6 +173,7 @@
     <Compile Include="Config\Config.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Helper\SQLCon.vb" />
     <Compile Include="Helper\Utils.vb" />
     <Compile Include="Menu.vb">
       <SubType>Form</SubType>
@@ -175,7 +182,6 @@
       <DependentUpon>Menu.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Helper\SQLCon.vb" />
     <Compile Include="OEEDashboard.Designer.vb">
       <DependentUpon>OEEDashboard.vb</DependentUpon>
     </Compile>
@@ -203,6 +209,12 @@
       <DependentUpon>NewAdjustment.vb</DependentUpon>
     </Compile>
     <Compile Include="Reporte\NewAdjustment.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporte\NewDowntime.Designer.vb">
+      <DependentUpon>NewDowntime.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reporte\NewDowntime.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Resources\LocalizableStrings.en-US.Designer.vb">
@@ -246,12 +258,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Reporte\NewDowntime.Designer.vb">
-      <DependentUpon>NewDowntime.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Reporte\NewDowntime.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Reporte\NewPlannedDowntime.Designer.vb">
       <DependentUpon>NewPlannedDowntime.vb</DependentUpon>
     </Compile>
@@ -284,8 +290,11 @@
     <EmbeddedResource Include="Catalogos\DepartmentsConcepts.resx">
       <DependentUpon>DepartmentsConcepts.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Catalogos\StationsEquipment.resx">
-      <DependentUpon>StationsEquipment.vb</DependentUpon>
+    <EmbeddedResource Include="Catalogos\StationsEquipment - Copy.resx">
+      <DependentUpon>StationsEquipment - Copy.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Catalogos\PartFeatures.resx">
+      <DependentUpon>PartFeatures.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Config\Config.resx">
       <DependentUpon>Config.vb</DependentUpon>
@@ -310,6 +319,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte\NewAdjustment.resx">
       <DependentUpon>NewAdjustment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte\NewDowntime.resx">
+      <DependentUpon>NewDowntime.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte\Report1.rdlc" />
     <EmbeddedResource Include="Resources\LocalizableStrings.en-US.resx">
@@ -341,9 +353,6 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reporte\NewDowntime.resx">
-      <DependentUpon>NewDowntime.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte\NewPlannedDowntime.resx">
       <DependentUpon>NewPlannedDowntime.vb</DependentUpon>

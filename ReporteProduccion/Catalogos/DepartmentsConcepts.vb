@@ -43,8 +43,8 @@
     End Sub
 
     Private Sub TreeView1_AfterLabelEdit(sender As Object, e As NodeLabelEditEventArgs) Handles TreeView1.AfterLabelEdit
-        If e.Label Is Nothing Then Exit Sub
-        If e.Label.Trim = "" Then
+        If String.IsNullOrEmpty(e.Node.Text) Then Exit Sub
+        If e.Node.Text.Trim = "" Then
             e.CancelEdit = True
             Exit Sub
         End If
@@ -52,11 +52,11 @@
         Try
             Select Case e.Node.Level
                 Case 0  'DEPARTAMENTO
-                    SQLCon.EditDepartment(e.Node.Tag, e.Label)
+                    SQLCon.EditDepartment(e.Node.Tag, e.Node.Text)
                 Case 1 ''CONCEPTO
-                    SQLCon.EditConcept(e.Node.Tag, e.Label)
+                    SQLCon.EditConcept(e.Node.Tag, e.Node.Text)
                 Case 2 ''DOWNTIME CODE
-                    SQLCon.EditDowntimeCode(e.Node.Tag, e.Label)
+                    SQLCon.EditDowntimeCode(e.Node.Tag, e.Node.Text)
             End Select
 
         Catch ex As Exception
