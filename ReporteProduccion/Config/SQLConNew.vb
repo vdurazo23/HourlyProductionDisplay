@@ -1,6 +1,6 @@
 ﻿Imports System.Data.SqlClient
 
-Public Class SQLCon
+Public Class SQLConNew
     Public Shared Cn As New SqlClient.SqlConnection("")
     Public Shared CnMARS As New SqlClient.SqlConnection("")
     Public Shared CnMPS As New SqlClient.SqlConnection("")
@@ -248,23 +248,6 @@ Public Class SQLCon
             da.Fill(ds, "Concepts")
             Cn.Close()
             Return ds.Tables("Concepts")
-        Catch ex As Exception
-            Throw New Exception(ex.Message)
-        Finally
-            If Cn.State = ConnectionState.Open Then Cn.Close()
-        End Try
-    End Function
-
-    Shared Function GetFeatures() As DataTable
-        Try
-            Cn.ConnectionString = constring()
-            If Cn.State = ConnectionState.Closed Then Cn.Open()
-            da.SelectCommand.CommandText = "select * from partfeatures order by Asset_ID,Description"
-            da.SelectCommand.Connection = Cn
-            ds.Tables.Clear()
-            da.Fill(ds, "Features")
-            Cn.Close()
-            Return ds.Tables("Features")
         Catch ex As Exception
             Throw New Exception(ex.Message)
         Finally
@@ -536,71 +519,6 @@ Public Class SQLCon
     End Function
 #End Region
 
-#Region "Features"
-    Shared Function NewFeature(ByVal Asset_ID As Integer, ByVal Station As String) As Integer
-        Try
-            Cn.ConnectionString = constring()
-            If Cn.State = ConnectionState.Closed Then Cn.Open()
-            cmd.CommandText = "insert into PartFeatures(Asset_ID,Description) values(@Asset_ID,@Description) select @@IDENTITY"
-            cmd.Connection = Cn
-            cmd.Parameters.Clear()
-            cmd.Parameters.Add("@Asset_ID", SqlDbType.Int)
-            cmd.Parameters.Add("@Description", SqlDbType.VarChar)
-
-            cmd.Parameters("@Asset_ID").Value = Asset_ID
-            cmd.Parameters("@Description").Value = Station
-
-            Dim resp As Integer
-            resp = cmd.ExecuteScalar()
-            Return resp
-        Catch ex As Exception
-            Throw New Exception(ex.Message)
-        Finally
-            If Cn.State = ConnectionState.Open Then Cn.Close()
-        End Try
-    End Function
-    Shared Function EditFeature(ByVal FeatureId As Integer, ByVal Description As String) As Integer
-        Try
-            Cn.ConnectionString = constring()
-            If Cn.State = ConnectionState.Closed Then Cn.Open()
-            cmd.CommandText = "update PartFeatures set Description=@description where id=@id"
-            cmd.Connection = Cn
-            cmd.Parameters.Clear()
-
-            cmd.Parameters.AddWithValue("@id", FeatureId)
-            cmd.Parameters.AddWithValue("@description", Description)
-
-            cmd.ExecuteNonQuery()
-            Return 1
-
-        Catch ex As Exception
-            Throw New Exception(ex.Message)
-        Finally
-            If Cn.State = ConnectionState.Open Then Cn.Close()
-        End Try
-    End Function
-
-    Shared Function DeleteFeature(ByVal ID As Integer) As Integer
-        Try
-            Cn.ConnectionString = constring()
-            If Cn.State = ConnectionState.Closed Then Cn.Open()
-            cmd.CommandText = "delete from PartFeatures where id=@id"
-            cmd.Connection = Cn
-            cmd.Parameters.Clear()
-            cmd.Parameters.AddWithValue("@id", ID)
-            cmd.ExecuteNonQuery()
-            Return 1
-        Catch ex As Exception
-            Throw New Exception(ex.Message)
-        Finally
-            If Cn.State = ConnectionState.Open Then Cn.Close()
-        End Try
-    End Function
-#End Region
-
-
-   
-
 #Region "Stations"
 
     Shared Function NewStation(ByVal Asset_ID As Integer, ByVal Station As String) As Integer
@@ -733,24 +651,6 @@ Public Class SQLCon
             cmd.ExecuteNonQuery()
             Return 1
 
-        Catch ex As Exception
-            Throw New Exception(ex.Message)
-        Finally
-            If Cn.State = ConnectionState.Open Then Cn.Close()
-        End Try
-    End Function
-
-    Shared Function DeleteEquipment(ByVal ID As Integer) As Integer
-        Try
-            Cn.ConnectionString = constring()
-            If Cn.State = ConnectionState.Closed Then Cn.Open()
-            cmd.CommandText = "delete from Equipment where id=@id"
-            cmd.Connection = Cn
-            cmd.Parameters.Clear()
-            cmd.Parameters.AddWithValue("@id", ID)
-
-            cmd.ExecuteNonQuery()
-            Return 1
         Catch ex As Exception
             Throw New Exception(ex.Message)
         Finally
@@ -907,6 +807,7 @@ Public Class SQLCon
             If CnMARS.State = ConnectionState.Open Then CnMARS.Close()
         End Try
     End Function
+
 #End Region
 
 #Region "Downtime"
@@ -1049,7 +950,7 @@ Public Class SQLCon
 #Region "Adjustments"
     Shared Function NewAdjustment(ByVal Asset As Integer, ByVal productiondate As String, ByVal shift As String, ByVal Hour As String, ByVal Quantity As Integer, ByVal comments As String, ByRef PartNumber As String) As Integer
         Try
-            If String.IsNullOrEmpty(productiondate) Or String.IsNullOrEmpty(shift) Or String.IsNullOrEmpty(Hour) Or Quantity = 0 Then
+            If String.IsNullOrEmpty(productiondate) Or String.IsNullOrEmpty(shift) Or String.IsNullOrEmpty(Hour) Or Quantity <= 0 Then
                 Throw New Exception("Data Validation not passed")
             End If
 
@@ -1780,22 +1681,6 @@ Public Class SQLCon
         End Try
     End Function
 
-    Shared Function GetReportDetails(ByVal ElId As Integer) As DataTable
-        Try
-            Cn.ConnectionString = constring()
-            If Cn.State = ConnectionState.Closed Then Cn.Open()
-            da.SelectCommand.CommandText = "select * from ReportDetail where ReportID = " & ElId.ToString
-            da.SelectCommand.Connection = Cn
-            ds.Tables.Clear()
-            da.Fill(ds, "ReportDetail")
-            Cn.Close()
-            Return ds.Tables("ReportDetail")
-        Catch ex As Exception
-            Throw New Exception(ex.Message)
-        Finally
-            If Cn.State = ConnectionState.Open Then Cn.Close()
-        End Try
-    End Function
 #End Region
 
 End Class

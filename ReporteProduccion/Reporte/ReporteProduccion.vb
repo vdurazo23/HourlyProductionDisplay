@@ -1,4 +1,5 @@
 ﻿Imports Telerik.WinControls.UI
+Imports System.Data.SqlClient
 
 Public Class ReporteProduccion
     Public RecursoDatarow() As DataRow
@@ -7,6 +8,7 @@ Public Class ReporteProduccion
     Public AdjustmentsDatatable As DataTable
     Public PlannedDownTimeDatatable As DataTable
     Dim ReworkDatatable As DataTable
+    Dim ReportDetailTable As DataTable
 
     Public CurrentProductionDate As Date
     Public CurrentShiftName As String
@@ -16,7 +18,6 @@ Public Class ReporteProduccion
     Dim downtimerowindex As Integer
     Dim ajustesrowindex As Integer
     Dim planneddowntimerowindex As Integer
-
 
     Dim ShiftLength As Double    ''DURACIÓN DEL TURNO DE INICIO A FIN6-2 (8 HRS)
     Dim PlannedProductionTime As Double    'TIEMPO PLANEADO DE PRODUCCION DURACION DEL TURNO - PAROS PLANEADOS (8 HRS - 30 MINS COMIDA = 7.5 HRS)
@@ -45,10 +46,8 @@ Public Class ReporteProduccion
     Dim CurrentSelectedrow As Integer = -1
     Dim CurrentSelectedCell As Integer = -1
 
-
     Public IscurrentShift As Boolean
     Dim GaugeIndicator As New AquaControls.AquaGauge
-
 
     Public ELID As Integer = -1
     Public Editar As Boolean = False
@@ -58,8 +57,7 @@ Public Class ReporteProduccion
     Dim gridpopulated As Boolean = False
 
     Private Sub ReporteProduccion_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        BtnRefresh_Click(sender, e)
-        guardarreporte()        
+        guardarreporte()
     End Sub
 
     Private Sub Reporte_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -97,6 +95,10 @@ Public Class ReporteProduccion
             ELID = SQLCon.GetReportID(RecursoDatarow(0).Item("ID"), CurrentProductionDate, CurrentShiftName)
             If ELID > 0 Then Editar = True
             If Editar And SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "Eliminar") Then BtnDelete.Enabled = True
+
+            ''DEPENDENCY :   ........
+            'If IscurrentShift Then SqlDependencyStart()
+
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
             Me.DialogResult = Windows.Forms.DialogResult.Cancel
@@ -282,7 +284,7 @@ Public Class ReporteProduccion
     Private Sub CargarRework()
         Try
             ReworkDatatable = SQLCon.GetRework(RecursoDatarow(0).Item("ID"), CurrentProductionDate, CurrentShiftName)
-           
+
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
@@ -322,7 +324,7 @@ Public Class ReporteProduccion
     Private Sub cargarplannedDowntime()
         Try
             PlannedDownTimeDatatable = SQLCon.GetPlannedDT(RecursoDatarow(0).Item("ID"), CurrentProductionDate, CurrentShiftName)
-           
+
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
@@ -365,54 +367,13 @@ Public Class ReporteProduccion
     Sub Getdetails()
         Dim start As DateTime
         start = Now
-
         Try
-            loadgridAdjustments()
-            LoadGridDowntime()
-            LoadGridRework()
-            loadGridPlannedDt()
-
-
-         
-
-            Dim horasdt As DataTable = ProductionDataTable.DefaultView.ToTable(True, "STARTTIME")
-            Dim partesdt As DataTable = ProductionDataTable.DefaultView.ToTable(True, "PartNumber", "RUNRATE")
+            Dim horasdt As DataTable
+            Dim partesdt As DataTable
+            Dim Horainicio As DateTime
             Dim Horafin As DateTime
-            For i = 0 To horasdt.DefaultView.Count - 1
-                Dim lsthorainiciofin As New List(Of DateTime)
-                lsthorainiciofin.Add(horasdt.DefaultView.Item(i).Item(0))
-                Horafin = Convert.ToDateTime(horasdt.DefaultView.Item(i).Item(0)).AddMinutes(60 - Convert.ToDateTime(horasdt.DefaultView.Item(i).Item(0)).Minute)
-                lsthorainiciofin.Add(Horafin)
-                GridTemp.Columns(i + 2).HeaderText = lsthorainiciofin(0).ToString("hh:mm") & " - " & lsthorainiciofin(1).ToString("hh:mm tt")
-                GridTemp.Columns(i + 2).Tag = lsthorainiciofin
-            Next
-
-
-            TotalPartsProduced = ProductionDataTable.Compute("Sum(TOTAL)", "")
-            If DownTimeDatatable.DefaultView.Count > 0 Then
-                UnplannedDowntime = DownTimeDatatable.Compute("Sum(Minutes)", "")
-            Else
-                UnplannedDowntime = 0
-            End If
-            CycleTime = 60 / JPH
-
-            If PlannedDownTimeDatatable.DefaultView.Count > 0 Then
-                TotalPlannedDowntime = PlannedDownTimeDatatable.Compute("sum(minutes)", "") 'ProductionDataTable.Compute("Sum(SEGUNDOSBREAK)", "")
-            Else
-                TotalPlannedDowntime = 0
-            End If
-
-            If ReworkDatatable.DefaultView.Count > 0 Then
-                TotalRejected = ReworkDatatable.Compute("sum(Quantity)", "")
-            Else
-                TotalRejected = 0
-            End If
-
-            ShiftLength = (DateDiff(DateInterval.Second, ShiftStartTime, IIf(currentTime > ShiftEndTime, ShiftEndTime, currentTime))) / 3600
-
-            ProductionDataTable.DefaultView.RowFilter = ""
-
             Dim currpart As String = ""
+            Dim CURROPENEDDATE As DateTime
             Dim OpenedDate As DateTime
             Dim ClosedDate As DateTime
             Dim TotalSegundos As Integer
@@ -421,104 +382,242 @@ Public Class ReporteProduccion
             GridTemp.Rows.Clear()
             Dim PartDt() As DataRow
 
-            For i = 0 To ProductionDataTable.DefaultView.Count - 1
-                If ProductionDataTable.DefaultView.Item(i).Item("PARTNUMBER") <> currpart Then
-                    ''nueva parte
+            loadgridAdjustments()
+            LoadGridDowntime()
+            LoadGridRework()
+            loadGridPlannedDt()
+            If ProductionDataTable.DefaultView.Count = 0 Then
+                ELID = SQLCon.GetReportID(RecursoDatarow(0).Item("ID"), CurrentProductionDate, CurrentShiftName)
+                If ELID <> 0 Then
+                    ''SI ENTRA X AQUI ES QUE NO HAY DATOS DE MARS PERO SI EXISTE UN REPORTE GUARDADO
+                    ''ENTONCES CARGAR TODO DE SQL Y SALTAR LO DE MARS.
+                    ReportDetailTable = SQLCon.GetReportDetails(ELID)
+                    Dim r As Integer
+                    For r = 0 To DateDiff(DateInterval.Hour, ShiftStartTime, ShiftEndTime) - 1
+                        Dim lsthorainiciofin As New List(Of DateTime)
+                        lsthorainiciofin.Add(ShiftStartTime.AddHours(r))
+                        lsthorainiciofin.Add(ShiftStartTime.AddHours(r).AddMinutes(60))
 
-                    currpart = ProductionDataTable.DefaultView.Item(i).Item("PARTNUMBER")
-
-                    OpenedDate = CType(ProductionDataTable.DefaultView.Item(i).Item("OPENEDDATE"), DateTime).ToString(FormatoFecha & " HH:mm:ss.fff")
-                    If i = 0 Then OpenedDate = CType(ProductionDataTable.DefaultView.Item(i).Item("STARTTIME"), DateTime).ToString(FormatoFecha & " HH:mm:ss.fff")
-                    If (String.IsNullOrEmpty(ProductionDataTable.DefaultView.Item(i).Item("CLOSEDDATE").ToString)) Then
-                        ClosedDate = LstShiftTimes(2)
-                    Else
-                        ClosedDate = CType(ProductionDataTable.DefaultView.Item(i).Item("CLOSEDDATE"), DateTime).ToString(FormatoFecha & " HH:mm:ss.fff")
-                    End If
-
-                    ''Corregir openeddate de mars si está mal
-                    If i > 0 Then
-                        If OpenedDate <> CType(GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("End").Value, DateTime) Then
-                            OpenedDate = CType(GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("End").Value, DateTime)                            
-                        End If
-                    End If
-
-                    GridTemp.Rows.Add(currpart, ProductionDataTable.DefaultView.Item(i).Item("RUNRATE")) ', , , ,oeeloc.ToString, )
-
-                    PartDt = Nothing
-                    PartDt = ProductionDataTable.Select("PARTNUMBER='" & currpart & "' AND OPENEDDATE>='" & OpenedDate.ToString(FormatoFecha & " HH:mm:ss.fff") & "' AND ((CLOSEDDATE<='" & ClosedDate.ToString(FormatoFecha & " HH:mm:ss.fff") & "') OR CLOSEDDATE IS NULL)")
-
-                    For Y = 0 To PartDt.Count - 1
-                        For z = 2 To 15
-                            If Not GridTemp.Columns(z).Tag Is Nothing Then
-                                If GridTemp.Columns(z).Tag(0) = PartDt(Y)("STARTTIME") Then
-                                    GridTemp.Rows(GridTemp.Rows.Count - 1).Cells(z).Value = PartDt(Y)("Total")
-                                    Dim ajuste As Integer
-                                    If Not IsDBNull(AdjustmentsDatatable.Compute("Sum(Quantity)", "PartNumber = '" & currpart & "' AND hour>='" & CType(GridTemp.Columns(z).Tag(0), DateTime).ToString(FormatoFecha & " HH:mm:ss") & "' And hour<'" & CType(GridTemp.Columns(z).Tag(1), DateTime).ToString(FormatoFecha & " HH:mm:ss") & "'")) Then
-                                        ajuste = AdjustmentsDatatable.Compute("Sum(Quantity)", "PartNumber = '" & currpart & "' AND hour>='" & CType(GridTemp.Columns(z).Tag(0), DateTime).ToString(FormatoFecha & " HH:mm:ss") & "' And hour<'" & CType(GridTemp.Columns(z).Tag(1), DateTime).ToString(FormatoFecha & " HH:mm:ss") & "'")
-                                        GridTemp.Rows(GridTemp.Rows.Count - 1).Cells(z).Value = PartDt(Y)("Total") + ajuste
-                                        GridTemp.Rows(GridTemp.Rows.Count - 1).Cells(z).Tag = ajuste
-                                    End If
-
-                                    GridTemp.Columns(z).IsVisible = True
-                                End If
-                            End If
-                        Next
+                        GridTemp.Columns(r + 2).HeaderText = lsthorainiciofin(0).ToString("hh:mm") & " - " & lsthorainiciofin(1).ToString("hh:mm tt")
+                        GridTemp.Columns(r + 2).Tag = lsthorainiciofin
+                        GridTemp.Columns(r + 2).IsVisible = True
                     Next
-                    If ClosedDate > ShiftEndTime Then
-                        ClosedDate = ShiftEndTime
+
+                    TotalPartsProduced = ReportDetailTable.Compute("Sum(TOTAL)", "")
+                    If AdjustmentsDatatable.DefaultView.Count > 0 Then
+                        ''si hay ajustes hay que sumarlos
+                        TotalPartsProduced = TotalPartsProduced + +AdjustmentsDatatable.Compute("Sum(Quantity)", "")
                     End If
 
-                    OpenedDate = CType(OpenedDate.ToString(FormatoFecha & " HH:mm:ss.000"), DateTime)
-                    ClosedDate = CType(ClosedDate.ToString(FormatoFecha & " HH:mm:ss.000"), DateTime)
-
-
-                    TotalSegundos = DateDiff(DateInterval.Second, OpenedDate, ClosedDate)
-                    TOTALPart = ProductionDataTable.Compute("Sum(Total)", "PartNumber='" & currpart & "' and OPENEDDATE='" & CType(ProductionDataTable.DefaultView.Item(i).Item("OPENEDDATE"), DateTime).ToString(FormatoFecha & " HH:mm:ss.fff") & "'")
-
-                    TotalAjuste = 0
-                    If Not IsDBNull(AdjustmentsDatatable.Compute("Sum(Quantity)", "PartNumber='" & currpart & "'")) Then
-
-                        TotalAjuste = AdjustmentsDatatable.Compute("Sum(Quantity)", "PartNumber='" & currpart & "'")
-                        TOTALPart = TOTALPart + TotalAjuste
+                    If DownTimeDatatable.DefaultView.Count > 0 Then
+                        UnplannedDowntime = DownTimeDatatable.Compute("Sum(Minutes)", "")
+                    Else
+                        UnplannedDowntime = 0
+                    End If
+                    If PlannedDownTimeDatatable.DefaultView.Count > 0 Then
+                        TotalPlannedDowntime = PlannedDownTimeDatatable.Compute("sum(minutes)", "") 'ProductionDataTable.Compute("Sum(SEGUNDOSBREAK)", "")
+                    Else
+                        TotalPlannedDowntime = 0
+                    End If
+                    If ReworkDatatable.DefaultView.Count > 0 Then
+                        TotalRejected = ReworkDatatable.Compute("sum(Quantity)", "")
+                    Else
+                        TotalRejected = 0
                     End If
 
+                    ShiftLength = (DateDiff(DateInterval.Second, ShiftStartTime, IIf(currentTime > ShiftEndTime, ShiftEndTime, currentTime))) / 3600
 
+                    For i = 0 To ReportDetailTable.DefaultView.Count - 1
+                        If ReportDetailTable.DefaultView.Item(i).Item("PART") <> currpart Or ReportDetailTable.DefaultView.Item(i).Item("START") <> CURROPENEDDATE Then
+                            ''nueva parte
+                            currpart = ReportDetailTable.DefaultView.Item(i).Item("PART")
+                            CURROPENEDDATE = ReportDetailTable.DefaultView.Item(i).Item("START")
 
-                    Dim oeeloc As Double
-                    Dim LocDowntime As Double
-                    'LocDowntime = DownTimeDatatable.Compute("sum(minutes)", "PartNumber='" & currpart & "' and Hour>=" & OpenedDate.ToString("HH") & " And Hour<=" & ClosedDate.ToString("HH"))
+                            GridTemp.Rows.Add(currpart, ReportDetailTable.DefaultView.Item(i).Item("JPH"), ReportDetailTable.DefaultView.Item(i).Item("H1"), ReportDetailTable.DefaultView.Item(i).Item("H2"), ReportDetailTable.DefaultView.Item(i).Item("H3"), ReportDetailTable.DefaultView.Item(i).Item("H4"), ReportDetailTable.DefaultView.Item(i).Item("H5"), ReportDetailTable.DefaultView.Item(i).Item("H6"), ReportDetailTable.DefaultView.Item(i).Item("H7"), ReportDetailTable.DefaultView.Item(i).Item("H8"), ReportDetailTable.DefaultView.Item(i).Item("H9"), ReportDetailTable.DefaultView.Item(i).Item("H10"), ReportDetailTable.DefaultView.Item(i).Item("H11"), ReportDetailTable.DefaultView.Item(i).Item("H12"), ReportDetailTable.DefaultView.Item(i).Item("H13"), ReportDetailTable.DefaultView.Item(i).Item("H14"), ReportDetailTable.DefaultView.Item(i).Item("TOTAL"), ReportDetailTable.DefaultView.Item(i).Item("Start"), ReportDetailTable.DefaultView.Item(i).Item("End"), ReportDetailTable.DefaultView.Item(i).Item("Hours"), ReportDetailTable.DefaultView.Item(i).Item("PPT"), ReportDetailTable.DefaultView.Item(i).Item("OT"), ReportDetailTable.DefaultView.Item(i).Item("Downtime"), ReportDetailTable.DefaultView.Item(i).Item("PlannedDowntime"), ReportDetailTable.DefaultView.Item(i).Item("Rejected"))
 
+                            TOTALPart = ReportDetailTable.Compute("Sum(Total)", "Part='" & currpart & "' and Start='" & CType(ReportDetailTable.DefaultView.Item(i).Item("start"), DateTime).ToString(FormatoFecha & " HH:mm:ss.fff") & "'")
 
+                            TotalAjuste = 0
+                            If Not IsDBNull(AdjustmentsDatatable.Compute("Sum(Quantity)", "PartNumber='" & currpart & "'")) Then
+                                TotalAjuste = AdjustmentsDatatable.Compute("Sum(Quantity)", "PartNumber='" & currpart & "'")
+                                TOTALPart = TOTALPart + TotalAjuste
+                            End If
 
+                            Dim oeeloc As Double
+                            Dim LocDowntime As Double
+                            'LocDowntime = DownTimeDatatable.Compute("sum(minutes)", "PartNumber='" & currpart & "' and Hour>=" & OpenedDate.ToString("HH") & " And Hour<=" & ClosedDate.ToString("HH"))
 
-                    GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Downtime").Value = DownTimeDatatable.Compute("Sum(Minutes)", "PartNumber='" & currpart & "' and hour>='" & CType(OpenedDate, DateTime).ToString(FormatoFecha & " HH:00:00") & "' And hour<'" & CType(ClosedDate, DateTime).ToString(FormatoFecha & " HH:mm:ss") & "'")
-                    GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Planneddowntime").Value = PlannedDownTimeDatatable.Compute("Sum(Minutes)", "PartNumber='" & currpart & "' and hour>='" & CType(OpenedDate, DateTime).ToString(FormatoFecha & " HH:00:00") & "' And hour<'" & CType(ClosedDate, DateTime).ToString(FormatoFecha & " HH:mm:ss") & "'")
-                    GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Rejected").Value = ReworkDatatable.Compute("Sum(Quantity)", "PartNumber='" & currpart & "' and hour>='" & CType(OpenedDate, DateTime).ToString(FormatoFecha & " HH:00:00") & "' And hour<'" & CType(ClosedDate, DateTime).ToString(FormatoFecha & " HH:mm:ss") & "'")
+                            If GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Downtime").Value Is Nothing Then GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Downtime").Value = 0
+                            If GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Planneddowntime").Value Is Nothing Then GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Planneddowntime").Value = 0
+                            If GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Rejected").Value Is Nothing Then GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Rejected").Value = 0
 
-                    If GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Downtime").Value Is Nothing Then GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Downtime").Value = 0
-                    If GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Planneddowntime").Value Is Nothing Then GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Planneddowntime").Value = 0
-                    If GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Rejected").Value Is Nothing Then GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Rejected").Value = 0
+                            JPH = GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("JPH").Value
 
+                            TotalSegundos = ReportDetailTable.DefaultView.Item(i).Item("Hours") * 3600
 
+                            oeeloc = CalculateOEE(TotalSegundos / 3600, GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Downtime").Value, GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Planneddowntime").Value, GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Rejected").Value, TOTALPart)
 
-                    GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Total").Value = TOTALPart.ToString
-                    GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Start").Value = OpenedDate
-                    GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("End").Value = ClosedDate
-                    JPH = GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("JPH").Value
-
-                    oeeloc = CalculateOEE(TotalSegundos / 3600, GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Downtime").Value, GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Planneddowntime").Value, GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Rejected").Value, TOTALPart)
-
-                    GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Hours").Value = (TotalSegundos / 3600).ToString
-                    GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("PPT").Value = PlannedProductionTime
-                    GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("OT").Value = OperatingTime
-                    GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Availability").Value = Availability.ToString
-                    GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Performance").Value = Performance.ToString
-                    GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Quality").Value = Quality.ToString
-                    GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("OEE").Value = oeeloc.ToString
+                            GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Hours").Value = (TotalSegundos / 3600).ToString
+                            GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("PPT").Value = PlannedProductionTime
+                            GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("OT").Value = OperatingTime
+                            GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Availability").Value = Availability.ToString
+                            GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Performance").Value = Performance.ToString
+                            GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Quality").Value = Quality.ToString
+                            GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("OEE").Value = oeeloc.ToString
+                        End If
+                    Next
                 End If
-            Next
+            Else
+                horasdt = ProductionDataTable.DefaultView.ToTable(True, "STARTTIME")
+                partesdt = ProductionDataTable.DefaultView.ToTable(True, "PartNumber", "RUNRATE")
 
-            gridpopulated = True
+                For i = 0 To horasdt.DefaultView.Count - 1
+                    Dim lsthorainiciofin As New List(Of DateTime)
+                    lsthorainiciofin.Add(horasdt.DefaultView.Item(i).Item(0))
+                    Horafin = Convert.ToDateTime(horasdt.DefaultView.Item(i).Item(0)).AddMinutes(60 - Convert.ToDateTime(horasdt.DefaultView.Item(i).Item(0)).Minute)
+                    lsthorainiciofin.Add(Horafin)
+                    GridTemp.Columns(i + 2).HeaderText = lsthorainiciofin(0).ToString("hh:mm") & " - " & lsthorainiciofin(1).ToString("hh:mm tt")
+                    GridTemp.Columns(i + 2).Tag = lsthorainiciofin
+                Next
+
+                TotalPartsProduced = ProductionDataTable.Compute("Sum(TOTAL)", "")
+                If AdjustmentsDatatable.DefaultView.Count > 0 Then
+                    ''si hay ajustes hay que sumarlos
+                    TotalPartsProduced = TotalPartsProduced + +AdjustmentsDatatable.Compute("Sum(Quantity)", "")
+                End If
+                If DownTimeDatatable.DefaultView.Count > 0 Then
+                    UnplannedDowntime = DownTimeDatatable.Compute("Sum(Minutes)", "")
+                Else
+                    UnplannedDowntime = 0
+                End If
+                CycleTime = 60 / JPH
+
+                If PlannedDownTimeDatatable.DefaultView.Count > 0 Then
+                    TotalPlannedDowntime = PlannedDownTimeDatatable.Compute("sum(minutes)", "") 'ProductionDataTable.Compute("Sum(SEGUNDOSBREAK)", "")
+                Else
+                    TotalPlannedDowntime = 0
+                End If
+
+                If ReworkDatatable.DefaultView.Count > 0 Then
+                    TotalRejected = ReworkDatatable.Compute("sum(Quantity)", "")
+                Else
+                    TotalRejected = 0
+                End If
+
+                ShiftLength = (DateDiff(DateInterval.Second, ShiftStartTime, IIf(currentTime > ShiftEndTime, ShiftEndTime, currentTime))) / 3600
+
+                ProductionDataTable.DefaultView.RowFilter = ""
+
+                For i = 0 To ProductionDataTable.DefaultView.Count - 1
+                    If ProductionDataTable.DefaultView.Item(i).Item("PARTNUMBER") <> currpart Or ProductionDataTable.DefaultView.Item(i).Item("OPENEDDATE") <> CURROPENEDDATE Then
+                        ''nueva parte
+
+                        currpart = ProductionDataTable.DefaultView.Item(i).Item("PARTNUMBER")
+                        CURROPENEDDATE = ProductionDataTable.DefaultView.Item(i).Item("OPENEDDATE")
+
+                        Dim BreaksMARS As Integer
+                        BreaksMARS = ProductionDataTable.Compute("count(OPENEDDATE)", "PARTNUMBER='" & currpart & "'")
+
+                        If BreaksMARS > 1 Then
+                            ''TIENE AL MENOS DOS VECES ABIERTO EL MISMO NRO. OpenedDate = CType(ProductionDataTable.Compute("MIN(OPENEDDATE)", "PARTNUMBER='" & currpart & "'"), DateTime).ToString(FormatoFecha & " HH:mm:ss.fff")    ClosedDate = CType(ProductionDataTable.Compute("MAX(CLOSEDDATE)", "PARTNUMBER='" & currpart & "'"), DateTime).ToString(FormatoFecha & " HH:mm:ss.fff")
+                        End If
+
+                        OpenedDate = CType(ProductionDataTable.DefaultView.Item(i).Item("OPENEDDATE"), DateTime).ToString(FormatoFecha & " HH:mm:ss.fff")
+
+                        If i = 0 Then OpenedDate = CType(ProductionDataTable.DefaultView.Item(i).Item("STARTTIME"), DateTime).ToString(FormatoFecha & " HH:mm:ss.fff")
+                        If (String.IsNullOrEmpty(ProductionDataTable.DefaultView.Item(i).Item("CLOSEDDATE").ToString)) Then
+                            ClosedDate = LstShiftTimes(2)
+                        Else
+                            ClosedDate = CType(ProductionDataTable.DefaultView.Item(i).Item("CLOSEDDATE"), DateTime).ToString(FormatoFecha & " HH:mm:ss.fff")
+                        End If
+
+                        ''Corregir openeddate de mars si está mal
+                        If i > 0 Then
+                            If OpenedDate <> CType(GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("End").Value, DateTime) Then
+                                OpenedDate = CType(GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("End").Value, DateTime)
+                            End If
+                        End If
+
+                        GridTemp.Rows.Add(currpart, ProductionDataTable.DefaultView.Item(i).Item("RUNRATE")) ', , , ,oeeloc.ToString, )
+
+                        PartDt = Nothing
+
+                        If (String.IsNullOrEmpty(ProductionDataTable.DefaultView.Item(i).Item("CLOSEDDATE").ToString)) Then
+                            PartDt = ProductionDataTable.Select("PARTNUMBER='" & currpart & "' AND OPENEDDATE>='" & OpenedDate.ToString(FormatoFecha & " HH:mm:ss.fff") & "' AND ((CLOSEDDATE<='" & ClosedDate.ToString(FormatoFecha & " HH:mm:ss.fff") & "') OR CLOSEDDATE IS NULL)")
+                        Else
+                            PartDt = ProductionDataTable.Select("PARTNUMBER='" & currpart & "' AND OPENEDDATE>='" & OpenedDate.ToString(FormatoFecha & " HH:mm:ss.fff") & "' AND ((CLOSEDDATE<='" & ClosedDate.ToString(FormatoFecha & " HH:mm:ss.fff") & "') )")
+                        End If
+
+
+
+
+                        For Y = 0 To PartDt.Count - 1
+                            For z = 2 To 15
+                                If Not GridTemp.Columns(z).Tag Is Nothing Then
+                                    If GridTemp.Columns(z).Tag(0) = PartDt(Y)("STARTTIME") Then
+                                        GridTemp.Rows(GridTemp.Rows.Count - 1).Cells(z).Value = PartDt(Y)("Total")
+                                        Dim ajuste As Integer
+                                        If Not IsDBNull(AdjustmentsDatatable.Compute("Sum(Quantity)", "PartNumber = '" & currpart & "' AND hour>='" & CType(GridTemp.Columns(z).Tag(0), DateTime).ToString(FormatoFecha & " HH:mm:ss") & "' And hour<'" & CType(GridTemp.Columns(z).Tag(1), DateTime).ToString(FormatoFecha & " HH:mm:ss") & "'")) Then
+                                            ajuste = AdjustmentsDatatable.Compute("Sum(Quantity)", "PartNumber = '" & currpart & "' AND hour>='" & CType(GridTemp.Columns(z).Tag(0), DateTime).ToString(FormatoFecha & " HH:mm:ss") & "' And hour<'" & CType(GridTemp.Columns(z).Tag(1), DateTime).ToString(FormatoFecha & " HH:mm:ss") & "'")
+                                            GridTemp.Rows(GridTemp.Rows.Count - 1).Cells(z).Value = PartDt(Y)("Total") + ajuste
+                                            GridTemp.Rows(GridTemp.Rows.Count - 1).Cells(z).Tag = ajuste
+                                        End If
+                                        GridTemp.Columns(z).IsVisible = True
+                                    Else
+                                        'z = z + 1
+                                    End If
+                                End If
+                            Next
+                        Next
+                        If ClosedDate > ShiftEndTime Then
+                            ClosedDate = ShiftEndTime
+                        End If
+
+                        OpenedDate = CType(OpenedDate.ToString(FormatoFecha & " HH:mm:ss.000"), DateTime)
+                        ClosedDate = CType(ClosedDate.ToString(FormatoFecha & " HH:mm:ss.000"), DateTime)
+
+                        TotalSegundos = DateDiff(DateInterval.Second, OpenedDate, ClosedDate)
+                        TOTALPart = ProductionDataTable.Compute("Sum(Total)", "PartNumber='" & currpart & "' and OPENEDDATE='" & CType(ProductionDataTable.DefaultView.Item(i).Item("OPENEDDATE"), DateTime).ToString(FormatoFecha & " HH:mm:ss.fff") & "'")
+
+                        TotalAjuste = 0
+                        If Not IsDBNull(AdjustmentsDatatable.Compute("Sum(Quantity)", "PartNumber='" & currpart & "'")) Then
+
+                            TotalAjuste = AdjustmentsDatatable.Compute("Sum(Quantity)", "PartNumber='" & currpart & "'")
+                            TOTALPart = TOTALPart + TotalAjuste
+                        End If
+
+                        Dim oeeloc As Double
+                        Dim LocDowntime As Double
+                        'LocDowntime = DownTimeDatatable.Compute("sum(minutes)", "PartNumber='" & currpart & "' and Hour>=" & OpenedDate.ToString("HH") & " And Hour<=" & ClosedDate.ToString("HH"))
+
+                        GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Downtime").Value = DownTimeDatatable.Compute("Sum(Minutes)", "PartNumber='" & currpart & "' and hour>='" & CType(OpenedDate, DateTime).ToString(FormatoFecha & " HH:00:00") & "' And hour<'" & CType(ClosedDate, DateTime).ToString(FormatoFecha & " HH:mm:ss") & "'")
+                        GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Planneddowntime").Value = PlannedDownTimeDatatable.Compute("Sum(Minutes)", "PartNumber='" & currpart & "' and hour>='" & CType(OpenedDate, DateTime).ToString(FormatoFecha & " HH:00:00") & "' And hour<'" & CType(ClosedDate, DateTime).ToString(FormatoFecha & " HH:mm:ss") & "'")
+                        GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Rejected").Value = ReworkDatatable.Compute("Sum(Quantity)", "PartNumber='" & currpart & "' and hour>='" & CType(OpenedDate, DateTime).ToString(FormatoFecha & " HH:00:00") & "' And hour<'" & CType(ClosedDate, DateTime).ToString(FormatoFecha & " HH:mm:ss") & "'")
+
+                        If GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Downtime").Value Is Nothing Then GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Downtime").Value = 0
+                        If GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Planneddowntime").Value Is Nothing Then GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Planneddowntime").Value = 0
+                        If GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Rejected").Value Is Nothing Then GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Rejected").Value = 0
+
+
+
+                        GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Total").Value = TOTALPart.ToString
+                        GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Start").Value = OpenedDate
+                        GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("End").Value = ClosedDate
+                        JPH = GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("JPH").Value
+
+                        oeeloc = CalculateOEE(TotalSegundos / 3600, GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Downtime").Value, GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Planneddowntime").Value, GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Rejected").Value, TOTALPart)
+
+                        GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Hours").Value = (TotalSegundos / 3600).ToString
+                        GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("PPT").Value = PlannedProductionTime
+                        GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("OT").Value = OperatingTime
+                        GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Availability").Value = Availability.ToString
+                        GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Performance").Value = Performance.ToString
+                        GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Quality").Value = Quality.ToString
+                        GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("OEE").Value = oeeloc.ToString
+                    End If
+                Next
+            End If
+togridpopulated:
             ''YA UNA VEZ PINTADO TODO AGREGAR LAS FILAS DE TIEIMPOMUERTO, RECHAZOS Y PAROSPLANEADOS
             adddetails()
 
@@ -526,7 +625,6 @@ Public Class ReporteProduccion
 
             For i = 2 To GridTemp.Columns.Count - 1
                 If Not IsNothing(GridTemp.Columns(i).Tag) Then
-
                     'End If
                     'If GridTemp.Columns(i).HeaderText.StartsWith("H") Or GridTemp.Columns(i).HeaderText.StartsWith("T") Then
                     'Else
@@ -541,6 +639,7 @@ Public Class ReporteProduccion
             GridTemp.Rows(reworkrowindex).Cells("TOTAL").Value = ReworkDatatable.Compute("Sum(Quantity)", "")
             GridTemp.Rows(downtimerowindex).Cells("TOTAL").Value = DownTimeDatatable.Compute("Sum(Minutes)", "")
             GridTemp.Rows(planneddowntimerowindex).Cells("TOTAL").Value = PlannedDownTimeDatatable.Compute("Sum(Minutes)", "")
+            GridTemp.Rows(ajustesrowindex).Cells("TOTAL").Value = AdjustmentsDatatable.Compute("Sum(Quantity)", "")
 
             For I = 0 To GridTemp.Columns.Count - 1
                 GridTemp.Columns(I).BestFit()
@@ -624,7 +723,7 @@ Public Class ReporteProduccion
     End Sub
 
     Sub adddetails()
-        Try            
+        Try
             GridTemp.Rows.Add("Tiempo Muerto")
             downtimerowindex = GridTemp.Rows.Count - 1
             GridTemp.Rows.Add("Unidades Rechazadas")
@@ -672,6 +771,7 @@ Public Class ReporteProduccion
     Sub guardarreporte()
         Try
             If deleted Then Exit Sub
+
             If Not SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "Captura") Then
                 BtnSave.Enabled = False
                 Exit Sub
@@ -687,6 +787,9 @@ Public Class ReporteProduccion
                     Exit Sub
                 End If
             End If
+
+            Dim e As System.EventArgs
+            BtnRefresh_Click(Me, e)
 
             If Editar Then
                 SQLCon.EditReport(ELID, TotalPartsProduced, Availability, Performance, Quality, OEE, JPH, ShiftLength, PlannedProductionTime, OperatingTime, ShiftStartTime, ShiftEndTime, UnplannedDowntime, TotalPlannedDowntime * 60, TotalRejected)
@@ -704,13 +807,13 @@ Public Class ReporteProduccion
                     Next
                 End If
             End If
+
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-
         If Not IscurrentShift Then Exit Sub
         Try
             Timer1.Stop()
@@ -733,6 +836,58 @@ Public Class ReporteProduccion
         Finally
             Timer1.Start()
         End Try
+    End Sub
+
+    Public Sub SqlDependencyStart()
+        Try
+
+            SqlDependency.Stop(SQLCon.constringMARS)
+            SqlDependency.Start(SQLCon.constringMARS)
+            Using cn As SqlConnection = New SqlConnection(SQLCon.constringMARS)
+                Using cmd1 As SqlCommand = cn.CreateCommand
+                    cmd1.CommandType = CommandType.Text
+                    cmd1.CommandText = "SELECT sum(TOTAL) FROM [hmo].[GetHourlyProdTableReport] (" & RecursoDatarow(0).Item("ID") & ",'" & CurrentShiftName & "','" & CurrentProductionDate.ToString("MM/dd/yyyy") & "'," & RecursoDatarow(0).Item("SubResourceId") & ") where starttime<'" & ShiftEndTime.ToString("MM/dd/yyyy HH:mm:ss") & "'"  ''where CURRENTTARGET>0"
+                    'RecursoDatarow(0).Item("ID"), RecursoDatarow(0).Item("SubResourceId"), ShiftEndTime.ToString("MM/dd/yyyy HH:mm:ss"), CurrentProductionDate.ToString("MM/dd/yyyy"), CurrentShiftName
+                    ', CurrentShiftName, CurrentProductionDate
+                    cmd1.Notification = Nothing
+                    Dim dep As SqlDependency = New SqlDependency(cmd1)
+                    ' creates an event handler for the notification of data changes in the database
+                    AddHandler dep.OnChange, AddressOf dep_onchange
+                    cn.Open()
+                    Using dr As SqlDataReader = cmd1.ExecuteReader
+                        While dr.Read
+                            Me.Invoke(Sub()
+                                          ''HACER LO DEL TIMER AQUÍ
+                                          If GridTemp.Rows.Count > 0 Then CurrentSelectedrow = GridTemp.SelectedRows(0).Index
+                                          For Each column As Telerik.WinControls.UI.GridViewCellInfo In GridTemp.SelectedRows(0).Cells
+                                              If column.IsCurrent Then CurrentSelectedCell = column.ColumnInfo.Index
+                                          Next
+                                          cargardatos()
+                                          GridTemp.SelectedRows(0).IsSelected = False
+                                          If CurrentSelectedrow >= 0 Then
+                                              GridTemp.Rows(CurrentSelectedrow).IsSelected = True
+                                              GridTemp.Rows(CurrentSelectedrow).IsCurrent = True
+                                              GridTemp.Rows(CurrentSelectedrow).Cells(CurrentSelectedCell).IsSelected = True
+                                          End If
+                                      End Sub)
+
+                        End While
+                    End Using
+                End Using
+            End Using
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+        End Try
+    End Sub
+
+    Private Sub dep_onchange(ByVal sender As System.Object, ByVal e As System.Data.SqlClient.SqlNotificationEventArgs)
+        ' this event is run asynchronously so you will need to invoke to run on the UI thread(if required)
+       
+            SqlDependencyStart()
+
+            ' this will remove the event handler since the dependency is only for a single notification
+            Dim dep As SqlDependency = DirectCast(sender, SqlDependency)
+            RemoveHandler dep.OnChange, AddressOf dep_onchange
     End Sub
 
 
@@ -798,7 +953,7 @@ Public Class ReporteProduccion
 
             If dt.ShowDialog = Windows.Forms.DialogResult.OK Then
 
-                cargardatos()
+                ' cargardatos()
                 guardarreporte()
             End If
 
@@ -830,18 +985,22 @@ Public Class ReporteProduccion
             Dim tbltemp As New DataTable
             Dim TblPartsTemp As New DataTable
             Dim TblPartsHoursTemp As New DataTable
-            tbltemp = ProductionDataTable.DefaultView.ToTable("Horas", True, "STARTTIME")
-            tbltemp.Columns.Add("Hora12")
 
-            TblPartsTemp = ProductionDataTable.DefaultView.ToTable("Partes", False, "PARTNUMBER", "STARTTIME")
-            TblPartsHoursTemp = ProductionDataTable.DefaultView.ToTable("Partes", True, "STARTTIME", "PARTNUMBER")
+            If ProductionDataTable.DefaultView.Count = 0 Then
 
-            Dim Horafin As DateTime
-            For i = 0 To tbltemp.DefaultView.Count - 1
-                'tbltemp.Rows(i).Item(2) = tbltemp.DefaultView.Item(i).Item(0)
-                Horafin = Convert.ToDateTime(tbltemp.DefaultView.Item(i).Item(0)).AddMinutes(60 - Convert.ToDateTime(tbltemp.DefaultView.Item(i).Item(0)).Minute)
-                tbltemp.Rows(i).Item(1) = CType(GridTemp.Columns(i + 2).Tag(0), DateTime).ToString("hh:mm") & " - " & Horafin.ToString("hh:mm tt")
-            Next
+            Else
+                tbltemp = ProductionDataTable.DefaultView.ToTable("Horas", True, "STARTTIME")
+                tbltemp.Columns.Add("Hora12")
+                TblPartsTemp = ProductionDataTable.DefaultView.ToTable("Partes", False, "PARTNUMBER", "STARTTIME")
+                TblPartsHoursTemp = ProductionDataTable.DefaultView.ToTable("Partes", True, "STARTTIME", "PARTNUMBER")
+
+                Dim Horafin As DateTime
+                For i = 0 To tbltemp.DefaultView.Count - 1
+                    'tbltemp.Rows(i).Item(2) = tbltemp.DefaultView.Item(i).Item(0)
+                    Horafin = Convert.ToDateTime(tbltemp.DefaultView.Item(i).Item(0)).AddMinutes(60 - Convert.ToDateTime(tbltemp.DefaultView.Item(i).Item(0)).Minute)
+                    tbltemp.Rows(i).Item(1) = CType(GridTemp.Columns(i + 2).Tag(0), DateTime).ToString("hh:mm") & " - " & Horafin.ToString("hh:mm tt")
+                Next
+            End If
 
             Dim dt As New NewDowntime
             If EsEditar Then
@@ -874,7 +1033,7 @@ Public Class ReporteProduccion
 
             If dt.ShowDialog = Windows.Forms.DialogResult.OK Then
 
-                cargardatos()
+                'cargardatos()
                 guardarreporte()
             End If
 
@@ -936,7 +1095,7 @@ Public Class ReporteProduccion
                 dt.currenthour = Specifichour
             End If
             If dt.ShowDialog() = Windows.Forms.DialogResult.OK Then
-                cargardatos()
+                'cargardatos()
                 guardarreporte()
             End If
 
@@ -1116,12 +1275,10 @@ Public Class ReporteProduccion
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
-        BtnRefresh_Click(sender, e)
         If Double.IsNaN(OEE) Then
             MsgBox("Valor de OEE es infinito" & vbCrLf & "No se puede generar el Reporte", MsgBoxStyle.Exclamation, "OEE infinito")
             Exit Sub
         End If
-
         guardarreporte()
     End Sub
 
@@ -1250,7 +1407,7 @@ Public Class ReporteProduccion
                 Case "OEE"
                     e.CellElement.ToolTipText = "OEE = Availability * Performance * Quality"
 
-                   
+
 
             End Select
         Catch ex As Exception
@@ -1301,11 +1458,11 @@ Public Class ReporteProduccion
 
 
     Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
-        
+
     End Sub
 
     Private Sub BackgroundWorker1_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
-       
+
     End Sub
 
     Private Sub RadButton1_Click(sender As Object, e As EventArgs) Handles BtnDelete.Click
@@ -1348,5 +1505,9 @@ Public Class ReporteProduccion
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
+    End Sub
+
+    Private Sub RadButton2_Click(sender As Object, e As EventArgs) Handles RadButton2.Click
+        NuevoEditarAdjustment(True)
     End Sub
 End Class

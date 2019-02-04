@@ -102,6 +102,7 @@
             TreeView1.SelectedNode.Nodes.Add("Equipment" & (TreeView1.SelectedNode.Nodes.Count + 1).ToString)
             TreeView1.SelectedNode.Nodes(TreeView1.SelectedNode.Nodes.Count - 1).Tag = newid
             TreeView1.SelectedNode = TreeView1.SelectedNode.Nodes(TreeView1.SelectedNode.Nodes.Count - 1)
+            TreeView1.SelectedNode.ContextMenuStrip = ContextEquipments
             TreeView1.SelectedNode.BeginEdit()
 
         Catch ex As Exception
@@ -113,7 +114,13 @@
     Private Sub ToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem3.Click
         Try
             If MsgBox("Seguro que desea eliminar el equipo " & TreeView1.SelectedNode.Text & "?", MsgBoxStyle.YesNoCancel + MsgBoxStyle.Question, "Eliminar equipo") = MsgBoxResult.Yes Then
+                
+                SQLCon.DeleteEquipment(TreeView1.SelectedNode.Tag)
 
+                Dim currpar As Integer
+                currpar = TreeView1.SelectedNode.Parent.Parent.Index
+                cargardatos()
+                TreeView1.Nodes(currpar).ExpandAll()
             End If
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
