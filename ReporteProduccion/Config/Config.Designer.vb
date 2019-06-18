@@ -54,9 +54,18 @@ Partial Class Config
         Me.TXTUsuarioMPS = New System.Windows.Forms.TextBox()
         Me.TXTBDMPS = New System.Windows.Forms.TextBox()
         Me.TxtServerMPS = New System.Windows.Forms.TextBox()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.TXTPWDCMS = New System.Windows.Forms.TextBox()
+        Me.TXTUIDCMS = New System.Windows.Forms.TextBox()
+        Me.TxtDSN = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -274,7 +283,7 @@ Partial Class Config
         Me.GroupBox3.Controls.Add(Me.TXTUsuarioMPS)
         Me.GroupBox3.Controls.Add(Me.TXTBDMPS)
         Me.GroupBox3.Controls.Add(Me.TxtServerMPS)
-        Me.GroupBox3.Location = New System.Drawing.Point(150, 204)
+        Me.GroupBox3.Location = New System.Drawing.Point(13, 202)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(265, 186)
         Me.GroupBox3.TabIndex = 4
@@ -356,11 +365,87 @@ Partial Class Config
         Me.TxtServerMPS.Size = New System.Drawing.Size(161, 20)
         Me.TxtServerMPS.TabIndex = 0
         '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.Label13)
+        Me.GroupBox4.Controls.Add(Me.Label14)
+        Me.GroupBox4.Controls.Add(Me.Label16)
+        Me.GroupBox4.Controls.Add(Me.Button6)
+        Me.GroupBox4.Controls.Add(Me.TXTPWDCMS)
+        Me.GroupBox4.Controls.Add(Me.TXTUIDCMS)
+        Me.GroupBox4.Controls.Add(Me.TxtDSN)
+        Me.GroupBox4.Location = New System.Drawing.Point(283, 202)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(265, 186)
+        Me.GroupBox4.TabIndex = 5
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "CMS"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(6, 84)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(64, 13)
+        Me.Label13.TabIndex = 8
+        Me.Label13.Text = "Contraseña:"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(6, 58)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(46, 13)
+        Me.Label14.TabIndex = 7
+        Me.Label14.Text = "Usuario:"
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(6, 32)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(33, 13)
+        Me.Label16.TabIndex = 5
+        Me.Label16.Text = "DSN:"
+        '
+        'Button6
+        '
+        Me.Button6.Location = New System.Drawing.Point(93, 133)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(161, 40)
+        Me.Button6.TabIndex = 4
+        Me.Button6.Text = "Probar Conexión"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
+        'TXTPWDCMS
+        '
+        Me.TXTPWDCMS.Location = New System.Drawing.Point(93, 81)
+        Me.TXTPWDCMS.Name = "TXTPWDCMS"
+        Me.TXTPWDCMS.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.TXTPWDCMS.Size = New System.Drawing.Size(161, 20)
+        Me.TXTPWDCMS.TabIndex = 3
+        Me.TXTPWDCMS.UseSystemPasswordChar = True
+        '
+        'TXTUIDCMS
+        '
+        Me.TXTUIDCMS.Location = New System.Drawing.Point(93, 55)
+        Me.TXTUIDCMS.Name = "TXTUIDCMS"
+        Me.TXTUIDCMS.Size = New System.Drawing.Size(161, 20)
+        Me.TXTUIDCMS.TabIndex = 2
+        '
+        'TxtDSN
+        '
+        Me.TxtDSN.Location = New System.Drawing.Point(93, 29)
+        Me.TxtDSN.Name = "TxtDSN"
+        Me.TxtDSN.Size = New System.Drawing.Size(161, 20)
+        Me.TxtDSN.TabIndex = 0
+        '
         'Config
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(562, 456)
+        Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
@@ -375,6 +460,8 @@ Partial Class Config
         Me.GroupBox2.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -410,4 +497,12 @@ Partial Class Config
     Friend WithEvents TXTUsuarioMPS As System.Windows.Forms.TextBox
     Friend WithEvents TXTBDMPS As System.Windows.Forms.TextBox
     Friend WithEvents TxtServerMPS As System.Windows.Forms.TextBox
+    Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
+    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents Button6 As System.Windows.Forms.Button
+    Friend WithEvents TXTPWDCMS As System.Windows.Forms.TextBox
+    Friend WithEvents TXTUIDCMS As System.Windows.Forms.TextBox
+    Friend WithEvents TxtDSN As System.Windows.Forms.TextBox
 End Class

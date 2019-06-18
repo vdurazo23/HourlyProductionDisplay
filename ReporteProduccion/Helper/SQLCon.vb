@@ -4,9 +4,11 @@ Public Class SQLCon
     Public Shared Cn As New SqlClient.SqlConnection("")
     Public Shared CnMARS As New SqlClient.SqlConnection("")
     Public Shared CnMPS As New SqlClient.SqlConnection("")
+    Public Shared CnCMS As New Odbc.OdbcConnection("")
 
     Public Shared da As New SqlClient.SqlDataAdapter("", Cn)
     Public Shared damars As New SqlClient.SqlDataAdapter("", CnMARS)
+    Public Shared dacms As New Odbc.OdbcDataAdapter("", CnCMS)
 
     Public Shared cmd As New SqlClient.SqlCommand("", Cn)
     Public Shared cmdMARS As New SqlClient.SqlCommand("", Cn)
@@ -26,8 +28,10 @@ Public Class SQLCon
         Return "Data Source=" & My.Settings.MPSServer.Trim & ";workstation id=;Persist Security Info=True;User ID=" & My.Settings.MPSUsuario & ";password=" & My.Settings.MPSContraseña & ";initial catalog=" & My.Settings.MPSBD
     End Function
 
+    Shared Function constringCMS() As String
+        Return "DSN=" & My.Settings.dsnCMS.Trim & ";UID=" & My.Settings.uidCMS.Trim & ";PWD=" & My.Settings.pwdCMS
+    End Function
 #End Region
-
 
 #Region "Connections"
     Shared Function Conexion() As SqlClient.SqlConnection
@@ -43,6 +47,11 @@ Public Class SQLCon
     Shared Function ConexionMPS() As SqlClient.SqlConnection
         CnMPS.ConnectionString = constringMPS()
         Return CnMPS
+    End Function
+
+    Shared Function ConexionCMS() As Odbc.OdbcConnection
+        CnCMS.ConnectionString = constringCMS()
+        Return CnCMS
     End Function
 
 #End Region
@@ -598,7 +607,412 @@ Public Class SQLCon
     End Function
 #End Region
 
+#Region "TPM´s"
 
+    'Select
+    Shared Function TPMreq() As DataTable
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            da.SelectCommand.CommandText = "Select * from tpm.TPM"
+            da.SelectCommand.Connection = CnMPS
+            ds.Tables.Clear()
+            da.Fill(ds, "TPM")
+            CnMPS.Close()
+            Return ds.Tables("TPM")
+
+
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+
+    End Function
+    Shared Function TPMRelEsts() As DataTable
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            da.SelectCommand.CommandText = "Select * from [tpm].[Tpm_Station]"
+            da.SelectCommand.Connection = CnMPS
+            ds.Tables.Clear()
+            da.Fill(ds, "TPMrel")
+            CnMPS.Close()
+            Return ds.Tables("TPMrel")
+
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+
+
+    End Function
+    Shared Function TPMelements() As DataTable
+
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+
+            da.SelectCommand.CommandText = "Select * from tpm.TPM_Detalle order by TPM_ID,Orden"
+            da.SelectCommand.Connection = CnMPS
+            ds.Tables.Clear()
+            da.Fill(ds, "Elements")
+            CnMPS.Close()
+            Return ds.Tables("Elements")
+
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+    End Function
+    Shared Function TPMStations()
+        Try
+
+            CnCMS.ConnectionString = constringCMS()
+            If CnCMS.State = ConnectionState.Closed Then CnCMS.Open()
+            dacms.SelectCommand.CommandText = "select * from ABC.CONFIG_ABC"
+            dacms.SelectCommand.Connection = CnCMS
+            ds.Tables.Clear()
+            dacms.Fill(ds, "Stations")
+            CnCMS.Close()
+            Return ds.Tables("Stations")
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+
+        Finally
+            If CnCMS.State = ConnectionState.Open Then CnCMS.Close()
+        End Try
+
+    End Function
+    Shared Function TPMelementTag(ByVal TPM_ID As Integer, ByVal texto As String, ByVal orden As Integer) As Integer
+
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            cmd.CommandText = "Select ID from [tpm].[TPM_DETALLE] where TPM_ID = @tpm_id and Text = @text and Orden = @orden"
+            cmd.Connection = CnMPS
+            cmd.Parameters.Clear()
+            cmd.Parameters.Add("@tpm_id", SqlDbType.Int)
+            cmd.Parameters.Add("@text", SqlDbType.VarChar)
+            cmd.Parameters.Add("@orden", SqlDbType.Int)
+            cmd.Parameters("@tpm_id").Value = TPM_ID
+            cmd.Parameters("@text").Value = texto
+            cmd.Parameters("@orden").Value = orden
+            Dim a As Integer
+            a = cmd.ExecuteScalar
+            Return a
+
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+
+        End Try
+    End Function
+    Shared Function TPM_RESULT(ByVal TPM_ID As Integer, ByVal TPMDETALLE As Boolean, Optional ByVal detalle As Integer = 0) As Integer
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            cmd.Connection = CnMPS
+            cmd.Parameters.Clear()
+            cmd.Parameters.Add("@TPMID", SqlDbType.Int)
+            cmd.Parameters("@TPMID").Value = TPM_ID
+            If TPMDETALLE Then
+                cmd.CommandText = "Select * from [tpm].[TPM_Result_Detalle] where TPM_ID = @TPMID and TPM_Detalle_ID = @detalle"
+                cmd.Parameters.Add("@detalle", SqlDbType.Int)
+                cmd.Parameters("@detalle").Value = detalle
+            Else
+                cmd.CommandText = "Select * from [tpm].[TPM_Result] where TPM_ID = @TPMID"
+            End If
+            Return cmd.ExecuteScalar()
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+    End Function
+    Shared Function TPM_ELEMENT_RESULT(ByVal ElementId As Integer) As Integer
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            cmd.Connection = CnMPS
+            cmd.Parameters.Clear()
+            cmd.Parameters.Add("@element_id", SqlDbType.Int)
+            cmd.Parameters("@element_id").Value = ElementId
+            cmd.CommandText = "Select id from [tpm].[Tpm_Result_Detalle] where TPM_Detalle_ID = @element_id"
+            Return cmd.ExecuteScalar()
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+    End Function
+
+    'INSERT
+    Shared Function TPMAddRelStation(ByVal TPM_ID As Integer, ByVal Asset As String, ByVal Station As String)
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            cmd.CommandText = "INSERT INTO [tpm].[Tpm_Station] (TPM_ID,Asset,Station) VALUES (@id_tpm,@Asset,@Station) "
+            cmd.Connection = CnMPS
+            cmd.Parameters.Clear()
+            cmd.Parameters.Add("@id_tpm", SqlDbType.Int)
+            cmd.Parameters.Add("@Asset", SqlDbType.VarChar)
+            cmd.Parameters.Add("@Station", SqlDbType.VarChar)
+
+            cmd.Parameters("@id_tpm").Value = TPM_ID
+            cmd.Parameters("@Asset").Value = Asset
+            cmd.Parameters("@Station").Value = Station
+
+            cmd.ExecuteNonQuery()
+            Return 1
+
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+
+        Finally
+
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+
+    End Function
+    Shared Function AddTPMelements(ByVal TPM_ID As Integer, ByVal Orden As Integer, ByVal text As String, ByVal Color As String) As Integer
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            cmd.CommandText = "INSERT INTO [tpm].[TPM_Detalle] ([TPM_ID],[Orden],[Text],Color) VALUES(@id,@orden,@text,@color)"
+            cmd.Connection = CnMPS
+            cmd.Parameters.Clear()
+            cmd.Parameters.AddWithValue("@id", TPM_ID)
+            cmd.Parameters.AddWithValue("@orden", Orden)
+            cmd.Parameters.AddWithValue("@text", text)
+            cmd.Parameters.AddWithValue("@color", Color)
+
+            cmd.ExecuteNonQuery()
+            Return 1
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+
+    End Function
+    Shared Function AddTPM(ByVal name As String) As Integer
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            cmd.CommandText = "INSERT INTO [tpm].[TPM] (Name) VALUES(@Name)"
+            cmd.Connection = CnMPS
+            cmd.Parameters.Clear()
+            cmd.Parameters.Add("@Name", SqlDbType.VarChar)
+            cmd.Parameters("@Name").Value = name
+            cmd.ExecuteNonQuery()
+            Return 1
+
+
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+    End Function
+
+    'UPDATE
+    Shared Function TPMelementUpdate(ByVal tpm_id As Integer, ByVal Orden As Integer, ByVal id As Integer) As Integer
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            cmd.CommandText = "UPDATE [tpm].[TPM_Detalle] SET Orden = @Orden where  TPM_ID = @tpm_id and ID = @id"
+            cmd.Connection = CnMPS
+            cmd.Parameters.Clear()
+            cmd.Parameters.Add("@id", SqlDbType.Int)
+            cmd.Parameters.Add("@Orden", SqlDbType.Int)
+            cmd.Parameters.Add("@tpm_id", SqlDbType.Int)
+            cmd.Parameters("@tpm_id").Value = tpm_id
+            cmd.Parameters("@Orden").Value = Orden
+            cmd.Parameters("@id").Value = id
+            cmd.ExecuteNonQuery()
+            Return 1
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+
+    End Function
+    Shared Function EditTPMelements(ByVal tpm_id As Integer, ByVal texto As String, ByVal Orden As Integer, ByVal id As Integer, ByVal Color As String) As Integer
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            cmd.CommandText = "Update [tpm].[TPM_Detalle] SET Text = @texto,Color=@Color where TPM_ID = @tpm_id and ID = @id "
+            cmd.Connection = CnMPS
+            cmd.Parameters.Clear()
+
+            cmd.Parameters.AddWithValue("@id", id)
+            cmd.Parameters.AddWithValue("@tpm_id", tpm_id)
+            cmd.Parameters.AddWithValue("@texto", texto)
+            cmd.Parameters.AddWithValue("@Color", Color)
+
+            cmd.ExecuteNonQuery()
+            Return 1
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+    End Function
+    Shared Function TPMEdit(ByVal tpm_id As Integer, ByVal text As String) As Integer
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            cmd.Connection = CnMPS
+            cmd.CommandText = "UPDATE [tpm].[TPM] SET Name = @text where ID = @id"
+            cmd.Parameters.Clear()
+            cmd.Parameters.Add("@id", SqlDbType.Int)
+            cmd.Parameters.Add("@text", SqlDbType.VarChar)
+            cmd.Parameters("@id").Value = tpm_id
+            cmd.Parameters("@text").Value = text
+            cmd.ExecuteNonQuery()
+
+            Return 1
+
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+    End Function
+    Public Structure ElementsOrder
+        Dim id As Integer
+        Dim orden As Integer
+    End Structure
+    Shared Function EditOrderElements(ByVal tpm_id As Integer, ByVal elements As List(Of ElementsOrder)) As Integer
+        Dim tra As SqlClient.SqlTransaction
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            tra = CnMPS.BeginTransaction()
+            cmd.Connection = CnMPS
+            cmd.CommandText = "UPDATE [tpm].[TPM_Detalle] SET Orden = @orden where  TPM_ID = @tpm_id and ID = @id"
+            cmd.Parameters.Clear()
+            cmd.Transaction = tra
+            cmd.Parameters.Add("@tpm_id", SqlDbType.Int)
+            cmd.Parameters.Add("@orden", SqlDbType.Int)
+            cmd.Parameters.Add("@id", SqlDbType.Int)
+            cmd.Parameters("@tpm_id").Value = tpm_id
+            For Each a As ElementsOrder In elements
+                cmd.Parameters("@id").Value = a.id
+                cmd.Parameters("@orden").Value = a.orden
+                cmd.ExecuteNonQuery()
+            Next
+            tra.Commit()
+            Return 1
+        Catch ex As Exception
+            tra.Rollback()
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+            cmd.Transaction = Nothing
+        End Try
+    End Function
+
+    'DELETE
+    Shared Function RemoveTPMelement(ByVal TPM_ID As Integer, ByVal Orden As Integer, ByVal id As Integer) As Integer
+        Dim tra As SqlClient.SqlTransaction
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            tra = CnMPS.BeginTransaction()
+            cmd.CommandText = "DELETE FROM [tpm].[TPM_Detalle] where TPM_ID = @tpm_id and Orden = @orden and Id = @id "
+            cmd.Connection = CnMPS
+            cmd.Parameters.Clear()
+            cmd.Transaction = tra
+            cmd.Parameters.Add("@tpm_id", SqlDbType.Int)
+            cmd.Parameters.Add("@orden", SqlDbType.Int)
+            cmd.Parameters.Add("@id", SqlDbType.Int)
+            cmd.Parameters("@tpm_id").Value = TPM_ID
+            cmd.Parameters("@orden").Value = Orden
+            cmd.Parameters("@id").Value = id
+            cmd.ExecuteNonQuery()
+            cmd.CommandText = "DELETE FROM [tpm].[TPM_Result_Detalle] where TPM_ID = @tpm_id and TPM_Detalle_ID = @id"
+            cmd.ExecuteNonQuery()
+            tra.Commit()
+            Return 1
+        Catch ex As Exception
+            tra.Rollback()
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+            cmd.Transaction = Nothing
+        End Try
+
+    End Function
+    Shared Function TPMRemoveRelStation(ByVal TPM_ID As Integer, ByVal Asset As String, ByVal Station As String)
+
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            cmd.CommandText = "DELETE FROM  [tpm].[Tpm_Station] where TPM_ID = @id_tpm and Asset = @Asset and Station = @Station "
+            cmd.Connection = CnMPS
+            cmd.Parameters.Clear()
+            cmd.Parameters.Add("@id_tpm", SqlDbType.Int)
+            cmd.Parameters.Add("@Asset", SqlDbType.VarChar)
+            cmd.Parameters.Add("@Station", SqlDbType.VarChar)
+            cmd.Parameters("@id_tpm").Value = TPM_ID
+            cmd.Parameters("@Asset").Value = Asset
+            cmd.Parameters("@Station").Value = Station
+
+            cmd.ExecuteNonQuery()
+            Return 1
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+    End Function
+    Shared Function DeleteTPM(ByVal TPM_ID As Integer) As Integer
+        Dim tra As SqlClient.SqlTransaction
+        Try
+
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            tra = CnMPS.BeginTransaction()
+
+            cmd.Connection = CnMPS
+            cmd.Parameters.Clear()
+            cmd.Parameters.Add("@TPM_ID", SqlDbType.Int)
+            cmd.Parameters("@TPM_ID").Value = TPM_ID
+            cmd.Transaction = tra
+            cmd.CommandText = "Delete from [tpm].[TPM_Detalle] where TPM_ID = @TPM_ID"
+            cmd.ExecuteNonQuery()
+            cmd.CommandText = "Delete from [tpm].[TPM_Result] where TPM_ID = @TPM_ID"
+            cmd.ExecuteNonQuery()
+            cmd.CommandText = "Delete from [tpm].[TPM_Result_Detalle] where TPM_ID = @TPM_ID"
+            cmd.ExecuteNonQuery()
+            cmd.CommandText = "Delete from [tpm].[Tpm_Station] where TPM_ID = @TPM_ID"
+            cmd.ExecuteNonQuery()
+            cmd.CommandText = "Delete from [tpm].[TPM] where ID = @TPM_ID"
+            cmd.ExecuteNonQuery()
+
+            tra.Commit()
+            Return 1
+
+
+        Catch ex As Exception
+            tra.Rollback()
+            Throw New Exception(ex.Message)
+
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+            cmd.Transaction = Nothing
+        End Try
+
+    End Function
+#End Region
    
 
 #Region "Stations"
@@ -896,7 +1310,12 @@ Public Class SQLCon
             Dim CurrShiftName As String = ""
             cmdMARS.CommandText = "Select ProductionShiftName from pro.ResourceStatus where Asset_ID=" & AssetID
             CurrShiftName = cmdMARS.ExecuteScalar
-            damars.SelectCommand.CommandText = "SELECT * FROM [hmo].[GetHourlyProdTableReport] (" & AssetID & ",'" & IIf(EspecificShift <> "", EspecificShift, CurrShiftName) & "','" & IIf(EspecificDate <> "", EspecificDate, CurrDate.ToString("MM/dd/yyyy")) & "'," & SubresourceID & ") where starttime<'" & shiftendtime & "'"  ''where CURRENTTARGET>0"
+            damars.SelectCommand.CommandText = "SELECT * FROM [hmo].[GetHourlyProdTableReport] (" & AssetID & ",'" & IIf(EspecificShift <> "", EspecificShift, CurrShiftName) & "','" & IIf(EspecificDate <> "", EspecificDate, CurrDate.ToString("MM/dd/yyyy")) & "'," & SubresourceID & ") where starttime<'" & shiftendtime & "' "  ''where CURRENTTARGET>0"
+            If Debugger.IsAttached Then
+                If 1 = 0 Then
+                    damars.SelectCommand.CommandText = "SELECT * FROM [hmo].[GetHourlyProdTableReport] (" & AssetID & ",'" & IIf(EspecificShift <> "", EspecificShift, CurrShiftName) & "','" & IIf(EspecificDate <> "", EspecificDate, CurrDate.ToString("MM/dd/yyyy")) & "'," & SubresourceID & ") where starttime<'" & shiftendtime & "' AND TOTAL>=0"  ''where CURRENTTARGET>0"
+                End If
+            End If
             ds.Tables.Clear()
             damars.Fill(ds, "Production")
             CnMARS.Close()

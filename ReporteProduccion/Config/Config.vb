@@ -5,7 +5,7 @@
         Try
             If cn.State = ConnectionState.Open Then cn.Close()
             cn.Open()
-            MsgBox("Conexión a BD Reporte exitosa", MsgBoxStyle.Information, "Conexión")
+            MsgBox("Conexión a BD Reporte exitosa", MsgBoxStyle.Information, "Conexión Reporte")
 
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -31,6 +31,10 @@
             TXTUsuarioMPS.Text = My.Settings.MPSUsuario
             TXTContrasaeñaMPS.Text = My.Settings.MPSContraseña
 
+            TxtDSN.Text = My.Settings.dsnCMS
+            TXTUIDCMS.Text = My.Settings.uidCMS
+            TXTPWDCMS.Text = My.Settings.pwdCMS
+
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
@@ -41,7 +45,7 @@
         Try
             If cn.State = ConnectionState.Open Then cn.Close()
             cn.Open()
-            MsgBox("Conexión a MARS exitosa", MsgBoxStyle.Information, "Conexión")
+            MsgBox("Conexión a MARS exitosa", MsgBoxStyle.Information, "Conexión MARS")
         Catch ex As Exception
             MsgBox(ex.Message)
         Finally
@@ -66,6 +70,10 @@
             My.Settings.MPSUsuario = TXTUsuarioMPS.Text
             My.Settings.MPSContraseña = TXTContrasaeñaMPS.Text
 
+            My.Settings.dsnCMS = TxtDSN.Text
+            My.Settings.uidCMS = TXTUIDCMS.Text
+            My.Settings.pwdCMS = TXTPWDCMS.Text
+
             My.Settings.Save()
             Me.DialogResult = Windows.Forms.DialogResult.OK
             Me.Close()
@@ -83,12 +91,25 @@
         Try
             If cn.State = ConnectionState.Open Then cn.Close()
             cn.Open()
-            MsgBox("Conexión a MPS exitosa", MsgBoxStyle.Information, "Conexión")
+            MsgBox("Conexión a MPS exitosa", MsgBoxStyle.Information, "Conexión MPS")
 
         Catch ex As Exception
             MsgBox(ex.Message)
         Finally
             If cn.State = ConnectionState.Open Then cn.Close()
+        End Try
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Dim con As New Odbc.OdbcConnection("DSN=" & TxtDSN.Text & ";UID=" & TXTUIDCMS.Text & ";PWD=" & TXTPWDCMS.Text)
+        Try
+            If con.State = ConnectionState.Closed Then con.Open()
+            'con.Open()
+            MsgBox("Conexión a CMS exitosa", MsgBoxStyle.Information, "Conexión CMS")
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+        Finally
+            If con.State = ConnectionState.Open Then con.Close()
         End Try
     End Sub
 End Class

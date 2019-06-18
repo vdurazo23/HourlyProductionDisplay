@@ -257,6 +257,42 @@ Namespace My
                 Me("PrefConcepto") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property dsnCMS() As String
+            Get
+                Return CType(Me("dsnCMS"),String)
+            End Get
+            Set
+                Me("dsnCMS") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property uidCMS() As String
+            Get
+                Return CType(Me("uidCMS"),String)
+            End Get
+            Set
+                Me("uidCMS") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property pwdCMS() As String
+            Get
+                Return CType(Me("pwdCMS"),String)
+            End Get
+            Set
+                Me("pwdCMS") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

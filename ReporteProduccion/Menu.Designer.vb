@@ -52,6 +52,7 @@ Partial Class Menu
         Me.LblUsername = New System.Windows.Forms.ToolStripStatusLabel()
         Me.DonutShape1 = New Telerik.WinControls.Tests.DonutShape()
         Me.MediaShape1 = New Telerik.WinControls.Tests.MediaShape()
+        Me.RadPageTPM = New Telerik.WinControls.UI.RadPageViewPage()
         Me.GroupBox1.SuspendLayout()
         CType(Me.RadPageView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadPageView1.SuspendLayout()
@@ -124,6 +125,7 @@ Partial Class Menu
         Me.RadPageView1.Controls.Add(Me.RadPageStations)
         Me.RadPageView1.Controls.Add(Me.RadPageDepartments)
         Me.RadPageView1.Controls.Add(Me.RadPageCharacteristics)
+        Me.RadPageView1.Controls.Add(Me.RadPageTPM)
         Me.RadPageView1.ImageList = Me.ImageList1
         Me.RadPageView1.Name = "RadPageView1"
         Me.RadPageView1.PageBackColor = System.Drawing.Color.White
@@ -243,6 +245,12 @@ Partial Class Menu
         Me.LblUsername.Name = "LblUsername"
         resources.ApplyResources(Me.LblUsername, "LblUsername")
         '
+        'RadPageTPM
+        '
+        Me.RadPageTPM.ItemSize = New System.Drawing.SizeF(225.0!, 45.0!)
+        resources.ApplyResources(Me.RadPageTPM, "RadPageTPM")
+        Me.RadPageTPM.Name = "RadPageTPM"
+        '
         'Menu
         '
         resources.ApplyResources(Me, "$this")
@@ -298,5 +306,6 @@ Partial Class Menu
     Friend WithEvents LblUsername As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents DonutShape1 As Telerik.WinControls.Tests.DonutShape
     Friend WithEvents MediaShape1 As Telerik.WinControls.Tests.MediaShape
+    Friend WithEvents RadPageTPM As Telerik.WinControls.UI.RadPageViewPage
 
 End Class

@@ -24,83 +24,83 @@ Partial Class ReporteProduccion
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ReporteProduccion))
-        Dim GridViewTextBoxColumn72 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn73 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn74 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn75 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn76 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn77 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn78 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn79 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn80 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn81 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn82 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn83 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn84 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim TableViewDefinition7 As Telerik.WinControls.UI.TableViewDefinition = New Telerik.WinControls.UI.TableViewDefinition()
-        Dim GridViewTextBoxColumn85 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn86 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn87 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn88 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn89 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn90 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn91 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn92 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn93 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn94 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn95 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn96 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim TableViewDefinition8 As Telerik.WinControls.UI.TableViewDefinition = New Telerik.WinControls.UI.TableViewDefinition()
-        Dim GridViewTextBoxColumn97 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn98 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn99 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn100 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn101 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn102 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn103 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn104 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn105 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim TableViewDefinition9 As Telerik.WinControls.UI.TableViewDefinition = New Telerik.WinControls.UI.TableViewDefinition()
-        Dim TableViewDefinition10 As Telerik.WinControls.UI.TableViewDefinition = New Telerik.WinControls.UI.TableViewDefinition()
-        Dim GridViewTextBoxColumn106 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn107 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn108 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn109 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn110 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn111 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn112 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn113 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim TableViewDefinition11 As Telerik.WinControls.UI.TableViewDefinition = New Telerik.WinControls.UI.TableViewDefinition()
-        Dim GridViewTextBoxColumn114 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn115 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn116 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn117 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn118 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn119 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn120 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn121 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn122 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn123 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn124 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn125 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn126 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn127 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn128 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn129 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn130 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn131 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn132 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn133 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn134 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn135 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn136 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn137 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn138 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn139 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn140 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn141 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim GridViewTextBoxColumn142 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
-        Dim TableViewDefinition12 As Telerik.WinControls.UI.TableViewDefinition = New Telerik.WinControls.UI.TableViewDefinition()
+        Dim GridViewTextBoxColumn1 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn2 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn3 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn4 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn5 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn6 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn7 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn8 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn9 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn10 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn11 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn12 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn13 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim TableViewDefinition1 As Telerik.WinControls.UI.TableViewDefinition = New Telerik.WinControls.UI.TableViewDefinition()
+        Dim GridViewTextBoxColumn14 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn15 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn16 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn17 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn18 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn19 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn20 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn21 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn22 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn23 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn24 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn25 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim TableViewDefinition2 As Telerik.WinControls.UI.TableViewDefinition = New Telerik.WinControls.UI.TableViewDefinition()
+        Dim GridViewTextBoxColumn26 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn27 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn28 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn29 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn30 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn31 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn32 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn33 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn34 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim TableViewDefinition3 As Telerik.WinControls.UI.TableViewDefinition = New Telerik.WinControls.UI.TableViewDefinition()
+        Dim TableViewDefinition4 As Telerik.WinControls.UI.TableViewDefinition = New Telerik.WinControls.UI.TableViewDefinition()
+        Dim GridViewTextBoxColumn35 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn36 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn37 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn38 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn39 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn40 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn41 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn42 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim TableViewDefinition5 As Telerik.WinControls.UI.TableViewDefinition = New Telerik.WinControls.UI.TableViewDefinition()
+        Dim GridViewTextBoxColumn43 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn44 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn45 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn46 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn47 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn48 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn49 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn50 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn51 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn52 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn53 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn54 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn55 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn56 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn57 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn58 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn59 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn60 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn61 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn62 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn63 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn64 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn65 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn66 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn67 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn68 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn69 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn70 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim GridViewTextBoxColumn71 As Telerik.WinControls.UI.GridViewTextBoxColumn = New Telerik.WinControls.UI.GridViewTextBoxColumn()
+        Dim TableViewDefinition6 As Telerik.WinControls.UI.TableViewDefinition = New Telerik.WinControls.UI.TableViewDefinition()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.LblOEE = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -121,9 +121,6 @@ Partial Class ReporteProduccion
         Me.GridProduction = New Telerik.WinControls.UI.RadGridView()
         Me.RadPageView1 = New Telerik.WinControls.UI.RadPageView()
         Me.PageDowntime = New Telerik.WinControls.UI.RadPageViewPage()
-        Me.BtnDeleteDowntime = New Telerik.WinControls.UI.RadButton()
-        Me.BtnEditDowntime = New Telerik.WinControls.UI.RadButton()
-        Me.BtnNewDowntime = New Telerik.WinControls.UI.RadButton()
         Me.PageRework = New Telerik.WinControls.UI.RadPageViewPage()
         Me.BtnDeleteRework = New Telerik.WinControls.UI.RadButton()
         Me.BtnEditRework = New Telerik.WinControls.UI.RadButton()
@@ -137,19 +134,22 @@ Partial Class ReporteProduccion
         Me.RadButton1 = New Telerik.WinControls.UI.RadButton()
         Me.RadButton2 = New Telerik.WinControls.UI.RadButton()
         Me.RadButton3 = New Telerik.WinControls.UI.RadButton()
-        Me.BtnRefresh = New Telerik.WinControls.UI.RadButton()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.PanelGauge = New System.Windows.Forms.Panel()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.LblProdTot = New System.Windows.Forms.Label()
-        Me.BtnSave = New Telerik.WinControls.UI.RadButton()
         Me.GridTemp = New Telerik.WinControls.UI.RadGridView()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.AjusteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.BtnDetails = New Telerik.WinControls.UI.RadButton()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.BtnDelete = New Telerik.WinControls.UI.RadButton()
+        Me.AjusteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BtnSave = New Telerik.WinControls.UI.RadButton()
+        Me.BtnRefresh = New Telerik.WinControls.UI.RadButton()
+        Me.BtnDeleteDowntime = New Telerik.WinControls.UI.RadButton()
+        Me.BtnEditDowntime = New Telerik.WinControls.UI.RadButton()
+        Me.BtnNewDowntime = New Telerik.WinControls.UI.RadButton()
         CType(Me.GridDownTime, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridDownTime.MasterTemplate, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridRework, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -161,9 +161,6 @@ Partial Class ReporteProduccion
         CType(Me.RadPageView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadPageView1.SuspendLayout()
         Me.PageDowntime.SuspendLayout()
-        CType(Me.BtnDeleteDowntime, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.BtnEditDowntime, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.BtnNewDowntime, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PageRework.SuspendLayout()
         CType(Me.BtnDeleteRework, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BtnEditRework, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -178,13 +175,16 @@ Partial Class ReporteProduccion
         CType(Me.RadButton1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadButton2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadButton3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.BtnRefresh, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.BtnSave, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridTemp, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridTemp.MasterTemplate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.BtnDetails, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BtnDelete, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BtnSave, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BtnRefresh, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BtnDeleteDowntime, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BtnEditDowntime, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BtnNewDowntime, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ImageList1
@@ -313,50 +313,50 @@ Partial Class ReporteProduccion
         Me.GridDownTime.MasterTemplate.AllowDragToGroup = False
         Me.GridDownTime.MasterTemplate.AllowEditRow = False
         Me.GridDownTime.MasterTemplate.AutoExpandGroups = True
-        GridViewTextBoxColumn72.FieldName = "ID"
-        GridViewTextBoxColumn72.HeaderText = "ID"
-        GridViewTextBoxColumn72.Name = "ID"
-        GridViewTextBoxColumn73.FieldName = "Asset_ID"
-        GridViewTextBoxColumn73.HeaderText = "Asset_ID"
-        GridViewTextBoxColumn73.Name = "Asset_ID"
-        GridViewTextBoxColumn74.FieldName = "ProductionDate"
-        GridViewTextBoxColumn74.HeaderText = "FechaProd"
-        GridViewTextBoxColumn74.Name = "ProductionDate"
-        GridViewTextBoxColumn75.FieldName = "Shift"
-        GridViewTextBoxColumn75.HeaderText = "Turno"
-        GridViewTextBoxColumn75.Name = "Shift"
-        GridViewTextBoxColumn76.FieldName = "Hour"
-        GridViewTextBoxColumn76.HeaderText = "Hora"
-        GridViewTextBoxColumn76.Name = "Hour"
-        GridViewTextBoxColumn77.FieldName = "PartNumber"
-        GridViewTextBoxColumn77.HeaderText = "Parte"
-        GridViewTextBoxColumn77.Name = "PartNumber"
-        GridViewTextBoxColumn78.FieldName = "Station"
-        GridViewTextBoxColumn78.HeaderText = "Operacion"
-        GridViewTextBoxColumn78.Name = "Station"
-        GridViewTextBoxColumn79.FieldName = "equipment"
-        GridViewTextBoxColumn79.HeaderText = "Equipo"
-        GridViewTextBoxColumn79.Name = "equipment"
-        GridViewTextBoxColumn80.FieldName = "department"
-        GridViewTextBoxColumn80.HeaderText = "Departmento"
-        GridViewTextBoxColumn80.Name = "department"
-        GridViewTextBoxColumn81.FieldName = "concept"
-        GridViewTextBoxColumn81.HeaderText = "Concepto"
-        GridViewTextBoxColumn81.Name = "concept"
-        GridViewTextBoxColumn82.FieldName = "Description"
-        GridViewTextBoxColumn82.HeaderText = "Descripcion"
-        GridViewTextBoxColumn82.Name = "Description"
-        GridViewTextBoxColumn83.FieldName = "minutes"
-        GridViewTextBoxColumn83.HeaderText = "Minutos"
-        GridViewTextBoxColumn83.Name = "minutes"
-        GridViewTextBoxColumn84.FieldName = "comments"
-        GridViewTextBoxColumn84.HeaderText = "Comentarios"
-        GridViewTextBoxColumn84.Name = "comments"
-        Me.GridDownTime.MasterTemplate.Columns.AddRange(New Telerik.WinControls.UI.GridViewDataColumn() {GridViewTextBoxColumn72, GridViewTextBoxColumn73, GridViewTextBoxColumn74, GridViewTextBoxColumn75, GridViewTextBoxColumn76, GridViewTextBoxColumn77, GridViewTextBoxColumn78, GridViewTextBoxColumn79, GridViewTextBoxColumn80, GridViewTextBoxColumn81, GridViewTextBoxColumn82, GridViewTextBoxColumn83, GridViewTextBoxColumn84})
-        Me.GridDownTime.MasterTemplate.ViewDefinition = TableViewDefinition7
+        GridViewTextBoxColumn1.FieldName = "ID"
+        GridViewTextBoxColumn1.HeaderText = "ID"
+        GridViewTextBoxColumn1.Name = "ID"
+        GridViewTextBoxColumn2.FieldName = "Asset_ID"
+        GridViewTextBoxColumn2.HeaderText = "Asset_ID"
+        GridViewTextBoxColumn2.Name = "Asset_ID"
+        GridViewTextBoxColumn3.FieldName = "ProductionDate"
+        GridViewTextBoxColumn3.HeaderText = "FechaProd"
+        GridViewTextBoxColumn3.Name = "ProductionDate"
+        GridViewTextBoxColumn4.FieldName = "Shift"
+        GridViewTextBoxColumn4.HeaderText = "Turno"
+        GridViewTextBoxColumn4.Name = "Shift"
+        GridViewTextBoxColumn5.FieldName = "Hour"
+        GridViewTextBoxColumn5.HeaderText = "Hora"
+        GridViewTextBoxColumn5.Name = "Hour"
+        GridViewTextBoxColumn6.FieldName = "PartNumber"
+        GridViewTextBoxColumn6.HeaderText = "Parte"
+        GridViewTextBoxColumn6.Name = "PartNumber"
+        GridViewTextBoxColumn7.FieldName = "Station"
+        GridViewTextBoxColumn7.HeaderText = "Operacion"
+        GridViewTextBoxColumn7.Name = "Station"
+        GridViewTextBoxColumn8.FieldName = "equipment"
+        GridViewTextBoxColumn8.HeaderText = "Equipo"
+        GridViewTextBoxColumn8.Name = "equipment"
+        GridViewTextBoxColumn9.FieldName = "department"
+        GridViewTextBoxColumn9.HeaderText = "Departmento"
+        GridViewTextBoxColumn9.Name = "department"
+        GridViewTextBoxColumn10.FieldName = "concept"
+        GridViewTextBoxColumn10.HeaderText = "Concepto"
+        GridViewTextBoxColumn10.Name = "concept"
+        GridViewTextBoxColumn11.FieldName = "Description"
+        GridViewTextBoxColumn11.HeaderText = "Descripcion"
+        GridViewTextBoxColumn11.Name = "Description"
+        GridViewTextBoxColumn12.FieldName = "minutes"
+        GridViewTextBoxColumn12.HeaderText = "Minutos"
+        GridViewTextBoxColumn12.Name = "minutes"
+        GridViewTextBoxColumn13.FieldName = "comments"
+        GridViewTextBoxColumn13.HeaderText = "Comentarios"
+        GridViewTextBoxColumn13.Name = "comments"
+        Me.GridDownTime.MasterTemplate.Columns.AddRange(New Telerik.WinControls.UI.GridViewDataColumn() {GridViewTextBoxColumn1, GridViewTextBoxColumn2, GridViewTextBoxColumn3, GridViewTextBoxColumn4, GridViewTextBoxColumn5, GridViewTextBoxColumn6, GridViewTextBoxColumn7, GridViewTextBoxColumn8, GridViewTextBoxColumn9, GridViewTextBoxColumn10, GridViewTextBoxColumn11, GridViewTextBoxColumn12, GridViewTextBoxColumn13})
+        Me.GridDownTime.MasterTemplate.ViewDefinition = TableViewDefinition1
         Me.GridDownTime.Name = "GridDownTime"
         Me.GridDownTime.ReadOnly = True
-        Me.GridDownTime.Size = New System.Drawing.Size(840, 323)
+        Me.GridDownTime.Size = New System.Drawing.Size(840, 327)
         Me.GridDownTime.TabIndex = 4
         Me.GridDownTime.Text = "RadGridView1"
         '
@@ -375,44 +375,44 @@ Partial Class ReporteProduccion
         Me.GridRework.MasterTemplate.AllowDragToGroup = False
         Me.GridRework.MasterTemplate.AllowEditRow = False
         Me.GridRework.MasterTemplate.AutoExpandGroups = True
-        GridViewTextBoxColumn85.FieldName = "ID"
-        GridViewTextBoxColumn85.HeaderText = "ID"
-        GridViewTextBoxColumn85.Name = "ID"
-        GridViewTextBoxColumn86.FieldName = "Asset_ID"
-        GridViewTextBoxColumn86.HeaderText = "Asset_ID"
-        GridViewTextBoxColumn86.Name = "Asset_ID"
-        GridViewTextBoxColumn87.FieldName = "ProductionDate"
-        GridViewTextBoxColumn87.HeaderText = "FechaProd"
-        GridViewTextBoxColumn87.Name = "ProductionDate"
-        GridViewTextBoxColumn88.FieldName = "shift"
-        GridViewTextBoxColumn88.HeaderText = "Turno"
-        GridViewTextBoxColumn88.Name = "shift"
-        GridViewTextBoxColumn89.FieldName = "Hour"
-        GridViewTextBoxColumn89.HeaderText = "Hora"
-        GridViewTextBoxColumn89.Name = "Hour"
-        GridViewTextBoxColumn90.FieldName = "PartNumber"
-        GridViewTextBoxColumn90.HeaderText = "Parte"
-        GridViewTextBoxColumn90.Name = "PartNumber"
-        GridViewTextBoxColumn91.FieldName = "Concept"
-        GridViewTextBoxColumn91.HeaderText = "Concepto"
-        GridViewTextBoxColumn91.Name = "Concept"
-        GridViewTextBoxColumn92.FieldName = "Code"
-        GridViewTextBoxColumn92.HeaderText = "Codigo"
-        GridViewTextBoxColumn92.Name = "Code"
-        GridViewTextBoxColumn93.FieldName = "Feature"
-        GridViewTextBoxColumn93.HeaderText = "Cordon"
-        GridViewTextBoxColumn93.Name = "Feature"
-        GridViewTextBoxColumn94.FieldName = "Quantity"
-        GridViewTextBoxColumn94.HeaderText = "Cantidad"
-        GridViewTextBoxColumn94.Name = "Quantity"
-        GridViewTextBoxColumn95.FieldName = "Scrap"
-        GridViewTextBoxColumn95.HeaderText = "Scrap"
-        GridViewTextBoxColumn95.Name = "Scrap"
-        GridViewTextBoxColumn96.FieldName = "Comments"
-        GridViewTextBoxColumn96.HeaderText = "Comentarios"
-        GridViewTextBoxColumn96.Name = "Comments"
-        Me.GridRework.MasterTemplate.Columns.AddRange(New Telerik.WinControls.UI.GridViewDataColumn() {GridViewTextBoxColumn85, GridViewTextBoxColumn86, GridViewTextBoxColumn87, GridViewTextBoxColumn88, GridViewTextBoxColumn89, GridViewTextBoxColumn90, GridViewTextBoxColumn91, GridViewTextBoxColumn92, GridViewTextBoxColumn93, GridViewTextBoxColumn94, GridViewTextBoxColumn95, GridViewTextBoxColumn96})
-        Me.GridRework.MasterTemplate.ViewDefinition = TableViewDefinition8
+        GridViewTextBoxColumn14.FieldName = "ID"
+        GridViewTextBoxColumn14.HeaderText = "ID"
+        GridViewTextBoxColumn14.Name = "ID"
+        GridViewTextBoxColumn15.FieldName = "Asset_ID"
+        GridViewTextBoxColumn15.HeaderText = "Asset_ID"
+        GridViewTextBoxColumn15.Name = "Asset_ID"
+        GridViewTextBoxColumn16.FieldName = "ProductionDate"
+        GridViewTextBoxColumn16.HeaderText = "FechaProd"
+        GridViewTextBoxColumn16.Name = "ProductionDate"
+        GridViewTextBoxColumn17.FieldName = "shift"
+        GridViewTextBoxColumn17.HeaderText = "Turno"
+        GridViewTextBoxColumn17.Name = "shift"
+        GridViewTextBoxColumn18.FieldName = "Hour"
+        GridViewTextBoxColumn18.HeaderText = "Hora"
+        GridViewTextBoxColumn18.Name = "Hour"
+        GridViewTextBoxColumn19.FieldName = "PartNumber"
+        GridViewTextBoxColumn19.HeaderText = "Parte"
+        GridViewTextBoxColumn19.Name = "PartNumber"
+        GridViewTextBoxColumn20.FieldName = "Concept"
+        GridViewTextBoxColumn20.HeaderText = "Concepto"
+        GridViewTextBoxColumn20.Name = "Concept"
+        GridViewTextBoxColumn21.FieldName = "Code"
+        GridViewTextBoxColumn21.HeaderText = "Codigo"
+        GridViewTextBoxColumn21.Name = "Code"
+        GridViewTextBoxColumn22.FieldName = "Feature"
+        GridViewTextBoxColumn22.HeaderText = "Cordon"
+        GridViewTextBoxColumn22.Name = "Feature"
+        GridViewTextBoxColumn23.FieldName = "Quantity"
+        GridViewTextBoxColumn23.HeaderText = "Cantidad"
+        GridViewTextBoxColumn23.Name = "Quantity"
+        GridViewTextBoxColumn24.FieldName = "Scrap"
+        GridViewTextBoxColumn24.HeaderText = "Scrap"
+        GridViewTextBoxColumn24.Name = "Scrap"
+        GridViewTextBoxColumn25.FieldName = "Comments"
+        GridViewTextBoxColumn25.HeaderText = "Comentarios"
+        GridViewTextBoxColumn25.Name = "Comments"
+        Me.GridRework.MasterTemplate.Columns.AddRange(New Telerik.WinControls.UI.GridViewDataColumn() {GridViewTextBoxColumn14, GridViewTextBoxColumn15, GridViewTextBoxColumn16, GridViewTextBoxColumn17, GridViewTextBoxColumn18, GridViewTextBoxColumn19, GridViewTextBoxColumn20, GridViewTextBoxColumn21, GridViewTextBoxColumn22, GridViewTextBoxColumn23, GridViewTextBoxColumn24, GridViewTextBoxColumn25})
+        Me.GridRework.MasterTemplate.ViewDefinition = TableViewDefinition2
         Me.GridRework.Name = "GridRework"
         Me.GridRework.ReadOnly = True
         Me.GridRework.Size = New System.Drawing.Size(840, 323)
@@ -434,35 +434,35 @@ Partial Class ReporteProduccion
         Me.GridPlannedDT.MasterTemplate.AllowDragToGroup = False
         Me.GridPlannedDT.MasterTemplate.AllowEditRow = False
         Me.GridPlannedDT.MasterTemplate.AutoExpandGroups = True
-        GridViewTextBoxColumn97.FieldName = "ID"
-        GridViewTextBoxColumn97.HeaderText = "ID"
-        GridViewTextBoxColumn97.Name = "ID"
-        GridViewTextBoxColumn98.FieldName = "Asset_ID"
-        GridViewTextBoxColumn98.HeaderText = "Asset_ID"
-        GridViewTextBoxColumn98.Name = "Asset_ID"
-        GridViewTextBoxColumn99.FieldName = "ProductionDate"
-        GridViewTextBoxColumn99.HeaderText = "FechaProd"
-        GridViewTextBoxColumn99.Name = "ProductionDate"
-        GridViewTextBoxColumn100.FieldName = "Shift"
-        GridViewTextBoxColumn100.HeaderText = "Turno"
-        GridViewTextBoxColumn100.Name = "Shift"
-        GridViewTextBoxColumn101.FieldName = "Hour"
-        GridViewTextBoxColumn101.HeaderText = "Hora"
-        GridViewTextBoxColumn101.Name = "Hour"
-        GridViewTextBoxColumn102.FieldName = "PartNumber"
-        GridViewTextBoxColumn102.HeaderText = "Parte"
-        GridViewTextBoxColumn102.Name = "PartNumber"
-        GridViewTextBoxColumn103.FieldName = "Description"
-        GridViewTextBoxColumn103.HeaderText = "Descripcion"
-        GridViewTextBoxColumn103.Name = "Description"
-        GridViewTextBoxColumn104.FieldName = "minutes"
-        GridViewTextBoxColumn104.HeaderText = "Minutos"
-        GridViewTextBoxColumn104.Name = "minutes"
-        GridViewTextBoxColumn105.FieldName = "comments"
-        GridViewTextBoxColumn105.HeaderText = "Comentarios"
-        GridViewTextBoxColumn105.Name = "comments"
-        Me.GridPlannedDT.MasterTemplate.Columns.AddRange(New Telerik.WinControls.UI.GridViewDataColumn() {GridViewTextBoxColumn97, GridViewTextBoxColumn98, GridViewTextBoxColumn99, GridViewTextBoxColumn100, GridViewTextBoxColumn101, GridViewTextBoxColumn102, GridViewTextBoxColumn103, GridViewTextBoxColumn104, GridViewTextBoxColumn105})
-        Me.GridPlannedDT.MasterTemplate.ViewDefinition = TableViewDefinition9
+        GridViewTextBoxColumn26.FieldName = "ID"
+        GridViewTextBoxColumn26.HeaderText = "ID"
+        GridViewTextBoxColumn26.Name = "ID"
+        GridViewTextBoxColumn27.FieldName = "Asset_ID"
+        GridViewTextBoxColumn27.HeaderText = "Asset_ID"
+        GridViewTextBoxColumn27.Name = "Asset_ID"
+        GridViewTextBoxColumn28.FieldName = "ProductionDate"
+        GridViewTextBoxColumn28.HeaderText = "FechaProd"
+        GridViewTextBoxColumn28.Name = "ProductionDate"
+        GridViewTextBoxColumn29.FieldName = "Shift"
+        GridViewTextBoxColumn29.HeaderText = "Turno"
+        GridViewTextBoxColumn29.Name = "Shift"
+        GridViewTextBoxColumn30.FieldName = "Hour"
+        GridViewTextBoxColumn30.HeaderText = "Hora"
+        GridViewTextBoxColumn30.Name = "Hour"
+        GridViewTextBoxColumn31.FieldName = "PartNumber"
+        GridViewTextBoxColumn31.HeaderText = "Parte"
+        GridViewTextBoxColumn31.Name = "PartNumber"
+        GridViewTextBoxColumn32.FieldName = "Description"
+        GridViewTextBoxColumn32.HeaderText = "Descripcion"
+        GridViewTextBoxColumn32.Name = "Description"
+        GridViewTextBoxColumn33.FieldName = "minutes"
+        GridViewTextBoxColumn33.HeaderText = "Minutos"
+        GridViewTextBoxColumn33.Name = "minutes"
+        GridViewTextBoxColumn34.FieldName = "comments"
+        GridViewTextBoxColumn34.HeaderText = "Comentarios"
+        GridViewTextBoxColumn34.Name = "comments"
+        Me.GridPlannedDT.MasterTemplate.Columns.AddRange(New Telerik.WinControls.UI.GridViewDataColumn() {GridViewTextBoxColumn26, GridViewTextBoxColumn27, GridViewTextBoxColumn28, GridViewTextBoxColumn29, GridViewTextBoxColumn30, GridViewTextBoxColumn31, GridViewTextBoxColumn32, GridViewTextBoxColumn33, GridViewTextBoxColumn34})
+        Me.GridPlannedDT.MasterTemplate.ViewDefinition = TableViewDefinition3
         Me.GridPlannedDT.Name = "GridPlannedDT"
         Me.GridPlannedDT.ReadOnly = True
         Me.GridPlannedDT.Size = New System.Drawing.Size(840, 323)
@@ -524,7 +524,7 @@ Partial Class ReporteProduccion
         Me.GridProduction.MasterTemplate.AllowDeleteRow = False
         Me.GridProduction.MasterTemplate.AllowEditRow = False
         Me.GridProduction.MasterTemplate.EnableGrouping = False
-        Me.GridProduction.MasterTemplate.ViewDefinition = TableViewDefinition10
+        Me.GridProduction.MasterTemplate.ViewDefinition = TableViewDefinition4
         Me.GridProduction.Name = "GridProduction"
         Me.GridProduction.ReadOnly = True
         Me.GridProduction.Size = New System.Drawing.Size(862, 191)
@@ -562,47 +562,11 @@ Partial Class ReporteProduccion
         Me.PageDowntime.Controls.Add(Me.BtnEditDowntime)
         Me.PageDowntime.Controls.Add(Me.GridDownTime)
         Me.PageDowntime.Controls.Add(Me.BtnNewDowntime)
-        Me.PageDowntime.ItemSize = New System.Drawing.SizeF(94.0!, 28.0!)
-        Me.PageDowntime.Location = New System.Drawing.Point(10, 37)
+        Me.PageDowntime.ItemSize = New System.Drawing.SizeF(90.0!, 24.0!)
+        Me.PageDowntime.Location = New System.Drawing.Point(10, 33)
         Me.PageDowntime.Name = "PageDowntime"
-        Me.PageDowntime.Size = New System.Drawing.Size(848, 389)
+        Me.PageDowntime.Size = New System.Drawing.Size(848, 393)
         Me.PageDowntime.Text = "Tiempo Muerto"
-        '
-        'BtnDeleteDowntime
-        '
-        Me.BtnDeleteDowntime.ImageIndex = 2
-        Me.BtnDeleteDowntime.ImageList = Me.ImageList1
-        Me.BtnDeleteDowntime.Location = New System.Drawing.Point(278, 3)
-        Me.BtnDeleteDowntime.Name = "BtnDeleteDowntime"
-        Me.BtnDeleteDowntime.Size = New System.Drawing.Size(131, 50)
-        Me.BtnDeleteDowntime.TabIndex = 2
-        Me.BtnDeleteDowntime.Text = "Eliminar Tiempo Muerto"
-        Me.BtnDeleteDowntime.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.BtnDeleteDowntime.TextWrap = True
-        '
-        'BtnEditDowntime
-        '
-        Me.BtnEditDowntime.ImageIndex = 1
-        Me.BtnEditDowntime.ImageList = Me.ImageList1
-        Me.BtnEditDowntime.Location = New System.Drawing.Point(141, 3)
-        Me.BtnEditDowntime.Name = "BtnEditDowntime"
-        Me.BtnEditDowntime.Size = New System.Drawing.Size(131, 50)
-        Me.BtnEditDowntime.TabIndex = 1
-        Me.BtnEditDowntime.Text = "Editar Tiempo Muerto"
-        Me.BtnEditDowntime.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.BtnEditDowntime.TextWrap = True
-        '
-        'BtnNewDowntime
-        '
-        Me.BtnNewDowntime.ImageIndex = 0
-        Me.BtnNewDowntime.ImageList = Me.ImageList1
-        Me.BtnNewDowntime.Location = New System.Drawing.Point(3, 3)
-        Me.BtnNewDowntime.Name = "BtnNewDowntime"
-        Me.BtnNewDowntime.Size = New System.Drawing.Size(131, 50)
-        Me.BtnNewDowntime.TabIndex = 0
-        Me.BtnNewDowntime.Text = "Agregar Tiempo Muerto"
-        Me.BtnNewDowntime.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.BtnNewDowntime.TextWrap = True
         '
         'PageRework
         '
@@ -610,7 +574,7 @@ Partial Class ReporteProduccion
         Me.PageRework.Controls.Add(Me.BtnEditRework)
         Me.PageRework.Controls.Add(Me.GridRework)
         Me.PageRework.Controls.Add(Me.BtnNewRework)
-        Me.PageRework.ItemSize = New System.Drawing.SizeF(124.0!, 28.0!)
+        Me.PageRework.ItemSize = New System.Drawing.SizeF(120.0!, 24.0!)
         Me.PageRework.Location = New System.Drawing.Point(10, 37)
         Me.PageRework.Name = "PageRework"
         Me.PageRework.Size = New System.Drawing.Size(848, 389)
@@ -658,7 +622,7 @@ Partial Class ReporteProduccion
         Me.PagePlannedDT.Controls.Add(Me.BtnEditPDT)
         Me.PagePlannedDT.Controls.Add(Me.GridPlannedDT)
         Me.PagePlannedDT.Controls.Add(Me.BtnNewPDT)
-        Me.PagePlannedDT.ItemSize = New System.Drawing.SizeF(88.0!, 28.0!)
+        Me.PagePlannedDT.ItemSize = New System.Drawing.SizeF(84.0!, 24.0!)
         Me.PagePlannedDT.Location = New System.Drawing.Point(10, 37)
         Me.PagePlannedDT.Name = "PagePlannedDT"
         Me.PagePlannedDT.Size = New System.Drawing.Size(848, 389)
@@ -706,7 +670,7 @@ Partial Class ReporteProduccion
         Me.PageAjustes.Controls.Add(Me.RadButton1)
         Me.PageAjustes.Controls.Add(Me.RadButton2)
         Me.PageAjustes.Controls.Add(Me.RadButton3)
-        Me.PageAjustes.ItemSize = New System.Drawing.SizeF(52.0!, 28.0!)
+        Me.PageAjustes.ItemSize = New System.Drawing.SizeF(48.0!, 24.0!)
         Me.PageAjustes.Location = New System.Drawing.Point(10, 37)
         Me.PageAjustes.Name = "PageAjustes"
         Me.PageAjustes.Size = New System.Drawing.Size(848, 389)
@@ -728,32 +692,32 @@ Partial Class ReporteProduccion
         Me.GridAdjustments.MasterTemplate.AllowDragToGroup = False
         Me.GridAdjustments.MasterTemplate.AllowEditRow = False
         Me.GridAdjustments.MasterTemplate.AutoExpandGroups = True
-        GridViewTextBoxColumn106.FieldName = "ID"
-        GridViewTextBoxColumn106.HeaderText = "ID"
-        GridViewTextBoxColumn106.Name = "ID"
-        GridViewTextBoxColumn107.FieldName = "Asset_ID"
-        GridViewTextBoxColumn107.HeaderText = "Asset_ID"
-        GridViewTextBoxColumn107.Name = "Asset_ID"
-        GridViewTextBoxColumn108.FieldName = "ProductionDate"
-        GridViewTextBoxColumn108.HeaderText = "FechaProd"
-        GridViewTextBoxColumn108.Name = "ProductionDate"
-        GridViewTextBoxColumn109.FieldName = "Shift"
-        GridViewTextBoxColumn109.HeaderText = "Turno"
-        GridViewTextBoxColumn109.Name = "Shift"
-        GridViewTextBoxColumn110.FieldName = "Hour"
-        GridViewTextBoxColumn110.HeaderText = "Hora"
-        GridViewTextBoxColumn110.Name = "Hour"
-        GridViewTextBoxColumn111.FieldName = "PartNumber"
-        GridViewTextBoxColumn111.HeaderText = "Parte"
-        GridViewTextBoxColumn111.Name = "PartNumber"
-        GridViewTextBoxColumn112.FieldName = "Quantity"
-        GridViewTextBoxColumn112.HeaderText = "Cantidad"
-        GridViewTextBoxColumn112.Name = "Quantity"
-        GridViewTextBoxColumn113.FieldName = "comments"
-        GridViewTextBoxColumn113.HeaderText = "Comentarios"
-        GridViewTextBoxColumn113.Name = "comments"
-        Me.GridAdjustments.MasterTemplate.Columns.AddRange(New Telerik.WinControls.UI.GridViewDataColumn() {GridViewTextBoxColumn106, GridViewTextBoxColumn107, GridViewTextBoxColumn108, GridViewTextBoxColumn109, GridViewTextBoxColumn110, GridViewTextBoxColumn111, GridViewTextBoxColumn112, GridViewTextBoxColumn113})
-        Me.GridAdjustments.MasterTemplate.ViewDefinition = TableViewDefinition11
+        GridViewTextBoxColumn35.FieldName = "ID"
+        GridViewTextBoxColumn35.HeaderText = "ID"
+        GridViewTextBoxColumn35.Name = "ID"
+        GridViewTextBoxColumn36.FieldName = "Asset_ID"
+        GridViewTextBoxColumn36.HeaderText = "Asset_ID"
+        GridViewTextBoxColumn36.Name = "Asset_ID"
+        GridViewTextBoxColumn37.FieldName = "ProductionDate"
+        GridViewTextBoxColumn37.HeaderText = "FechaProd"
+        GridViewTextBoxColumn37.Name = "ProductionDate"
+        GridViewTextBoxColumn38.FieldName = "Shift"
+        GridViewTextBoxColumn38.HeaderText = "Turno"
+        GridViewTextBoxColumn38.Name = "Shift"
+        GridViewTextBoxColumn39.FieldName = "Hour"
+        GridViewTextBoxColumn39.HeaderText = "Hora"
+        GridViewTextBoxColumn39.Name = "Hour"
+        GridViewTextBoxColumn40.FieldName = "PartNumber"
+        GridViewTextBoxColumn40.HeaderText = "Parte"
+        GridViewTextBoxColumn40.Name = "PartNumber"
+        GridViewTextBoxColumn41.FieldName = "Quantity"
+        GridViewTextBoxColumn41.HeaderText = "Cantidad"
+        GridViewTextBoxColumn41.Name = "Quantity"
+        GridViewTextBoxColumn42.FieldName = "comments"
+        GridViewTextBoxColumn42.HeaderText = "Comentarios"
+        GridViewTextBoxColumn42.Name = "comments"
+        Me.GridAdjustments.MasterTemplate.Columns.AddRange(New Telerik.WinControls.UI.GridViewDataColumn() {GridViewTextBoxColumn35, GridViewTextBoxColumn36, GridViewTextBoxColumn37, GridViewTextBoxColumn38, GridViewTextBoxColumn39, GridViewTextBoxColumn40, GridViewTextBoxColumn41, GridViewTextBoxColumn42})
+        Me.GridAdjustments.MasterTemplate.ViewDefinition = TableViewDefinition5
         Me.GridAdjustments.Name = "GridAdjustments"
         Me.GridAdjustments.ReadOnly = True
         Me.GridAdjustments.Size = New System.Drawing.Size(840, 323)
@@ -796,20 +760,6 @@ Partial Class ReporteProduccion
         Me.RadButton3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.RadButton3.TextWrap = True
         '
-        'BtnRefresh
-        '
-        Me.BtnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnRefresh.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.BtnRefresh.ImageIndex = 3
-        Me.BtnRefresh.ImageList = Me.ImageList1
-        Me.BtnRefresh.Location = New System.Drawing.Point(28, 696)
-        Me.BtnRefresh.Name = "BtnRefresh"
-        Me.BtnRefresh.Size = New System.Drawing.Size(250, 57)
-        Me.BtnRefresh.TabIndex = 39
-        Me.BtnRefresh.Text = "Actualizar"
-        Me.BtnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.BtnRefresh.TextWrap = True
-        '
         'Timer1
         '
         Me.Timer1.Interval = 25000
@@ -843,21 +793,6 @@ Partial Class ReporteProduccion
         Me.LblProdTot.TabIndex = 43
         Me.LblProdTot.Text = "000"
         '
-        'BtnSave
-        '
-        Me.BtnSave.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnSave.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.BtnSave.ImageIndex = 4
-        Me.BtnSave.ImageList = Me.ImageList1
-        Me.BtnSave.Location = New System.Drawing.Point(309, 696)
-        Me.BtnSave.Name = "BtnSave"
-        Me.BtnSave.Size = New System.Drawing.Size(670, 57)
-        Me.BtnSave.TabIndex = 46
-        Me.BtnSave.Text = "Guardar Reporte"
-        Me.BtnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.BtnSave.TextWrap = True
-        '
         'GridTemp
         '
         Me.GridTemp.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -875,105 +810,105 @@ Partial Class ReporteProduccion
         Me.GridTemp.MasterTemplate.AllowColumnReorder = False
         Me.GridTemp.MasterTemplate.AllowDeleteRow = False
         Me.GridTemp.MasterTemplate.AllowEditRow = False
-        GridViewTextBoxColumn114.HeaderText = "Parte"
-        GridViewTextBoxColumn114.Name = "PART"
-        GridViewTextBoxColumn114.Width = 250
-        GridViewTextBoxColumn115.HeaderText = "JPH"
-        GridViewTextBoxColumn115.Name = "JPH"
-        GridViewTextBoxColumn116.HeaderText = "H1"
-        GridViewTextBoxColumn116.IsVisible = False
-        GridViewTextBoxColumn116.Name = "H1"
-        GridViewTextBoxColumn117.HeaderText = "H2"
-        GridViewTextBoxColumn117.IsVisible = False
-        GridViewTextBoxColumn117.Name = "H2"
-        GridViewTextBoxColumn118.HeaderText = "H3"
-        GridViewTextBoxColumn118.IsVisible = False
-        GridViewTextBoxColumn118.Name = "H3"
-        GridViewTextBoxColumn119.HeaderText = "H4"
-        GridViewTextBoxColumn119.IsVisible = False
-        GridViewTextBoxColumn119.Name = "H4"
-        GridViewTextBoxColumn120.HeaderText = "H5"
-        GridViewTextBoxColumn120.IsVisible = False
-        GridViewTextBoxColumn120.Name = "H5"
-        GridViewTextBoxColumn121.HeaderText = "H6"
-        GridViewTextBoxColumn121.IsVisible = False
-        GridViewTextBoxColumn121.Name = "H6"
-        GridViewTextBoxColumn122.HeaderText = "H7"
-        GridViewTextBoxColumn122.IsVisible = False
-        GridViewTextBoxColumn122.Name = "H7"
-        GridViewTextBoxColumn123.HeaderText = "H8"
-        GridViewTextBoxColumn123.IsVisible = False
-        GridViewTextBoxColumn123.Name = "H8"
-        GridViewTextBoxColumn124.HeaderText = "H9"
-        GridViewTextBoxColumn124.IsVisible = False
-        GridViewTextBoxColumn124.Name = "H9"
-        GridViewTextBoxColumn125.HeaderText = "H10"
-        GridViewTextBoxColumn125.IsVisible = False
-        GridViewTextBoxColumn125.Name = "H10"
-        GridViewTextBoxColumn126.HeaderText = "H11"
-        GridViewTextBoxColumn126.IsVisible = False
-        GridViewTextBoxColumn126.Name = "H11"
-        GridViewTextBoxColumn127.HeaderText = "H12"
-        GridViewTextBoxColumn127.IsVisible = False
-        GridViewTextBoxColumn127.Name = "H12"
-        GridViewTextBoxColumn128.HeaderText = "H13"
-        GridViewTextBoxColumn128.IsVisible = False
-        GridViewTextBoxColumn128.Name = "H13"
-        GridViewTextBoxColumn129.HeaderText = "H14"
-        GridViewTextBoxColumn129.IsVisible = False
-        GridViewTextBoxColumn129.Name = "H14"
-        GridViewTextBoxColumn130.HeaderText = "TOTAL"
-        GridViewTextBoxColumn130.Name = "TOTAL"
-        GridViewTextBoxColumn131.DataType = GetType(Date)
-        GridViewTextBoxColumn131.HeaderText = "Inicio"
-        GridViewTextBoxColumn131.Name = "Start"
-        GridViewTextBoxColumn132.DataType = GetType(Date)
-        GridViewTextBoxColumn132.HeaderText = "Fin"
-        GridViewTextBoxColumn132.Name = "End"
-        GridViewTextBoxColumn133.DataType = GetType(Double)
-        GridViewTextBoxColumn133.FormatString = "{0:#,###0.00;(#,###0.00);0}"
-        GridViewTextBoxColumn133.HeaderText = "Horas"
-        GridViewTextBoxColumn133.Name = "Hours"
-        GridViewTextBoxColumn134.DataType = GetType(Double)
-        GridViewTextBoxColumn134.FormatString = "{0:#,###0.00;(#,###0.00);0}"
-        GridViewTextBoxColumn134.HeaderText = "TP"
-        GridViewTextBoxColumn134.Name = "PPT"
-        GridViewTextBoxColumn135.DataType = GetType(Double)
-        GridViewTextBoxColumn135.FormatString = "{0:#,###0.00;(#,###0.00);0}"
-        GridViewTextBoxColumn135.HeaderText = "TO"
-        GridViewTextBoxColumn135.Name = "OT"
-        GridViewTextBoxColumn136.DataType = GetType(Double)
-        GridViewTextBoxColumn136.FormatString = "{0:#,###0.00 Min}"
-        GridViewTextBoxColumn136.HeaderText = "TiempoMuerto"
-        GridViewTextBoxColumn136.Name = "Downtime"
-        GridViewTextBoxColumn137.DataType = GetType(Double)
-        GridViewTextBoxColumn137.FormatString = "{0:#,###0.00 Min}"
-        GridViewTextBoxColumn137.HeaderText = "ParosPlaneados"
-        GridViewTextBoxColumn137.Name = "PlannedDowntime"
-        GridViewTextBoxColumn138.DataType = GetType(Double)
-        GridViewTextBoxColumn138.FormatString = "{0:#,###0 parts}"
-        GridViewTextBoxColumn138.HeaderText = "Rechazos"
-        GridViewTextBoxColumn138.Name = "Rejected"
-        GridViewTextBoxColumn139.DataType = GetType(Double)
-        GridViewTextBoxColumn139.FormatString = "{0:P}"
-        GridViewTextBoxColumn139.HeaderText = "Disponibilidad"
-        GridViewTextBoxColumn139.Name = "Availability"
-        GridViewTextBoxColumn140.DataType = GetType(Double)
-        GridViewTextBoxColumn140.FormatString = "{0:P}"
-        GridViewTextBoxColumn140.HeaderText = "Eficiencia"
-        GridViewTextBoxColumn140.Name = "Performance"
-        GridViewTextBoxColumn141.DataType = GetType(Double)
-        GridViewTextBoxColumn141.FormatString = "{0:P}"
-        GridViewTextBoxColumn141.HeaderText = "FTT"
-        GridViewTextBoxColumn141.Name = "Quality"
-        GridViewTextBoxColumn142.DataType = GetType(Double)
-        GridViewTextBoxColumn142.FormatString = "{0:P}"
-        GridViewTextBoxColumn142.HeaderText = "OEE"
-        GridViewTextBoxColumn142.Name = "OEE"
-        Me.GridTemp.MasterTemplate.Columns.AddRange(New Telerik.WinControls.UI.GridViewDataColumn() {GridViewTextBoxColumn114, GridViewTextBoxColumn115, GridViewTextBoxColumn116, GridViewTextBoxColumn117, GridViewTextBoxColumn118, GridViewTextBoxColumn119, GridViewTextBoxColumn120, GridViewTextBoxColumn121, GridViewTextBoxColumn122, GridViewTextBoxColumn123, GridViewTextBoxColumn124, GridViewTextBoxColumn125, GridViewTextBoxColumn126, GridViewTextBoxColumn127, GridViewTextBoxColumn128, GridViewTextBoxColumn129, GridViewTextBoxColumn130, GridViewTextBoxColumn131, GridViewTextBoxColumn132, GridViewTextBoxColumn133, GridViewTextBoxColumn134, GridViewTextBoxColumn135, GridViewTextBoxColumn136, GridViewTextBoxColumn137, GridViewTextBoxColumn138, GridViewTextBoxColumn139, GridViewTextBoxColumn140, GridViewTextBoxColumn141, GridViewTextBoxColumn142})
+        GridViewTextBoxColumn43.HeaderText = "Parte"
+        GridViewTextBoxColumn43.Name = "PART"
+        GridViewTextBoxColumn43.Width = 250
+        GridViewTextBoxColumn44.HeaderText = "JPH"
+        GridViewTextBoxColumn44.Name = "JPH"
+        GridViewTextBoxColumn45.HeaderText = "H1"
+        GridViewTextBoxColumn45.IsVisible = False
+        GridViewTextBoxColumn45.Name = "H1"
+        GridViewTextBoxColumn46.HeaderText = "H2"
+        GridViewTextBoxColumn46.IsVisible = False
+        GridViewTextBoxColumn46.Name = "H2"
+        GridViewTextBoxColumn47.HeaderText = "H3"
+        GridViewTextBoxColumn47.IsVisible = False
+        GridViewTextBoxColumn47.Name = "H3"
+        GridViewTextBoxColumn48.HeaderText = "H4"
+        GridViewTextBoxColumn48.IsVisible = False
+        GridViewTextBoxColumn48.Name = "H4"
+        GridViewTextBoxColumn49.HeaderText = "H5"
+        GridViewTextBoxColumn49.IsVisible = False
+        GridViewTextBoxColumn49.Name = "H5"
+        GridViewTextBoxColumn50.HeaderText = "H6"
+        GridViewTextBoxColumn50.IsVisible = False
+        GridViewTextBoxColumn50.Name = "H6"
+        GridViewTextBoxColumn51.HeaderText = "H7"
+        GridViewTextBoxColumn51.IsVisible = False
+        GridViewTextBoxColumn51.Name = "H7"
+        GridViewTextBoxColumn52.HeaderText = "H8"
+        GridViewTextBoxColumn52.IsVisible = False
+        GridViewTextBoxColumn52.Name = "H8"
+        GridViewTextBoxColumn53.HeaderText = "H9"
+        GridViewTextBoxColumn53.IsVisible = False
+        GridViewTextBoxColumn53.Name = "H9"
+        GridViewTextBoxColumn54.HeaderText = "H10"
+        GridViewTextBoxColumn54.IsVisible = False
+        GridViewTextBoxColumn54.Name = "H10"
+        GridViewTextBoxColumn55.HeaderText = "H11"
+        GridViewTextBoxColumn55.IsVisible = False
+        GridViewTextBoxColumn55.Name = "H11"
+        GridViewTextBoxColumn56.HeaderText = "H12"
+        GridViewTextBoxColumn56.IsVisible = False
+        GridViewTextBoxColumn56.Name = "H12"
+        GridViewTextBoxColumn57.HeaderText = "H13"
+        GridViewTextBoxColumn57.IsVisible = False
+        GridViewTextBoxColumn57.Name = "H13"
+        GridViewTextBoxColumn58.HeaderText = "H14"
+        GridViewTextBoxColumn58.IsVisible = False
+        GridViewTextBoxColumn58.Name = "H14"
+        GridViewTextBoxColumn59.HeaderText = "TOTAL"
+        GridViewTextBoxColumn59.Name = "TOTAL"
+        GridViewTextBoxColumn60.DataType = GetType(Date)
+        GridViewTextBoxColumn60.HeaderText = "Inicio"
+        GridViewTextBoxColumn60.Name = "Start"
+        GridViewTextBoxColumn61.DataType = GetType(Date)
+        GridViewTextBoxColumn61.HeaderText = "Fin"
+        GridViewTextBoxColumn61.Name = "End"
+        GridViewTextBoxColumn62.DataType = GetType(Double)
+        GridViewTextBoxColumn62.FormatString = "{0:#,###0.00;(#,###0.00);0}"
+        GridViewTextBoxColumn62.HeaderText = "Horas"
+        GridViewTextBoxColumn62.Name = "Hours"
+        GridViewTextBoxColumn63.DataType = GetType(Double)
+        GridViewTextBoxColumn63.FormatString = "{0:#,###0.00;(#,###0.00);0}"
+        GridViewTextBoxColumn63.HeaderText = "TP"
+        GridViewTextBoxColumn63.Name = "PPT"
+        GridViewTextBoxColumn64.DataType = GetType(Double)
+        GridViewTextBoxColumn64.FormatString = "{0:#,###0.00;(#,###0.00);0}"
+        GridViewTextBoxColumn64.HeaderText = "TO"
+        GridViewTextBoxColumn64.Name = "OT"
+        GridViewTextBoxColumn65.DataType = GetType(Double)
+        GridViewTextBoxColumn65.FormatString = "{0:#,###0.00 Min}"
+        GridViewTextBoxColumn65.HeaderText = "TiempoMuerto"
+        GridViewTextBoxColumn65.Name = "Downtime"
+        GridViewTextBoxColumn66.DataType = GetType(Double)
+        GridViewTextBoxColumn66.FormatString = "{0:#,###0.00 Min}"
+        GridViewTextBoxColumn66.HeaderText = "ParosPlaneados"
+        GridViewTextBoxColumn66.Name = "PlannedDowntime"
+        GridViewTextBoxColumn67.DataType = GetType(Double)
+        GridViewTextBoxColumn67.FormatString = "{0:#,###0 parts}"
+        GridViewTextBoxColumn67.HeaderText = "Rechazos"
+        GridViewTextBoxColumn67.Name = "Rejected"
+        GridViewTextBoxColumn68.DataType = GetType(Double)
+        GridViewTextBoxColumn68.FormatString = "{0:P}"
+        GridViewTextBoxColumn68.HeaderText = "Disponibilidad"
+        GridViewTextBoxColumn68.Name = "Availability"
+        GridViewTextBoxColumn69.DataType = GetType(Double)
+        GridViewTextBoxColumn69.FormatString = "{0:P}"
+        GridViewTextBoxColumn69.HeaderText = "Eficiencia"
+        GridViewTextBoxColumn69.Name = "Performance"
+        GridViewTextBoxColumn70.DataType = GetType(Double)
+        GridViewTextBoxColumn70.FormatString = "{0:P}"
+        GridViewTextBoxColumn70.HeaderText = "FTT"
+        GridViewTextBoxColumn70.Name = "Quality"
+        GridViewTextBoxColumn71.DataType = GetType(Double)
+        GridViewTextBoxColumn71.FormatString = "{0:P}"
+        GridViewTextBoxColumn71.HeaderText = "OEE"
+        GridViewTextBoxColumn71.Name = "OEE"
+        Me.GridTemp.MasterTemplate.Columns.AddRange(New Telerik.WinControls.UI.GridViewDataColumn() {GridViewTextBoxColumn43, GridViewTextBoxColumn44, GridViewTextBoxColumn45, GridViewTextBoxColumn46, GridViewTextBoxColumn47, GridViewTextBoxColumn48, GridViewTextBoxColumn49, GridViewTextBoxColumn50, GridViewTextBoxColumn51, GridViewTextBoxColumn52, GridViewTextBoxColumn53, GridViewTextBoxColumn54, GridViewTextBoxColumn55, GridViewTextBoxColumn56, GridViewTextBoxColumn57, GridViewTextBoxColumn58, GridViewTextBoxColumn59, GridViewTextBoxColumn60, GridViewTextBoxColumn61, GridViewTextBoxColumn62, GridViewTextBoxColumn63, GridViewTextBoxColumn64, GridViewTextBoxColumn65, GridViewTextBoxColumn66, GridViewTextBoxColumn67, GridViewTextBoxColumn68, GridViewTextBoxColumn69, GridViewTextBoxColumn70, GridViewTextBoxColumn71})
         Me.GridTemp.MasterTemplate.EnableGrouping = False
         Me.GridTemp.MasterTemplate.EnableSorting = False
-        Me.GridTemp.MasterTemplate.ViewDefinition = TableViewDefinition12
+        Me.GridTemp.MasterTemplate.ViewDefinition = TableViewDefinition6
         Me.GridTemp.Name = "GridTemp"
         Me.GridTemp.ReadOnly = True
         Me.GridTemp.Size = New System.Drawing.Size(1164, 220)
@@ -986,13 +921,6 @@ Partial Class ReporteProduccion
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AjusteToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         Me.ContextMenuStrip1.Size = New System.Drawing.Size(108, 26)
-        '
-        'AjusteToolStripMenuItem
-        '
-        Me.AjusteToolStripMenuItem.Image = Global.ReporteProduccion.My.Resources.Resources._1387241235_Setting
-        Me.AjusteToolStripMenuItem.Name = "AjusteToolStripMenuItem"
-        Me.AjusteToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
-        Me.AjusteToolStripMenuItem.Text = "Ajuste"
         '
         'BtnDetails
         '
@@ -1023,6 +951,78 @@ Partial Class ReporteProduccion
         Me.BtnDelete.Text = "Eliminar Reporte"
         Me.BtnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.BtnDelete.TextWrap = True
+        '
+        'AjusteToolStripMenuItem
+        '
+        Me.AjusteToolStripMenuItem.Image = Global.ReporteProduccion.My.Resources.Resources._1387241235_Setting
+        Me.AjusteToolStripMenuItem.Name = "AjusteToolStripMenuItem"
+        Me.AjusteToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
+        Me.AjusteToolStripMenuItem.Text = "Ajuste"
+        '
+        'BtnSave
+        '
+        Me.BtnSave.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnSave.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.BtnSave.ImageIndex = 4
+        Me.BtnSave.ImageList = Me.ImageList1
+        Me.BtnSave.Location = New System.Drawing.Point(309, 696)
+        Me.BtnSave.Name = "BtnSave"
+        Me.BtnSave.Size = New System.Drawing.Size(670, 57)
+        Me.BtnSave.TabIndex = 46
+        Me.BtnSave.Text = "Guardar Reporte"
+        Me.BtnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BtnSave.TextWrap = True
+        '
+        'BtnRefresh
+        '
+        Me.BtnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnRefresh.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.BtnRefresh.ImageIndex = 3
+        Me.BtnRefresh.ImageList = Me.ImageList1
+        Me.BtnRefresh.Location = New System.Drawing.Point(28, 696)
+        Me.BtnRefresh.Name = "BtnRefresh"
+        Me.BtnRefresh.Size = New System.Drawing.Size(250, 57)
+        Me.BtnRefresh.TabIndex = 39
+        Me.BtnRefresh.Text = "Actualizar"
+        Me.BtnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BtnRefresh.TextWrap = True
+        '
+        'BtnDeleteDowntime
+        '
+        Me.BtnDeleteDowntime.ImageIndex = 2
+        Me.BtnDeleteDowntime.ImageList = Me.ImageList1
+        Me.BtnDeleteDowntime.Location = New System.Drawing.Point(278, 3)
+        Me.BtnDeleteDowntime.Name = "BtnDeleteDowntime"
+        Me.BtnDeleteDowntime.Size = New System.Drawing.Size(131, 50)
+        Me.BtnDeleteDowntime.TabIndex = 2
+        Me.BtnDeleteDowntime.Text = "Eliminar Tiempo Muerto"
+        Me.BtnDeleteDowntime.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BtnDeleteDowntime.TextWrap = True
+        '
+        'BtnEditDowntime
+        '
+        Me.BtnEditDowntime.ImageIndex = 1
+        Me.BtnEditDowntime.ImageList = Me.ImageList1
+        Me.BtnEditDowntime.Location = New System.Drawing.Point(141, 3)
+        Me.BtnEditDowntime.Name = "BtnEditDowntime"
+        Me.BtnEditDowntime.Size = New System.Drawing.Size(131, 50)
+        Me.BtnEditDowntime.TabIndex = 1
+        Me.BtnEditDowntime.Text = "Editar Tiempo Muerto"
+        Me.BtnEditDowntime.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BtnEditDowntime.TextWrap = True
+        '
+        'BtnNewDowntime
+        '
+        Me.BtnNewDowntime.ImageIndex = 0
+        Me.BtnNewDowntime.ImageList = Me.ImageList1
+        Me.BtnNewDowntime.Location = New System.Drawing.Point(3, 3)
+        Me.BtnNewDowntime.Name = "BtnNewDowntime"
+        Me.BtnNewDowntime.Size = New System.Drawing.Size(131, 50)
+        Me.BtnNewDowntime.TabIndex = 0
+        Me.BtnNewDowntime.Text = "Agregar Tiempo Muerto"
+        Me.BtnNewDowntime.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BtnNewDowntime.TextWrap = True
         '
         'ReporteProduccion
         '
@@ -1069,9 +1069,6 @@ Partial Class ReporteProduccion
         CType(Me.RadPageView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.RadPageView1.ResumeLayout(False)
         Me.PageDowntime.ResumeLayout(False)
-        CType(Me.BtnDeleteDowntime, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.BtnEditDowntime, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.BtnNewDowntime, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PageRework.ResumeLayout(False)
         CType(Me.BtnDeleteRework, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BtnEditRework, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1086,13 +1083,16 @@ Partial Class ReporteProduccion
         CType(Me.RadButton1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadButton2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadButton3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.BtnRefresh, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.BtnSave, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridTemp.MasterTemplate, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridTemp, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip1.ResumeLayout(False)
         CType(Me.BtnDetails, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BtnDelete, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BtnSave, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BtnRefresh, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BtnDeleteDowntime, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BtnEditDowntime, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BtnNewDowntime, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

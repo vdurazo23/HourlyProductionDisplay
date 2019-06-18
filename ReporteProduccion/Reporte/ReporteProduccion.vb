@@ -432,11 +432,8 @@ Public Class ReporteProduccion
                             ''nueva parte
                             currpart = ReportDetailTable.DefaultView.Item(i).Item("PART")
                             CURROPENEDDATE = ReportDetailTable.DefaultView.Item(i).Item("START")
-
                             GridTemp.Rows.Add(currpart, ReportDetailTable.DefaultView.Item(i).Item("JPH"), ReportDetailTable.DefaultView.Item(i).Item("H1"), ReportDetailTable.DefaultView.Item(i).Item("H2"), ReportDetailTable.DefaultView.Item(i).Item("H3"), ReportDetailTable.DefaultView.Item(i).Item("H4"), ReportDetailTable.DefaultView.Item(i).Item("H5"), ReportDetailTable.DefaultView.Item(i).Item("H6"), ReportDetailTable.DefaultView.Item(i).Item("H7"), ReportDetailTable.DefaultView.Item(i).Item("H8"), ReportDetailTable.DefaultView.Item(i).Item("H9"), ReportDetailTable.DefaultView.Item(i).Item("H10"), ReportDetailTable.DefaultView.Item(i).Item("H11"), ReportDetailTable.DefaultView.Item(i).Item("H12"), ReportDetailTable.DefaultView.Item(i).Item("H13"), ReportDetailTable.DefaultView.Item(i).Item("H14"), ReportDetailTable.DefaultView.Item(i).Item("TOTAL"), ReportDetailTable.DefaultView.Item(i).Item("Start"), ReportDetailTable.DefaultView.Item(i).Item("End"), ReportDetailTable.DefaultView.Item(i).Item("Hours"), ReportDetailTable.DefaultView.Item(i).Item("PPT"), ReportDetailTable.DefaultView.Item(i).Item("OT"), ReportDetailTable.DefaultView.Item(i).Item("Downtime"), ReportDetailTable.DefaultView.Item(i).Item("PlannedDowntime"), ReportDetailTable.DefaultView.Item(i).Item("Rejected"))
-
                             TOTALPart = ReportDetailTable.Compute("Sum(Total)", "Part='" & currpart & "' and Start='" & CType(ReportDetailTable.DefaultView.Item(i).Item("start"), DateTime).ToString(FormatoFecha & " HH:mm:ss.fff") & "'")
-
                             TotalAjuste = 0
                             If Not IsDBNull(AdjustmentsDatatable.Compute("Sum(Quantity)", "PartNumber='" & currpart & "'")) Then
                                 TotalAjuste = AdjustmentsDatatable.Compute("Sum(Quantity)", "PartNumber='" & currpart & "'")
@@ -509,7 +506,7 @@ Public Class ReporteProduccion
                 ProductionDataTable.DefaultView.RowFilter = ""
 
                 For i = 0 To ProductionDataTable.DefaultView.Count - 1
-                    If ProductionDataTable.DefaultView.Item(i).Item("PARTNUMBER") <> currpart Or ProductionDataTable.DefaultView.Item(i).Item("OPENEDDATE") <> CURROPENEDDATE Then
+                    If ProductionDataTable.DefaultView.Item(i).Item("PARTNUMBER") <> currpart Or ProductionDataTable.DefaultView.Item(i).Item("OPENEDDATE") <> CURROPENEDDATE Then  ' 
                         ''nueva parte
 
                         currpart = ProductionDataTable.DefaultView.Item(i).Item("PARTNUMBER")
@@ -987,6 +984,7 @@ togridpopulated:
             Dim TblPartsHoursTemp As New DataTable
 
             If ProductionDataTable.DefaultView.Count = 0 Then
+                tbltemp = ReportDetailTable.DefaultView.ToTable("Hours", True, "Start")
 
             Else
                 tbltemp = ProductionDataTable.DefaultView.ToTable("Horas", True, "STARTTIME")

@@ -30,8 +30,8 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>Reporte.html</WebPage>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>13</ApplicationRevision>
-    <ApplicationVersion>1.0.0.13</ApplicationVersion>
+    <ApplicationRevision>14</ApplicationRevision>
+    <ApplicationVersion>1.0.0.14</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <ExcludeDeploymentUrl>true</ExcludeDeploymentUrl>
@@ -276,6 +276,18 @@
     <Compile Include="Reporte\ReporteProduccion.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="TPM\Add_element.Designer.vb">
+      <DependentUpon>Add_element.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TPM\Add_element.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TPM\TPM.Designer.vb">
+      <DependentUpon>TPM.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TPM\TPM.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\Get_MARS_Assets.resx">
@@ -363,6 +375,12 @@
     <EmbeddedResource Include="Reporte\ReporteProduccion.resx">
       <DependentUpon>ReporteProduccion.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TPM\Add_element.resx">
+      <DependentUpon>Add_element.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TPM\TPM.resx">
+      <DependentUpon>TPM.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -409,6 +427,8 @@
     <Content Include="favicon.ico" />
     <Content Include="MaRsicon.ico" />
     <Content Include="Reporte_icon.ico" />
+    <None Include="Resources\icons8-arriba-48 %282%29.png" />
+    <None Include="Resources\icons8-abajo-48 %281%29.png" />
     <None Include="Resources\1387241235_Setting.png" />
     <None Include="Resources\if_find_712.png" />
     <None Include="Resources\search_magnifying_glass_find-128.png" />

@@ -11,6 +11,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ReporteProduccion", "Report
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "HardwareMonitor", "HardwareMonitor\HardwareMonitor.vbproj", "{0F900DDA-DF64-49F3-93A9-026A91BA1D85}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "KPIs", "KPIs\KPIs.vbproj", "{0AEC6C79-D0EE-4C95-A359-685CEDC97193}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,12 @@ Global
 		{0F900DDA-DF64-49F3-93A9-026A91BA1D85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F900DDA-DF64-49F3-93A9-026A91BA1D85}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0F900DDA-DF64-49F3-93A9-026A91BA1D85}.Release|x86.ActiveCfg = Release|Any CPU
+		{0AEC6C79-D0EE-4C95-A359-685CEDC97193}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AEC6C79-D0EE-4C95-A359-685CEDC97193}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AEC6C79-D0EE-4C95-A359-685CEDC97193}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0AEC6C79-D0EE-4C95-A359-685CEDC97193}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AEC6C79-D0EE-4C95-A359-685CEDC97193}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AEC6C79-D0EE-4C95-A359-685CEDC97193}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

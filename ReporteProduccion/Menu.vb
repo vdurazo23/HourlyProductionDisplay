@@ -19,6 +19,7 @@ Public Class Menu
         If Not SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "Operaciones") Then RadPageStations.Enabled = False
         If Not SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "Departamentos") Then RadPageDepartments.Enabled = False
         If Not SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "Características") Then RadPageCharacteristics.Enabled = False
+        If Not SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "TPM") Then RadPageTPM.Enabled = False
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -145,7 +146,7 @@ Public Class Menu
     Dim stateq As New StationsEquipment
     Dim depconc As New DepartmentsConcepts
     Dim feat As New PartFeatures
-
+    Dim tpm As New TPM
     Private Sub RadPageView1_SelectedPageChanged(sender As Object, e As EventArgs) Handles RadPageView1.SelectedPageChanged
         If RadPageView1.SelectedPage.Name = "" Then Exit Sub
         Select Case RadPageView1.SelectedPage.Name
@@ -187,6 +188,18 @@ Public Class Menu
                 feat.FormBorderStyle = Windows.Forms.FormBorderStyle.None
                 RadPageCharacteristics.Controls.Add(feat)
                 feat.Show()
+            Case RadPageTPM.Name
+                tpm = Nothing
+                tpm = New TPM
+                tpm.TopLevel = False
+                tpm.Visible = True
+                tpm.Dock = DockStyle.Fill
+                tpm.FormBorderStyle = Windows.Forms.FormBorderStyle.None
+                RadPageTPM.Controls.Add(tpm)
+                tpm.Show()
+                tpm.activaopciones()
+
+
         End Select
     End Sub
 

@@ -127,11 +127,17 @@
             TblProd.DefaultView.RowFilter = "STARTTIME='" & CType(CboHora.SelectedValue, DateTime).ToString(FormatoFecha & " HH:mm:ss") & "'  AND PARTNUMBER='" & CboParte.SelectedValue.ToString & "'"
             getminutosdisponibles()
 
+            ErrorProvider1.Clear()
             If (TotalMins + NumericUpDown1.Value) > MinDisp Then
-                ErrorProvider1.Clear()
                 ErrorProvider1.SetError(NumericUpDown1, "Sobrepasa la cantidad de minutos permitidos en la hora (" & (MinDisp - TotalMins).ToString & ")" & vbCrLf & "Para el Número de parte Actual")
                 Exit Sub
             End If
+
+            If CboConcepto.Text = "OTROS" And txtcomments.Text = "" Then
+                ErrorProvider1.SetError(txtcomments, "Requerido!.")
+                Exit Sub
+            End If
+
             If Editar Then
                 SQLCon.EditPlannedDowntime(ELID, Convert.ToDateTime(CboHora.SelectedValue).ToString("MM/dd/yyyy HH:mm:ss"), CboConcepto.SelectedValue, NumericUpDown1.Value, txtcomments.Text, CboParte.SelectedValue.ToString)
                 MsgBox("Registro de paro planeado Modificado exitosamente", MsgBoxStyle.Information, "Editar paro planeado")

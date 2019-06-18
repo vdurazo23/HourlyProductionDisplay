@@ -54,7 +54,7 @@ Partial Class DepartmentsConcepts
         Me.NuevaOpToolStripMenuItem.Image = Global.ReporteProduccion.My.Resources.Resources._1386307661_new_file
         Me.NuevaOpToolStripMenuItem.Name = "NuevaOpToolStripMenuItem"
         Me.NuevaOpToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
-        Me.NuevaOpToolStripMenuItem.Text = "Nuevo Departamento"
+        Me.NuevaOpToolStripMenuItem.Text = "Nuevo Concepto"
         '
         'EliminarDepartamentoToolStripMenuItem
         '
