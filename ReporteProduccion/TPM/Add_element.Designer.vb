@@ -28,8 +28,8 @@ Partial Class Add_element
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.CboClas = New System.Windows.Forms.ComboBox()
+        Me.LblClas = New System.Windows.Forms.Label()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -38,73 +38,73 @@ Partial Class Add_element
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(12, 9)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(72, 13)
+        Me.Label1.Size = New System.Drawing.Size(88, 13)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "New element:"
+        Me.Label1.Text = "Nuevo elemento:"
         '
         'TextBox1
         '
         Me.TextBox1.Location = New System.Drawing.Point(12, 25)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(382, 70)
+        Me.TextBox1.Size = New System.Drawing.Size(398, 70)
         Me.TextBox1.TabIndex = 1
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(90, 162)
+        Me.Button1.Location = New System.Drawing.Point(107, 128)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(118, 27)
         Me.Button1.TabIndex = 2
-        Me.Button1.Text = "Add"
+        Me.Button1.Text = "Agregar"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(214, 162)
+        Me.Button2.Location = New System.Drawing.Point(231, 128)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(118, 27)
         Me.Button2.TabIndex = 3
-        Me.Button2.Text = "Cancel"
+        Me.Button2.Text = "Cancelar"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'ErrorProvider1
         '
         Me.ErrorProvider1.ContainerControl = Me
         '
-        'ComboBox1
+        'CboClas
         '
-        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Green", "Yellow", "Red"})
-        Me.ComboBox1.Location = New System.Drawing.Point(106, 101)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(288, 21)
-        Me.ComboBox1.TabIndex = 4
+        Me.CboClas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CboClas.FormattingEnabled = True
+        Me.CboClas.Items.AddRange(New Object() {"Green", "Yellow", "Red"})
+        Me.CboClas.Location = New System.Drawing.Point(106, 101)
+        Me.CboClas.Name = "CboClas"
+        Me.CboClas.Size = New System.Drawing.Size(304, 21)
+        Me.CboClas.TabIndex = 4
         '
-        'Label2
+        'LblClas
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(12, 104)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(63, 13)
-        Me.Label2.TabIndex = 5
-        Me.Label2.Text = "Clasification"
+        Me.LblClas.AutoSize = True
+        Me.LblClas.Location = New System.Drawing.Point(12, 104)
+        Me.LblClas.Name = "LblClas"
+        Me.LblClas.Size = New System.Drawing.Size(66, 13)
+        Me.LblClas.TabIndex = 5
+        Me.LblClas.Text = "Clasificación"
         '
         'Add_element
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(422, 201)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.ComboBox1)
+        Me.ClientSize = New System.Drawing.Size(457, 168)
+        Me.Controls.Add(Me.LblClas)
+        Me.Controls.Add(Me.CboClas)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.Label1)
         Me.Name = "Add_element"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Add_element"
+        Me.Text = "Agregar Elemento"
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -116,6 +116,6 @@ Partial Class Add_element
     Friend WithEvents Button1 As Button
     Friend WithEvents Button2 As Button
     Friend WithEvents ErrorProvider1 As ErrorProvider
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
+    Friend WithEvents LblClas As System.Windows.Forms.Label
+    Friend WithEvents CboClas As System.Windows.Forms.ComboBox
 End Class

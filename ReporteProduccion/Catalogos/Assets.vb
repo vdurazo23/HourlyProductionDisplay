@@ -36,7 +36,11 @@
                 If tblassets.Rows.Contains(sr.RadGridView1.CurrentRow.Cells(0).Value.ToString) Then
                     MsgBox("El Recurso seleccionado ya se encuentra en la colección", MsgBoxStyle.Exclamation, "Recurso Duplicado")
                 Else
-                    SQLCon.NewAsset(sr.RadGridView1.CurrentRow.Cells(0).Value, sr.RadGridView1.CurrentRow.Cells(1).Value, sr.RadGridView1.CurrentRow.Cells(2).Value, sr.RadGridView1.CurrentRow.Cells(3).Value, sr.RadGridView1.CurrentRow.Cells(4).Value, sr.RadGridView1.CurrentRow.Cells(5).Value, sr.RadGridView1.CurrentRow.Cells(6).Value, sr.RadGridView1.CurrentRow.Cells(7).Value)
+                    Dim subresourceid As Integer
+                    If (Not String.IsNullOrEmpty(sr.RadGridView1.CurrentRow.Cells(7).Value.ToString)) Then
+                        subresourceid = sr.RadGridView1.CurrentRow.Cells(7).Value
+                    End If
+                    SQLCon.NewAsset(sr.RadGridView1.CurrentRow.Cells(0).Value, sr.RadGridView1.CurrentRow.Cells(1).Value, sr.RadGridView1.CurrentRow.Cells(2).Value.ToString, sr.RadGridView1.CurrentRow.Cells(3).Value.ToString, sr.RadGridView1.CurrentRow.Cells(4).Value.ToString, sr.RadGridView1.CurrentRow.Cells(5).Value.ToString, sr.RadGridView1.CurrentRow.Cells(6).Value.ToString, subresourceid)
                     cargardatos()
                 End If
             End If
@@ -53,6 +57,19 @@
         If Not SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "Recursos", "Eliminar") Then
             MsgBox("No tiene permisos para esta opción" & vbCrLf & "Consulte al Administrador del Sistema", MsgBoxStyle.Exclamation, "Permisos")
             Exit Sub
+        End If
+        If MsgBox("Seguro que desea eliminar el Recurso seleccionado?", MsgBoxStyle.YesNoCancel + MsgBoxStyle.Question, "Eliminar Recurso") = MsgBoxResult.Yes Then
+            SQLCon.DeleteResource(GridAssets.CurrentRow.Cells(0).Value)
+            cargardatos()
+        End If
+    End Sub
+
+    Private Sub BtnEditResource_Click(sender As Object, e As EventArgs) Handles BtnEditResource.Click
+        Dim edas As New EditAsset
+        edas.elid = GridAssets.CurrentRow.Cells(0).Value
+        edas.StartPosition = FormStartPosition.CenterScreen
+        If edas.ShowDialog() = Windows.Forms.DialogResult.OK Then
+            cargardatos()
         End If
     End Sub
 End Class

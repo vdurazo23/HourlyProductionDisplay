@@ -30,8 +30,8 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>Reporte.html</WebPage>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>14</ApplicationRevision>
-    <ApplicationVersion>1.0.0.14</ApplicationVersion>
+    <ApplicationRevision>24</ApplicationRevision>
+    <ApplicationVersion>1.0.0.24</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <ExcludeDeploymentUrl>true</ExcludeDeploymentUrl>
@@ -89,11 +89,32 @@
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AquaGauge">
       <HintPath>..\..\..\..\FreeGaugeExample\FreeGaugeExample\FreeGaugeExample\bin\Debug\AquaGauge.dll</HintPath>
+    </Reference>
+    <Reference Include="DPFPGuiNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=d4f4a0bd9c559145, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>H:\Proyectos\RETRABAJOS\RETRABAJOS\RETRABAJOS\bin\Debug\DPFPGuiNET.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DPFPShrNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=d902fe275a8d6cf2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>H:\Proyectos\RETRABAJOS\RETRABAJOS\RETRABAJOS\bin\Debug\DPFPShrNET.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DPFPVerNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=4de0a9c4dcc83984, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>H:\Proyectos\RETRABAJOS\RETRABAJOS\RETRABAJOS\bin\Debug\DPFPVerNET.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -131,6 +152,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\EditAsset.Designer.vb">
+      <DependentUpon>EditAsset.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\EditAsset.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Assets\Get_MARS_Assets.Designer.vb">
       <DependentUpon>Get_MARS_Assets.vb</DependentUpon>
     </Compile>
@@ -276,10 +303,32 @@
     <Compile Include="Reporte\ReporteProduccion.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="TPM\Add_category.Designer.vb">
+      <DependentUpon>Add_category.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TPM\Add_category.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="TPM\Add_element.Designer.vb">
       <DependentUpon>Add_element.vb</DependentUpon>
     </Compile>
     <Compile Include="TPM\Add_element.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TPM\AppData.vb" />
+    <Compile Include="TPM\ColourDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TPM\NoProducción.Designer.vb">
+      <DependentUpon>NoProducción.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TPM\NoProducción.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TPM\Reporte.Designer.vb">
+      <DependentUpon>Reporte.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TPM\Reporte.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TPM\TPM.Designer.vb">
@@ -288,8 +337,23 @@
     <Compile Include="TPM\TPM.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="TPM\TPMReporte.Designer.vb">
+      <DependentUpon>TPMReporte.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TPM\TPMReporte.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TPM\VerificationForm.Designer.vb">
+      <DependentUpon>VerificationForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TPM\VerificationForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Assets\EditAsset.resx">
+      <DependentUpon>EditAsset.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Assets\Get_MARS_Assets.resx">
       <DependentUpon>Get_MARS_Assets.vb</DependentUpon>
     </EmbeddedResource>
@@ -312,6 +376,9 @@
       <DependentUpon>Config.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.en-US.resx">
+      <DependentUpon>Menu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu.en.resx">
       <DependentUpon>Menu.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.es.resx">
@@ -375,11 +442,29 @@
     <EmbeddedResource Include="Reporte\ReporteProduccion.resx">
       <DependentUpon>ReporteProduccion.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TPM\Add_category.resx">
+      <DependentUpon>Add_category.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TPM\Add_element.resx">
       <DependentUpon>Add_element.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TPM\ColourDialog.resx">
+      <DependentUpon>ColourDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TPM\NoProducción.resx">
+      <DependentUpon>NoProducción.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TPM\Reporte.resx">
+      <DependentUpon>Reporte.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TPM\TPM.resx">
       <DependentUpon>TPM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TPM\TPMReporte.resx">
+      <DependentUpon>TPMReporte.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TPM\VerificationForm.resx">
+      <DependentUpon>VerificationForm.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -440,22 +525,82 @@
   <ItemGroup>
     <PublishFile Include="CrystalDecisions.Shared">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DPFPCtlXTypeLibNET">
+      <Visible>False</Visible>
       <PublishState>Include</PublishState>
       <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DPFPCtlXWrapperNET">
+      <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="DPFPShrXTypeLibNET">
+      <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="log4net">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.ReportViewer.DataVisualization">
+      <Visible>False</Visible>
+      <PublishState>Include</PublishState>
       <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.ReportViewer.ProcessingObjectModel">
+      <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.SqlServer.Types">
+      <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>

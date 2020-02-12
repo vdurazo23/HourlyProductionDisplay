@@ -39,6 +39,7 @@ Partial Class NewPlannedDowntime
         Me.CboParte = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.LblReferencia = New System.Windows.Forms.Label()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadButton2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadButton1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -129,7 +130,7 @@ Partial Class NewPlannedDowntime
         '
         Me.RadButton2.ImageIndex = 1
         Me.RadButton2.ImageList = Me.ImageList1
-        Me.RadButton2.Location = New System.Drawing.Point(288, 227)
+        Me.RadButton2.Location = New System.Drawing.Point(288, 289)
         Me.RadButton2.Name = "RadButton2"
         Me.RadButton2.Size = New System.Drawing.Size(128, 59)
         Me.RadButton2.TabIndex = 6
@@ -148,7 +149,7 @@ Partial Class NewPlannedDowntime
         '
         Me.RadButton1.ImageIndex = 0
         Me.RadButton1.ImageList = Me.ImageList1
-        Me.RadButton1.Location = New System.Drawing.Point(151, 227)
+        Me.RadButton1.Location = New System.Drawing.Point(151, 289)
         Me.RadButton1.Name = "RadButton1"
         Me.RadButton1.Size = New System.Drawing.Size(128, 59)
         Me.RadButton1.TabIndex = 5
@@ -190,12 +191,24 @@ Partial Class NewPlannedDowntime
         '
         Me.ErrorProvider1.ContainerControl = Me
         '
+        'LblReferencia
+        '
+        Me.LblReferencia.AutoSize = True
+        Me.LblReferencia.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblReferencia.Location = New System.Drawing.Point(127, 224)
+        Me.LblReferencia.Name = "LblReferencia"
+        Me.LblReferencia.Size = New System.Drawing.Size(87, 20)
+        Me.LblReferencia.TabIndex = 29
+        Me.LblReferencia.Text = "Referencia"
+        Me.LblReferencia.Visible = False
+        '
         'NewPlannedDowntime
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(567, 306)
+        Me.ClientSize = New System.Drawing.Size(567, 360)
+        Me.Controls.Add(Me.LblReferencia)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.CboParte)
         Me.Controls.Add(Me.RadButton2)
@@ -236,4 +249,5 @@ Partial Class NewPlannedDowntime
     Friend WithEvents CboParte As System.Windows.Forms.ComboBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents ErrorProvider1 As System.Windows.Forms.ErrorProvider
+    Friend WithEvents LblReferencia As System.Windows.Forms.Label
 End Class

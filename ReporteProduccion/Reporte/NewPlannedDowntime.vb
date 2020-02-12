@@ -102,6 +102,16 @@
                 NumericUpDown1.Value = tbltmp.DefaultView.Item(0).Item("Minutes")
                 CurrentMinsValue = tbltmp.DefaultView.Item(0).Item("Minutes")
                 txtcomments.Text = tbltmp.DefaultView.Item(0).Item("Comments")
+
+                If Not IsDBNull(tbltmp.DefaultView.Item(0).Item("DT_Id")) Then
+                    NumericUpDown1.Enabled = False
+                    LblReferencia.Text = tbltmp.DefaultView.Item(0).Item("DT_Id").ToString()
+                    LblReferencia.Visible = True
+                Else
+                    LblReferencia.Text = ""
+                    LblReferencia.Visible = False
+                End If
+
             End If
 
         Catch ex As Exception
@@ -155,7 +165,7 @@
     Private Sub CboConcepto_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboConcepto.SelectedIndexChanged
 
         Try
-
+            If LblReferencia.Text.Trim <> "" Then Exit Sub
             TblConcepts2.DefaultView.RowFilter = "id=" & CboConcepto.SelectedValue.ToString
 
             NumericUpDown1.Value = TblConcepts2.DefaultView.Item(0).Item("DefaultValue")

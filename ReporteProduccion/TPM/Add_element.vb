@@ -1,10 +1,10 @@
 ﻿Public Class Add_element
     Public texto As String
-
+    Public ShowColor As Boolean = False
     Function Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         ErrorProvider1.Clear()
         If TextBox1.Text.Trim = "" Then
-            ErrorProvider1.SetError(TextBox1, "¨Please fill this space")
+            ErrorProvider1.SetError(TextBox1, "Requerido...!")
             Exit Function
         End If
         texto = TextBox1.Text
@@ -28,7 +28,8 @@
     End Function
 
     Private Sub Add_element_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If ComboBox1.SelectedIndex < 0 Then ComboBox1.SelectedIndex = 0
-
+        If CboClas.SelectedIndex < 0 Then CboClas.SelectedIndex = 0
+        LblClas.Visible = ShowColor
+        CboClas.Visible = ShowColor
     End Sub
 End Class

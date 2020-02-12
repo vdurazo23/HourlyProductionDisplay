@@ -49,11 +49,25 @@ Partial Class NewDowntime
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.RadButton3 = New Telerik.WinControls.UI.RadButton()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.LblReferencia = New System.Windows.Forms.Label()
+        Me.LblStartEndtimes = New System.Windows.Forms.Label()
+        Me.ChkPlaneado = New System.Windows.Forms.CheckBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.LblReferencia2 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.txtcomments2 = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.NumericUpDown2 = New System.Windows.Forms.NumericUpDown()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.CboPlanConcepto = New System.Windows.Forms.ComboBox()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadButton2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadButton1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadButton3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
+        CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'CboHora
@@ -121,6 +135,7 @@ Partial Class NewDowntime
         Me.NumericUpDown1.DecimalPlaces = 2
         Me.NumericUpDown1.Font = New System.Drawing.Font("Microsoft Sans Serif", 22.0!)
         Me.NumericUpDown1.Location = New System.Drawing.Point(133, 187)
+        Me.NumericUpDown1.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
         Me.NumericUpDown1.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NumericUpDown1.Name = "NumericUpDown1"
         Me.NumericUpDown1.Size = New System.Drawing.Size(120, 41)
@@ -141,7 +156,7 @@ Partial Class NewDowntime
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(281, 200)
+        Me.Label5.Location = New System.Drawing.Point(259, 208)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(75, 20)
         Me.Label5.TabIndex = 8
@@ -230,7 +245,7 @@ Partial Class NewDowntime
         '
         Me.RadButton2.ImageIndex = 1
         Me.RadButton2.ImageList = Me.ImageList1
-        Me.RadButton2.Location = New System.Drawing.Point(422, 306)
+        Me.RadButton2.Location = New System.Drawing.Point(422, 491)
         Me.RadButton2.Name = "RadButton2"
         Me.RadButton2.Size = New System.Drawing.Size(128, 59)
         Me.RadButton2.TabIndex = 10
@@ -250,7 +265,7 @@ Partial Class NewDowntime
         '
         Me.RadButton1.ImageIndex = 0
         Me.RadButton1.ImageList = Me.ImageList1
-        Me.RadButton1.Location = New System.Drawing.Point(285, 306)
+        Me.RadButton1.Location = New System.Drawing.Point(285, 491)
         Me.RadButton1.Name = "RadButton1"
         Me.RadButton1.Size = New System.Drawing.Size(128, 59)
         Me.RadButton1.TabIndex = 9
@@ -293,12 +308,145 @@ Partial Class NewDowntime
         Me.RadButton3.TextWrap = True
         Me.ToolTip1.SetToolTip(Me.RadButton3, "Buscar (F1)")
         '
+        'LblReferencia
+        '
+        Me.LblReferencia.AutoSize = True
+        Me.LblReferencia.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblReferencia.Location = New System.Drawing.Point(374, 184)
+        Me.LblReferencia.Name = "LblReferencia"
+        Me.LblReferencia.Size = New System.Drawing.Size(87, 20)
+        Me.LblReferencia.TabIndex = 24
+        Me.LblReferencia.Text = "Referencia"
+        Me.LblReferencia.Visible = False
+        '
+        'LblStartEndtimes
+        '
+        Me.LblStartEndtimes.AutoSize = True
+        Me.LblStartEndtimes.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblStartEndtimes.Location = New System.Drawing.Point(374, 208)
+        Me.LblStartEndtimes.Name = "LblStartEndtimes"
+        Me.LblStartEndtimes.Size = New System.Drawing.Size(124, 20)
+        Me.LblStartEndtimes.TabIndex = 25
+        Me.LblStartEndtimes.Text = "Start - End Time"
+        Me.LblStartEndtimes.Visible = False
+        '
+        'ChkPlaneado
+        '
+        Me.ChkPlaneado.AutoSize = True
+        Me.ChkPlaneado.Enabled = False
+        Me.ChkPlaneado.Location = New System.Drawing.Point(142, 306)
+        Me.ChkPlaneado.Name = "ChkPlaneado"
+        Me.ChkPlaneado.Size = New System.Drawing.Size(71, 17)
+        Me.ChkPlaneado.TabIndex = 26
+        Me.ChkPlaneado.Text = "Planeado"
+        Me.ChkPlaneado.UseVisualStyleBackColor = True
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.LblReferencia2)
+        Me.GroupBox1.Controls.Add(Me.Label14)
+        Me.GroupBox1.Controls.Add(Me.txtcomments2)
+        Me.GroupBox1.Controls.Add(Me.Label11)
+        Me.GroupBox1.Controls.Add(Me.Label12)
+        Me.GroupBox1.Controls.Add(Me.NumericUpDown2)
+        Me.GroupBox1.Controls.Add(Me.Label13)
+        Me.GroupBox1.Controls.Add(Me.CboPlanConcepto)
+        Me.GroupBox1.Enabled = False
+        Me.GroupBox1.Location = New System.Drawing.Point(133, 306)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(650, 179)
+        Me.GroupBox1.TabIndex = 27
+        Me.GroupBox1.TabStop = False
+        '
+        'LblReferencia2
+        '
+        Me.LblReferencia2.AutoSize = True
+        Me.LblReferencia2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblReferencia2.Location = New System.Drawing.Point(413, 70)
+        Me.LblReferencia2.Name = "LblReferencia2"
+        Me.LblReferencia2.Size = New System.Drawing.Size(87, 20)
+        Me.LblReferencia2.TabIndex = 32
+        Me.LblReferencia2.Text = "Referencia"
+        Me.LblReferencia2.Visible = False
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(46, 117)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(103, 20)
+        Me.Label14.TabIndex = 31
+        Me.Label14.Text = "Comentarios:"
+        '
+        'txtcomments2
+        '
+        Me.txtcomments2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtcomments2.Location = New System.Drawing.Point(190, 104)
+        Me.txtcomments2.Multiline = True
+        Me.txtcomments2.Name = "txtcomments2"
+        Me.txtcomments2.Size = New System.Drawing.Size(398, 66)
+        Me.txtcomments2.TabIndex = 30
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(332, 70)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(75, 20)
+        Me.Label11.TabIndex = 29
+        Me.Label11.Text = "(Minutos)"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(46, 70)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(61, 20)
+        Me.Label12.TabIndex = 28
+        Me.Label12.Text = "Tiempo"
+        '
+        'NumericUpDown2
+        '
+        Me.NumericUpDown2.DecimalPlaces = 2
+        Me.NumericUpDown2.Font = New System.Drawing.Font("Microsoft Sans Serif", 22.0!)
+        Me.NumericUpDown2.Location = New System.Drawing.Point(190, 57)
+        Me.NumericUpDown2.Name = "NumericUpDown2"
+        Me.NumericUpDown2.Size = New System.Drawing.Size(120, 41)
+        Me.NumericUpDown2.TabIndex = 26
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(46, 26)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(78, 20)
+        Me.Label13.TabIndex = 27
+        Me.Label13.Text = "Concepto"
+        '
+        'CboPlanConcepto
+        '
+        Me.CboPlanConcepto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CboPlanConcepto.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CboPlanConcepto.FormattingEnabled = True
+        Me.CboPlanConcepto.Location = New System.Drawing.Point(190, 23)
+        Me.CboPlanConcepto.Name = "CboPlanConcepto"
+        Me.CboPlanConcepto.Size = New System.Drawing.Size(398, 28)
+        Me.CboPlanConcepto.TabIndex = 25
+        '
         'NewDowntime
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(834, 390)
+        Me.ClientSize = New System.Drawing.Size(834, 562)
+        Me.Controls.Add(Me.ChkPlaneado)
+        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.LblStartEndtimes)
+        Me.Controls.Add(Me.LblReferencia)
         Me.Controls.Add(Me.RadButton3)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.CboParte)
@@ -331,6 +479,9 @@ Partial Class NewDowntime
         CType(Me.RadButton1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadButton3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -360,4 +511,16 @@ Partial Class NewDowntime
     Friend WithEvents ErrorProvider1 As System.Windows.Forms.ErrorProvider
     Friend WithEvents RadButton3 As Telerik.WinControls.UI.RadButton
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents LblStartEndtimes As System.Windows.Forms.Label
+    Friend WithEvents LblReferencia As System.Windows.Forms.Label
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents ChkPlaneado As System.Windows.Forms.CheckBox
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents NumericUpDown2 As System.Windows.Forms.NumericUpDown
+    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents CboPlanConcepto As System.Windows.Forms.ComboBox
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents txtcomments2 As System.Windows.Forms.TextBox
+    Friend WithEvents LblReferencia2 As System.Windows.Forms.Label
 End Class

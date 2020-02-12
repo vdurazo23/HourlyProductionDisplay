@@ -12,6 +12,7 @@ Public Class SQLCon
 
     Public Shared cmd As New SqlClient.SqlCommand("", Cn)
     Public Shared cmdMARS As New SqlClient.SqlCommand("", Cn)
+    Public Shared cmdCMS As New Odbc.OdbcCommand("", CnCMS)
 
     Public Shared ds As New DataSet
 #Region "ConnectionStrings"
@@ -63,7 +64,7 @@ Public Class SQLCon
 
             Dim ds As New DataSet
             Dim da As New SqlClient.SqlDataAdapter("", CnMPS)
-            da.SelectCommand.CommandText = "select Id,usuario,password,activo from dbo.usuarios where usuario=@usuario"
+            da.SelectCommand.CommandText = "select Id,usuario,password,activo,CB_CODIGO from dbo.usuarios where usuario=@usuario"
             da.SelectCommand.Parameters.Add("@usuario", SqlDbType.VarChar)
             da.SelectCommand.Parameters("@usuario").Value = Username
 
@@ -79,6 +80,7 @@ Public Class SQLCon
                     If ds.Tables("Usuario").DefaultView.Item(0).Item("Password") = Password Then
                         My.Settings.UserId = ds.Tables("Usuario").DefaultView.Item(0).Item("Id").ToString
                         My.Settings.UserName = ds.Tables("Usuario").DefaultView.Item(0).Item("usuario")
+                        My.Settings.CB_CODIGO = ds.Tables("Usuario").DefaultView.Item(0).Item("CB_CODIGO")
                         My.Settings.Save()
                         Return "OK"
                     Else
@@ -93,6 +95,7 @@ Public Class SQLCon
             If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
         End Try
     End Function
+
     Shared Function getPermiso(ByVal Usuario As Integer, ByVal Sistema As String, Optional ByVal Modulo As String = "", Optional ByVal Accion As String = "") As Boolean
         Try
             CnMPS.ConnectionString = constringMPS()
@@ -118,6 +121,27 @@ Public Class SQLCon
             Throw New Exception(ex.Message)
         Finally
             If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+    End Function
+
+    Shared Function GetLineaByID(ByVal elid As Integer) As DataTable
+        Try
+            Cn.ConnectionString = constring()
+            If Cn.State = ConnectionState.Closed Then Cn.Open()
+
+            da.SelectCommand.CommandText = "select * from dbo.Asset where id=" & elid.ToString
+            da.SelectCommand.Connection = Cn
+
+            ds.Tables.Clear()
+            da.Fill(ds, "Lineas")
+
+            Cn.Close()
+
+            Return ds.Tables("Lineas")
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        Finally
+            If Cn.State = ConnectionState.Open Then Cn.Close()
         End Try
     End Function
 
@@ -188,6 +212,31 @@ Public Class SQLCon
             da.Fill(ds, "ReworkCodes")
             Cn.Close()
             Return ds.Tables("ReworkCodes")
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        Finally
+            If Cn.State = ConnectionState.Open Then Cn.Close()
+        End Try
+    End Function
+
+
+
+    Shared Function EditAsset(ByVal ID As Integer, ByVal UseTheoretical As Boolean)
+        Try
+
+            Cn.ConnectionString = constring()
+            If Cn.State = ConnectionState.Closed Then Cn.Open()
+            cmd.CommandText = "UPDATE [dbo].[Asset]  SET UseTheoretical = @Theoretical where id=@ID"
+            cmd.Connection = Cn
+            cmd.Parameters.Clear()
+
+            cmd.Parameters.Add("@ID", SqlDbType.Int)
+            cmd.Parameters.Add("@Theoretical", SqlDbType.Bit)
+            
+            cmd.Parameters("@ID").Value = ID
+            cmd.Parameters("@Theoretical").Value = UseTheoretical
+            cmd.ExecuteNonQuery()
+            Return 1
         Catch ex As Exception
             Throw New Exception(ex.Message)
         Finally
@@ -607,6 +656,34 @@ Public Class SQLCon
     End Function
 #End Region
 
+#Region "CMS Rates"
+    Shared Function GetCMSTheoricalRate(ByVal partnumber As String, ByVal dept As String, ByVal resource As String) As Integer
+        Try
+            CnCMS.ConnectionString = constringCMS()
+            If CnCMS.State = ConnectionState.Closed Then CnCMS.Open()
+
+            Dim retval As Integer = 0
+            cmdCMS.CommandText = "select AOFUTD from METHDR WHERE AOPART='" & partnumber & "' AND AODEPT='" & dept & "' AND AORESC='" & resource & "'"
+            retval = cmdCMS.ExecuteScalar
+
+            If retval > 0 Then Return retval
+
+            cmdCMS.CommandText = "select ARFUTD from METHDA WHERE ARPART='" & partnumber & "' AND ARDEPT='" & dept & "' AND ARRESC='" & resource & "'"
+            retval = cmdCMS.ExecuteScalar
+
+            If retval > 0 Then
+                Return retval
+            Else
+                Return -1
+            End If
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        Finally
+            If CnCMS.State = ConnectionState.Open Then CnCMS.Close()
+        End Try
+    End Function
+#End Region
+
 #Region "TPM´s"
 
     'Select
@@ -672,7 +749,7 @@ Public Class SQLCon
 
             CnCMS.ConnectionString = constringCMS()
             If CnCMS.State = ConnectionState.Closed Then CnCMS.Open()
-            dacms.SelectCommand.CommandText = "select * from ABC.CONFIG_ABC"
+            dacms.SelectCommand.CommandText = "select * from ABC.CONFIG_ABC WHERE ASSET <>''"
             dacms.SelectCommand.Connection = CnCMS
             ds.Tables.Clear()
             dacms.Fill(ds, "Stations")
@@ -1012,6 +1089,516 @@ Public Class SQLCon
         End Try
 
     End Function
+
+    Shared Function TPMcategories() As DataTable
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+
+            da.SelectCommand.CommandText = "Select * from [tpm].[TPM_Categorias]"
+            da.SelectCommand.Connection = CnMPS
+            ds.Tables.Clear()
+            da.Fill(ds, "Categories")
+            CnMPS.Close()
+            Return ds.Tables("Categories")
+
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+    End Function
+
+    Shared Function TPMcategoriesInsert(ByVal Categoria As String)
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+
+            cmd.CommandText = "Insert into [Tpm].[TPM_Categorias](Categoria,Simbolo,ColorName)VALUES(@cat,1,'Black')"
+            cmd.Connection = CnMPS
+            cmd.Parameters.Clear()
+
+
+            cmd.Parameters.Add("@cat", SqlDbType.VarChar)
+            cmd.Parameters("@cat").Value = Categoria
+
+
+            cmd.ExecuteNonQuery()
+            CnMPS.Close()
+            Return 1
+
+        Catch ex As Exception
+            Return 0
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+    End Function
+
+    Shared Function TPMcategoriesUpdate(ByVal id As Integer, ByVal Categoria As String, ByVal Simbolo As Integer, ByVal ColorName As String)
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            cmd.CommandText = "UPDATE [tpm].[TPM_Categorias] SET Categoria = @Categoria, Simbolo = @Simbolo, ColorName = @Color where ID = @id"
+            cmd.Connection = CnMPS
+            cmd.Parameters.Clear()
+
+            cmd.Parameters.Add("@Categoria", SqlDbType.VarChar)
+            cmd.Parameters.Add("@Simbolo", SqlDbType.Int)
+            cmd.Parameters.Add("@Color", SqlDbType.VarChar)
+            cmd.Parameters.Add("@id", SqlDbType.Int)
+
+            cmd.Parameters("@Categoria").Value = Categoria
+            cmd.Parameters("@Simbolo").Value = Simbolo
+            cmd.Parameters("@Color").Value = ColorName
+            cmd.Parameters("@id").Value = id
+
+            cmd.ExecuteNonQuery()
+            CnMPS.Close()
+
+            Return 1
+        Catch ex As Exception
+            Return 0
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+    End Function
+
+    Shared Function TPMCategoriesCount(ByVal id As Integer) As Integer
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            cmd.CommandText = "select count(*) From [tpm].[TPM_Elementos] where Categoria_ID = " & id.ToString
+            cmd.Connection = CnMPS
+            cmd.Parameters.Clear()
+           
+            Dim retval As Integer
+            retval = cmd.ExecuteScalar()
+            Return retval
+        Catch ex As Exception            
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+    End Function
+
+    Shared Function TPMcategoriesDelete(ByVal id As Integer)
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            cmd.CommandText = "Delete From [tpm].[TPM_Categorias] where ID = @id"
+            cmd.Connection = CnMPS
+            cmd.Parameters.Clear()
+            cmd.Parameters.Add("@id", SqlDbType.Int)
+            cmd.Parameters("@id").Value = id
+            cmd.ExecuteNonQuery()          
+            Return 1
+        Catch ex As Exception           
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+    End Function
+
+    Shared Function TPMdefects() As DataTable
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            da.SelectCommand.CommandText = "Select * from tpm.TPM_Defectos"
+            da.SelectCommand.Connection = CnMPS
+            ds.Tables.Clear()
+            da.Fill(ds, "Defects")            
+            Return ds.Tables("Defects")
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+    End Function
+
+    Shared Function TPMdefectsInsert(ByVal Defecto As String)
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+
+            cmd.CommandText = "Insert into [tpm].[TPM_Defectos]([Defecto])VALUES(" &
+                "@Defecto); select @@IDENTITY"
+            cmd.Connection = CnMPS
+            cmd.Parameters.Clear()
+
+            cmd.Parameters.Add("@Defecto", SqlDbType.VarChar)
+            cmd.Parameters("@Defecto").Value = Defecto
+            Dim re As Integer = 0
+            re = cmd.ExecuteScalar()
+            Return re
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+    End Function
+
+    Shared Function TPMdefectsUpdate(ByVal id As Integer, ByVal Defecto As String)
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            cmd.CommandText = "Update [tpm].[TPM_Defectos] SET Defecto = @Defecto where id = @ID"
+            cmd.Connection = CnMPS
+            cmd.Parameters.Clear()
+
+            cmd.Parameters.Add("@Defecto", SqlDbType.VarChar)
+            cmd.Parameters("@Defecto").Value = Defecto
+            cmd.Parameters.Add("@ID", SqlDbType.VarChar)
+            cmd.Parameters("@ID").Value = id
+
+            cmd.ExecuteNonQuery()
+            Return 1
+            CnMPS.Close()
+        Catch ex As Exception
+            Return 0
+            Throw New Exception(ex.Message)
+        Finally
+
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+
+        End Try
+    End Function
+
+    Shared Function TPMdefectsDeleteCount(ByVal id As Integer) As Integer
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            cmd.CommandText = "select count(*) from tpm.TPM_Result_Defectos where defectoid=" & id.ToString
+            cmd.Connection = CnMPS
+            cmd.Parameters.Clear()
+            Return cmd.ExecuteScalar            
+        Catch ex As Exception
+
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+    End Function
+
+    Shared Function TPMdefectsDelete(ByVal id As Integer)
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            cmd.CommandText = "Delete From [TPM].[TPM_Defectos] where id = @id"
+            cmd.Connection = CnMPS
+            cmd.Parameters.Clear()
+
+            cmd.Parameters.Add("@id", SqlDbType.VarChar)
+            cmd.Parameters("@id").Value = id
+
+            cmd.ExecuteNonQuery()         
+            Return 1
+        Catch ex As Exception
+            Return 0
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+    End Function
+
+    Shared Function TPMdef_rel() As DataTable
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+
+            da.SelectCommand.CommandText = "Select * from [tpm].[TPM_Elementos]   order by Asset,Station,Categoria_ID,Elemento"
+            da.SelectCommand.Connection = CnMPS
+            ds.Tables.Clear()
+            da.Fill(ds, "Relations")
+            CnMPS.Close()
+            Return ds.Tables("Relations")
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+    End Function
+
+    Shared Function TPMdef_rel_Insert(ByVal Categoria_ID As Integer, ByVal Asset As String, ByVal Station As String, ByVal elemento As String)
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            cmd.CommandText = "Insert into [tpm].[TPM_Elementos](Categoria_ID,Asset,Station,Elemento)VALUES(@cat,@Asset,@Station,@Element); select @@IDENTITY"
+            cmd.Connection = CnMPS
+            cmd.Parameters.Clear()
+
+            cmd.Parameters.Add("@cat", SqlDbType.Int)
+            cmd.Parameters.Add("@Asset", SqlDbType.VarChar)
+            cmd.Parameters.Add("@Station", SqlDbType.VarChar)
+            cmd.Parameters.Add("@Element", SqlDbType.VarChar)
+
+            cmd.Parameters("@cat").Value = Categoria_ID
+            cmd.Parameters("@Asset").Value = Asset
+            cmd.Parameters("@Station").Value = Station
+            cmd.Parameters("@Element").Value = elemento
+
+
+            Dim re = cmd.ExecuteScalar()
+            CnMPS.Close()
+            Return re
+        Catch ex As Exception
+            Return 0
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+    End Function
+
+    Shared Function TPMdef_rel_Update(ByVal ID As Integer, ByVal elemento As String)
+        Try
+
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            cmd.CommandText = "Update [tpm].[TPM_Elementos] set Elemento = @Element where id = @id"
+            cmd.Connection = CnMPS
+            cmd.Parameters.Clear()
+
+            cmd.Parameters.Add("@id", SqlDbType.Int)
+            cmd.Parameters.Add("@Element", SqlDbType.VarChar)
+
+            cmd.Parameters("@id").Value = ID
+            cmd.Parameters("@Element").Value = elemento
+
+
+            cmd.ExecuteNonQuery()
+
+            CnMPS.Close()
+            Return 1
+        Catch ex As Exception
+            Return 0
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+    End Function
+
+    Shared Function TPMdef_rel_Delete(ByVal id As Integer)
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            cmd.CommandText = "Delete from [tpm].[TPM_Elementos] where id = @id"
+            cmd.Connection = CnMPS
+            cmd.Parameters.Clear()
+
+            cmd.Parameters.Add("@id", SqlDbType.VarChar)
+            cmd.Parameters("@id").Value = id
+
+            cmd.ExecuteNonQuery()
+            CnMPS.Close()
+            Return 1
+        Catch ex As Exception
+            Return 0
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+    End Function
+
+    Shared Function TPMcat_rel_delete(ByVal cat_id As Integer, ByVal asset As String, ByVal station As String)
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            cmd.CommandText = "Delete from [tpm].[TPM_Elementos] where Categoria_ID = @cat_id and Asset = @asset and Station = @stat"
+            cmd.Connection = CnMPS
+            cmd.Parameters.Clear()
+
+            cmd.Parameters.Add("@cat_id", SqlDbType.Int)
+            cmd.Parameters.Add("@asset", SqlDbType.VarChar)
+            cmd.Parameters.Add("@stat", SqlDbType.VarChar)
+            cmd.Parameters("@cat_id").Value = cat_id
+            cmd.Parameters("@asset").Value = asset
+            cmd.Parameters("@stat").Value = station
+
+            cmd.ExecuteNonQuery()
+            Return 1
+            CnMPS.Close()
+
+        Catch ex As Exception
+            Return 0
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+    End Function
+
+    Shared Function Huellas(ByVal cb_codigo As String) As DataTable
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            da.SelectCommand.Parameters.Clear()
+            da.SelectCommand.Parameters.Add("@CB_CODIGO", SqlDbType.VarChar)
+            da.SelectCommand.Parameters("@CB_CODIGO").Value = cb_codigo
+            da.SelectCommand.CommandText = "Select * from [dbo].[COMEDOR_HUELLAS] where CB_CODIGO= @CB_CODIGO"
+            da.SelectCommand.Connection = CnMPS
+            ds.Tables.Clear()
+            da.Fill(ds, "Huellas")
+            CnMPS.Close()
+            Return ds.Tables("Huellas")
+
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+    End Function
+
+    Shared Function TPMrepTot(ByVal fecha As Date, ByVal turno As Integer, ByVal linea As String) As DataTable
+        Try
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            da.SelectCommand.Parameters.Clear()
+            'da.SelectCommand.CommandText = "select r.id,s.Asset,s.Station,TPM_Result,CB_CODIGO,r.CB_CODIGO_Aprueba,r.Aprueba_datetime FROM [MaRs].[tpm].[Tpm_Station] s left join mars.tpm.TPM_Result  r  on s.Asset = r.Asset  and s.Station = r.Station AND date = @fecha and Shift = @turno Where s.Asset = @asset"
+            da.SelectCommand.CommandText = "select r.id,s.Asset,s.Station,case when TPM_Result is null and @fecha <= getdate() then 0 when TPM_Result is null and @fecha > getdate() then 5 else TPM_Result end as TPM_Result,CB_CODIGO,r.CB_CODIGO_Aprueba,r.Aprueba_datetime FROM [MaRs].[tpm].[Tpm_Station] s left join mars.tpm.TPM_Result  r  on s.Asset = r.Asset  and s.Station = r.Station AND date = @fecha and Shift = @turno Where s.Asset = @asset"
+            'da.SelectCommand.Parameters.Add("@fecha", SqlDbType.Date)
+            da.SelectCommand.Parameters.Add("@turno", SqlDbType.Int)
+            da.SelectCommand.Parameters.Add("@asset", SqlDbType.VarChar)
+
+            'da.SelectCommand.Parameters("@fecha").Value = fecha
+            da.SelectCommand.Parameters.AddWithValue("@fecha", fecha)
+            da.SelectCommand.Parameters("@turno").Value = turno
+            da.SelectCommand.Parameters("@asset").Value = linea
+            da.SelectCommand.Connection = CnMPS
+            ds.Tables.Clear()
+            da.Fill(ds, "Stations_comp")
+            CnMPS.Close()
+            Return ds.Tables("Stations_comp")
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+        End Try
+    End Function
+
+    Shared Function Aprob_tpm(ByVal id As List(Of Integer), ByVal cb_codigo As String)
+        Dim tra As SqlClient.SqlTransaction
+        Try
+
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            tra = CnMPS.BeginTransaction()
+
+            cmd.Connection = CnMPS
+            cmd.Parameters.Clear()
+            cmd.Transaction = tra
+            cmd.Parameters.Add("@CB_CODIGO", SqlDbType.Int)
+            cmd.Parameters("@CB_CODIGO").Value = cb_codigo
+            cmd.Parameters.Add("@ID", SqlDbType.Int)
+            For Each i As Integer In id
+
+                cmd.Parameters("@ID").Value = i
+                cmd.CommandText = "UPDATE [tpm].[TPM_Result] SET CB_CODIGO_Aprueba = @CB_CODIGO, Aprueba_datetime = GETDATE() where ID = @ID"
+                cmd.ExecuteNonQuery()
+            Next
+
+
+
+            tra.Commit()
+            Return 1
+
+
+        Catch ex As Exception
+            tra.Rollback()
+            Throw New Exception(ex.Message)
+
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+            cmd.Transaction = Nothing
+        End Try
+    End Function
+
+    Shared Function NoProduccionAprob(ByVal id As List(Of NOPRODUCCION), ByVal cb_codigo As String)
+        Dim tra As SqlClient.SqlTransaction
+        Try
+
+            CnMPS.ConnectionString = constringMPS()
+            If CnMPS.State = ConnectionState.Closed Then CnMPS.Open()
+            tra = CnMPS.BeginTransaction()
+
+            cmd.Connection = CnMPS
+
+            cmd.Transaction = tra
+
+            For Each i As NOPRODUCCION In id
+
+                cmd.Parameters.Clear()
+                cmd.Parameters.Add("@ASSET", SqlDbType.VarChar)
+                cmd.Parameters("@ASSET").Value = i.Asset
+                cmd.Parameters.Add("@STATION", SqlDbType.VarChar)
+                cmd.Parameters("@STATION").Value = i.Station
+                cmd.CommandText = "Select TPM_ID from tpm.Tpm_Station where Asset = @ASSET AND Station = @STATION"
+                Dim tpm_id = cmd.ExecuteScalar
+
+                cmd.Parameters.Add("@CB_CODIGO", SqlDbType.Int)
+                cmd.Parameters.Add("@SHIFT", SqlDbType.Int)
+                cmd.Parameters.Add("@DATE", SqlDbType.Date)
+                cmd.Parameters.Add("@TPMID", SqlDbType.Int)
+                cmd.Parameters("@CB_CODIGO").Value = cb_codigo
+                cmd.Parameters("@SHIFT").Value = i.Shift
+                cmd.Parameters("@DATE").Value = i.Fecha
+                cmd.Parameters("@TPMID").Value = tpm_id
+
+                cmd.CommandText = "INSERT INTO [tpm].[TPM_Result] (Date,Time,TPM_ID,Asset,Station,Shift,TPM_Result,CB_CODIGO_Aprueba,Aprueba_datetime) VALUES(@DATE,@DATE,@TPMID,@ASSET,@Station,@SHIFT,4,@CB_CODIGO,GETDATE()); select @@IDENTITY"
+                Dim re = cmd.ExecuteScalar()
+                da.SelectCommand.Parameters.Clear()
+                da.SelectCommand.Parameters.Add("@TPMID", SqlDbType.Int)
+                da.SelectCommand.Parameters("@TPMID").Value = tpm_id
+                da.SelectCommand.CommandText = "Select id from [tpm].[TPM_Detalle] where TPM_ID = @TPMID order by Orden"
+                da.SelectCommand.Connection = CnMPS
+                da.SelectCommand.Transaction = tra
+                ds.Tables.Clear()
+                da.Fill(ds, "elements")
+
+
+                For Each ro As DataRow In ds.Tables("elements").Rows
+                    cmd.Parameters.Clear()
+                    cmd.Parameters.Add("@Result", SqlDbType.Int)
+                    cmd.Parameters("@Result").Value = re
+                    cmd.Parameters.Add("@date", SqlDbType.Date)
+                    cmd.Parameters.Add("@tpm_detalle", SqlDbType.Int)
+                    cmd.Parameters.Add("@Asset", SqlDbType.VarChar)
+                    cmd.Parameters.Add("@Station", SqlDbType.VarChar)
+                    cmd.Parameters.Add("@Shift", SqlDbType.VarChar)
+                    cmd.Parameters.Add("@CB_CODIGO", SqlDbType.Int)
+                    cmd.Parameters.AddWithValue("@tpm_id", tpm_id)
+                    cmd.Parameters("@date").Value = i.Fecha
+                    cmd.Parameters("@tpm_detalle").Value = ro.Item(0).ToString
+                    cmd.Parameters("@Asset").Value = i.Asset
+                    cmd.Parameters("@Station").Value = i.Station
+                    cmd.Parameters("@Shift").Value = i.Shift
+                    cmd.Parameters("@CB_CODIGO").Value = cb_codigo
+                    cmd.CommandText = "INSERT INTO tpm.[TPM_Result_Detalle] (Result_ID,Date,Time,TPM_ID,TPM_Detalle_ID, Asset,Station,Shift,Result,TPM_Result,CB_CODIGO)VALUES(@Result,@date,@date,@tpm_id,@tpm_detalle,@Asset,@Station,@Shift,4,4,@CB_CODIGO) "
+                    cmd.ExecuteNonQuery()
+                Next
+            Next
+
+
+
+            tra.Commit()
+            Return 1
+
+
+        Catch ex As Exception
+            tra.Rollback()
+            Throw New Exception(ex.Message)
+
+        Finally
+            If CnMPS.State = ConnectionState.Open Then CnMPS.Close()
+            cmd.Transaction = Nothing
+        End Try
+    End Function
+
+    Public Structure NOPRODUCCION
+        Dim Asset As String
+        Dim Station As String
+        Dim Shift As Integer
+        Dim Fecha As Date
+    End Structure
 #End Region
    
 
@@ -1205,7 +1792,8 @@ Public Class SQLCon
         Try
             CnMARS.ConnectionString = constringMARS()
             If CnMARS.State = ConnectionState.Closed Then CnMARS.Open()
-            damars.SelectCommand.CommandText = "Select A.ID,A.Name,A.Description,A.Code,A.DeviceCode,A.DepartmentCode,A.ResourceCode,SR.SubResourceOffset_ID as SubResourceID from pro.ResourceStatus RS inner join dbo.Asset A on RS.Asset_ID=A.ID inner join ref.SubResource SR on SR.Asset_ID=A.ID"
+            'damars.SelectCommand.CommandText = "Select A.ID,A.Name,A.Description,A.Code,A.DeviceCode,A.DepartmentCode,A.ResourceCode,SR.SubResourceOffset_ID as SubResourceID from pro.ResourceStatus RS inner join dbo.Asset A on RS.Asset_ID=A.ID inner join ref.SubResource SR on SR.Asset_ID=A.ID"
+            damars.SelectCommand.CommandText = "Select A.ID,A.Name,A.Description,A.Code,A.DeviceCode,A.DepartmentCode,A.ResourceCode,SR.SubResourceOffset_ID as SubResourceID from dbo.Asset A left outer join pro.ResourceStatus RS  on RS.Asset_ID=A.ID  left outer join ref.SubResource SR on SR.Asset_ID=A.ID"
             damars.SelectCommand.Connection = CnMARS
             ds.Tables.Clear()
             damars.Fill(ds, "Assets")
@@ -1276,8 +1864,6 @@ Public Class SQLCon
         End Try
     End Function
 
-
-
     Shared Function GetMARSProductionShiftName(ByVal AssetID As String, ByVal SubresourceID As String) As String
         Try
             CnMARS.ConnectionString = constringMARS()
@@ -1298,12 +1884,36 @@ Public Class SQLCon
         End Try
     End Function
 
+    Shared Function GetMARSDowntime(ByVal AssetID As String, ByVal SubresourceID As String, ByVal shiftendtime As String, Optional ByVal EspecificDate As String = "", Optional ByVal EspecificShift As String = "") As DataTable
+        Try
+            CnMARS.ConnectionString = constringMARS()
+            If CnMARS.State = ConnectionState.Closed Then CnMARS.Open()
+            cmdMARS.CommandText = "Select ProductionShift from pro.ResourceStatus where Asset_ID=" & AssetID
+            'cmdMARS.CommandText = "Select case when ProductionShift is null then ProductionDate else ProductionShift End as ProductionShiftDate from pro.ResourceStatus where Asset_ID=" & AssetID
+            cmdMARS.Connection = CnMARS
+            Dim CurrDate As Date
+            CurrDate = cmdMARS.ExecuteScalar
+            Dim CurrShiftName As String = ""
+            cmdMARS.CommandText = "Select ProductionShiftName from pro.ResourceStatus where Asset_ID=" & AssetID
+            CurrShiftName = cmdMARS.ExecuteScalar
+            damars.SelectCommand.CommandText = "exec [hmo].[getdowntime] " & AssetID & ",'" & IIf(EspecificShift <> "", EspecificShift, CurrShiftName) & "','" & IIf(EspecificDate <> "", EspecificDate, CurrDate.ToString("MM/dd/yyyy")) & "' "  ''where CURRENTTARGET>0"
+            ds.Tables.Clear()
+            damars.Fill(ds, "Downtime")
+            CnMARS.Close()
+            Return ds.Tables("Downtime")
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        Finally
+            If CnMARS.State = ConnectionState.Open Then CnMARS.Close()
+        End Try
+    End Function
 
     Shared Function GetMARSProduction(ByVal AssetID As String, ByVal SubresourceID As String, ByVal shiftendtime As String, Optional ByVal EspecificDate As String = "", Optional ByVal EspecificShift As String = "") As DataTable
         Try
             CnMARS.ConnectionString = constringMARS()
             If CnMARS.State = ConnectionState.Closed Then CnMARS.Open()
             cmdMARS.CommandText = "Select ProductionShift from pro.ResourceStatus where Asset_ID=" & AssetID
+            'cmdMARS.CommandText = "Select case when ProductionShift is null then ProductionDate else ProductionShift End as ProductionShiftDate from pro.ResourceStatus where Asset_ID=" & AssetID
             cmdMARS.Connection = CnMARS
             Dim CurrDate As Date
             CurrDate = cmdMARS.ExecuteScalar
@@ -1329,7 +1939,10 @@ Public Class SQLCon
 #End Region
 
 #Region "Downtime"
-    Shared Function NewDowntime(ByVal Asset As Integer, ByVal productiondate As String, ByVal shift As String, ByVal Hour As String, ByVal equipment As String, ByVal downtimecode As Integer, ByVal minutes As Double, ByVal comments As String, ByRef PartNumber As String) As Integer
+
+    
+
+    Shared Function NewDowntime(ByVal Asset As Integer, ByVal productiondate As String, ByVal shift As String, ByVal Hour As String, ByVal equipment As String, ByVal downtimecode As Integer, ByVal minutes As Double, ByVal comments As String, ByRef PartNumber As String, Optional ByVal StartTime As String = "", Optional ByVal EndTime As String = "", Optional ByVal DT_ID As Integer = -1) As Integer
         Try
             If String.IsNullOrEmpty(productiondate) Or String.IsNullOrEmpty(shift) Or String.IsNullOrEmpty(Hour) Or String.IsNullOrEmpty(equipment) Or minutes <= 0 Then
                 Throw New Exception("Data Validation not passed")
@@ -1338,7 +1951,7 @@ Public Class SQLCon
             Cn.ConnectionString = constring()
             If Cn.State = ConnectionState.Closed Then Cn.Open()
 
-            cmd.CommandText = "insert into downtime(Asset_ID,productiondate,shift,hour,equipment,downtimecode_id,minutes,comments,PartNumber)values(@Asset_ID,@date,@shift,@hour,@equipment,@downtimecode,@minutes,@comments,@PartNumber) select @@IDENTITY"
+            cmd.CommandText = "insert into downtime(Asset_ID,productiondate,shift,hour,equipment,downtimecode_id,minutes,comments,PartNumber,StartTime,EndTime,DT_Id)values(@Asset_ID,@date,@shift,@hour,@equipment,@downtimecode,@minutes,@comments,@PartNumber,@StartTime,@EndTime,@DT_Id) select @@IDENTITY"
             cmd.Connection = Cn
 
             cmd.Parameters.Clear()
@@ -1351,6 +1964,9 @@ Public Class SQLCon
             cmd.Parameters.Add("@minutes", SqlDbType.Float)
             cmd.Parameters.Add("@comments", SqlDbType.Text)
             cmd.Parameters.Add("@PartNumber", SqlDbType.VarChar)
+            cmd.Parameters.Add("@StartTime", SqlDbType.VarChar)
+            cmd.Parameters.Add("@EndTime", SqlDbType.VarChar)
+            cmd.Parameters.Add("@DT_Id", SqlDbType.Int)
 
             cmd.Parameters("@Asset_ID").Value = Asset
             cmd.Parameters("@date").Value = productiondate
@@ -1361,6 +1977,13 @@ Public Class SQLCon
             cmd.Parameters("@minutes").Value = minutes
             cmd.Parameters("@comments").Value = comments
             cmd.Parameters("@PartNumber").Value = PartNumber
+            cmd.Parameters("@StartTime").Value = StartTime
+            cmd.Parameters("@EndTime").Value = EndTime
+            cmd.Parameters("@DT_Id").Value = DT_ID
+
+            If equipment < 0 Then cmd.Parameters("@equipment").Value = DBNull.Value
+            If downtimecode < 0 Then cmd.Parameters("@downtimecode").Value = DBNull.Value
+            If DT_ID < 0 Then cmd.Parameters("@DT_Id").Value = DBNull.Value
 
             Dim retval As Integer
             retval = CInt(cmd.ExecuteScalar)
@@ -1373,6 +1996,52 @@ Public Class SQLCon
             Throw New Exception(ex.Message)
         Finally
             If Cn.State = ConnectionState.Open Then Cn.Close()
+        End Try
+    End Function
+
+    Shared Function NewDowntimeSplit(ByVal Original_ID As Integer, ByVal minutes As Double) As Integer
+        Dim trn As SqlClient.SqlTransaction
+        Try
+
+            Cn.ConnectionString = constring()
+            If Cn.State = ConnectionState.Closed Then Cn.Open()
+            trn = Cn.BeginTransaction
+
+            cmd.CommandText = "update downtime set Minutes=Minutes - @Minutes where ID = @ID"
+            cmd.Connection = Cn
+            cmd.Transaction = trn
+
+            cmd.Parameters.Clear()
+            cmd.Parameters.AddWithValue("@Minutes", minutes)
+            cmd.Parameters.AddWithValue("@ID", Original_ID)
+
+
+            cmd.ExecuteNonQuery()
+
+            cmd.CommandText = "insert into downtime(Asset_ID,productiondate,shift,hour,minutes,PartNumber,StartTime,EndTime,DT_Id) " & _
+                " select Asset_ID,productiondate,shift,hour,minutes,PartNumber,StartTime,EndTime,DT_Id from downtime where ID=@ID " & _
+                " select @@IDENTITY"
+
+            cmd.Parameters.Clear()
+            cmd.Parameters.AddWithValue("@ID", Original_ID)
+
+            Dim retval As Integer
+            retval = CInt(cmd.ExecuteScalar)
+
+            cmd.CommandText = "update downtime set minutes=@Minutes where ID=@ID"
+            cmd.Parameters.Clear()
+            cmd.Parameters.AddWithValue("@Minutes", minutes)
+            cmd.Parameters.AddWithValue("@ID", retval)
+            cmd.ExecuteNonQuery()
+            cmd.Parameters.Clear()
+            trn.Commit()
+            Return retval
+        Catch ex As Exception
+            trn.Rollback()
+            Throw New Exception(ex.Message)
+        Finally
+            If Cn.State = ConnectionState.Open Then Cn.Close()
+            cmd.Transaction = Nothing
         End Try
     End Function
 
@@ -1431,8 +2100,12 @@ Public Class SQLCon
             'comment
             Cn.ConnectionString = constring()
             If Cn.State = ConnectionState.Closed Then Cn.Open()
-            da.SelectCommand.CommandText = "SELECT DT.ID,DT.Asset_ID,dt.ProductionDate,DT.Shift,Dt.Hour,Dt.PartNumber,s.Station,E.Equipment,D.Department,C.Concept,dtc.Description,DT.Minutes,dt.Comments from Downtime DT inner join Equipment E on DT.Equipment = e.ID inner join Stations S on e.Station =s.ID inner join DowntimeCodes DTC on DT.DowntimeCode_ID = DTC.ID inner join Concepts C on DTC.Concept_ID = C.ID inner join Departments D on c.Department_ID = D.ID  " & _
+            'da.SelectCommand.CommandText = "SELECT DT.ID,DT.Asset_ID,dt.ProductionDate,DT.Shift,Dt.Hour,Dt.PartNumber,s.Station,E.Equipment,D.Department,C.Concept,dtc.Description,DT.Minutes,dt.Comments from Downtime DT inner join Equipment E on DT.Equipment = e.ID inner join Stations S on e.Station =s.ID inner join DowntimeCodes DTC on DT.DowntimeCode_ID = DTC.ID inner join Concepts C on DTC.Concept_ID = C.ID inner join Departments D on c.Department_ID = D.ID  " & _
+            '"where DT.asset_ID = " & asset_ID.ToString & " and DT.productiondate='" & productiondate.ToString("MM/dd/yyyy") & "' and DT.Shift = '" & shift & "' order by dt.Hour,dt.ID"
+
+            da.SelectCommand.CommandText = "SELECT DT.ID,DT.Asset_ID,dt.ProductionDate,DT.Shift,Dt.Hour,Dt.PartNumber,s.Station,E.Equipment,ISNULL(D.Department,'') AS Department,C.Concept,dtc.Description,DT.Minutes,dt.Comments,dt.DT_Id from Downtime DT left outer join Equipment E on DT.Equipment = e.ID left outer join Stations S on e.Station =s.ID left outer join DowntimeCodes DTC on DT.DowntimeCode_ID = DTC.ID left outer join Concepts C on DTC.Concept_ID = C.ID left outer join Departments D on c.Department_ID = D.ID  " & _
             "where DT.asset_ID = " & asset_ID.ToString & " and DT.productiondate='" & productiondate.ToString("MM/dd/yyyy") & "' and DT.Shift = '" & shift & "' order by dt.Hour,dt.ID"
+
             da.SelectCommand.Connection = Cn
             ds.Tables.Clear()
             da.Fill(ds, "Downtime")
@@ -1450,7 +2123,7 @@ Public Class SQLCon
         Try
             Cn.ConnectionString = constring()
             If Cn.State = ConnectionState.Closed Then Cn.Open()
-            da.SelectCommand.CommandText = "select Dt.*,st.ID as station,con.ID as concept,dep.ID as department from Downtime Dt inner join Equipment eq on dt.Equipment = eq.id inner join Stations st on eq.Station = st.id inner join DowntimeCodes DTC on dt.DowntimeCode_ID=DTC.ID inner join Concepts Con on dtc.Concept_ID=con.ID inner join Departments dep on Con.Department_ID = dep.ID  where DT.ID=" & id.ToString
+            da.SelectCommand.CommandText = "select Dt.*,st.ID as station,con.ID as concept,dep.ID as department from Downtime Dt left outer join Equipment eq on dt.Equipment = eq.id left outer join Stations st on eq.Station = st.id left outer join DowntimeCodes DTC on dt.DowntimeCode_ID=DTC.ID left outer join Concepts Con on dtc.Concept_ID=con.ID left outer join Departments dep on Con.Department_ID = dep.ID  where DT.ID=" & id.ToString
             da.SelectCommand.Connection = Cn
             ds.Tables.Clear()
             da.Fill(ds, "downtime")
@@ -1556,7 +2229,21 @@ Public Class SQLCon
             If Cn.State = ConnectionState.Open Then Cn.Close()
         End Try
     End Function
-
+    Shared Function DeleteResource(ByVal ID As Integer) As Integer
+        Try
+            ''mms
+            Cn.ConnectionString = constring()
+            If Cn.State = ConnectionState.Closed Then Cn.Open()
+            cmd.CommandText = "delete from Asset where id=" & ID.ToString
+            cmd.Connection = Cn
+            cmd.ExecuteNonQuery()
+            Return 1
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        Finally
+            If Cn.State = ConnectionState.Open Then Cn.Close()
+        End Try
+    End Function
     Shared Function GetAdjustments(ByVal asset_ID As Integer, ByVal productiondate As Date, ByVal shift As String) As DataTable
         Try
             'comment
@@ -1737,11 +2424,11 @@ Public Class SQLCon
 
 #Region "PlannedDowntime"
 
-    Shared Function NewPlannedDowntime(ByVal Asset As Integer, ByVal productiondate As String, ByVal shift As String, ByVal Hour As String, ByVal ReasonCode As Integer, ByVal minutes As Double, ByVal comments As String, ByVal PartNumber As String) As Integer
+    Shared Function NewPlannedDowntime(ByVal Asset As Integer, ByVal productiondate As String, ByVal shift As String, ByVal Hour As String, ByVal ReasonCode As Integer, ByVal minutes As Double, ByVal comments As String, ByVal PartNumber As String, Optional ByVal dtid As Integer = 0) As Integer
         Try
             Cn.ConnectionString = constring()
             If Cn.State = ConnectionState.Closed Then Cn.Open()
-            cmd.CommandText = "insert into PlannedDT(Asset_ID,productiondate,shift,hour,PlannedDTRC_ID,minutes,comments,PartNumber)values(@Asset_ID,@date,@shift,@hour,@PlannedDTRC,@minutes,@comments,@PartNumber) select @@IDENTITY"
+            cmd.CommandText = "insert into PlannedDT(Asset_ID,productiondate,shift,hour,PlannedDTRC_ID,minutes,comments,PartNumber,DT_Id)values(@Asset_ID,@date,@shift,@hour,@PlannedDTRC,@minutes,@comments,@PartNumber,@dtid) select @@IDENTITY"
             cmd.Connection = Cn
 
             cmd.Parameters.Clear()
@@ -1753,6 +2440,7 @@ Public Class SQLCon
             cmd.Parameters.Add("@minutes", SqlDbType.Float)
             cmd.Parameters.Add("@comments", SqlDbType.Text)
             cmd.Parameters.Add("@PartNumber", SqlDbType.VarChar)
+            cmd.Parameters.Add("@dtid", SqlDbType.Int)
 
             cmd.Parameters("@Asset_ID").Value = Asset
             cmd.Parameters("@date").Value = productiondate
@@ -1762,6 +2450,7 @@ Public Class SQLCon
             cmd.Parameters("@minutes").Value = minutes
             cmd.Parameters("@comments").Value = comments
             cmd.Parameters("@PartNumber").Value = PartNumber
+            cmd.Parameters("@dtid").Value = IIf(dtid <> 0, dtid, DBNull.Value)
 
             Dim retval As Integer
             retval = CInt(cmd.ExecuteScalar)
@@ -1824,12 +2513,40 @@ Public Class SQLCon
             If Cn.State = ConnectionState.Open Then Cn.Close()
         End Try
     End Function
+    Shared Function DeleteDownTimeByRef(ByVal RefID As Integer) As Integer
+        Try
+            Cn.ConnectionString = constring()
+            If Cn.State = ConnectionState.Closed Then Cn.Open()
+            cmd.CommandText = "delete from Downtime where DT_Id=" & RefID.ToString
+            cmd.Connection = Cn
+            cmd.ExecuteNonQuery()
+            Return 1
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        Finally
+            If Cn.State = ConnectionState.Open Then Cn.Close()
+        End Try
+    End Function
+    Shared Function DeletePlannedDownTimeByRef(ByVal RefID As Integer) As Integer
+        Try
+            Cn.ConnectionString = constring()
+            If Cn.State = ConnectionState.Closed Then Cn.Open()
+            cmd.CommandText = "delete from PlannedDT where DT_Id=" & RefID.ToString
+            cmd.Connection = Cn
+            cmd.ExecuteNonQuery()
+            Return 1
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        Finally
+            If Cn.State = ConnectionState.Open Then Cn.Close()
+        End Try
+    End Function
 
     Shared Function GetPlannedDT(ByVal asset_ID As Integer, ByVal productiondate As Date, ByVal shift As String) As DataTable
         Try
             Cn.ConnectionString = constring()
             If Cn.State = ConnectionState.Closed Then Cn.Open()
-            da.SelectCommand.CommandText = "select pdt.ID,pdt.Asset_ID,pdt.ProductionDate,pdt.Shift,pdt.Hour,pdt.PartNumber,rc.Description,pdt.minutes,pdt.comments from planneddt pdt inner join planneddtrc rc on pdt.planneddtrc_id=rc.id " & _
+            da.SelectCommand.CommandText = "select pdt.ID,pdt.Asset_ID,pdt.ProductionDate,pdt.Shift,pdt.Hour,pdt.PartNumber,rc.Description,pdt.minutes,pdt.comments,pdt.DT_Id from planneddt pdt inner join planneddtrc rc on pdt.planneddtrc_id=rc.id " & _
             "where pdt.asset_ID = " & asset_ID.ToString & " and pdt.productiondate='" & productiondate.ToString("MM/dd/yyyy") & "' and shift = '" & shift & "'"
 
             da.SelectCommand.Connection = Cn
@@ -1848,6 +2565,7 @@ Public Class SQLCon
         Try
             Cn.ConnectionString = constring()
             If Cn.State = ConnectionState.Closed Then Cn.Open()
+            ''da.SelectCommand.CommandText = "select Dt.*,st.ID as station,con.ID as concept,dep.ID as department from Downtime Dt left outer join Equipment eq on dt.Equipment = eq.id left outer join Stations st on eq.Station = st.id left outer join DowntimeCodes DTC on dt.DowntimeCode_ID=DTC.ID left outer join Concepts Con on dtc.Concept_ID=con.ID left outer join Departments dep on Con.Department_ID = dep.ID  where DT.ID=" & id.ToString
             da.SelectCommand.CommandText = "select * from PlannedDT where ID=" & ID.ToString
             da.SelectCommand.Connection = Cn
             ds.Tables.Clear()
@@ -2218,3 +2936,4 @@ Public Class SQLCon
 #End Region
 
 End Class
+

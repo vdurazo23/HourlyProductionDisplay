@@ -22,6 +22,8 @@ Partial Class Config
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Config))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -62,6 +64,7 @@ Partial Class Config
         Me.TXTPWDCMS = New System.Windows.Forms.TextBox()
         Me.TXTUIDCMS = New System.Windows.Forms.TextBox()
         Me.TxtDSN = New System.Windows.Forms.TextBox()
+        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -256,20 +259,26 @@ Partial Class Config
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(168, 394)
+        Me.Button3.ImageIndex = 0
+        Me.Button3.ImageList = Me.ImageList1
+        Me.Button3.Location = New System.Drawing.Point(156, 394)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(110, 50)
+        Me.Button3.Size = New System.Drawing.Size(123, 58)
         Me.Button3.TabIndex = 2
         Me.Button3.Text = "Guardar"
+        Me.Button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(284, 394)
+        Me.Button4.ImageIndex = 1
+        Me.Button4.ImageList = Me.ImageList1
+        Me.Button4.Location = New System.Drawing.Point(285, 394)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(110, 50)
+        Me.Button4.Size = New System.Drawing.Size(122, 58)
         Me.Button4.TabIndex = 3
         Me.Button4.Text = "Cancelar"
+        Me.Button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.Button4.UseVisualStyleBackColor = True
         '
         'GroupBox3
@@ -440,6 +449,13 @@ Partial Class Config
         Me.TxtDSN.Size = New System.Drawing.Size(161, 20)
         Me.TxtDSN.TabIndex = 0
         '
+        'ImageList1
+        '
+        Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
+        Me.ImageList1.Images.SetKeyName(0, "Save.png")
+        Me.ImageList1.Images.SetKeyName(1, "Delete.png")
+        '
         'Config
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -505,4 +521,5 @@ Partial Class Config
     Friend WithEvents TXTPWDCMS As System.Windows.Forms.TextBox
     Friend WithEvents TXTUIDCMS As System.Windows.Forms.TextBox
     Friend WithEvents TxtDSN As System.Windows.Forms.TextBox
+    Friend WithEvents ImageList1 As System.Windows.Forms.ImageList
 End Class

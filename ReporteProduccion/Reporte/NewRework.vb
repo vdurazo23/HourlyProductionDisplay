@@ -82,11 +82,11 @@
                 CboFeatures.SelectedValue = tbltmp.DefaultView.Item(0).Item("feature")
                 NumericUpDown1.Value = tbltmp.DefaultView.Item(0).Item("Quantity")
                 txtcomments.Text = tbltmp.DefaultView.Item(0).Item("Comments")
-
-            End If
-
-            If My.Settings.PrefConcepto > 0 Then
-                CboConcepto.SelectedValue = My.Settings.PrefConcepto
+            Else
+                ''cuando es nuevo seleccionar concepto preferido
+                If My.Settings.PrefConcepto > 0 Then
+                    CboConcepto.SelectedValue = My.Settings.PrefConcepto
+                End If
             End If
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
@@ -153,17 +153,15 @@
             If Editar Then
                 SQLCon.EditRework(ELID, Convert.ToDateTime(CboHora.SelectedValue).ToString("MM/dd/yyyy HH:mm:ss"), Cbocodigo.SelectedValue, CboFeatures.SelectedValue, NumericUpDown1.Value, txtcomments.Text, CboParte.SelectedValue.ToString, CheckScrap.Checked)
                 MsgBox("Registro de Retrabajo Modificado exitosamente", MsgBoxStyle.Information, "Editar Rechazo")
-                Me.DialogResult = Windows.Forms.DialogResult.OK
-                My.Settings.PrefConcepto = CboConcepto.SelectedValue
-                My.Settings.Save()
-
+                Me.DialogResult = Windows.Forms.DialogResult.OK               
             Else
                 SQLCon.NewRework(AssetID, ProductionDate.ToString("MM/dd/yyyy"), ShiftName, Convert.ToDateTime(CboHora.SelectedValue).ToString("MM/dd/yyyy HH:mm:ss"), Cbocodigo.SelectedValue, CboFeatures.SelectedValue, NumericUpDown1.Value, txtcomments.Text, CboParte.SelectedValue.ToString, CheckScrap.Checked)
                 MsgBox("Registro de Retrabajo Generado exitosamente", MsgBoxStyle.Information, "Nuevo Rechazo")
-                Me.DialogResult = Windows.Forms.DialogResult.OK
-                My.Settings.PrefConcepto = CboConcepto.SelectedValue
-                My.Settings.Save()
+                Me.DialogResult = Windows.Forms.DialogResult.OK               
             End If
+
+            My.Settings.PrefConcepto = CboConcepto.SelectedValue
+            My.Settings.Save()
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
         End Try

@@ -24,17 +24,19 @@ Partial Class Assets
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Assets))
-        Dim TableViewDefinition1 As Telerik.WinControls.UI.TableViewDefinition = New Telerik.WinControls.UI.TableViewDefinition()
+        Dim TableViewDefinition2 As Telerik.WinControls.UI.TableViewDefinition = New Telerik.WinControls.UI.TableViewDefinition()
         Me.RadButton1 = New Telerik.WinControls.UI.RadButton()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.RadButton3 = New Telerik.WinControls.UI.RadButton()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GridAssets = New Telerik.WinControls.UI.RadGridView()
+        Me.BtnEditResource = New Telerik.WinControls.UI.RadButton()
         CType(Me.RadButton1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadButton3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         CType(Me.GridAssets, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridAssets.MasterTemplate, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BtnEditResource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RadButton1
@@ -62,7 +64,7 @@ Partial Class Assets
         '
         Me.RadButton3.ImageIndex = 2
         Me.RadButton3.ImageList = Me.ImageList1
-        Me.RadButton3.Location = New System.Drawing.Point(150, 3)
+        Me.RadButton3.Location = New System.Drawing.Point(277, 3)
         Me.RadButton3.Name = "RadButton3"
         Me.RadButton3.Size = New System.Drawing.Size(131, 50)
         Me.RadButton3.TabIndex = 7
@@ -73,6 +75,7 @@ Partial Class Assets
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.BtnEditResource)
         Me.Panel1.Controls.Add(Me.RadButton1)
         Me.Panel1.Controls.Add(Me.RadButton3)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
@@ -93,12 +96,24 @@ Partial Class Assets
         Me.GridAssets.MasterTemplate.AllowDeleteRow = False
         Me.GridAssets.MasterTemplate.AllowEditRow = False
         Me.GridAssets.MasterTemplate.EnableGrouping = False
-        Me.GridAssets.MasterTemplate.ViewDefinition = TableViewDefinition1
+        Me.GridAssets.MasterTemplate.ViewDefinition = TableViewDefinition2
         Me.GridAssets.Name = "GridAssets"
         Me.GridAssets.ReadOnly = True
         Me.GridAssets.Size = New System.Drawing.Size(929, 424)
         Me.GridAssets.TabIndex = 9
         Me.GridAssets.Text = "RadGridView1"
+        '
+        'BtnEditResource
+        '
+        Me.BtnEditResource.ImageIndex = 1
+        Me.BtnEditResource.ImageList = Me.ImageList1
+        Me.BtnEditResource.Location = New System.Drawing.Point(140, 3)
+        Me.BtnEditResource.Name = "BtnEditResource"
+        Me.BtnEditResource.Size = New System.Drawing.Size(131, 50)
+        Me.BtnEditResource.TabIndex = 8
+        Me.BtnEditResource.Text = "Editar Recurso"
+        Me.BtnEditResource.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.BtnEditResource.TextWrap = True
         '
         'Assets
         '
@@ -117,6 +132,7 @@ Partial Class Assets
         Me.Panel1.ResumeLayout(False)
         CType(Me.GridAssets.MasterTemplate, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridAssets, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BtnEditResource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -125,4 +141,5 @@ Partial Class Assets
     Friend WithEvents RadButton3 As Telerik.WinControls.UI.RadButton
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents GridAssets As Telerik.WinControls.UI.RadGridView
+    Friend WithEvents BtnEditResource As Telerik.WinControls.UI.RadButton
 End Class

@@ -60,18 +60,18 @@ Public Class TPM
 
     Public Sub activaopciones()
         Try
-            BtnNuevoTPM.Enabled = SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "TPM", "Nuevo")
-            BtnNuevoElemento.Enabled = SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "TPM", "Nuevo")
+            'BtnNuevoTPM.Enabled = SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "TPM", "Nuevo")
+            'BtnNuevoElemento.Enabled = SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "TPM", "Nuevo")
 
-            BtnEditarTPM.Enabled = SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "TPM", "Editar")
-            BtnEditarElemento.Enabled = SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "TPM", "Editar")
-            BtnUp.Enabled = SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "TPM", "Editar")
-            BtnDown.Enabled = SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "TPM", "Editar")
+            'BtnEditarTPM.Enabled = SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "TPM", "Editar")
+            'BtnEditarElemento.Enabled = SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "TPM", "Editar")
+            'BtnUp.Enabled = SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "TPM", "Editar")
+            'BtnDown.Enabled = SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "TPM", "Editar")
 
-            TableLayoutPanel1.Enabled = SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "TPM", "Editar")
+            'TableLayoutPanel1.Enabled = SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "TPM", "Editar")
 
-            BtnEliminarTPM.Enabled = SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "TPM", "Eliminar")
-            BtnEliminarElemento.Enabled = SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "TPM", "Eliminar")
+            'BtnEliminarTPM.Enabled = SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "TPM", "Eliminar")
+            'BtnEliminarElemento.Enabled = SQLCon.getPermiso(My.Settings.UserId, "Reporte Producción", "TPM", "Eliminar")
 
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
@@ -232,11 +232,12 @@ Public Class TPM
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles BtnNuevoTPM.Click
+    Private Sub BtnNuevoTPM_Click(sender As Object, e As EventArgs) Handles BtnNuevoTPM.Click
         Try
             Dim n As New Add_element
-            n.ComboBox1.Visible = False
-            n.Label2.Visible = False
+
+            n.CboClas.Visible = False
+            n.LblClas.Visible = False
             If n.ShowDialog = DialogResult.OK Then
                 addelement = n.texto
                 n.Dispose()
@@ -275,7 +276,7 @@ Public Class TPM
             iniciando = False
         End Try
     End Sub
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles BtnUp.Click
+    Private Sub BtnUp_Click(sender As Object, e As EventArgs) Handles BtnUp.Click
         If ListView1.Items.Count = 0 Then Exit Sub
         If ListView1.SelectedIndices.Count <= 0 Then Exit Sub
         Dim indice = ListView1.SelectedIndices.Item(0)
@@ -310,20 +311,21 @@ Public Class TPM
         rev = SQLCon.TPMelementUpdate(ListBox1.SelectedValue, indice + 2, ListView1.Items(indice + 1).Tag)
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles BtnNuevoElemento.Click
+    Private Sub BtnNuevoElemento_Click(sender As Object, e As EventArgs) Handles BtnNuevoElemento.Click
         Try
             If ListBox1.Items.Count = 0 Then Exit Sub
             Dim add As New Add_element
+            add.ShowColor = True
             If add.ShowDialog() = DialogResult.OK Then
                 addelement = add.texto
-                add.Dispose()
-                add = Nothing
-                Dim re = SQLCon.AddTPMelements(ListBox1.SelectedValue, ListView1.Items.Count + 1, addelement, add.ComboBox1.Text)
+                Dim re = SQLCon.AddTPMelements(ListBox1.SelectedValue, ListView1.Items.Count + 1, addelement, add.CboClas.Text)
                 If re = 1 Then
                     ListView1.Items.Add(addelement)
                     ListView1.Items(ListView1.Items.Count - 1).Tag = SQLCon.TPMelementTag(ListBox1.SelectedValue, addelement, ListView1.Items.Count)
-                    ListView1.Items(ListView1.Items.Count - 1).BackColor = Color.FromName(add.ComboBox1.Text)
+                    ListView1.Items(ListView1.Items.Count - 1).BackColor = Color.FromName(add.CboClas.Text)
                 End If
+                add.Dispose()
+                add = Nothing
             Else
                 addelement = ""
                 add.Dispose()
@@ -335,7 +337,7 @@ Public Class TPM
         End Try
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles BtnEliminarElemento.Click
+    Private Sub BtnEliminarElemento_Click(sender As Object, e As EventArgs) Handles BtnEliminarElemento.Click
         Try
 
             If ListView1.Items.Count = 0 Or ListBox1.SelectedIndex = -1 Then Exit Sub
@@ -344,11 +346,8 @@ Public Class TPM
 
             Dim check As Integer = SQLCon.TPM_ELEMENT_RESULT(ListView1.Items(indice).Tag)
             If check > 0 Then
-                Dim a As DialogResult
-                a = MsgBox("This element has a record. Do you really want to delete?", MsgBoxStyle.YesNo + MsgBoxStyle.Critical)
-                If a <> DialogResult.Yes Then
-                    Exit Sub
-                End If
+                MsgBox("Este elemento contiene uno o varios registros" & vbCrLf & "No se puede eliminar?", MsgBoxStyle.Exclamation, "Eliminar")
+                Exit Sub
             End If
 
 
@@ -398,7 +397,7 @@ Public Class TPM
         activeInsert = True
     End Sub
 
-    Private Sub Edit_element_Click(sender As Object, e As EventArgs) Handles BtnEditarElemento.Click
+    Private Sub BtnEditarElemento_Click(sender As Object, e As EventArgs) Handles BtnEditarElemento.Click
         Try
             If ListBox1.Items.Count = 0 Then Exit Sub
             If ListView1.SelectedIndices.Count = 0 Then Exit Sub
@@ -406,18 +405,19 @@ Public Class TPM
             If indice = -1 Then Exit Sub
 
             Dim add As New Add_element
+            add.ShowColor = True
             add.TextBox1.Text = ListView1.Items(indice).Text
-            add.ComboBox1.Text = ListView1.Items(indice).BackColor.Name
+            add.CboClas.Text = ListView1.Items(indice).BackColor.Name
             add.Button1.Text = "Update"
             add.Text = "Update"
             add.Label1.Text = "Text"
             If add.ShowDialog() = DialogResult.OK Then
                 Dim new_text = add.texto
                 'If new_text = ListView1.Items(indice).Text Then Exit Sub         
-                Dim re = SQLCon.EditTPMelements(ListBox1.SelectedValue, new_text, ListView1.SelectedIndices(0) + 1, ListView1.SelectedItems(0).Tag, add.ComboBox1.Text)
+                Dim re = SQLCon.EditTPMelements(ListBox1.SelectedValue, new_text, ListView1.SelectedIndices(0) + 1, ListView1.SelectedItems(0).Tag, add.CboClas.Text)
                 If re = 1 Then
                     ListView1.Items(indice).Text = new_text
-                    ListView1.Items(indice).BackColor = Color.FromName(add.ComboBox1.Text)
+                    ListView1.Items(indice).BackColor = Color.FromName(add.CboClas.Text)
                 End If
                 add.Dispose()
                 add = Nothing
@@ -432,7 +432,7 @@ Public Class TPM
         End Try
     End Sub
 
-    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles BtnEliminarTPM.Click
+    Private Sub BtnEliminarTPM_Click(sender As Object, e As EventArgs) Handles BtnEliminarTPM.Click
         Try
             Dim a As New DialogResult
             a = MsgBox("Está seguro que desea eliminar el TPM Seleccionado", MsgBoxStyle.YesNo + MsgBoxStyle.Question, "Eliminar")
@@ -458,7 +458,7 @@ Public Class TPM
         End Try
     End Sub
 
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles BtnEditarTPM.Click
+    Private Sub BtnEditarTPM_Click(sender As Object, e As EventArgs) Handles BtnEditarTPM.Click
         Try
             If ListBox1.SelectedIndex < 0 Then Exit Sub
             Dim add As New Add_element
@@ -466,8 +466,8 @@ Public Class TPM
             add.Button1.Text = "Update"
             add.Text = "Update element"
             add.Label1.Text = "Name:"
-            add.ComboBox1.Visible = False
-            add.Label2.Visible = False
+            add.CboClas.Visible = False
+            add.LblClas.Visible = False
             If add.ShowDialog() = DialogResult.OK Then
                 Dim new_text = add.texto
                 If new_text = ListBox1.SelectedItem.Row.ItemArray(1).ToString Then Exit Sub
@@ -490,4 +490,581 @@ Public Class TPM
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
     End Sub
+
+
+    '**********NUEVO CODIGO
+    Dim cargado As Boolean = False
+    Dim last_index As Integer = -2
+
+
+    Friend WithEvents cd As New ColourDialog
+
+    Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl1.SelectedIndexChanged
+        Try
+            Select Case CType(sender, TabControl).SelectedIndex
+
+                Case 0
+
+                Case 1
+                    If cargado = False Then
+                        cargar_tablas()
+                        Cat_ayuda_visual()
+                        Tree_view_lineas()
+
+                        cargado = True
+                    End If
+                    For i = 0 To DataGridView1.Columns.Count - 1
+                        DataGridView1.Columns(i).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                    Next
+                Case 2
+                    'Cargar categorias
+                    Cargar_categorias()
+
+                    'Cargar defectos
+                    Cargar_defectos()
+
+            End Select
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+
+    'Tab control 1
+    Sub cargar_tablas()
+        Try
+            s = SQLCon.TPMStations
+            Dim ss As DataTable = s.DefaultView.ToTable
+            If midataset.Tables("Stations") IsNot Nothing Then
+                midataset.Tables.Remove("Stations")
+            End If
+            ss.TableName = "Stations"
+            midataset.Tables.Add(ss)
+            'midataset.Tables("Stations").DefaultView.RowFilter = "TARGET IS NOT NULL"
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Sub Tree_view_lineas()
+        Try
+
+
+
+            TV_rel_lc.Nodes.Clear()
+
+            Dim c = midataset.Tables("Stations").DefaultView.ToTable(True, "ASSET")
+            For Each ro As DataRow In c.Rows
+                If ro.ItemArray(0).ToString.Trim <> "" Then
+                    TV_rel_lc.Nodes.Add(ro.ItemArray(0).ToString.Trim)
+                End If
+            Next
+
+            Dim cc = midataset.Tables("Stations").DefaultView.ToTable(True, "ASSET", "Station")
+            For Each ro As DataRow In cc.Rows
+                If ro.ItemArray(0).ToString.Trim <> "" Then
+                    For Each it As TreeNode In TV_rel_lc.Nodes
+                        If ro.ItemArray(0).ToString.Trim = it.Text.ToString Then
+                            it.Nodes.Add(ro.ItemArray(1).ToString.Trim)
+                            it.Nodes(it.Nodes.Count - 1).ContextMenuStrip = Categorias
+                        End If
+                    Next
+                End If
+            Next
+
+            s = SQLCon.TPMdef_rel
+            Dim filter_s = s.DefaultView.ToTable(True, "Categoria_ID", "Asset", "Station")
+            For Each ro As DataRow In filter_s.Rows
+                For Each it As TreeNode In TV_rel_lc.Nodes
+                    If ro.ItemArray(1).ToString.Trim = it.Text.ToString Then
+                        For Each itt As TreeNode In it.Nodes
+                            If ro.ItemArray(2).ToString.Trim = itt.Text.ToString.Trim Then
+                                itt.Nodes.Add(ro.ItemArray(0).ToString.Trim & " - " & DataGridView1.Rows(ro.ItemArray(0).ToString - 1).Cells(1).Value.ToString)
+                                itt.Nodes(itt.Nodes.Count - 1).Tag = ro.ItemArray(0).ToString.Trim
+                                itt.Nodes(itt.Nodes.Count - 1).ContextMenuStrip = Elemento
+                                Dim filter_ss = s.Select("Categoria_ID = '" & ro.ItemArray(0).ToString & "' AND Asset= '" & ro.ItemArray(1).ToString & "' AND Station = '" & ro.ItemArray(2).ToString & "'")
+                                If filter_ss.Count > 0 Then
+                                    For i = 0 To filter_ss.Count - 1
+                                        itt.Nodes(itt.Nodes.Count - 1).Nodes.Add(filter_ss(i).ItemArray(4).ToString)
+                                        itt.Nodes(itt.Nodes.Count - 1).Nodes(itt.Nodes(itt.Nodes.Count - 1).Nodes.Count - 1).Tag = filter_ss(i).ItemArray(0)
+                                        itt.Nodes(itt.Nodes.Count - 1).Nodes(itt.Nodes(itt.Nodes.Count - 1).Nodes.Count - 1).ContextMenuStrip = ContextMenuStrip1
+                                    Next
+                                End If
+                                Exit For
+                            End If
+
+                        Next
+                        Exit For
+                    End If
+                Next
+
+            Next
+            '    TV_rel_lc.ContextMenuStrip = Categorias
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+
+    Sub Cat_ayuda_visual()
+        Try
+            s = SQLCon.TPMcategories
+            Dim ss As DataTable = s.DefaultView.ToTable
+            If midataset.Tables("Categorias") IsNot Nothing Then
+                midataset.Tables.Remove("Categorias")
+            End If
+            ss.TableName = "Categorias"
+            midataset.Tables.Add(ss)
+            DataGridView1.DataSource = Nothing
+            DataGridView1.Columns.Clear()
+            DataGridView1.DataSource = midataset.Tables("Categorias")
+            DataGridView1.Columns(2).Visible = False
+            DataGridView1.Columns(3).Visible = False
+            DataGridView1.Columns(4).Visible = False
+            DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            Dim r As New DataGridViewTextBoxColumn
+            r.Name = "Simbolo"
+
+            r.HeaderText = "Símbolo"
+            DataGridView1.Columns.Add(r)
+            DataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells
+            DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells
+            DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+
+    End Sub
+
+
+
+    'Tab control 2
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_color.Click
+
+        cd.Location = New Point(Me.Width \ 2, Me.Height \ 2)
+        cd.StartPosition = FormStartPosition.CenterScreen
+        cd.Show()
+
+    End Sub
+
+
+
+    Private Sub cd_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles cd.MouseDown
+
+        lbl_vp.ForeColor = cd.SelectedColor
+
+    End Sub
+
+    Private Sub Add_category_click(sender As Object, e As EventArgs) Handles Add_category.Click
+        Try
+            Dim add As New Add_element
+            Dim agregar_pendiente As String
+            If add.ShowDialog = DialogResult.OK Then
+                agregar_pendiente = add.texto
+                add.Dispose()
+                add = Nothing
+                Dim re = SQLCon.TPMcategoriesInsert(agregar_pendiente)
+                If re > 0 Then
+                    Cargar_categorias()
+                End If
+            Else
+                agregar_pendiente = ""
+                add.Dispose()
+                add = Nothing
+                Exit Sub
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+    Private Sub Add_defect_Click(sender As Object, e As EventArgs) Handles Add_defect.Click
+        Try
+            Dim add As New Add_element
+            Dim agregar_defecto As String
+            If add.ShowDialog = DialogResult.OK Then
+                agregar_defecto = add.texto
+                add.Dispose()
+                add = Nothing
+                Dim res = SQLCon.TPMdefectsInsert(agregar_defecto)
+                If res > 0 Then
+                    Dim re As New ListViewItem
+                    re.Text = agregar_defecto
+                    re.Tag = res
+                    lv_defectos.Items.Add(re)
+                Else
+                    MsgBox("No se ha efectuado el cambio", MsgBoxStyle.Critical)
+                End If
+            Else
+                agregar_defecto = ""
+                add.Dispose()
+                add = Nothing
+                Exit Sub
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+
+    Private Sub Delete_category_click(sender As Object, e As EventArgs) Handles btn_delete_cat.Click
+        Try
+            Dim id As Integer = dtg_categoria.CurrentRow.Cells(0).Value
+            Dim re As DialogResult
+            re = MsgBox("Seguro que desea eliminar esta categoría? ", MsgBoxStyle.YesNoCancel + MsgBoxStyle.Question, "Eliminar Categoría")
+            If re = DialogResult.Yes Then
+
+                Dim cnt = SQLCon.TPMCategoriesCount(id)
+                If cnt > 0 Then
+                    MsgBox("La categoría seleccionada contiene varios elementos" & vbCrLf & "En una o varias operaciones" & vbCrLf & "elimine todos sus elementos ", MsgBoxStyle.Exclamation, "Eliminar categoría")
+                    Exit Sub
+                End If
+
+                Dim res = SQLCon.TPMcategoriesDelete(id)
+                If res > 0 Then
+                    Cargar_categorias()
+                End If
+
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+    Private Sub Delete_defect_Click(sender As Object, e As EventArgs) Handles Delete_defect.Click
+        Try
+            If lv_defectos.SelectedItems.Count < 1 Then
+                MsgBox("Seleccione un elemento de la lista", MsgBoxStyle.Critical)
+                Exit Sub
+            End If
+
+            If MsgBox("Seguro que desea eliminar este defecto? ", MsgBoxStyle.YesNoCancel + MsgBoxStyle.Question, "Eliminar Defecto") <> MsgBoxResult.Yes Then Exit Sub
+
+
+            Dim id As Integer = lv_defectos.SelectedItems(0).Tag
+
+            Dim cnt = SQLCon.TPMdefectsDeleteCount(id)
+            If cnt > 0 Then
+                MsgBox("El defecto seleccionado aparece en varios TPM realizados" & vbCrLf & "En una o varias operaciones" & vbCrLf & "No se puede eliminar ", MsgBoxStyle.Exclamation, "Eliminar categoría")
+                Exit Sub
+            End If
+
+            Dim re = SQLCon.TPMdefectsDelete(id)
+            If re > 0 Then
+                lv_defectos.SelectedItems(0).Remove()
+            Else
+                MsgBox("El defecto no fue eliminado")
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+
+    Private Sub Edit_defect_Click(sender As Object, e As EventArgs) Handles Edit_defect.Click
+        Try
+            If lv_defectos.SelectedItems.Count < 1 Then
+                MsgBox("Seleccione un elemento de la lista", MsgBoxStyle.Critical)
+                Exit Sub
+            End If
+            Dim id As Integer = lv_defectos.SelectedItems(0).Tag
+            Dim agregar_defecto As String
+            Dim add As New Add_element
+            add.TextBox1.Text = lv_defectos.SelectedItems(0).Text
+            add.Button1.Text = "Update"
+            add.Text = "Update"
+            add.Label1.Text = "Text"
+            If add.ShowDialog() = DialogResult.OK Then
+                Dim new_text = add.texto
+                If new_text = lv_defectos.SelectedItems(0).Text Then Exit Sub
+                add.Dispose()
+                add = Nothing
+                Dim re = SQLCon.TPMdefectsUpdate(id, new_text)
+                If re > 0 Then
+                    lv_defectos.SelectedItems(0).Text = new_text
+                Else
+                    MsgBox("Cambio no realizado", MsgBoxStyle.Critical)
+                End If
+            Else
+                add.Dispose()
+                add = Nothing
+                Exit Sub
+
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmb_simbolo.SelectedIndexChanged
+        Try
+            If sender.SelectedIndex <> -1 Then
+                lbl_vp.Text = CType(sender, ComboBox).Text
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+
+
+    Sub Cargar_categorias()
+        Try
+            s = SQLCon.TPMcategories
+            Dim ss As DataTable = s.DefaultView.ToTable
+            If midataset.Tables("Categorias") IsNot Nothing Then
+                midataset.Tables.Remove("Categorias")
+            End If
+            ss.TableName = "Categorias"
+            midataset.Tables.Add(ss)
+            dtg_categoria.DataSource = Nothing
+            dtg_categoria.DataSource = midataset.Tables("Categorias")
+            If TV_rel_lc.Nodes.Count > 0 Then Tree_view_lineas()
+            Cat_ayuda_visual()
+            groupbox_false()
+            GroupBox2.Enabled = True
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+    Sub Cargar_defectos()
+        Try
+            s = SQLCon.TPMdefects
+            Dim sss As DataTable = s.DefaultView.ToTable
+            If midataset.Tables("Defectos") IsNot Nothing Then
+                midataset.Tables.Remove("Defectos")
+            End If
+            sss.TableName = "Defectos"
+            midataset.Tables.Add(sss)
+            lv_defectos.Items.Clear()
+            For Each it As DataRow In midataset.Tables("Defectos").Rows
+                Dim et As New ListViewItem
+                et.Text = it.Item(1).ToString
+                et.Tag = it.Item(0).ToString
+                ' et.SubItems.Add(it.Item(1).ToString)
+                '    et.Tag = it.Item(0).ToString
+                '  et.Text = it.Item(1).ToString
+                lv_defectos.Items.Add(et)
+            Next
+
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+
+    Sub groupbox_false()
+        Try
+            last_index = -2
+            Txt_categoria.Text = ""
+            cmb_simbolo.SelectedIndex = -1
+            lbl_vp.ForeColor = Drawing.Color.Black
+            GroupBox1.Enabled = False
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+    Sub groupbox_true()
+        Try
+            GroupBox1.Enabled = True
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+
+    Private Sub DataGridView1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dtg_categoria.CellDoubleClick
+        Try
+            If e.RowIndex < 0 Then
+                Exit Sub
+            End If
+            Console.WriteLine("")
+            If e.RowIndex = last_index Then Exit Sub
+
+            last_index = e.RowIndex
+
+            'Cargar datos 
+            Txt_categoria.Text = CType(sender, DataGridView).CurrentRow.Cells(1).Value.ToString
+            cmb_simbolo.SelectedIndex = CType(sender, DataGridView).CurrentRow.Cells(2).Value - 1
+            lbl_vp.ForeColor = Drawing.Color.FromName(CType(sender, DataGridView).CurrentRow.Cells("ColorName").Value.ToString)
+
+            GroupBox2.Enabled = False
+            groupbox_true()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+        End Try
+    End Sub
+
+    Private Sub btn_cancel_Click(sender As Object, e As EventArgs) Handles btn_cancel_cat.Click
+        Try
+            groupbox_false()
+            GroupBox2.Enabled = True
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btn_update_cat.Click
+        Try
+            Dim id As Integer = dtg_categoria.CurrentRow.Cells(0).Value
+            Dim re = SQLCon.TPMcategoriesUpdate(id, Txt_categoria.Text, cmb_simbolo.SelectedIndex + 1, lbl_vp.ForeColor.Name.ToString)
+            If re > 0 Then
+                Cargar_categorias()
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+
+    Private Sub DataGridView1_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DataGridView1.CellFormatting
+        Try
+            If e.ColumnIndex = 5 Then
+                Select Case DataGridView1.Rows(e.RowIndex).Cells(2).Value
+                    Case 0
+
+                    Case 1
+                        DataGridView1.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = "○"
+
+                    Case 2
+                        DataGridView1.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = "□"
+                    Case Else
+
+                End Select
+                e.CellStyle.ForeColor = Color.FromName(DataGridView1.Rows(e.RowIndex).Cells("ColorName").Value)
+                e.CellStyle.Font = New Font("Microsoft Sans Serif", 25, FontStyle.Bold)
+                Console.WriteLine("")
+            End If
+
+
+
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+
+
+    Dim myselectednode
+    Private Sub ampos_MouseDown(sender As Object, e As MouseEventArgs) Handles TV_rel_lc.MouseDown
+        myselectednode = TV_rel_lc.GetNodeAt(e.X, e.Y)
+    End Sub
+    Private Sub EditarToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click, EditarToolStripMenuItem2.Click, EliminarElementoToolStripMenuItem.Click
+        Try
+
+            Select Case sender.Text
+                Case "Agregar elemento"
+                    Try
+                        Dim add As New Add_element
+                        Dim agregar_defecto As String
+                        If add.ShowDialog = DialogResult.OK Then
+                            agregar_defecto = add.texto
+                            add.Dispose()
+                            add = Nothing
+
+                            Dim cat_id = CType(myselectednode, TreeNode).Tag
+                            Dim asset = CType(myselectednode, TreeNode).Parent.Parent.Text
+                            Dim station = CType(myselectednode, TreeNode).Parent.Text
+
+                            Dim res = SQLCon.TPMdef_rel_Insert(cat_id, asset, station, agregar_defecto)
+
+                            If res > 0 Then
+                                CType(myselectednode, TreeNode).Nodes.Add(agregar_defecto)
+                                CType(myselectednode, TreeNode).Nodes(CType(myselectednode, TreeNode).Nodes.Count - 1).Tag = res
+                                CType(myselectednode, TreeNode).Nodes(CType(myselectednode, TreeNode).Nodes.Count - 1).ContextMenuStrip = ContextMenuStrip1
+                            Else
+                                MsgBox("No se ha efectuado el cambio", MsgBoxStyle.Critical)
+                            End If
+                        Else
+                            agregar_defecto = ""
+                            add.Dispose()
+                            add = Nothing
+                            Exit Sub
+                        End If
+                    Catch ex As Exception
+                        MsgBox(ex.Message, MsgBoxStyle.Critical)
+                    End Try
+
+                Case "Editar elemento"
+                    Dim id = myselectednode.tag
+                    Dim add As New Add_element
+                    add.TextBox1.Text = myselectednode.Text.ToString
+                    add.Button1.Text = "Update"
+                    add.Text = "Update"
+                    add.Label1.Text = "Text"
+                    If add.ShowDialog() = DialogResult.OK Then
+                        Dim new_text = add.texto
+                        If new_text = myselectednode.Text Then Exit Sub
+                        add.Dispose()
+                        add = Nothing
+
+                        Dim re = SQLCon.TPMdef_rel_Update(myselectednode.tag, new_text)
+                        If re > 0 Then
+                            myselectednode.Text = new_text
+                        Else
+                            MsgBox("Cambio no realizado", MsgBoxStyle.Critical)
+                        End If
+                    Else
+                        add.Dispose()
+                        add = Nothing
+                        Exit Sub
+
+                    End If
+
+
+                Case "Eliminar elemento"
+                    Dim id = myselectednode.tag
+                    If MsgBox("Seguro que desea eliminar el elemento seleccionado", MsgBoxStyle.Critical + MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                        Dim re = SQLCon.TPMdef_rel_Delete(id)
+                        If re > 0 Then
+                            CType(myselectednode, TreeNode).Remove()
+                        Else
+                            MsgBox("No se pudo eliminar el nodo")
+                        End If
+                    End If
+
+            End Select
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+        End Try
+    End Sub
+
+    Private Sub Agregar_categorias_Click(sender As Object, e As EventArgs) Handles Agregar_categorias.Click, EditarToolStripMenuItem.Click
+        Try
+            Console.WriteLine("")
+
+            Select Case sender.text
+                Case "Agregar categoria"
+                    Dim r As New Add_category
+                    If r.ShowDialog = DialogResult.OK Then
+                        Console.Write("")
+                        Dim categoria = r.ComboBox1.SelectedValue
+                        Dim categoria_text = r.ComboBox1.Text
+                        Dim station = CType(myselectednode, TreeNode).Text
+                        Dim asset = CType(myselectednode, TreeNode).Parent.Text
+                        Dim element = r.TextBox1.Text.Trim
+                        Dim re = SQLCon.TPMdef_rel_Insert(categoria, asset, station, element)
+                        If re > 0 Then
+                            Tree_view_lineas()
+                        End If
+                    Else
+
+                    End If
+
+                Case "Eliminar categoria"
+                    If MsgBox("Seguro que desea eliminar la relación entre la operación y la categoria con los elementos relacionados?", MsgBoxStyle.Critical + MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+
+                        Dim re = SQLCon.TPMcat_rel_delete(CType(myselectednode, TreeNode).Tag, CType(myselectednode, TreeNode).Parent.Parent.Text, CType(myselectednode, TreeNode).Parent.Text)
+                        If re > 0 Then
+                            CType(myselectednode, TreeNode).Remove()
+                        End If
+
+                    End If
+
+            End Select
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+
+
 End Class

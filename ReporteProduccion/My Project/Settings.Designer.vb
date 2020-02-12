@@ -293,6 +293,30 @@ Namespace My
                 Me("pwdCMS") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property PrefDepartment() As Integer
+            Get
+                Return CType(Me("PrefDepartment"),Integer)
+            End Get
+            Set
+                Me("PrefDepartment") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property CB_CODIGO() As String
+            Get
+                Return CType(Me("CB_CODIGO"),String)
+            End Get
+            Set
+                Me("CB_CODIGO") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

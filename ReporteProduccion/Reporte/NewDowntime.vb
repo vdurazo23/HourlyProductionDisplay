@@ -4,7 +4,8 @@
     Dim TblCodes As DataTable
     Dim TblConcepts As DataTable
 
-
+    Dim TblPlanConcepts As DataTable
+    Dim TblPlanConcepts2 As DataTable
 
     Public ProductionDate As Date
     Public ShiftName As String
@@ -26,6 +27,7 @@
     Dim MinDisp As Integer
     Dim CurrentMinsValue As Integer
 
+    Dim DtTotalMinutes As Decimal = 0
 
     Private Sub NewDowntime_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
         If e.KeyCode = Keys.F1 Then
@@ -105,6 +107,14 @@
             Cbodepartment.ValueMember = "ID"
             Cbodepartment.DisplayMember = "Department"
 
+
+            TblPlanConcepts = SQLCon.GetPlannedDTRC()
+            TblPlanConcepts2 = SQLCon.GetPlannedDTRC()
+
+            CboPlanConcepto.DataSource = TblPlanConcepts.DefaultView
+            CboPlanConcepto.ValueMember = "ID"
+            CboPlanConcepto.DisplayMember = "Description"
+
             Try
                 For i = 0 To CboHora.Items.Count - 1
                     If CboHora.Items(i)(0).Hour = currenthour Then
@@ -130,16 +140,61 @@
                     End If
                 Next
 
-                CboStation.SelectedValue = tbltmp.DefaultView.Item(0).Item("station")
-                CboEquipment.SelectedValue = tbltmp.DefaultView.Item(0).Item("Equipment")
-                Cbodepartment.SelectedValue = tbltmp.DefaultView.Item(0).Item("department")
-                CboConcepto.SelectedValue = tbltmp.DefaultView.Item(0).Item("concept")
-                cbocode.SelectedValue = tbltmp.DefaultView.Item(0).Item("DowntimeCode_ID")
-                CboParte.SelectedValue = tbltmp.DefaultView.Item(0).Item("PartNumber")
-                txtcomments.Text = tbltmp.DefaultView.Item(0).Item("Comments")
-                NumericUpDown1.Value = tbltmp.DefaultView.Item(0).Item("Minutes")
+                If Not IsDBNull(tbltmp.DefaultView.Item(0).Item("station")) Then CboStation.SelectedValue = tbltmp.DefaultView.Item(0).Item("station")
+                If Not IsDBNull(tbltmp.DefaultView.Item(0).Item("Equipment")) Then CboEquipment.SelectedValue = tbltmp.DefaultView.Item(0).Item("Equipment")
+                If Not IsDBNull(tbltmp.DefaultView.Item(0).Item("department")) Then Cbodepartment.SelectedValue = tbltmp.DefaultView.Item(0).Item("department")
+                If Not IsDBNull(tbltmp.DefaultView.Item(0).Item("concept")) Then CboConcepto.SelectedValue = tbltmp.DefaultView.Item(0).Item("concept")
+                If Not IsDBNull(tbltmp.DefaultView.Item(0).Item("DowntimeCode_ID")) Then cbocode.SelectedValue = tbltmp.DefaultView.Item(0).Item("DowntimeCode_ID")
+
+                If tblpartsHours.DefaultView.ToTable.Select("PARTNUMBER='" & tbltmp.DefaultView.Item(0).Item("PartNumber").ToString & "'").Length = 0 Then
+                    '' LA PARTE NO ESTÁ INCLUIDA HAY QUE AGREGARLA
+                    If tbltmp.DefaultView.Item(0).Item("DT_Id") > 0 Then
+                        tblpartsHours.DefaultView.RowFilter = tblpartsHours.DefaultView.RowFilter & " OR PARTNUMBER='" & tbltmp.DefaultView.Item(0).Item("PartNumber").ToString & "'"
+                    End If
+                End If
+
+
+
+                CboParte.SelectedValue = tbltmp.DefaultView.Item(0).Item("PartNumber").ToString
+                If Not IsDBNull(tbltmp.DefaultView.Item(0).Item("DT_Id")) Then
+                    If tbltmp.DefaultView.Item(0).Item("DT_Id") > 0 Then
+                        'CboHora.Enabled = False
+                        CboParte.Enabled = False
+                    End If
+                End If
+
+                
+                txtcomments.Text = tbltmp.DefaultView.Item(0).Item("Comments").ToString
+                NumericUpDown1.Value = Math.Round(tbltmp.DefaultView.Item(0).Item("Minutes"), 2)
+                DtTotalMinutes = Math.Round(tbltmp.DefaultView.Item(0).Item("Minutes"), 2)
                 CurrentMinsValue = tbltmp.DefaultView.Item(0).Item("Minutes")
 
+                If IsDBNull(tbltmp.DefaultView.Item(0).Item("department")) Then
+                    If My.Settings.PrefDepartment > 0 Then
+                        Cbodepartment.SelectedValue = My.Settings.PrefDepartment
+                    End If
+                End If
+
+                If Not IsDBNull(tbltmp.DefaultView.Item(0).Item("DT_Id")) Then
+                    ''Significa que es automático
+                    NumericUpDown1.Minimum = 0
+                    ChkPlaneado.Enabled = True
+
+
+                    NumericUpDown1.Enabled = False
+                    LblReferencia.Text = tbltmp.DefaultView.Item(0).Item("DT_Id").ToString()
+                    LblReferencia.Visible = True
+
+                    LblStartEndtimes.Text = CType(tbltmp.DefaultView.Item(0).Item("StartTime"), DateTime).ToString("MM/dd/yyyy HH:mm:ss") & "  -  " & CType(tbltmp.DefaultView.Item(0).Item("EndTime"), DateTime).ToString("MM/dd/yyyy HH:mm:ss")
+                    LblStartEndtimes.Visible = True
+                Else
+                    LblReferencia.Text = ""
+                End If
+            Else
+                ''Cuando es nuevo
+                If My.Settings.PrefDepartment > 0 Then
+                    Cbodepartment.SelectedValue = My.Settings.PrefDepartment
+                End If
             End If
 
         Catch ex As Exception
@@ -196,23 +251,76 @@
 
     Private Sub RadButton1_Click(sender As Object, e As EventArgs) Handles RadButton1.Click
         Try
-            If NumericUpDown1.Value <= 0 Then Exit Sub
+            If NumericUpDown1.Value <= 0 And LblReferencia.Text = "" Then Exit Sub
+
+            If CboStation.SelectedValue Is Nothing Then
+                ErrorProvider1.Clear()
+                ErrorProvider1.SetError(CboStation, "Requerido!")
+                Exit Sub
+            End If
+
+            If CboEquipment.SelectedValue Is Nothing Then
+                ErrorProvider1.Clear()
+                ErrorProvider1.SetError(CboEquipment, "Requerido!")
+                Exit Sub
+            End If
+
+            If Cbodepartment.SelectedValue Is Nothing Then
+                ErrorProvider1.Clear()
+                ErrorProvider1.SetError(Cbodepartment, "Requerido!")
+                Exit Sub
+            End If
+            If CboConcepto.SelectedValue Is Nothing Then
+                ErrorProvider1.Clear()
+                ErrorProvider1.SetError(CboConcepto, "Requerido!")
+                Exit Sub
+            End If
+            If cbocode.SelectedValue Is Nothing Then
+                ErrorProvider1.Clear()
+                ErrorProvider1.SetError(cbocode, "Requerido!")
+                Exit Sub
+            End If
+
+
 
             TblProd.DefaultView.RowFilter = "STARTTIME='" & CType(CboHora.SelectedValue, DateTime).ToString(FormatoFecha & " HH:mm:ss") & "'  AND PARTNUMBER='" & CboParte.SelectedValue.ToString & "'"
             getminutosdisponibles()
 
-            If (TotalMins + NumericUpDown1.Value) > MinDisp Then
+            If (TotalMins + NumericUpDown1.Value) > MinDisp And LblReferencia.Text.Trim = "" Then
                 ErrorProvider1.Clear()
                 ErrorProvider1.SetError(NumericUpDown1, "Sobrepasa la cantidad de minutos permitidos en la hora (" & (MinDisp - TotalMins).ToString & ")" & vbCrLf & "Para el Número de parte Actual")
                 Exit Sub
             End If
+
+            If ChkPlaneado.Checked And NumericUpDown2.Value = 0 Then
+                ErrorProvider1.Clear()
+                ErrorProvider1.SetError(NumericUpDown2, "Debe especificar un valor mayor a cero")
+                Exit Sub
+            End If
+
             'If TotalMins + (NumericUpDown1.Value - CurrentMinsValue) > (MinDisp - TotalMins) Then
             '    ErrorProvider1.Clear()
             '    ErrorProvider1.SetError(NumericUpDown1, "Sobrepasa la cantidad de minutos permitidos en la hora (" & (MinDisp - TotalMins).ToString & ")" & vbCrLf & "Para el Número de parte Actual")
             '    Exit Sub
             'End If
             If Editar Then
-                SQLCon.EditDowntime(ELID, Convert.ToDateTime(CboHora.SelectedValue).ToString("MM/dd/yyyy HH:mm:ss"), CboEquipment.SelectedValue, cbocode.SelectedValue, NumericUpDown1.Value, txtcomments.Text, CboParte.SelectedValue.ToString)
+                If ChkPlaneado.Checked Then
+                    ''Hay que dividirlo en un PDT y un DT
+                    If NumericUpDown1.Value = 0 Then
+                        ''Hay que quitar este Tiempo muerto y solo dejar el Planndt
+                        SQLCon.DeleteDowntime(ELID)
+                        SQLCon.NewPlannedDowntime(AssetID, ProductionDate.ToString("MM/dd/yyyy"), ShiftName, Convert.ToDateTime(CboHora.SelectedValue).ToString("MM/dd/yyyy HH:mm:ss"), CboPlanConcepto.SelectedValue, NumericUpDown2.Value, txtcomments2.Text, CboParte.SelectedValue.ToString, CInt(LblReferencia.Text))
+                    Else
+                        ''Hay que agregar el PDT y modificar el DT
+                        SQLCon.EditDowntime(ELID, Convert.ToDateTime(CboHora.SelectedValue).ToString("MM/dd/yyyy HH:mm:ss"), CboEquipment.SelectedValue, cbocode.SelectedValue, NumericUpDown1.Value, txtcomments.Text, CboParte.SelectedValue.ToString)
+                        SQLCon.NewPlannedDowntime(AssetID, ProductionDate.ToString("MM/dd/yyyy"), ShiftName, Convert.ToDateTime(CboHora.SelectedValue).ToString("MM/dd/yyyy HH:mm:ss"), CboPlanConcepto.SelectedValue, NumericUpDown2.Value, txtcomments2.Text, CboParte.SelectedValue.ToString, CInt(LblReferencia.Text))
+                    End If
+
+                Else
+                    '' Solo Actualizar el DT
+                    SQLCon.EditDowntime(ELID, Convert.ToDateTime(CboHora.SelectedValue).ToString("MM/dd/yyyy HH:mm:ss"), CboEquipment.SelectedValue, cbocode.SelectedValue, NumericUpDown1.Value, txtcomments.Text, CboParte.SelectedValue.ToString)
+                End If
+
                 MsgBox("Registro de Tiempo muerto Modificado exitosamente", MsgBoxStyle.Information, "Editar Tiempo Muerto")
                 Me.DialogResult = Windows.Forms.DialogResult.OK
             Else
@@ -220,6 +328,9 @@
                 MsgBox("Registro de Tiempo muerto Generado exitosamente", MsgBoxStyle.Information, "Nuevo Tiempo Muerto")
                 Me.DialogResult = Windows.Forms.DialogResult.OK
             End If
+
+            My.Settings.PrefDepartment = Cbodepartment.SelectedValue
+            My.Settings.Save()
 
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
@@ -328,7 +439,7 @@
                         FIN = CType(CboHora.SelectedValue, DateTime).AddHours(1)
                     End If
                 End If
-                
+
 
                 MinDisp = MinDisp + Math.Round((DateDiff(DateInterval.Second, INICIO, FIN) / 60))
 
@@ -353,4 +464,22 @@
         End Try
     End Sub
 
+    Private Sub ChkPlaneado_CheckedChanged(sender As Object, e As EventArgs) Handles ChkPlaneado.CheckedChanged
+        NumericUpDown2.Maximum = DtTotalMinutes
+        GroupBox1.Enabled = ChkPlaneado.Checked
+        If ChkPlaneado.Checked = False Then NumericUpDown2.Value = 0
+    End Sub
+
+    Private Sub CboPlanConcepts_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboPlanConcepto.SelectedIndexChanged
+        Try
+            TblPlanConcepts2.DefaultView.RowFilter = "id=" & CboConcepto.SelectedValue.ToString
+            NumericUpDown2.Maximum = TblPlanConcepts2.DefaultView.Item(0).Item("Max")
+        Catch ex As Exception
+        Finally
+            TblPlanConcepts2.DefaultView.RowFilter = ""
+        End Try
+    End Sub
+    Private Sub NumericUpDown2_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown2.ValueChanged    
+        NumericUpDown1.Value = DtTotalMinutes - NumericUpDown2.Value
+    End Sub
 End Class
