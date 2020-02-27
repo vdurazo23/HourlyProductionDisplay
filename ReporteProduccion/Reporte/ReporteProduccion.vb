@@ -642,7 +642,7 @@ Public Class ReporteProduccion
                                 GridTemp.Rows.Add(currpart, ProductionDataTable.DefaultView.Item(i).Item("RUNRATE")) ', , , ,oeeloc.ToString, )
                             End If
                         End If
-                        OpenedDate = CType(OpenedDate.ToString(FormatoFecha & " HH:mm:ss.000"), DateTime)
+                        OpenedDate = CType(OpenedDate.ToString(FormatoFecha & " HH:mm:ss.fff"), DateTime)
                         If mismaparte Then
                             ''entonces el opened date es el anterior
                             OpenedDate = GridTemp.Rows(GridTemp.Rows.Count - 1).Cells("Start").Value
@@ -684,7 +684,7 @@ Public Class ReporteProduccion
                         '    ClosedDate = ShiftEndTime
                         'End If
 
-                        ClosedDate = CType(ClosedDate.ToString(FormatoFecha & " HH:mm:ss.000"), DateTime)
+                        ClosedDate = CType(ClosedDate.ToString(FormatoFecha & " HH:mm:ss.fff"), DateTime)
 
                         ''Corregir ClosedDate de MArs si biene mal                       
                         ''Si el closed date es mayor que el shiftend solo tomar hasta el shiftend
