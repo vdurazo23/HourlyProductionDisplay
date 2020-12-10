@@ -1043,7 +1043,34 @@ Public Class TPM
                         Dim element = r.TextBox1.Text.Trim
                         Dim re = SQLCon.TPMdef_rel_Insert(categoria, asset, station, element)
                         If re > 0 Then
-                            Tree_view_lineas()
+                            Dim agregado As Boolean = False
+                            For Each node As TreeNode In CType(myselectednode, TreeNode).Nodes
+                                If categoria = node.Tag Then
+                                    node.Nodes.Add(element)
+                                    node.Nodes(CType(node, TreeNode).Nodes.Count - 1).Tag = re
+                                    node.Nodes(CType(node, TreeNode).Nodes.Count - 1).ContextMenuStrip = ContextMenuStrip1
+                                    agregado = True
+                                    Exit For
+                                ElseIf categoria < node.Tag Then
+                                    CType(myselectednode, TreeNode).Nodes.Insert(categoria - 1, categoria.ToString + " - " + categoria_text)
+                                    CType(myselectednode, TreeNode).Nodes.Item(categoria - 1).Tag = categoria
+                                    CType(myselectednode, TreeNode).Nodes.Item(categoria - 1).ContextMenuStrip = Elemento
+                                    CType(CType(myselectednode, TreeNode).Nodes.Item(categoria - 1), TreeNode).Nodes.Add(element)
+                                    CType(CType(myselectednode, TreeNode).Nodes.Item(categoria - 1), TreeNode).LastNode.Tag = re
+                                    CType(CType(myselectednode, TreeNode).Nodes.Item(categoria - 1), TreeNode).LastNode.ContextMenuStrip = ContextMenuStrip1
+                                    agregado = True
+                                    Exit For
+                                End If
+                            Next
+                            If agregado = False Then
+                                CType(myselectednode, TreeNode).Nodes.Insert(categoria - 1, categoria.ToString + " - " + categoria_text)
+                                CType(myselectednode, TreeNode).Nodes.Item(categoria - 1).Tag = categoria
+                                CType(myselectednode, TreeNode).Nodes.Item(categoria - 1).ContextMenuStrip = Elemento
+                                CType(CType(myselectednode, TreeNode).Nodes.Item(categoria - 1), TreeNode).Nodes.Add(element)
+                                CType(CType(myselectednode, TreeNode).Nodes.Item(categoria - 1), TreeNode).LastNode.Tag = re
+                                CType(CType(myselectednode, TreeNode).Nodes.Item(categoria - 1), TreeNode).LastNode.ContextMenuStrip = ContextMenuStrip1
+                            End If
+                            'Tree_view_lineas()
                         End If
                     Else
 

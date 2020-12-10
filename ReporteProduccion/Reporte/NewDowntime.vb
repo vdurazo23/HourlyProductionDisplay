@@ -472,14 +472,15 @@
 
     Private Sub CboPlanConcepts_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboPlanConcepto.SelectedIndexChanged
         Try
-            TblPlanConcepts2.DefaultView.RowFilter = "id=" & CboConcepto.SelectedValue.ToString
+            TblPlanConcepts2.DefaultView.RowFilter = "id=" & CboPlanConcepto.SelectedValue.ToString
             NumericUpDown2.Maximum = TblPlanConcepts2.DefaultView.Item(0).Item("Max")
         Catch ex As Exception
+            Console.Write(ex.Message)
         Finally
             TblPlanConcepts2.DefaultView.RowFilter = ""
         End Try
     End Sub
-    Private Sub NumericUpDown2_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown2.ValueChanged    
+    Private Sub NumericUpDown2_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown2.ValueChanged
         NumericUpDown1.Value = DtTotalMinutes - NumericUpDown2.Value
     End Sub
 End Class

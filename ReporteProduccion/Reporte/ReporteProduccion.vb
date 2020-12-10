@@ -158,7 +158,8 @@ Public Class ReporteProduccion
                     _Minutos = _Segundos / 60
                     If dr("diechange") = True Then
                         If _Minutos > 18 Then
-                            SQLCon.NewDowntime(RecursoDatarow(0).Item("ID"), CurrentProductionDate.ToString("MM/dd/yyyy"), CurrentShiftName, _Hour.ToString("MM/dd/yyyy HH:00:00"), -1, -1, _Minutos - 15, "ChangeOver", dr("PartNumber").ToString, _StartTime.ToString("MM/dd/yyyy HH:mm:ss"), _EndTime.ToString("MM/dd/yyyy HH:mm:ss"), dr("ID"))
+                            ''SI ES UN DIECHANGE ENTONCES SE GUARDA EN LA HORA QUE SE TERMINÓ EL CHANGE OVER (POR SI TARDA MAS DE UNA HORA)
+                            SQLCon.NewDowntime(RecursoDatarow(0).Item("ID"), CurrentProductionDate.ToString("MM/dd/yyyy"), CurrentShiftName, _EndTime.ToString("MM/dd/yyyy HH:00:00"), -1, -1, _Minutos - 15, "ChangeOver", dr("PartNumber").ToString, _StartTime.ToString("MM/dd/yyyy HH:mm:ss"), _EndTime.ToString("MM/dd/yyyy HH:mm:ss"), dr("ID"))
                         End If
                     Else
                         If _Minutos >= 3 Then
@@ -691,7 +692,8 @@ Public Class ReporteProduccion
                         TotalSegundos = DateDiff(DateInterval.Second, OpenedDate, IIf(ClosedDate > ShiftEndTime, ShiftEndTime, ClosedDate))
                         TOTALPart = ProductionDataTable.Compute("Sum(Total)", "PartNumber='" & currpart & "' and OPENEDDATE='" & CType(ProductionDataTable.DefaultView.Item(i).Item("OPENEDDATE"), DateTime).ToString(FormatoFecha & " HH:mm:ss.fff") & "'")
                         If mismaparte Then
-                            TOTALPart = ProductionDataTable.Compute("Sum(Total)", "PartNumber='" & currpart & "' AND ((CLOSEDDATE<='" & ClosedDate.ToString(FormatoFecha & " HH:mm:ss.fff") & "') ) ")
+                            'TOTALPart = ProductionDataTable.Compute("Sum(Total)", "PartNumber='" & currpart & "' AND ((CLOSEDDATE<='" & ClosedDate.ToString(FormatoFecha & " HH:mm:ss.fff") & "') ) ")
+                            TOTALPart = ProductionDataTable.Compute("Sum(Total)", "PartNumber='" & currpart & "' AND ((CLOSEDDATE<='" & ClosedDate.ToString(FormatoFecha & " HH:mm:ss.fff") & "' OR CLOSEDDATE IS NULL) ) ")
                         End If
 
                         TotalAjuste = 0

@@ -29,6 +29,7 @@ Public Class VerificationForm
                 End If
             End If
         Next
+
         If Not res.Verified Then EventHandlerStatus = DPFP.Gui.EventHandlerStatus.Failure
         intentos += 1
 
@@ -38,10 +39,8 @@ Public Class VerificationForm
                 MsgBox("No se pudo comprobar la huella", MsgBoxStyle.Exclamation, "Huella")
             End If
             Me.DialogResult = DialogResult.Cancel
-
         End If
         Data.Update()
-
 
     End Sub
 

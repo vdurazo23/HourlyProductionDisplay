@@ -165,12 +165,15 @@
     Private Sub CboConcepto_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboConcepto.SelectedIndexChanged
 
         Try
+            NumericUpDown1.Maximum = 999
             If LblReferencia.Text.Trim <> "" Then Exit Sub
             TblConcepts2.DefaultView.RowFilter = "id=" & CboConcepto.SelectedValue.ToString
 
-            NumericUpDown1.Value = TblConcepts2.DefaultView.Item(0).Item("DefaultValue")
             NumericUpDown1.Maximum = TblConcepts2.DefaultView.Item(0).Item("Max")
+            NumericUpDown1.Value = TblConcepts2.DefaultView.Item(0).Item("DefaultValue")
+
         Catch ex As Exception
+            Console.Write(ex.Message)
         Finally
             TblConcepts2.DefaultView.RowFilter = ""
         End Try

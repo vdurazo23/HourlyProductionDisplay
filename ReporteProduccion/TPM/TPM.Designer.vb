@@ -172,6 +172,7 @@ Partial Class TPM
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ListView1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListView1.HideSelection = False
         Me.ListView1.Location = New System.Drawing.Point(440, 58)
         Me.ListView1.Name = "ListView1"
         Me.ListView1.Size = New System.Drawing.Size(564, 308)
@@ -328,6 +329,7 @@ Partial Class TPM
         'lv_defectos
         '
         Me.lv_defectos.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader5})
+        Me.lv_defectos.HideSelection = False
         Me.lv_defectos.Location = New System.Drawing.Point(660, 44)
         Me.lv_defectos.MultiSelect = False
         Me.lv_defectos.Name = "lv_defectos"
@@ -479,7 +481,7 @@ Partial Class TPM
         Me.lbl_vp.ForeColor = System.Drawing.SystemColors.MenuHighlight
         Me.lbl_vp.Location = New System.Drawing.Point(443, 33)
         Me.lbl_vp.Name = "lbl_vp"
-        Me.lbl_vp.Size = New System.Drawing.Size(70, 54)
+        Me.lbl_vp.Size = New System.Drawing.Size(57, 54)
         Me.lbl_vp.TabIndex = 0
         Me.lbl_vp.Text = "○"
         '
@@ -552,12 +554,12 @@ Partial Class TPM
         '
         Me.Categorias.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Agregar_categorias})
         Me.Categorias.Name = "Categorias"
-        Me.Categorias.Size = New System.Drawing.Size(169, 26)
+        Me.Categorias.Size = New System.Drawing.Size(181, 48)
         '
         'Agregar_categorias
         '
         Me.Agregar_categorias.Name = "Agregar_categorias"
-        Me.Agregar_categorias.Size = New System.Drawing.Size(168, 22)
+        Me.Agregar_categorias.Size = New System.Drawing.Size(180, 22)
         Me.Agregar_categorias.Text = "Agregar categoria"
         '
         'TPM

@@ -197,9 +197,8 @@ Partial Class NewPlannedDowntime
         Me.LblReferencia.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblReferencia.Location = New System.Drawing.Point(127, 224)
         Me.LblReferencia.Name = "LblReferencia"
-        Me.LblReferencia.Size = New System.Drawing.Size(87, 20)
+        Me.LblReferencia.Size = New System.Drawing.Size(0, 20)
         Me.LblReferencia.TabIndex = 29
-        Me.LblReferencia.Text = "Referencia"
         Me.LblReferencia.Visible = False
         '
         'NewPlannedDowntime
